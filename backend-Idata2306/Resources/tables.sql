@@ -5,3 +5,15 @@ CREATE TABLE Price (
     code CHAR(3) NOT NULL,
     FOREIGN KEY (flight_name) REFERENCES Flights(flight_name)
 );
+
+CREATE TABLE Flight (
+    flight_name VARCHAR(100) PRIMARY KEY,
+    company VARCHAR(255) NOT NULL,
+    class_types JSON,
+    extra_features JSON
+);
+
+CREATE TABLE Airport (
+    code CHAR(3) PRIMARY KEY,
+    city VARCHAR(255) NOT NULL
+);
