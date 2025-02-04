@@ -17,3 +17,11 @@ CREATE TABLE Airport (
     code CHAR(3) PRIMARY KEY,
     city VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE Route (
+    flight_name VARCHAR(100) NOT NULL,
+    departure VARCHAR(100) NOT NULL,  
+    destination VARCHAR(100) NOT NULL, 
+    flight_date DATE NOT NULL,  
+  	FOREIGN KEY (flight_name) REFERENCES Flights(flight_name) 
+);
