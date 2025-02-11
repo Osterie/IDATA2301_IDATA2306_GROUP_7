@@ -19,7 +19,14 @@
 ---
 
 ## **Sprint Progress**
-| Story/Task                                | Assignee              | Status       | Story Points | Comments     |
-|-------------------------------------------|-----------------------|--------------|--------------|--------------|
+| Story/Task                      | Assignee         | Status | Story Points | Comments |
+|----------------------------------|-----------------|--------|--------------|----------|
+| Set up SQL on database          | All             | Done   | TBD          |          |
+| Build nav bar component         | TobyJavascript  | Done   | TBD          |          |
+
+
+Things to add to table.
+Set up SQL on database - All - Done 
+Build nav bar component - TobyJavascript - Done
 
 ---
