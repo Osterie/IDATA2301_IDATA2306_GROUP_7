@@ -16,13 +16,16 @@ Sprint stenographer: Adrian
 
 ## **Sprint Summary**
 - **Total Planned Work:**
+- Set up SQL
 
 - **Completed Work:**
+- Set up SQL
 
 ---
 
 ## **Sprint Progress**
-| Story/Task                                | Assignee              | Status       | Story Points | Comments     |
-|-------------------------------------------|-----------------------|--------------|--------------|--------------|
+| Story/Task                      | Assignee              | Status       | Story Points | Comments     |
+|---------------------------------|-----------------------|--------------|--------------|--------------|
+| Set up SQL on database          | All                   | Done         | [6]          |              |
 
 ---

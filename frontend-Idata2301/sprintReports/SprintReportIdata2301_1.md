@@ -1,5 +1,8 @@
 # **Sprint Report**
 
+Sprint master: Adrian
+Sprint stenographer: Adrian
+
 ## **Sprint Overview**
 - **Sprint Number:** Sprint 1
 - **Duration:** 16.01.2025 - 30.01.2025

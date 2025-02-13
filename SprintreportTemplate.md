@@ -1,5 +1,8 @@
 # **Sprint Report**
 
+Sprint master: x
+Sprint stenographer: x
+
 ## **Sprint Overview**
 - **Sprint Number:** Sprint [INSERT NUMBER]
 - **Duration:** DD.MM.2025 - DD.MM.2025
