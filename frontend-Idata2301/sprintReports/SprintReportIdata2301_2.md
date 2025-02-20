@@ -1,5 +1,8 @@
 # **Sprint Report**
 
+Sprint master: Tobias
+Sprint stenographer: Tobias
+
 ## **Sprint Overview**
 - **Sprint Number:** Sprint 2
 - **Duration:** 30.01.2025 - 13.02.2025
