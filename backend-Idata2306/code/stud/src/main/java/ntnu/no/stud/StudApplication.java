@@ -1,13 +1,13 @@
-package edu.stud.ntnu;
+package ntnu.no.stud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Idata2306Application {
+public class StudApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Idata2306Application.class, args);
+		SpringApplication.run(StudApplication.class, args);
 	}
 
 }

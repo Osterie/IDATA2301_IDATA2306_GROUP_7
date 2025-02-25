@@ -1,10 +1,10 @@
-package edu.stud.ntnu;
+package ntnu.no.stud;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Idata2306ApplicationTests {
+class StudApplicationTests {
 
 	@Test
 	void contextLoads() {

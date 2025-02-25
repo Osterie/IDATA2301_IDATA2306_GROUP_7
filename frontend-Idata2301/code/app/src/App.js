@@ -4,6 +4,7 @@ import ProductCardContainer from './components/cards/ProductCardContainer';
 import MainPageHero from './components/hero/mainPageHero/MainPageHero';
 import Footer from './components/footer/Footer';
 import Navbar from './components/header/Navbar';
+import { testApi } from './api/testApi';
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
     </header>
 
       <main>
-        {/* <MainPageHero/>  */}
+
+        <button onClick={() => testApi()}>Click me</button>
+        <MainPageHero/> 
         <FilterSidebar />
         <ProductCardContainer />
       </main>
