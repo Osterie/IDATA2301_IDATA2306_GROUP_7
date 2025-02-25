@@ -4,7 +4,16 @@ import ProductCardContainer from './components/cards/ProductCardContainer';
 import MainPageHero from './components/hero/mainPageHero/MainPageHero';
 import Footer from './components/footer/Footer';
 import Navbar from './components/header/Navbar';
-import { testApi } from './api/testApi';
+
+function testApi (){
+  
+
+      fetch('/hello')
+    .then(response => response.text())  // Change from .json() to .text()
+    .then(data => console.log(data));    // Now it correctly logs "Hei, Verden!!"
+
+
+};
 
 function App() {
   return (
