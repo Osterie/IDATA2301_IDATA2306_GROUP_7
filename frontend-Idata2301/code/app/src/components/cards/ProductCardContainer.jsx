@@ -1,5 +1,5 @@
 import React from "react";
-import "./roductCardContainer.css";
+import "./productCardContainer.css";
 import ProductCard from "./ProductCard";
 
 const products = [

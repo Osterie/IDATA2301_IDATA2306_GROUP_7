@@ -1,7 +1,7 @@
 import React from "react";
 import "./productCard.css";
 
-const ProductCard = ({ title, description, img, highlighted }) => {
+const ProductCard = ({title, description, img, highlighted }) => {
   return (
     <div className={`card ${highlighted ? "highlighted" : ""}`}>
       <img src={img} alt={title} />

@@ -3,7 +3,7 @@ import "./nav.css";
 
 const Navbar = () => {
   return (
-    <header>
+    // <header>
       <nav>
         <input type="checkbox" id="check" />
         <label htmlFor="check" className="checkbtn">
@@ -17,7 +17,8 @@ const Navbar = () => {
           <li><a href="/contact">Contact us</a></li>
         </ul>
       </nav>
-    </header>
+    // {/* </header> */}
+    
   );
 };
 
