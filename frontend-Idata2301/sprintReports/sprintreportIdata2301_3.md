@@ -26,19 +26,26 @@ Sprint stenographer: Daniel
  - Filter search bar
 
 
- - Build react structure
+ - Build simple react structure
  
 
 - **Completed Work:**
+ - Build react components
+ - Front page card
+ - Search bar
+ - Filter search bar
+
+ - Build simple react structure
 
 ---
 
 ## **Sprint Progress**
-| Story/Task                                | Assignee              | Status       | Story Points | Comments     |
-|-------------------------------------------|-----------------------|--------------|--------------|--------------|
-| Hero section                    | Daniel          |    | [4]          |          |
-| Front page card                 | Tobias          |    | [4]          |          |
-| Search page card                | Tobias          |    | [4]          |          |
-| Search bar                      | Daniel          |    | [4]          |          |
-| Filter search bar               | Adrian          |    | [4]          |          |
+| Story/Task        | Assignee | Status        | Story Points | Comments            |
+| ----------------- | -------- | ------------- | ------------ | ------------------- |
+| Hero section      | Daniel   | Not completed | [4]          | Partially completed |
+| Front page card   | Tobias   | Completed     | [4]          |                     |
+| Search page card  | Tobias   | Not completed | [4]          |                     |
+| Search bar        | Daniel   | Completed     | [4]          |                     |
+| Filter search bar | Adrian   | Completed     | [4]          |                     |
+
 ---
