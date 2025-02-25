@@ -8,7 +8,7 @@ import Navbar from './components/header/Navbar';
 function testApi (){
   
 
-      fetch('/hello')
+      fetch('URL')
     .then(response => response.text())  // Change from .json() to .text()
     .then(data => console.log(data));    // Now it correctly logs "Hei, Verden!!"
 
