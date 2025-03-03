@@ -1,57 +1,96 @@
+/* Sidebar general styling */
 .filter-sidebar {
-  width: 250px;
+  width: 20%; /* Sidebar width on PC */
+  height: auto;
   background-color: #1c1c1c;
   color: white;
   padding: 20px;
   border-radius: 8px;
+  overflow-y: auto;
+  transition: transform 0.3s ease-in-out; /* For mobile slide-in */
+  z-index: 2;
 }
 
-.filter-section {
-  margin-bottom: 20px;
-}
-
-.filter-section label {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-select,
-input[type="range"] {
+/* Finish button (only visible on mobile) */
+.finish-btn {
+  display: none; /* Hide by default */
   width: 100%;
-}
-
-input[type="checkbox"] {
-  margin-right: 8px;
-}
-
-/* Dropdown Button */
-.dropdown-btn {
-  width: 100%;
-  background-color: #333;
+  background-color: #ff4444;
   color: white;
-  padding: 8px;
+  padding: 10px;
   border: none;
   cursor: pointer;
-  text-align: left;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 16px;
   border-radius: 5px;
-  font-size: 14px;
 }
 
-.dropdown-btn:hover {
-  background-color: #444;
+.finish-btn:hover {
+  background-color: #e03333;
 }
 
-/* Dropdown Content */
-.dropdown-content {
+/* Button to toggle sidebar visibility on mobile */
+.toggle-sidebar-btn {
+  display: none;
+  background-color: #333;
+  color: white;
   padding: 10px;
-  background-color: #262626;
-  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  margin: 10px;
+  font-size: 16px;
 }
 
-.dropdown-content div {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 0;
+/* Mobile Styling: Fullscreen overlay effect */
+@media (max-width: 768px) {
+  .filter-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+    background-color: rgba(0, 0, 0, 0.9); /* Dark overlay effect */
+    color: white;
+    z-index: 1000; /* Ensures it's above everything */
+    transform: translateX(-100%); /* Initially hidden */
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .filter-sidebar.show {
+    transform: translateX(0); /* Show sidebar */
+  }
+
+  .finish-btn {
+    display: block; /* Show the finish button on mobile */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: auto;
+    padding: 10px 15px;
+    font-size: 18px;
+  }
+
+  .toggle-sidebar-btn {
+    display: block; /* Show the toggle button on mobile */
+  }
 }
+
+/* Desktop styling: Sidebar is always visible */
+@media (min-width: 769px) {
+  .filter-sidebar {
+    width: 20%; /* Sidebar takes less space on PC */
+    transform: translateX(0); /* Sidebar is always visible on PC */
+    position: static;
+    height: auto;
+  }
+
+  .toggle-sidebar-btn {
+    display: none; /* Hide the toggle button on PC */
+  }
+}
+
