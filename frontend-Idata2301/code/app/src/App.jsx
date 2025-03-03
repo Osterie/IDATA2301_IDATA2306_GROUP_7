@@ -1,6 +1,7 @@
 import './App.css';
 import FilterSidebar from './components/searchfilter/filter';
 import ProductCardContainer from './components/cards/ProductCardContainer';
+import ProductCardHeader from './components/cards/ProductCardHeader';
 import MainPageHero from './components/hero/mainPageHero/MainPageHero';
 import Footer from './components/footer/Footer';
 import Navbar from './components/header/Navbar';
@@ -25,11 +26,11 @@ function App() {
 
       <main>
         <MainPageHero/> 
-        <FilterSidebar />
-        <ProductCardContainer />
+        <ProductCardHeader/>
+        <ProductCardContainer/>
       </main>
 
-      <Footer />
+      <Footer/>
 
     </div>
   );

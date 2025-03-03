@@ -13,11 +13,10 @@ const Navbar = () => {
         <ul>
           <li><a className="active" href="#">Home</a></li>
           <li><a href="/info">Deals</a></li>
-          <li><a href="/cars">About</a></li>
-          <li><a href="/contact">Contact us</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/logg">Logg in</a></li>
         </ul>
       </nav>
-    // {/* </header> */}
     
   );
 };

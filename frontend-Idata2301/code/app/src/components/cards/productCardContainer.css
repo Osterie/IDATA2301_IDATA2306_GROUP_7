@@ -4,7 +4,7 @@
     justify-content: space-evenly; /* Spreads items evenly */
     gap: 2rem; /* Space between cards */
     max-width: 120rem; /* Prevents stretching too wide */
-    margin: 0 auto; /* Centers the container itself */
+    margin: 20px 100px auto; /* Centers the container itself */
 }
 
 /* Responsive Design */
@@ -12,5 +12,6 @@
     .product-container {
         flex-direction: column;
         align-items: center; /* Keeps cards centered on small screens */
+        margin: 0px;
     }
 }

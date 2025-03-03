@@ -2,10 +2,10 @@
 .filter-sidebar {
   width: 20%; /* Sidebar width on PC */
   height: auto;
-  background-color: #1c1c1c;
-  color: white;
+  background-color: var(--primary-filterbar-color);
+  color: var(--primary-text-color);
+  border: solid var(--border-color);
   padding: 20px;
-  border-radius: 8px;
   overflow-y: auto;
   transition: transform 0.3s ease-in-out; /* For mobile slide-in */
   z-index: 2;
@@ -16,7 +16,7 @@
   display: none; /* Hide by default */
   width: 100%;
   background-color: #ff4444;
-  color: white;
+  color: var(--primary-text-color);
   padding: 10px;
   border: none;
   cursor: pointer;
@@ -34,7 +34,7 @@
 .toggle-sidebar-btn {
   display: none;
   background-color: #333;
-  color: white;
+  color: var(--primary-text-color);
   padding: 10px;
   border: none;
   cursor: pointer;
@@ -92,5 +92,12 @@
   .toggle-sidebar-btn {
     display: none; /* Hide the toggle button on PC */
   }
+}
+
+/* Css variabelar */
+:root {
+  --primary-filterbar-color: #ffffff;
+  --primary-text-color: black;
+  --border-color: gray;
 }
 

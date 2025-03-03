@@ -7,7 +7,7 @@ const MainPageHero = () => {
     <section className="hero">
       <div className="hero-container">
         <h1>Find your next adventure</h1>
-        <p>Search for the best deals on flights and hotels</p>
+        <p>Search for the best deals on flights all around the world</p>
         <SearchBar />
       </div>
     </section>
