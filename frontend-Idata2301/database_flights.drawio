@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36" version="26.0.16">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1836" dy="702" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="765" dy="293" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -261,7 +261,7 @@
           <mxGeometry y="164" width="327" height="30" as="geometry" />
         </mxCell>
         <mxCell id="xdYvlDu0u07e66ifGCEE-42" value="Price" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="1247" y="207" width="391" height="257" as="geometry">
+          <mxGeometry x="1247" y="207" width="391" height="286" as="geometry">
             <mxRectangle x="550" y="140" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -286,11 +286,14 @@
         <mxCell id="xdYvlDu0u07e66ifGCEE-48" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="xdYvlDu0u07e66ifGCEE-42">
           <mxGeometry y="182" width="391" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="xdYvlDu0u07e66ifGCEE-49" value="&lt;span data-darkreader-inline-color=&quot;&quot; style=&quot;color: black; --darkreader-inline-color: var(--darkreader-text-000000, #e8e6e3);&quot; class=&quot;sqlcolor&quot;&gt;&lt;span data-darkreader-inline-color=&quot;&quot; style=&quot;color: rgb(0, 92, 197); --darkreader-inline-color: var(--darkreader-text-005cc5, #56b1ff);&quot; class=&quot;sqlkeywordcolor&quot;&gt;FOREIGN&lt;/span&gt; &lt;span data-darkreader-inline-color=&quot;&quot; style=&quot;color: rgb(0, 92, 197); --darkreader-inline-color: var(--darkreader-text-005cc5, #56b1ff);&quot; class=&quot;sqlkeywordcolor&quot;&gt;KEY&lt;/span&gt; (route_id) REFERENCES Route(id)&lt;/span&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="xdYvlDu0u07e66ifGCEE-42">
+        <mxCell id="xdYvlDu0u07e66ifGCEE-100" value="&lt;span data-darkreader-inline-color=&quot;&quot; style=&quot;color: black; --darkreader-inline-color: var(--darkreader-text-000000, #e8e6e3);&quot; class=&quot;sqlcolor&quot;&gt;&lt;span data-darkreader-inline-color=&quot;&quot; style=&quot;color: rgb(0, 92, 197); --darkreader-inline-color: var(--darkreader-text-005cc5, #56b1ff);&quot; class=&quot;sqlkeywordcolor&quot;&gt;FOREIGN&lt;/span&gt; &lt;span data-darkreader-inline-color=&quot;&quot; style=&quot;color: rgb(0, 92, 197); --darkreader-inline-color: var(--darkreader-text-005cc5, #56b1ff);&quot; class=&quot;sqlkeywordcolor&quot;&gt;KEY&lt;/span&gt; (class_id) REFERENCES Class(id)&lt;/span&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="xdYvlDu0u07e66ifGCEE-42">
           <mxGeometry y="190" width="391" height="32" as="geometry" />
         </mxCell>
-        <mxCell id="xdYvlDu0u07e66ifGCEE-50" value="&lt;font color=&quot;#005cc5&quot;&gt;CONSTRAINT CHK_Price_Discount_Range (discount BETWEEN 0 AND 100)&lt;/font&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="xdYvlDu0u07e66ifGCEE-42">
+        <mxCell id="xdYvlDu0u07e66ifGCEE-49" value="&lt;span data-darkreader-inline-color=&quot;&quot; style=&quot;color: black; --darkreader-inline-color: var(--darkreader-text-000000, #e8e6e3);&quot; class=&quot;sqlcolor&quot;&gt;&lt;span data-darkreader-inline-color=&quot;&quot; style=&quot;color: rgb(0, 92, 197); --darkreader-inline-color: var(--darkreader-text-005cc5, #56b1ff);&quot; class=&quot;sqlkeywordcolor&quot;&gt;FOREIGN&lt;/span&gt; &lt;span data-darkreader-inline-color=&quot;&quot; style=&quot;color: rgb(0, 92, 197); --darkreader-inline-color: var(--darkreader-text-005cc5, #56b1ff);&quot; class=&quot;sqlkeywordcolor&quot;&gt;KEY&lt;/span&gt; (route_id) REFERENCES Route(id)&lt;/span&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="xdYvlDu0u07e66ifGCEE-42">
           <mxGeometry y="222" width="391" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="xdYvlDu0u07e66ifGCEE-50" value="&lt;font color=&quot;#005cc5&quot;&gt;CONSTRAINT CHK_Price_Discount_Range (discount BETWEEN 0 AND 100)&lt;/font&gt;" style="whiteSpace=wrap;html=1;" vertex="1" parent="xdYvlDu0u07e66ifGCEE-42">
+          <mxGeometry y="254" width="391" height="32" as="geometry" />
         </mxCell>
         <mxCell id="xdYvlDu0u07e66ifGCEE-74" value="Class" style="swimlane;fontStyle=0;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="967" y="1047" width="230" height="87" as="geometry">
@@ -352,6 +355,13 @@
           <mxGeometry width="100" height="100" relative="1" as="geometry">
             <mxPoint x="890" y="100" as="sourcePoint" />
             <mxPoint x="1261" y="450" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xdYvlDu0u07e66ifGCEE-99" value="" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;rounded=0;noEdgeStyle=1;orthogonal=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="xdYvlDu0u07e66ifGCEE-74" target="xdYvlDu0u07e66ifGCEE-42">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="1311" y="950" as="sourcePoint" />
+            <mxPoint x="1170" y="950" as="targetPoint" />
             <Array as="points" />
           </mxGeometry>
         </mxCell>
