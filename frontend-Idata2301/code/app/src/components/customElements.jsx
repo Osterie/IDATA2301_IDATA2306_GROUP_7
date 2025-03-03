@@ -1,3 +1,7 @@
+// TODO Remove file after copyying what is wanted from it.
+
+
+
 // Factory which creates different html elements.
 class ElementFactory {
   constructor(style) {
