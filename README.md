@@ -2,6 +2,11 @@
 
 ---
 
+## Project Overview
+This project is a full-stack web application using Spring Boot for the backend and React for the frontend. It provides a REST API for data management and a user-friendly interface for interacting with the application.
+
+---
+
 ## Project members
 - Adrian - Osterie
 - Daniel - Pizzaester
@@ -43,4 +48,5 @@
 2. Run the following command:
    ```sh
    npm start
+   ```
    
