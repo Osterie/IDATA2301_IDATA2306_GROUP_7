@@ -12,7 +12,7 @@ function testApi (){
     .then(response => response.text())
     .then(data => console.log(data));
 
-
+    
 };
 
 function App() {
@@ -24,8 +24,6 @@ function App() {
     </header>
 
       <main>
-
-        <button onClick={() => testApi()}>Click me</button>
         <MainPageHero/> 
         <FilterSidebar />
         <ProductCardContainer />

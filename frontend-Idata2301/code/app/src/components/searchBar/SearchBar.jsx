@@ -9,7 +9,7 @@ const SearchBar = () => {
                 <input type="text" placeholder="To" name="to" required />
                 <input type="date" name="departure-date" required />
                 <input type="date" name="return-date" required />
-                <button type="submit">Search Flights</button>
+                <button type="submit">Search For Flights</button>
             </form>
         </>
     );
