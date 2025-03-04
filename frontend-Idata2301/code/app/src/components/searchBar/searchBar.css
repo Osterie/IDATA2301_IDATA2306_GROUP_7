@@ -23,13 +23,14 @@
 .search-form button {
     padding: 12px 25px;
     border: none;
-    background-color: #262834;
-    color: white;
+    background-color: var(--secondary-color);
+    color: var(--contrast-text-color);
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .search-form button:hover {
-    background-color: #001f4d;
+    background-color: var(--contrast-text-color);
+    color: var(--text-color);
 }

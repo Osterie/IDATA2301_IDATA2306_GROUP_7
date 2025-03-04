@@ -52,3 +52,27 @@ body {
     transform: rotate(360deg);
   }
 }
+
+/* CSS variables */
+:root{
+  /* Main colors */
+  --primary-color: #182833;
+  --secondary-color: #183040;
+  --background-color: rgb(240,240,250);
+  --bottom-color: #101520;
+
+  /* Contrast colors */
+  --primary-contrast: #FDA300;
+
+  /* Text color */
+  --text-color: black;
+  --border-color: black;
+
+  /* Contrast text color */
+  --contrast-text-color: white;
+  --contrast-border-color: white;
+
+  /* Shadow color */
+  --shadow-color: lightgray;
+
+}

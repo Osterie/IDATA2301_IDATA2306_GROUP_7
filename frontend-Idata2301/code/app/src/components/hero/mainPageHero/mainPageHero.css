@@ -11,7 +11,7 @@ html, body {
     background-image: url('./images/ross-parmly-rf6ywHVkrlY-unsplash.jpg');  /* Set the path to your image */
     background-size: cover;
     background-position: center;
-    color: white;
+    color: var(--contrast-text-color);
     text-align: center;
     padding: 80px 20px;
     height: calc(100vh - 80px);  /* Full height minus navbar height (adjust '60px' if navbar is taller) */
@@ -39,12 +39,12 @@ html, body {
 }
 
 .hero h1 {
-    color: #ffffff;
+    color: var(--contrast-text-color);
     margin: 0;
     font-size: 40px
 }
 .hero p {
-    color: #ffffff;
+    color: var(--contrast-text-color);
     margin: 0 0 20px 0;
     font-size: 30px;
 }

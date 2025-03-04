@@ -26,10 +26,10 @@ html, body {
 #contactTitle {
     margin-bottom: 10px;
     font-size: 30px;
-    color: var(--text-contrast);
+    color: var(--contrast-text-color);
 }
 .contactInfo {
-    color: var(--primary-contrast);
+    color: var(--contrast-text-color);
     font-size: 18px;
 }
 .contactInfo > a {
@@ -40,9 +40,9 @@ html, body {
     width: 80%;
     margin-left: 10%;
     padding: 10px;
-    border-top: 1px solid var(--text-contrast);
+    border-top: 1px solid var(--contrast-text-color);
     font-size: 18px;
-    color: var(--text-contrast);
+    color: var(--contrast-text-color);
 }
 @media (max-width: 900px){
     #contactTitle {
@@ -54,18 +54,4 @@ html, body {
     #bottomBox {
         text-align: center;
     }
-}
-
-:root{
-    --primary-color: #182833;
-    --secondary-color: #183040;
-    --bottom-color: #101520;
-    --text-color: rgb(36, 24, 24);
-    --border-color: black;
-    --primary-contrast: #FDA300;
-    --secondary-contrast: white;
-    --third-contrast: black;
-    --text-contrast: white;
-
-    --nav-height: 80px; 
 }

@@ -3,7 +3,7 @@
     height: 20rem;
     border-radius: 1rem;
     overflow: hidden;
-    box-shadow: 0 0 0.5rem lightgray;
+    box-shadow: 0 0 0.5rem var(--shadow-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -25,7 +25,7 @@
 /* Hover animation */
 .card:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 1rem lightgray;
+    box-shadow: 0 0 1rem var(--shadow-color);
 }
 
 /* Responsive Design */
