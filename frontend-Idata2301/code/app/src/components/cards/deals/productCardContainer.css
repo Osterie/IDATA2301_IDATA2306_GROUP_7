@@ -8,10 +8,9 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .product-container {
         flex-direction: column;
         align-items: center; /* Keeps cards centered on small screens */
-        margin: 0px;
     }
 }

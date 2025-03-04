@@ -2,7 +2,7 @@
 .filter-sidebar {
   width: 20vw; /* Sidebar width on PC */
   height: 100%;
-  background-color: var(--primary-filterbar-color);
+  background-color: var(--contrast-text-color);
   color: var(--primary-text-color);
   padding: 20px;
   margin: 0;
