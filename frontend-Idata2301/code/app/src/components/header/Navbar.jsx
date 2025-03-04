@@ -16,9 +16,14 @@ const Navbar = () => {
         <div className={`bar ${isMenuOpen ? "open" : ""}`}></div>
         <div className={`bar ${isMenuOpen ? "open" : ""}`}></div>
       </div>
+
       <a href="/" className="logo">
-        <img src={logo} alt="Logo" />
+        <div className="logo-container">
+          <img src={logo} alt="Logo" />
+          <h1>Flight Finder</h1>
+        </div>
       </a>
+
       <ul className={isMenuOpen ? "active" : ""}>
         <li><a className="active" href="#">Home</a></li>
         <li><a href="/info">Deals</a></li>

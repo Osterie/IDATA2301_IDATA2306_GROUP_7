@@ -15,11 +15,29 @@ nav {
   z-index: 3;
 }
 
+/* Adjust the .logo div to use Flexbox */
+nav .logo {
+  display: flex;
+  align-items: center;  /* Vertically aligns the logo and text */
+}
+
+nav .logo-container {
+  display: flex;
+  align-items: center;  /* Aligns logo image and text horizontally */
+}
+
 nav .logo img {
   height: 60px; /* Adjust based on your design */
   width: auto;
-  vertical-align: middle;
+  margin-right: 10px; /* Adds space between the logo image and the text */
 }
+
+nav .logo h1 {
+  margin: 0; /* Removes any default margin around the text */
+  color: white; /* Adjusts the text color */
+  font-size: 24px; /* Adjust text size as needed */
+}
+
 
 nav ul {
   display: flex;
