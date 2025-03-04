@@ -1,0 +1,43 @@
+.flight-card {
+  background: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  width: 90%; /* Takes most of the width */
+  max-width: 800px; /* Prevents it from being too wide */
+  margin: 10px auto; /* Centered and stacked */
+  transition: transform 0.2s ease-in-out;
+}
+
+.flight-card:hover {
+  transform: scale(1.02);
+}
+
+.flight-card h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.flight-number {
+  font-size: 0.9rem;
+  color: gray;
+}
+
+.flight-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: gray;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 10px;
+}

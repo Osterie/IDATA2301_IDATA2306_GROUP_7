@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./App.css";
 import FilterSidebar from "./components/searchfilter/filter";
-import ProductCardContainer from "./components/cards/ProductCardContainer";
-import ProductCardHeader from "./components/cards/ProductCardHeader";
+import ProductCardContainer from "./components/cards/deals/ProductCardContainer";
+import ProductCardHeader from "./components/cards/deals/ProductCardHeader";
+import FlightsContainer from "./components/cards/searched-flights/FlightsContainer";
 import MainPageHero from "./components/hero/mainPageHero/MainPageHero";
+import DealsPageHero from "./components/hero/dealsPageHero/DealsPageHero";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/header/Navbar";
 
@@ -28,7 +30,15 @@ function App() {
             <ProductCardContainer />
           </>
         )}
-        {activePage === "deals" && <FilterSidebar />}
+        {activePage === "deals" && (
+          <>
+            <DealsPageHero/>
+            <section className="search-section">
+              <FilterSidebar />
+              <FlightsContainer />
+            </section>
+          </>
+        )}
         {activePage === "about" && <h2>About Us Section</h2>}
         {activePage === "login" && <h2>Login Page</h2>}
       </main>

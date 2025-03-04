@@ -4,7 +4,7 @@
     justify-content: space-evenly; /* Spreads items evenly */
     gap: 2rem; /* Space between cards */
     max-width: 120rem; /* Prevents stretching too wide */
-    margin: 20px 100px auto; /* Centers the container itself */
+    margin: 20px 100px 20px; /* Centers the container itself */
 }
 
 /* Responsive Design */

@@ -1,12 +1,12 @@
 /* Sidebar general styling */
 .filter-sidebar {
-  width: 20%; /* Sidebar width on PC */
-  height: auto;
+  width: 20vw; /* Sidebar width on PC */
+  height: 100%;
   background-color: var(--primary-filterbar-color);
   color: var(--primary-text-color);
-  border: solid var(--border-color);
   padding: 20px;
-  overflow-y: auto;
+  margin: 0;
+  border-radius: 12px;
   transition: transform 0.3s ease-in-out; /* For mobile slide-in */
   z-index: 2;
 }
@@ -80,23 +80,9 @@
   }
 }
 
-/* Desktop styling: Sidebar is always visible */
-@media (min-width: 769px) {
-  .filter-sidebar {
-    width: 20%; /* Sidebar takes less space on PC */
-    transform: translateX(0); /* Sidebar is always visible on PC */
-    position: static;
-    height: auto;
-  }
-
-  .toggle-sidebar-btn {
-    display: none; /* Hide the toggle button on PC */
-  }
-}
-
 /* Css variabelar */
 :root {
-  --primary-filterbar-color: #ffffff;
+  --primary-filterbar-color: white;
   --primary-text-color: black;
   --border-color: gray;
 }

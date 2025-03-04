@@ -1,0 +1,19 @@
+.flights-container {
+  padding: 20px;
+  text-align: center;
+  width: 60%;
+}
+
+.flights-grid {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center cards */
+  gap: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .flights-container {
+    width: 100%;
+  }
+}

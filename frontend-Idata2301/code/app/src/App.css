@@ -2,6 +2,19 @@ body {
   background-color: rgb(240,240,250);
 }
 
+/* Search section */
+.search-section {
+  width: 100%;
+  display: flex;
+}
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .search-section {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+  }
+}
+
 .App {
   text-align: center;
 }
