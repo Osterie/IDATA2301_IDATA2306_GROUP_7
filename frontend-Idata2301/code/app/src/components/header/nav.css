@@ -1,97 +1,88 @@
-/* Logo */
-#Aavgs {
-  margin: 10px;
-  width: 20%;
-  background-color: white;
-}
-@media (max-width: 900px) {
-  #Aavgs {
-    width: 30%;
-  }
-}
-
-.LogoText {
-  position: absolute;
-  border-radius: 4px;
-  font-size: 50px;
-  font-family: "Lobster", cursive;
-  margin-left: 110px;
-  margin-top: 8px;
-  color: black;
-  background-color: white;
-  z-index: +2;
-}
-.Logo1 {
-  position: absolute;
-  margin-left: 25px;
-  margin-top: 3px;
-  z-index: +2;
-}
-
+/* General Styles */
 body {
-  /*font-family: 'Balsamiq Sans', cursive;*/
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Navbar Styles */
 nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background: var(--primary-color);
   height: 80px;
   width: 100%;
+  padding: 0 20px;
+  z-index: 3;
 }
-label.logo {
-  color: black;
-  font-size: 35px;
-  border-radius: 4px;
-  line-height: 80px;
-  padding: 0 100px;
-  font-family: "Lobster", cursive;
+
+nav .logo img {
+  height: 60px; /* Adjust based on your design */
+  width: auto;
+  vertical-align: middle;
 }
+
 nav ul {
-  float: right;
-  margin-right: 20px;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
+
 nav ul li {
-  display: inline-block;
-  line-height: 80px;
-  margin: 0 5px;
+  margin: 0 10px;
 }
+
 nav ul li a {
   color: white;
   font-size: 17px;
   padding: 7px 13px;
   border-radius: 3px;
   text-transform: uppercase;
+  text-decoration: none;
 }
-a.active,
-a:hover {
+
+nav ul li a.active,
+nav ul li a:hover {
   background: #f2f2f2;
   transition: 0.5s;
   color: black;
 }
-.checkbtn {
-  font-size: 30px;
-  color: white;
-  float: right;
-  line-height: 80px;
-  margin-right: 40px;
+
+/* Hamburger Menu Styles */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 24px;
+  width: 30px;
   cursor: pointer;
-  display: none;
 }
-#check {
-  display: none;
+
+.hamburger-menu .bar {
+  height: 4px;
+  width: 100%;
+  background-color: white;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
-@media (max-width: 1100px) {
-  label.logo {
-    font-size: 30px;
-  }
-  nav ul li a {
-    font-size: 16px;
-  }
+
+.hamburger-menu .bar.open:nth-child(1) {
+  transform: rotate(45deg) translateY(10px);
 }
+
+.hamburger-menu .bar.open:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu .bar.open:nth-child(3) {
+  transform: rotate(-45deg) translateY(-10px);
+}
+
+/* Responsive Styles */
 @media (max-width: 900px) {
-  .checkbtn {
-    display: block;
+  .hamburger-menu {
+    display: flex;
   }
-  ul {
+  nav ul {
     position: absolute;
     width: 100%;
     height: 100vh;
@@ -99,36 +90,27 @@ a:hover {
     top: 80px;
     left: -100%;
     text-align: center;
+    flex-direction: column;
     transition: all 0.5s;
   }
   nav ul li {
-    display: block;
     margin: 50px 0;
-    line-height: 30px;
   }
   nav ul li a {
     font-size: 20px;
   }
-  a:hover,
-  a.active {
-    background: none;
-    color: black;
-  }
-  #check:checked ~ ul {
+  nav ul.active {
     left: 0;
   }
-  label.logo {
-    font-size: 20px;
+  nav .logo img {
+    height: 40px; /* Adjust based on your design */
   }
 }
 
-/* Css variabelar */
+/* CSS Variables */
 :root {
   --primary-color: #262834;
   --secondary-color: #fd7d00;
-  --third-color: green;
-  --fourth-color: green;
-  --fifth-color: orange;
   --text-color: black;
   --text-secondcolor: white;
 }
