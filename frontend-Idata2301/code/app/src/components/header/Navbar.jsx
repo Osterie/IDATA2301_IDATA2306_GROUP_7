@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./nav.css";
 import logo from "./images/logo.png";
 
-const Navbar = () => {
+const Navbar = ({ onNavClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -25,10 +25,10 @@ const Navbar = () => {
       </a>
 
       <ul className={isMenuOpen ? "active" : ""}>
-        <li><a className="active" href="#">Home</a></li>
-        <li><a href="/info">Deals</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/logg">Logg in</a></li>
+        <li><a href="#" onClick={() => onNavClick("home")}>Home</a></li>
+        <li><a href="#" onClick={() => onNavClick("deals")}>Deals</a></li>
+        <li><a href="#" onClick={() => onNavClick("about")}>About</a></li>
+        <li><a href="#" onClick={() => onNavClick("login")}>Log in</a></li>
       </ul>
     </nav>
   );
