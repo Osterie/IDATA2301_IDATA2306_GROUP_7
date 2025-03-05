@@ -8,6 +8,7 @@ import MainPageHero from "./components/hero/mainPageHero/MainPageHero";
 import DealsPageHero from "./components/hero/dealsPageHero/DealsPageHero";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/header/Navbar";
+import AboutUs from "./components/about/AboutUs";
 
 function App() {
   const [activePage, setActivePage] = useState("home");
@@ -39,7 +40,11 @@ function App() {
             </section>
           </>
         )}
-        {activePage === "about" && <h2>About Us Section</h2>}
+        {activePage === "about" && (
+          <>
+            <AboutUs/>
+          </>
+        )}
         {activePage === "login" && <h2>Login Page</h2>}
       </main>
 
