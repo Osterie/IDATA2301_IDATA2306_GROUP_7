@@ -20,6 +20,9 @@ const DualRangeSlider = ({ label, min, max, step = 0.1, callback }) => {
 
   const updateSliderBackground = () => {
     const fromSlider = fromSliderRef.current;
+    fromSlider.style.zIndex = 3;
+    fromSlider.style.background = "transparent";
+
     const toSlider = toSliderRef.current;
     const rangeDistance = toSlider.max - toSlider.min;
     const fromPosition = fromSlider.value - toSlider.min;
@@ -27,12 +30,12 @@ const DualRangeSlider = ({ label, min, max, step = 0.1, callback }) => {
 
     toSlider.style.background = `linear-gradient(
       to right,
-      #C6C6C6 0%,
-      #C6C6C6 ${(fromPosition / rangeDistance) * 100}%,
-      #25daa5 ${(fromPosition / rangeDistance) * 100}%,
-      #25daa5 ${(toPosition / rangeDistance) * 100}%, 
-      #C6C6C6 ${(toPosition / rangeDistance) * 100}%, 
-      #C6C6C6 100%)`;
+      transparent 0%,
+      transparent ${(fromPosition / rangeDistance) * 100}%,
+      #0062e3 ${(fromPosition / rangeDistance) * 100}%,
+      #0062e3 ${(toPosition / rangeDistance) * 100}%, 
+      transparent ${(toPosition / rangeDistance) * 100}%, 
+      transparent 100%)`;
   };
 
   // Ensure min value never exceeds max value
@@ -105,7 +108,7 @@ const DualRangeSlider = ({ label, min, max, step = 0.1, callback }) => {
         {label}
       </div>
 
-      <div className="dual-range-slider-control">
+      <div className="dual-range-slider-control dual-range-slider-sliders-container">
         <input
           ref={fromSliderRef}
           type="range"

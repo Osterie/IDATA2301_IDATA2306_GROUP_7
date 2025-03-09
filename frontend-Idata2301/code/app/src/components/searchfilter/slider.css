@@ -25,6 +25,10 @@
     color: #635a5a;
 }
 
+.dual-range-slider-sliders-container {
+    border: 1px solid black;
+}
+
 .dual-range-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     pointer-events: all;
