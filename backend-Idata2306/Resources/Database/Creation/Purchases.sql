@@ -5,5 +5,5 @@ Create Table purchases (
 
     FOREIGN KEY (user_id) REFERENCES user(id),
     FOREIGN KEY (flight_id) REFERENCES flight(id),
-    FOREIGN KEY (price_id) REFERENCES price(id),
+    FOREIGN KEY (price_id) REFERENCES price(id)
 );

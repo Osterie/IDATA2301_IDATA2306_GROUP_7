@@ -3,5 +3,5 @@ Create Table favorite_flights (
     user_id INT NOT NULL,
 
     FOREIGN KEY (userid) REFERENCES user(id),
-    FOREIGN KEY (flight_id) REFERENCES flight(id),
+    FOREIGN KEY (flight_id) REFERENCES flight(id)
 );
