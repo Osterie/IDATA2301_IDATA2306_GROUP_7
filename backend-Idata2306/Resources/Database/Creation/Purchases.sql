@@ -1,9 +1,9 @@
-Create Table Purchases (
-    UserId INT NOT NULL,
-    Flight_Id INT NOT NULL,
-    Price_Id INT NOT NULL,
+Create Table purchases (
+    user_id INT NOT NULL,
+    flight_id INT NOT NULL,
+    price_id INT NOT NULL,
 
-    FOREIGN KEY (User_Id) REFERENCES User(Id),
-    FOREIGN KEY (Flight_Id) REFERENCES Flight(Id),s
-    FOREIGN KEY (Price_Id) REFERENCES Price(Id),
+    FOREIGN KEY (user_id) REFERENCES user(id),
+    FOREIGN KEY (flight_id) REFERENCES flight(id),
+    FOREIGN KEY (price_id) REFERENCES price(id),
 );

@@ -1,4 +1,4 @@
-Create Table Favorit_Flights ( 
+Create Table favorite_flights ( 
     flight_id INT NOT NULL,
     user_id INT NOT NULL,
 

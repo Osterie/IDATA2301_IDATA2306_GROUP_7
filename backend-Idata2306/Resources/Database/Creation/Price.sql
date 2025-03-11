@@ -7,7 +7,7 @@ CREATE TABLE price(
     discount INT UNSIGNED DEFAULT 0,
     scheduled_flights_id INT NOT NULL,
 
-    FOREIGN KEY (ClassId) REFERENCES class(Id),
-    FOREIGN KEY (ScheduledFlightsId) REFERENCES scheduled_flights(Id),
-    CONSTRAINT CHK_Price_Discount_Range CHECK (Discount BETWEEN 0 AND 100)
+    FOREIGN KEY (class_id) REFERENCES class(id),
+    FOREIGN KEY (scheduled_flights_id) REFERENCES scheduled_flights(id),
+    CONSTRAINT CHK_Price_Discount_Range CHECK (discount BETWEEN 0 AND 100)
 )
