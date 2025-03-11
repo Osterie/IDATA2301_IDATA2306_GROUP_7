@@ -1,4 +1,5 @@
 CREATE TABLE price(
+    id INT PRIMARY KEY AUTO_INCREMENT,
     class_id INT NOT NULL,
     price INT UNSIGNED NOT NULL,
     price_code CHAR(3) NOT NULL,
