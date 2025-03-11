@@ -1,4 +1,4 @@
 CREATE TABLE Class(
     Id INT PRIMARY KEY AUTO_INCREMENT,
-    Name Varchar(50) NOT NULL UNIQUE,
-)
+    Name Varchar(50) NOT NULL UNIQUE
+);
