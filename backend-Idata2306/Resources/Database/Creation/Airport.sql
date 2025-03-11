@@ -1,4 +1,4 @@
-CREATE TABLE Airport(
-    AirportCode CHAR(3) PRIMARY KEY,
-    City VARCHAR(255) NOT NULL
+CREATE TABLE airport(
+    airport_code CHAR(3) PRIMARY KEY,
+    city VARCHAR(255) NOT NULL
 );
