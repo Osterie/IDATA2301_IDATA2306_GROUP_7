@@ -10,6 +10,7 @@
     background: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 10px;
+    z-index: 2;
   }
   .form-group {
     margin-bottom: 15px;
@@ -23,6 +24,7 @@
     padding: 10px;
     border: none;
     border-radius: 5px;
+    z-index: 3;
   }
   button {
     padding: 10px 20px;
@@ -31,6 +33,7 @@
     background: #007BFF;
     color: white;
     cursor: pointer;
+    z-index: 3;
   }
   button:hover {
     background: #0056b3;
