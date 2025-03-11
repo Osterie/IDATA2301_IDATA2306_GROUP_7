@@ -1,7 +1,7 @@
 CREATE TABLE route(
-    Id INT PRIMARY KEY AUTO_INCREMENT,
-    DepartureAirportCode CHAR(3) NOT NULL,
-    ArrivalAirportCode CHAR(3) NOT NULL,
-    FOREIGN KEY (DepartureAirportCode) REFERENCES airport(AirportCode),
-    FOREIGN KEY (ArrivalAirportCode) REFERENCES airport(AirportCode)
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    departure_airport_code CHAR(3) NOT NULL,
+    arrival_airport_code CHAR(3) NOT NULL,
+    FOREIGN KEY (departure_airport_code) REFERENCES airport(airport_code),
+    FOREIGN KEY (arrival_airport_code) REFERENCES airport(airport_code)
 )
