@@ -1,7 +1,7 @@
 # **Sprint Report**
 
-Sprint master: Daniel
-Sprint stenographer: Daniel
+Sprint master: Adrian
+Sprint stenographer: Adrian
 
 ## **Sprint Overview**
 
