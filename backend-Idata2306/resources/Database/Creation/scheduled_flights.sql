@@ -4,6 +4,6 @@ CREATE TABLE ScheduledFlights(
     RouteId INT NOT NULL,
     Date DATE NOT NULL,
 
-    FOREIGN KEY (FlightId) REFERENCES Flight(Id),
-    FOREIGN KEY (RouteId) REFERENCES Route(Id)
+    FOREIGN KEY (FlightId) REFERENCES flight(Id),
+    FOREIGN KEY (RouteId) REFERENCES route(Id)
 )
