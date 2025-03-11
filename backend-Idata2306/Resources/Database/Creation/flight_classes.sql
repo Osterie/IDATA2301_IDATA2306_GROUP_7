@@ -1,7 +1,7 @@
 CREATE TABLE flight_classes(
-    class_id INT NOT NULL,
-    flight_id INT NOT NULL,
-    available_seats INT UNSIGNED NOT NULL,
-    FOREIGN KEY (class_id) REFERENCES class(id),
-    FOREIGN KEY (flight_id) REFERENCES flight(id)
+    ClassId INT NOT NULL,
+    FlightId INT NOT NULL,
+    AvailableSeats INT UNSIGNED NOT NULL,
+    FOREIGN KEY (ClassId) REFERENCES class(Id),
+    FOREIGN KEY (FlightId) REFERENCES flight(Id)
 );

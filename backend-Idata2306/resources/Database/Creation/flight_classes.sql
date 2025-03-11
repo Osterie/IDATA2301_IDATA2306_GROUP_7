@@ -1,4 +1,4 @@
-CREATE TABLE FlightClasses(
+CREATE TABLE flight_classes(
     ClassId INT NOT NULL,
     FlightId INT NOT NULL,
     AvailableSeats INT UNSIGNED NOT NULL,
