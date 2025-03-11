@@ -1,9 +1,0 @@
-CREATE TABLE ScheduledFlights(
-    Id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    FlightId INT NOT NULL,
-    RouteId INT NOT NULL,
-    Date DATE NOT NULL,
-
-    FOREIGN KEY (FlightId) REFERENCES flight(Id),
-    FOREIGN KEY (RouteId) REFERENCES route(Id)
-)
