@@ -6,6 +6,7 @@ import ProductCardHeader from "./components/cards/deals/ProductCardHeader";
 import FlightsContainer from "./components/cards/searched-flights/FlightsContainer";
 import MainPageHero from "./components/hero/mainPageHero/MainPageHero";
 import DealsPageHero from "./components/hero/dealsPageHero/DealsPageHero";
+import LogInPageHero from "./components/hero/logInPageHero/LogInPageHero";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/header/Navbar";
 import AboutUs from "./components/about/AboutUs";
@@ -45,7 +46,11 @@ function App() {
             <AboutUs/>
           </>
         )}
-        {activePage === "login" && <h2>Login Page</h2>}
+        {activePage === "login" && (
+          <>
+            <LogInPageHero />
+          </>
+        )}
       </main>
 
       <Footer />
