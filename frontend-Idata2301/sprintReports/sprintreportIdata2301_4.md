@@ -32,8 +32,12 @@ Sprint stenographer: Adrian
 | Story/Task                             | Assignee | Status | Story Points | Comments |
 | -------------------------------------- | -------- | ------ | ------------ | -------- |
 | Finish Hero section                    | Daniel   |        | [2]          |          |
-| Search page card                       | Tobias   |        | [4]          |          |
+| Static login page                      | Daniel   |        | [3]          |          |
+| Add multipage functionality            | Tobias   |        | [3]          |          |
+| Search page and card                   | Tobias   |        | [4]          |          |
+| About us page                          | Tobias   |        | [2]          |          |
 | Fetch information for searched flights | Adrian   |        | [3]          |          |
+| Worked on filter sidebar               | Tobias   |        | [3]          |          |
 | Searched flights page                  | Everyone |        | [9]          |          |
 
 ---
