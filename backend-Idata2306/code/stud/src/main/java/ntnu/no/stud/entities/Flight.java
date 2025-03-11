@@ -21,5 +21,11 @@ public class Flight {
     @Column(name = "company", nullable = false)
     private String company;
 
+    public Flight() { }
+
     // Getters and setters
+    public Flight(String name, String company) {
+        this.name = name;
+        this.company = company;
+    }
 }
