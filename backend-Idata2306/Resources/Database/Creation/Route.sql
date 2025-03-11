@@ -1,4 +1,4 @@
-CREATE TABLE Route(
+CREATE TABLE route(
     id INT PRIMARY KEY AUTO_INCREMENT,
     departure_airport_code CHAR(3) NOT NULL,
     arrival_airport_code CHAR(3) NOT NULL,

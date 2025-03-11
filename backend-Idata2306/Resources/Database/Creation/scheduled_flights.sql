@@ -1,4 +1,4 @@
-CREATE TABLE ScheduledFlights(
+CREATE TABLE scheduled_flights(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     flight_id INT NOT NULL,
     route_id INT NOT NULL,
