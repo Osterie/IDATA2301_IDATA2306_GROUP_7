@@ -4,4 +4,4 @@ CREATE TABLE route(
     arrival_airport_code CHAR(3) NOT NULL,
     FOREIGN KEY (departure_airport_code) REFERENCES airport(airport_code),
     FOREIGN KEY (arrival_airport_code) REFERENCES airport(airport_code)
-)
+);
