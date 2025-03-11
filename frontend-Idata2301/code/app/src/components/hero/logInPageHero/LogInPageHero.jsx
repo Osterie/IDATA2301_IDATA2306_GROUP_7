@@ -4,7 +4,7 @@ import './logInPageHero.css';
 const LoginPageHero = () => {
   return (
     <section className="hero">
-      <div className="hero-container">
+      <div className="login-hero-container">
         <h1>Welcome Back!</h1>
         <p>Please log in to continue</p>
         <form action="/login" method="post">
