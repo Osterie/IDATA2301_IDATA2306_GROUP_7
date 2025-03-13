@@ -1,7 +1,7 @@
 import React from 'react';
 import './logInPageHero.css';
 
-const LoginPageHero = () => {
+const LoginPageHero = ({ onNavClick }) => {
   return (
     <section className="hero">
       <div className="login-hero-container">
@@ -18,6 +18,7 @@ const LoginPageHero = () => {
           </div>
           <button type="submit">Log In</button>
         </form>
+        <p> <button onClick={() => onNavClick("create-account")}>Create Account</button></p>
       </div>
     </section>
   );

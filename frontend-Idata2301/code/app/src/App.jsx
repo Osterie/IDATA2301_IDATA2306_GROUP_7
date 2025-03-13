@@ -7,6 +7,7 @@ import FlightsContainer from "./components/cards/searched-flights/FlightsContain
 import MainPageHero from "./components/hero/mainPageHero/MainPageHero";
 import DealsPageHero from "./components/hero/dealsPageHero/DealsPageHero";
 import LogInPageHero from "./components/hero/logInPageHero/LogInPageHero";
+import CreateAccountPageHero from "./components/hero/createAccountHero/CreateAccountHero";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/header/Navbar";
 import AboutUs from "./components/about/AboutUs";
@@ -48,7 +49,12 @@ function App() {
         )}
         {activePage === "login" && (
           <>
-            <LogInPageHero />
+            <LogInPageHero onNavClick={handleNavClick} />
+          </>
+        )}
+        {activePage === "create-account" && (
+          <>
+            <CreateAccountPageHero />
           </>
         )}
       </main>
