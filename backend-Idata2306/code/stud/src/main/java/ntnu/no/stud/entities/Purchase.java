@@ -1,30 +1,27 @@
-package ntnu.no.stud.entities;
+// package ntnu.no.stud.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+// import jakarta.persistence.Entity;
+// import jakarta.persistence.Table;
+// import jakarta.persistence.Id;
+// import jakarta.persistence.ManyToOne;
+// import jakarta.persistence.JoinColumn;
 
-@Entity
-@Table(name = "purchases")
-public class Purchase {
+// @Entity
+// @Table(name = "purchases")
+// public class Purchase {
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+//     @Id
+//     @ManyToOne
+//     @JoinColumn(name = "user_id", nullable = false)
+//     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "flight_id", nullable = false)
-    private Flight flight;
+//     @ManyToOne
+//     @JoinColumn(name = "flight_id", nullable = false)
+//     private Flight flight;
 
-    @ManyToOne
-    @JoinColumn(name = "price_id", nullable = false)
-    private Price price;
+//     @ManyToOne
+//     @JoinColumn(name = "price_id", nullable = false)
+//     private Price price;
 
-    // Getters and setters
-}
+//     // Getters and setters
+// }

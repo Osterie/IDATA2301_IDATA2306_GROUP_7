@@ -24,6 +24,16 @@ Sprint stenographer: Adrian
 - When click search flights, go to searched flights page.
 
 - **Completed Work:**
+- Hero section
+- Static login page
+- Add multipage functionality
+- Search page and card
+- About us page
+- Worked on filter sidebar
+
+- **Not Completed:**
+- Fetch information for searched flights (BLOCKED by establish connection to database not completed)
+- Searched flights page
 
 ---
 
