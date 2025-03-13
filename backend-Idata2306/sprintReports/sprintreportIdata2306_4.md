@@ -25,6 +25,13 @@ Sprint stenographer: Adrian
 - POSTMAN for existing endpoints.
 
 - **Completed Work:**
+- Write all database info.
+- Create database tables.
+- Establish connection to database
+
+- **Not Completed:**
+- GET request for searched flights (BLOCKED by establish connection to database)
+- POSTMAN for existing endpoints (BLOCKED by establish connection to database)
 
 ---
 
@@ -34,7 +41,7 @@ Sprint stenographer: Adrian
 | -------------------------------- | -------- | ------------- | ------------ | -------- |
 | Write all database info.         | Everyone | Not completed | [5]          |          |
 | Create database tables.          | Everyone | Not completed | [4]          |          |
-| Establish connection to database | Adrian   | Not completed | [3]          |          |
+| Establish connection to database | Adrian   | Not completed | [6]          |          |
 | GET request for searched flights | Daniel   | Not completed | [5]          |          |
 | POSTMAN for existing endpoints   | Tobias   | Not completed | [3]          |          |
 
