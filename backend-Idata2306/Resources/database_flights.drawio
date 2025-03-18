@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" version="26.1.0">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" version="26.1.1">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="706" dy="296" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="835" dy="350" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -248,7 +248,7 @@
             <mxRectangle x="550" y="140" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="9sW0zsphx7L1edl2IHtJ-0" value="id PK" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="xdYvlDu0u07e66ifGCEE-42">
+        <mxCell id="9sW0zsphx7L1edl2IHtJ-0" value="id PK" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="xdYvlDu0u07e66ifGCEE-42" vertex="1">
           <mxGeometry y="26" width="391" height="26" as="geometry" />
         </mxCell>
         <mxCell id="xdYvlDu0u07e66ifGCEE-43" value="class_id FK" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="xdYvlDu0u07e66ifGCEE-42" vertex="1">
@@ -355,6 +355,30 @@
           <mxGeometry width="100" height="100" relative="1" as="geometry">
             <mxPoint x="1250" y="410" as="sourcePoint" />
             <mxPoint x="340" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ys6PJPCNHeN2WGXf6GEW-1" value="UserRoles" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1220" y="23" width="269" height="142" as="geometry">
+            <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Ys6PJPCNHeN2WGXf6GEW-2" value="user_id int FK" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Ys6PJPCNHeN2WGXf6GEW-1">
+          <mxGeometry y="26" width="269" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Ys6PJPCNHeN2WGXf6GEW-3" value="role Varchar(50)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Ys6PJPCNHeN2WGXf6GEW-1">
+          <mxGeometry y="52" width="269" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Ys6PJPCNHeN2WGXf6GEW-6" value="" style="line;html=1;strokeWidth=1;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="Ys6PJPCNHeN2WGXf6GEW-1">
+          <mxGeometry y="78" width="269" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="Ys6PJPCNHeN2WGXf6GEW-7" value="&lt;span style=&quot;text-wrap-mode: wrap; color: rgb(0, 92, 197); --darkreader-inline-color: var(--darkreader-text-005cc5, #56b1ff);&quot; data-darkreader-inline-color=&quot;&quot; class=&quot;sqlkeywordcolor&quot;&gt;FOREIGN&lt;/span&gt;&lt;span style=&quot;text-wrap-mode: wrap;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-wrap-mode: wrap; color: rgb(0, 92, 197); --darkreader-inline-color: var(--darkreader-text-005cc5, #56b1ff);&quot; data-darkreader-inline-color=&quot;&quot; class=&quot;sqlkeywordcolor&quot;&gt;KEY&lt;/span&gt;&lt;span style=&quot;text-wrap-mode: wrap;&quot;&gt;&amp;nbsp;(user_id) REFERENCES User(id&lt;/span&gt;&lt;span style=&quot;text-wrap-mode: wrap; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;)&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="Ys6PJPCNHeN2WGXf6GEW-1">
+          <mxGeometry y="86" width="269" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Ys6PJPCNHeN2WGXf6GEW-8" value="" style="edgeStyle=orthogonalEdgeStyle;fontSize=12;html=1;endArrow=ERzeroToMany;startArrow=ERmandOne;rounded=0;noEdgeStyle=1;orthogonal=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="4WXif6-VD8cvvsOOWggt-12" target="Ys6PJPCNHeN2WGXf6GEW-1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="1027" y="175" as="sourcePoint" />
+            <mxPoint x="1027" y="333" as="targetPoint" />
+            <Array as="points" />
           </mxGeometry>
         </mxCell>
       </root>

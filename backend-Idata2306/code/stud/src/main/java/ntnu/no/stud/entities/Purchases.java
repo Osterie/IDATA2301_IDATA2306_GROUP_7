@@ -7,8 +7,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
 @Entity
-@Table(name = "favorite_flights")
-public class FavoriteFlight {
+@Table(name = "purchases")
+public class Purchases {
 
     @Id
     @ManyToOne
@@ -19,11 +19,16 @@ public class FavoriteFlight {
     @JoinColumn(name = "flight_id", nullable = false)
     private Flight flight;
 
-    public FavoriteFlight() { }
+    @ManyToOne
+    @JoinColumn(name = "price_id", nullable = false)
+    private Price price;
 
-    public FavoriteFlight(User user, Flight flight) {
+    public Purchases() { }
+
+    public Purchases(User user, Flight flight, Price price) {
         this.user = user;
         this.flight = flight;
+        this.price = price;
     }
 
     // Getters and setters
@@ -42,5 +47,12 @@ public class FavoriteFlight {
     public void setFlight(Flight flight) {
         this.flight = flight;
     }
-}
 
+    public Price getPrice() {
+        return price;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
+    }
+}
