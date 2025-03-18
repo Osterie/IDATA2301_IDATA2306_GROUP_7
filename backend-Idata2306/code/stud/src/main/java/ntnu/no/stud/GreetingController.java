@@ -13,11 +13,18 @@ import ntnu.no.stud.repositories.FlightRepository;
 
 import ntnu.no.stud.entities.Flight;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import ntnu.no.stud.repositories.FlightRepository;
+import ntnu.no.stud.entities.Flight;
+
 /**
  * 
  * A REST API controller which responds to HTTP requests for /hello.
  */
 @RestController
+@CrossOrigin(origins = "*") // Allow frontend access
 public class GreetingController {
 
   @Autowired
