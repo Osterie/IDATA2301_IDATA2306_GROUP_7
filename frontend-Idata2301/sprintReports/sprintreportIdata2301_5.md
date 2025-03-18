@@ -30,11 +30,12 @@ Sprint stenographer: Tobias
 
 ## **Sprint Progress**
 
-| Story/Task                             | Assignee | Status | Story Points | Comments |
-| -------------------------------------- | -------- | ------ | ------------ | -------- |
-| Fetch request for filters and flight   | Adrian   |        | [5]          |          |
-| Fetch request for recommended cards    | Daniel   |        | [5]          |          |
-| Work on about page, add pictures?      | Tobias   |        | [4]          |          |
-| Refactor some components               | Everyone |        | [7]          |          |
+| Story/Task                                   | Assignee | Status | Story Points | Comments |
+| -------------------------------------------- | -------- | ------ | ------------ | -------- |
+| Fetch request for filters and flight         | Adrian   |        | [5]          |          |
+| Fetch request for recommended cards          | Daniel   |        | [5]          |          |
+| Work on about page, add pictures?            | Tobias   |        | [4]          |          |
+| Create a dropdown for amount of travelers    | Tobias   |        | [4]          |          |
+| Refactor some components                     | Everyone |        | [7]          |          |
 
 ---
