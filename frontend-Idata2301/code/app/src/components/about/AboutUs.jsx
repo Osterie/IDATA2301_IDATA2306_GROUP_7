@@ -1,5 +1,6 @@
 import React from "react";
 import "./aboutUs.css"; // Make sure this path is correct for your project
+import RoleContainer from "./RoleContainer";
 
 const AboutUs = () => {
   return (
@@ -29,6 +30,10 @@ const AboutUs = () => {
         <p>Manette Street</p>
         <p>London W1D 4AL</p>
         <p>United Kingdom</p>
+      </div>
+
+      <div>
+        <RoleContainer />
       </div>
 
       <div className="about-us-text-container">
