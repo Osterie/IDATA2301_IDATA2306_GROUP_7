@@ -41,6 +41,12 @@ public class ExtraFeature {
 
     private String name;
 
+    public ExtraFeature() { }
+
+    public ExtraFeature(String name) {
+        this.name = name;
+    }
+
     // Getters and setters
     public int getId() {
         return id;
@@ -57,5 +63,4 @@ public class ExtraFeature {
     public void setName(String name) {
         this.name = name;
     }
-
 }

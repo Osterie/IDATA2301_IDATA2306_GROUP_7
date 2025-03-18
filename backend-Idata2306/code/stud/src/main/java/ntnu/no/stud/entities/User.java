@@ -2,13 +2,18 @@ package ntnu.no.stud.entities;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 @Table(name = "user")
 public class User {
 
-    @Column(name = "user_id", nullable = false, unique = true)
-    private User userId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private int id;
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -21,20 +26,19 @@ public class User {
 
     public User() { }
 
-    public User(User userId, String username, String password, String email) {
-        this.userId = userId;
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
     }
 
     // Getters and Setters
-    public User getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {

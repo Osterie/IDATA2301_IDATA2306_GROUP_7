@@ -1,5 +1,8 @@
 package ntnu.no.stud.repositories;
 
-public class AirportRepository {
-    
+import ntnu.no.stud.entities.Airport;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface AirportRepository extends CrudRepository<Airport, Integer> {
 }

@@ -2,6 +2,8 @@ package ntnu.no.stud.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -10,6 +12,9 @@ import jakarta.persistence.Table;
 public class Airport {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     @Column(name = "airport_code", length = 3)
     private String airportCode;
 
@@ -24,6 +29,14 @@ public class Airport {
     }
 
     // Getters and Setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getAirportCode() {
         return airportCode;
     }

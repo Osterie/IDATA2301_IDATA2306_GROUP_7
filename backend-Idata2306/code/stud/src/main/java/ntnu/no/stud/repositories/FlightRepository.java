@@ -1,10 +1,8 @@
 package ntnu.no.stud.repositories;
 
-import org.springframework.data.repository.CrudRepository;
-
 import ntnu.no.stud.entities.Flight;
 
-public interface FlightRepository extends CrudRepository<Flight, Integer> {
+import org.springframework.data.repository.CrudRepository;
 
-  Flight findById(int id);
+public interface FlightRepository extends CrudRepository<Flight, Integer> {
 }

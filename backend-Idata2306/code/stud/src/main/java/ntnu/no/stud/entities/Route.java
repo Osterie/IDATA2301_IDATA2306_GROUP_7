@@ -1,5 +1,7 @@
 package ntnu.no.stud.entities;
 
+import ntnu.no.stud.entities.Airport;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
@@ -7,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 // import jakarta.persistence.Entity;
 // import jakarta.persistence.Table;
@@ -42,13 +45,20 @@ public class Route {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "departure_airport_code", nullable = false)
-    private String departureAirport;
+    private Airport departureAirport;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "arrival_airport_code", nullable = false)
-    private String arrivalAirport;
+    private Airport arrivalAirport;
+
+    public Route() { }
+
+    public Route(Airport departureAirport, Airport arrivalAirport) {
+        this.departureAirport = departureAirport;
+        this.arrivalAirport = arrivalAirport;
+    }
 
     // Getters and setters
     public int getId() {
@@ -59,19 +69,19 @@ public class Route {
         this.id = id;
     }
 
-    public String getDepartureAirport() {
+    public Airport getDepartureAirport() {
         return departureAirport;
     }
 
-    public void setDepartureAirport(String departureAirport) {
+    public void setDepartureAirport(Airport departureAirport) {
         this.departureAirport = departureAirport;
     }
 
-    public String getArrivalAirport() {
+    public Airport getArrivalAirport() {
         return arrivalAirport;
     }
 
-    public void setArrivalAirport(String arrivalAirport) {
+    public void setArrivalAirport(Airport arrivalAirport) {
         this.arrivalAirport = arrivalAirport;
     } 
 }

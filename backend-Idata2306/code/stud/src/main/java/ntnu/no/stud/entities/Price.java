@@ -1,5 +1,8 @@
 package ntnu.no.stud.entities;
 
+import ntnu.no.stud.entities.FlightClasses;
+import ntnu.no.stud.entities.ScheduledFlights;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
@@ -19,7 +22,7 @@ public class Price {
 
     @ManyToOne
     @JoinColumn(name = "class_id", nullable = false)
-    private FlightClass flightClassId;
+    private FlightClasses flightClassId;
 
     @Column(name = "price", nullable = false)
     private int price;
@@ -35,11 +38,11 @@ public class Price {
 
     @ManyToOne
     @JoinColumn(name = "scheduled_flights_id", nullable = false)
-    private ScheduledFlight scheduledFlight;
+    private ScheduledFlights scheduledFlight;
 
     public Price() { }
 
-    public Price(FlightClass flightClassId, int price, String priceCode, String provider, int discount, ScheduledFlight scheduledFlight) {
+    public Price(FlightClasses flightClassId, int price, String priceCode, String provider, int discount, ScheduledFlights scheduledFlight) {
         this.flightClassId = flightClassId;
         this.price = price;
         this.priceCode = priceCode;
@@ -57,11 +60,11 @@ public class Price {
         this.id = id;
     }
 
-    public FlightClass getFlightClassId() {
+    public FlightClasses getFlightClassId() {
         return flightClassId;
     }
 
-    public void setFlightClassId(FlightClass flightClassId) {
+    public void setFlightClassId(FlightClasses flightClassId) {
         this.flightClassId = flightClassId;
     }
 
@@ -97,11 +100,11 @@ public class Price {
         this.discount = discount;
     }
 
-    public ScheduledFlight getScheduledFlight() {
+    public ScheduledFlights getScheduledFlight() {
         return scheduledFlight;
     }
 
-    public void setScheduledFlight(ScheduledFlight scheduledFlight) {
+    public void setScheduledFlight(ScheduledFlights scheduledFlight) {
         this.scheduledFlight = scheduledFlight;
     }
 }
