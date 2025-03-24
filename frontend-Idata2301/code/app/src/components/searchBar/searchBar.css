@@ -21,11 +21,11 @@
     font-size: 1rem;
 }
 
-.search-form button {
+.call-to-action {
     padding: 12px 25px;
     border: none;
-    background-color: var(--secondary-color);
-    color: var(--contrast-text-color);
+    background-color: var(--call-to-action-color);
+    color: var(--text-color);
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
@@ -39,46 +39,9 @@
 .dropdown-button {
     padding: 12px 20px;
     border: none;
-    background-color: #007bff;
-    color: white;
+    background-color: var(--secondary-color);
+    color: var(--contrast-text-color);
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
-}
-
-.dropdown-button:hover {
-    background-color: #0056b3;
-}
-
-.dropdown-window {
-    position: absolute;
-    top: 100%;
-    left: 89%;
-    transform: translateX(-50%);
-    background: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 10;
-    width: 20%;
-}
-
-.dropdown-window select {
-    padding: 10px;
-    border: 1px solid #bbb;
-    border-radius: 5px;
-    font-size: 1rem;
-    background-color: white;
-    cursor: pointer;
-}
-
-.adult-input {
-    width: 50%;
-    height: 0px;
-    padding: 0px;
-    margin: 0px;
-    line-height: 0px;
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './searchBar.css';
+import PassengerAmountField from './PassengerAmountField';
 
 const SearchBar = () => {
     const [showDropdown, setShowDropdown] = useState(false);
@@ -17,18 +18,10 @@ const SearchBar = () => {
                 </button>
                 
                 {showDropdown && (
-                    <div className="dropdown-window">
-                        <select name="Classes" required>
-                            <option value="0">First class</option>
-                            <option value="1">Business class</option>
-                            <option value="2">Economy class</option>
-                        </select>
-                        
-                        <input className="adult-input" type="number" />
-                    </div>
+                    <PassengerAmountField/>
                 )}
                 
-                <button type="submit">Search For Flights</button>
+                <button className="call-to-action" type="submit">Search For Flights</button>
             </form>
         </>
     );

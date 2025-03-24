@@ -10,6 +10,7 @@ import LogInPageHero from "./components/hero/logInPageHero/LogInPageHero";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/header/Navbar";
 import AboutUs from "./components/about/AboutUs";
+import PassengerAmountField from "./components/searchBar/PassengerAmountField";
 
 function App() {
   const [activePage, setActivePage] = useState("home");

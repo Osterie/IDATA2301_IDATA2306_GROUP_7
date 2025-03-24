@@ -63,6 +63,7 @@ body {
 
   /* Contrast colors */
   --primary-contrast: #FDA300;
+  --call-to-action-color: #FDA300;
 
   /* Text color */
   --text-color: black;
