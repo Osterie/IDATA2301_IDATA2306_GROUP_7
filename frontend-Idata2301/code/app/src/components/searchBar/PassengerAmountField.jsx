@@ -1,17 +1,7 @@
-import { useState } from "react";
+import CustomInputField from "./CustomInputField";
 import "./passengerAmountField.css";
 
 const PassengerAmountField = () => {
-    const [amount, setAmount] = useState(1400);
-
-    const addValue = () => {
-        setAmount((prev) => prev + 1);
-    };
-
-    const subtractValue = () => {
-        setAmount((prev) => prev - 1);
-    };
-
     return (
         <div className="dropdown-window">
             <select name="Classes" required>
@@ -21,20 +11,10 @@ const PassengerAmountField = () => {
             </select>
 
             <label htmlFor="adults">Passengers 18+:</label>
-            <input id="adults" className="adult-input" type="number" placeholder="1" />
+            <CustomInputField />
 
             <label htmlFor="children">Passengers under 18:</label>
-            <input id="children" className="child-input" type="number" placeholder="0" />
-
-            <div className="input-number">
-                <input type="number" value={amount} readOnly />
-                <div className="input-number-actions">
-                    <button onClick={addValue}>+</button>
-                    <button onClick={subtractValue}>−</button>
-                </div>
-            </div>
-
-
+            <CustomInputField />
         </div>
     );
 };
