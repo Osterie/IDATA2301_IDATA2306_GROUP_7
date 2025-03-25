@@ -20,7 +20,7 @@ public class FlightClasses {
 
     @ManyToOne
     @JoinColumn(name = "class_id", nullable = false)
-    private Class flightClass;
+    private ClassEntity flightClass;
 
     @ManyToOne
     @JoinColumn(name = "flight_id", nullable = false)
@@ -31,7 +31,7 @@ public class FlightClasses {
 
     public FlightClasses() { }
 
-    public FlightClasses(Class flightClass, Flight flight, int availableSeats) {
+    public FlightClasses(ClassEntity flightClass, Flight flight, int availableSeats) {
         this.flightClass = flightClass;
         this.flight = flight;
         this.availableSeats = availableSeats;
@@ -46,11 +46,11 @@ public class FlightClasses {
         this.id = id;
     }
 
-    public Class getFlightClass() {
+    public ClassEntity getFlightClass() {
         return flightClass;
     }
 
-    public void setFlightClass(Class flightClass) {
+    public void setFlightClass(ClassEntity flightClass) {
         this.flightClass = flightClass;
     }
 

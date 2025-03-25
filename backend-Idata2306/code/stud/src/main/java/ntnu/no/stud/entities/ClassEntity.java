@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "class")
-public class Class {
+public class ClassEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +19,9 @@ public class Class {
     private String name;
 
     
-    public Class() { }
+    public ClassEntity() { }
 
-    public Class(String name) {
+    public ClassEntity(String name) {
         this.name = name;
     }
 
