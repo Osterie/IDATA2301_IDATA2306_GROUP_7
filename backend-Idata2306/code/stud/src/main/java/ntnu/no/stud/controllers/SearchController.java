@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import ntnu.no.stud.entities.Airport;
 import ntnu.no.stud.entities.ClassEntity;
 import ntnu.no.stud.entities.Flight;
+import ntnu.no.stud.entities.Price;
 import ntnu.no.stud.entities.Route;
+import ntnu.no.stud.entities.ScheduledFlights;
 import ntnu.no.stud.models.Passenger;
-import ntnu.no.stud.models.SearchedFlight;
-import ntnu.no.stud.repositories.FlightRepository;
+import ntnu.no.stud.repositories.PriceRepository;
 
 /**
  * 
@@ -25,27 +26,30 @@ import ntnu.no.stud.repositories.FlightRepository;
  */
 @RestController
 @CrossOrigin(origins = "*") // Allow frontend access
-public class FlightController {
+public class SearchController {
 
   @Autowired
-  private FlightRepository flightRepository; // Inject the repository
+  private PriceRepository priceRepository; // Inject the repository
 
 //   @PostMapping("/searchForFlights")
 //   public List<Flight> searchForFlights(@RequestBody SearchedFlight searchedFlight) {
-//     return flightRepository.searchForFlights(searchedFlight);
+//     return priceRepository.searchForFlights(searchedFlight);
 //   }
   /**
    * Adds a flight to the flight table
    */
   @GetMapping("/searchForFlightsGet")
-  public List<Flight> searchForFlightsGet() {
-    Route route = new Route(new Airport("OSL", "Oslo"), new Airport("BGO", "Bergen"));
-    LocalDate fromDate = LocalDate.now();
-    LocalDate toDate = LocalDate.now().plusDays(1);
-    List<Passenger> passengers = new ArrayList<>();
-    passengers.add(new Passenger(new ClassEntity("Economy"), 1));
-    SearchedFlight searchedFlight = new SearchedFlight(route, fromDate, toDate, passengers);
+  public List<Price> searchForFlightsGet() {
+    Route route = new Route(new Airport("JFK", "New york"), new Airport("SIN", "Singapore"));
+    LocalDate date = LocalDate.parse("2025-04-02");
+    
+    
+    LocalDate fromDate = LocalDate.parse("2025-04-02");
+    LocalDate toDate = LocalDate.parse("2025-04-20");
+    // List<Passenger> passengers = new ArrayList<>();
+    
+    ScheduledFlights scheduledFlight = new ScheduledFlights(new Flight("Delta Flight 425", "Delta Air Lines"), route, date);
 
-    return flightRepository.searchForFlights(route, fromDate, toDate, passengers);
+    return priceRepository.searchForFlights(scheduledFlight, fromDate, toDate);
   }
 }
