@@ -7,13 +7,10 @@ select {
     cursor: pointer;
 }
 
-.adult-input {
-    width: 50%;
-    height: 0px;
-    padding: 0px;
-    margin: 0px;
-    line-height: 0px;
+.adult-input, .child-input {
+    
 }
+
 
 .dropdown-window {
     position: absolute;
@@ -31,3 +28,12 @@ select {
     z-index: 10;
     width: 20%;
 }
+
+/* Mobile Styling */
+@media (max-width: 768px) {
+    .dropdown-window {
+        width: 100%;
+        left: 50%;
+    }
+  }
+  

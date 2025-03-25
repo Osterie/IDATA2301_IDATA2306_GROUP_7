@@ -8,10 +8,10 @@ const SearchBar = () => {
     return (
         <>
             <form className="search-form">
-                <input type="text" placeholder="From" name="from" required />
-                <input type="text" placeholder="To" name="to" required />
-                <input type="date" name="departure-date" required />
-                <input type="date" name="return-date" required />
+                <input className="search-bar-input" type="text" placeholder="From" name="from" required />
+                <input className="search-bar-input" type="text" placeholder="To" name="to" required />
+                <input className="search-bar-input" type="date" name="departure-date" required />
+                <input className="search-bar-input" type="date" name="return-date" required />
                 
                 <button type="button" className="dropdown-button" onClick={() => setShowDropdown(!showDropdown)}>
                     Select Passengers
