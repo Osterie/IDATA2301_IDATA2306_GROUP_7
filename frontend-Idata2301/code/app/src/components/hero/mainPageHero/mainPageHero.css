@@ -11,7 +11,6 @@ html, body {
     background-image: url('./images/ross-parmly-rf6ywHVkrlY-unsplash.jpg');  /* Set the path to your image */
     background-size: cover;
     background-position: center;
-    color: var(--contrast-text-color);
     text-align: center;
     padding: 80px 20px;
     height: calc(100vh - 80px);  /* Full height minus navbar height (adjust '60px' if navbar is taller) */
