@@ -1,17 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./productCardContainer.css";
 import ProductCard from "./ProductCard";
 
-const products = [
-  { id: 1, title: "Product 1", description: "This is a very good product", img: "https://picsum.photos/250/150?rnd=1" },
-  { id: 2, title: "Product 2", description: "This product is not that good, but we need to clear the stock anyway", img: "https://picsum.photos/250/150?rnd=2", highlighted: true },
-  { id: 3, title: "Product 3", description: "This is another product", img: "https://picsum.photos/250/150?rnd=3" },
-  { id: 4, title: "Product 4", description: "You can get this for free in GitHub, but we need money", img: "https://picsum.photos/250/150?rnd=4" },
-  { id: 5, title: "Product 5", description: "This is somehow also a product", img: "https://picsum.photos/250/150?rnd=5" },
-  { id: 6, title: "Product 6", description: "We love Chuck Norris", img: "https://picsum.photos/250/150?rnd=6" }
-];
-
 const ProductContainer = () => {
+  const [products, setProducts] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
+
+  useEffect(() => {
+    const fetchRandomFlights = async () => {
+      try {
+        setLoading(true); 
+        const response = await fetch("http://localhost:8080/getRandomFlights", {
+          method: "POST",
+          headers: { "Content-Type": "application/json",},
+          body: JSON.stringify({ count: 6 }), // Number of requested flights
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json(); // Parses the JSON response
+        setProducts(data); 
+      } catch (e) {
+        setError(e.message); 
+      } finally {
+        setLoading(false); 
+      }
+    };
+
+    fetchRandomFlights();
+  }, []); 
+
+  if (loading) {
+    return <p>Loading flights...</p>; // Displays loading message while fetching
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>; // Displays error message if something goes wrong
+  }
+
   return (
     <section className="product-container">
       {products.map((product) => (
@@ -22,5 +51,3 @@ const ProductContainer = () => {
 };
 
 export default ProductContainer;
-
-
