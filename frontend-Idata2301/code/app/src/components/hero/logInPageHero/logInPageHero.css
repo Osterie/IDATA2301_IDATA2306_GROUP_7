@@ -1,8 +1,7 @@
-.hero {
+.login-hero-container {
     background-size: cover;
     padding: 50px 0;
-    text-align: center;
-    color: white;
+
   }
   .login-hero-container {
     max-width: 600px;
@@ -15,18 +14,20 @@
   .form-group {
     margin-bottom: 15px;
   }
-  label {
+  .login-hero-container label {
+    text-align: center;
+    color: white;
     display: block;
     margin-bottom: 5px;
   }
-  input {
+  .login-hero-container input {
     width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
     z-index: 3;
   }
-  button {
+  .login-hero-container button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;

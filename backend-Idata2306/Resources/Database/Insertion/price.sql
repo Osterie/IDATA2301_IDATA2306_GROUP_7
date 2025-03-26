@@ -1,0 +1,12 @@
+INSERT INTO flight_application.price (discount, price, price_code, provider, class_id, scheduled_flights_id)
+VALUES
+    (0, 500, 'USD', 'Skyscanner', 1, 21),  -- Flight 18, Route 1 (JFK to LAX)
+    (10, 400, 'NOK', 'CheapOair', 2, 22),  -- Flight 19, Route 2 (ORD to AES)
+    (0, 550, 'EUR', 'Orbitz', 8, 23),  -- Flight 20, Route 3 (AMS to LHR)
+    (5, 600, 'CHF', 'OneTravel', 7, 24),  -- Flight 21, Route 4 (FCO to CDG)
+    (0, 450, 'EUR', 'Travelocity', 1, 25),  -- Flight 22, Route 5 (DFW to FRA)
+    (15, 700, 'USD', 'Google Flights', 8, 26),  -- Flight 23, Route 6 (HND to DXB)
+    (0, 650, 'EUR', 'JustFly', 2, 27),  -- Flight 24, Route 7 (DOH to SYD)
+    (10, 800, 'USD', 'eDreams', 7, 28),  -- Flight 25, Route 8 (SIN to JFK)
+    (5, 550, 'AED', 'Priceline', 4, 29),  -- Flight 26, Route 9 (AMS to ZRH)
+    (0, 450, 'QAR', 'American Airlines Website', 1, 30);  -- Flight 27, Route 10 (CDG to DFW)

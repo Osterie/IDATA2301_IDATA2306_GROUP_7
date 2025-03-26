@@ -1,3 +1,8 @@
-how is flightname determined?
+Question: How is flightname determined?
+Answer: 
 
-one-to-many relationship between flight and route? or one-to-one
+Question: one-to-many relationship between flight and route? or one-to-one?
+Answer:
+
+Question: Where should json files for postman be stored?
+Answer:

@@ -5,10 +5,11 @@
     gap: 15px;
     max-width: 100%;
     padding: 0 10px;
+    position: relative;
 }
 
-.search-form input, .search-form button {
-    flex: 1 1 200px; /* Flex-grow, flex-shrink, and flex-basis */
+.search-bar-input, .search-form button {
+    flex: 1 1 200px;
     max-width: 100%;
     box-sizing: border-box;
 }
@@ -20,11 +21,11 @@
     font-size: 1rem;
 }
 
-.search-form button {
+.call-to-action {
     padding: 12px 25px;
     border: none;
-    background-color: var(--secondary-color);
-    color: var(--contrast-text-color);
+    background-color: var(--call-to-action-color);
+    color: var(--text-color);
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
@@ -33,4 +34,14 @@
 .search-form button:hover {
     background-color: var(--contrast-text-color);
     color: var(--text-color);
+}
+
+.dropdown-button {
+    padding: 12px 20px;
+    border: none;
+    background-color: var(--secondary-color);
+    color: var(--contrast-text-color);
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
 }

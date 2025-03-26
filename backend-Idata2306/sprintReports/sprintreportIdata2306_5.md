@@ -20,6 +20,9 @@ Sprint stenographer: Tobias
 - **Total Planned Work:**
 - Create backend entities.
 - Create backend repositories.
+- Get and post requests.
+- Prepare for check point next week. 
+- Fill database tables with data.
 
 - **Completed Work:**
 
@@ -27,10 +30,14 @@ Sprint stenographer: Tobias
 
 ## **Sprint Progress**
 
-| Story/Task                             | Assignee     | Status        | Story Points | Comments |
-| -------------------------------------- | ------------ | ------------- | ------------ | -------- |
-| Write entities for all classes         | Tobias       | Not completed | [6]          |          |
-| Write repositories for all classes     | Not assigned | Not completed | [6]          |          |
+| Story/Task                         | Assignee | Status        | Story Points | Comments |
+| ---------------------------------- | -------- | ------------- | ------------ | -------- |
+| Write entities for all classes     | Everyone | Not completed | [6]          |          |
+| Write repositories for all classes | Everyone | Not completed | [6]          |          |
+| Post request for flight page       | Adrian   | Not completed | [6]          |          |
+| Fill database tables with data     | Adrian   | Completed     | [6]          |          |
+| Post request to add data           | Daniel   | Not completed | [4]          |          |
+| Prepare for check point            | Everyone | Not completed | [5]          |          |
 
 
 ---
