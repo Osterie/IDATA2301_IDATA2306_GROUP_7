@@ -13,8 +13,8 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**")
-                        .allowedOrigins("http://" + ServerConfig.FRONTEND_HOST + ":" + ServerConfig.FRONTEND_PORT) // React frontend URL
+                registry.addMapping("/**")
+                        .allowedOrigins("http://" + ServerConfig.FRONTEND_HOST.getValue() + ":" + ServerConfig.FRONTEND_PORT.getValue()) // React frontend URL
                         .allowedMethods("GET", "POST", "PUT", "DELETE");
             }
         };

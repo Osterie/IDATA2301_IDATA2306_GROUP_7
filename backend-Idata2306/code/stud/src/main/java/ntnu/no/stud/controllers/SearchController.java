@@ -44,21 +44,22 @@ public class SearchController {
 
     return priceRepository.searchForFlights(departure, arrival, fromDate, toDate);
   }
+
   /**
    * Adds a flight to the flight table
    */
-  @GetMapping("/searchForFlightsGet")
-  public List<Price> searchForFlightsGet() {
-    Route route = new Route(new Airport("JFK", "New york"), new Airport("SIN", "Singapore"));
-    LocalDate date = LocalDate.parse("2025-04-02");
+  // @GetMapping("/searchForFlightsGet")
+  // public List<Price> searchForFlightsGet() {
+  //   Route route = new Route(new Airport("JFK", "New york"), new Airport("SIN", "Singapore"));
+  //   LocalDate date = LocalDate.parse("2025-04-02");
     
     
-    LocalDate fromDate = LocalDate.parse("2025-04-02");
-    LocalDate toDate = LocalDate.parse("2025-04-20");
-    // List<Passenger> passengers = new ArrayList<>();
+  //   LocalDate fromDate = LocalDate.parse("2025-04-02");
+  //   LocalDate toDate = LocalDate.parse("2025-04-20");
+  //   // List<Passenger> passengers = new ArrayList<>();
     
-    ScheduledFlights scheduledFlight = new ScheduledFlights(new Flight("Delta Flight 425", "Delta Air Lines"), route, date);
+  //   ScheduledFlights scheduledFlight = new ScheduledFlights(new Flight("Delta Flight 425", "Delta Air Lines"), route, date);
 
-    return priceRepository.searchForFlights(scheduledFlight, fromDate, toDate);
-  }
+  //   // return priceRepository.searchForFlights(scheduledFlight, fromDate, toDate);
+  // }
 }

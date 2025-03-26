@@ -32,10 +32,10 @@ Sprint stenographer: Tobias
 
 | Story/Task                         | Assignee | Status        | Story Points | Comments |
 | ---------------------------------- | -------- | ------------- | ------------ | -------- |
-| Write entities for all classes     | Tobias   | Not completed | [6]          |          |
+| Write entities for all classes     | Everyone | Not completed | [6]          |          |
 | Write repositories for all classes | Everyone | Not completed | [6]          |          |
-| Get request for flight page        | Adrian   | Not completed | [4]          |          |
-| Fill database tables with data     | Adrian   | Completed     | [5]          |          |
+| Post request for flight page       | Adrian   | Not completed | [6]          |          |
+| Fill database tables with data     | Adrian   | Completed     | [6]          |          |
 | Post request to add data           | Daniel   | Not completed | [4]          |          |
 | Prepare for check point            | Everyone | Not completed | [5]          |          |
 
