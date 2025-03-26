@@ -1,12 +1,16 @@
 package ntnu.no.stud.models;
 
-import ntnu.no.stud.entities.Route;
+import ntnu.no.stud.entities.ScheduledFlights;
+import ntnu.no.stud.entities.ScheduledFlights;
+
 import java.time.LocalDate;
 import java.util.List;
 
 public class SearchedFlight {
 
-    private Route route;
+    private String departure;
+
+    private String arrival;
 
     private LocalDate fromDate;
 
@@ -14,19 +18,28 @@ public class SearchedFlight {
 
     private List<Passenger> passengers;
 
-    public SearchedFlight(Route route, LocalDate fromDate, LocalDate toDate, List<Passenger> passengers) {
-        this.route = route;
+    public SearchedFlight(String departure, String arrival, LocalDate fromDate, LocalDate toDate, List<Passenger> passengers) {
+        this.departure = departure;
+        this.arrival = arrival;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.passengers = passengers;
     }
 
-    public Route getRoute() {
-        return route;
+    public String getDeparture() {
+        return departure;
     }
 
-    public void setRoute(Route route) {
-        this.route = route;
+    public void setDeparture(String departure) {
+        this.departure = departure;
+    }
+
+    public String getArrival() {
+        return arrival;
+    }
+
+    public void setArrival(String arrival) {
+        this.arrival = arrival;
     }
 
     public LocalDate getFromDate() {

@@ -18,6 +18,7 @@ import ntnu.no.stud.entities.Price;
 import ntnu.no.stud.entities.Route;
 import ntnu.no.stud.entities.ScheduledFlights;
 import ntnu.no.stud.models.Passenger;
+import ntnu.no.stud.models.SearchedFlight;
 import ntnu.no.stud.repositories.PriceRepository;
 
 /**
@@ -31,10 +32,18 @@ public class SearchController {
   @Autowired
   private PriceRepository priceRepository; // Inject the repository
 
-//   @PostMapping("/searchForFlights")
-//   public List<Flight> searchForFlights(@RequestBody SearchedFlight searchedFlight) {
-//     return priceRepository.searchForFlights(searchedFlight);
-//   }
+  @PostMapping("/searchForFlights")
+  public List<Price> searchForFlights(@RequestBody SearchedFlight searchedFlight) {
+
+    // ScheduledFlights scheduledFlight = searchedFlight.getScheduledFlights();
+
+    String departure = searchedFlight.getDeparture();
+    String arrival = searchedFlight.getArrival();
+    LocalDate fromDate = searchedFlight.getFromDate();
+    LocalDate toDate = searchedFlight.getToDate();
+
+    return priceRepository.searchForFlights(departure, arrival, fromDate, toDate);
+  }
   /**
    * Adds a flight to the flight table
    */
