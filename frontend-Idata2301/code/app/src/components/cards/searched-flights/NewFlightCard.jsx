@@ -22,32 +22,32 @@ const NewFlightCard = ({ flight }) => {
   } = flight;
 
   return (
-    <div className="flight-card">
+    <div className="new-flight-card">
       <h2>{company} - {flightName}</h2>
-      <p className="class-name">Class: {flightClassName}</p>
+      <p className="new-class-name">Class: {flightClassName}</p>
       
-      <div className="flight-details">
-        <div className="departure">
+      <div className="new-flight-details">
+        <div className="new-departure">
           <p className="label">Departure</p>
           <p>{departureCity} ({departureCode})</p>
         </div>
-        <div className="arrival">
+        <div className="new-arrival">
           <p className="label">Arrival</p>
           <p>{arrivalCity} ({arrivalCode})</p>
         </div>
       </div>
 
-      <p className="date">Date: {date}</p>
-      <p className="seats">Available Seats: {availableSeats}</p>
+      <p className="new-date">Date: {date}</p>
+      <p className="new-seats">Available Seats: {availableSeats}</p>
 
-      <div className="price-section">
-        <p className="price">
+      <div className="new-price-section">
+        <p className="new-price">
           ${price} {priceCode}
         </p>
-        {discount > 0 && <p className="discount">Discount: {discount}%</p>}
+        {discount > 0 && <p className="new-discount">Discount: {discount}%</p>}
       </div>
 
-      <p className="provider">Provider: {provider}</p>
+      <p className="new-provider">Provider: {provider}</p>
     </div>
   );
 };

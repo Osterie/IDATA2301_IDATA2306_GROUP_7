@@ -3,7 +3,7 @@ import "./App.css";
 import FilterSidebar from "./components/searchfilter/filter";
 import ProductCardContainer from "./components/cards/deals/ProductCardContainer";
 import ProductCardHeader from "./components/cards/deals/ProductCardHeader";
-import FlightsContainer from "./components/cards/searched-flights/FlightsContainer";
+import NewFlightsContainer from "./components/cards/searched-flights/NewFlightsContainer";
 import MainPageHero from "./components/hero/mainPageHero/MainPageHero";
 import DealsPageHero from "./components/hero/dealsPageHero/DealsPageHero";
 import LogInPageHero from "./components/hero/logInPageHero/LogInPageHero";
@@ -15,6 +15,7 @@ import PassengerAmountField from "./components/searchBar/PassengerAmountField";
 
 function App() {
   const [activePage, setActivePage] = useState("home");
+  const [flights, setFlights] = useState([]);  // Store flight data
 
   const handleNavClick = (page) => {
     setActivePage(page);
@@ -29,7 +30,7 @@ function App() {
       <main>
         {activePage === "home" && (
           <>
-            <MainPageHero />
+            <MainPageHero setFlights={setFlights} setActivePage={setActivePage} />
             <ProductCardHeader />
             <ProductCardContainer />
           </>
@@ -39,25 +40,12 @@ function App() {
             <DealsPageHero/>
             <section className="search-section">
               <FilterSidebar />
-              <FlightsContainer />
+              <NewFlightsContainer flights={flights} />  {/* Pass flights to NewFlightsContainer */}
             </section>
           </>
         )}
-        {activePage === "about" && (
-          <>
-            <AboutUs/>
-          </>
-        )}
-        {activePage === "login" && (
-          <>
-            <LogInPageHero onNavClick={handleNavClick} />
-          </>
-        )}
-        {activePage === "create-account" && (
-          <>
-            <CreateAccountPageHero />
-          </>
-        )}
+        {activePage === "about" && <AboutUs />}
+        {activePage === "login" && <LogInPageHero />}
       </main>
 
       <Footer />
