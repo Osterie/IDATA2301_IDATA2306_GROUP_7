@@ -1,4 +1,4 @@
-.hero {
+.hero.login-hero-container {
     background-size: cover;
     padding: 50px 0;
     text-align: center;
@@ -12,21 +12,21 @@
     border-radius: 10px;
     z-index: 2;
   }
-  .form-group {
+  .form-group.login-hero-container {
     margin-bottom: 15px;
   }
-  label {
+  label.login-hero-container {
     display: block;
     margin-bottom: 5px;
   }
-  input {
+  input.login-hero-container {
     width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
     z-index: 3;
   }
-  button {
+  button.login-hero-container {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
