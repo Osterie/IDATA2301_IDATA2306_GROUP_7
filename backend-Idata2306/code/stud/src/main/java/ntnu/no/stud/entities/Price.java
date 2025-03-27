@@ -36,6 +36,9 @@ public class Price {
     @Column(name = "discount", nullable = false, columnDefinition = "int default 0")
     private int discount;
 
+    @Column(name = "hidden", nullable = false, columnDefinition = "boolean default false")
+    private boolean hidden;
+
     @ManyToOne
     @JoinColumn(name = "scheduled_flights_id", nullable = false)
     private ScheduledFlights scheduledFlight;
@@ -106,5 +109,13 @@ public class Price {
 
     public void setScheduledFlight(ScheduledFlights scheduledFlight) {
         this.scheduledFlight = scheduledFlight;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
     }
 }

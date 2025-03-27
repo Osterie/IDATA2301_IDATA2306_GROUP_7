@@ -30,6 +30,9 @@ public class Purchases {
     @JoinColumn(name = "price_id", nullable = false)
     private Price price;
 
+    @Column(name = "refunded", nullable = false, columnDefinition = "boolean default false")
+    private boolean refunded;
+
     public Purchases() { }
 
     public Purchases(User user, Flight flight, Price price) {
@@ -69,5 +72,13 @@ public class Purchases {
 
     public void setPrice(Price price) {
         this.price = price;
+    }
+
+    public boolean isRefunded() {
+        return refunded;
+    }
+
+    public void setRefunded(boolean refunded) {
+        this.refunded = refunded;
     }
 }
