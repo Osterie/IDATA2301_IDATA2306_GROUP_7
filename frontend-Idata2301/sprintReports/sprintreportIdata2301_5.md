@@ -22,7 +22,10 @@ Sprint stenographer: Tobias
 - Refactor components.
 
 - **Completed Work:**
-
+- Fetching data.
+- Refactor components.
+- Build out about page.
+- Dropdown.
 
 - **Not Completed:**
 
@@ -30,12 +33,12 @@ Sprint stenographer: Tobias
 
 ## **Sprint Progress**
 
-| Story/Task                                   | Assignee | Status | Story Points | Comments |
-| -------------------------------------------- | -------- | ------ | ------------ | -------- |
-| Fetch request for filters and flight         | Adrian   |        | [5]          |          |
-| Fetch request for recommended cards          | Daniel   |        | [5]          |          |
-| Work on about page, add pictures?            | Tobias   |        | [4]          |          |
-| Create a dropdown for amount of travelers    | Tobias   |        | [4]          |          |
-| Refactor some components                     | Everyone |        | [7]          |          |
+| Story/Task                                   | Assignee | Status      | Story Points | Comments |
+| -------------------------------------------- | -------- | ----------- | ------------ | -------- |
+| Fetch request for filters and flight         | Adrian   | In progress | [5]          |          |
+| Fetch request for recommended cards          | Daniel   | In progress | [5]          |          |
+| Work on about page, add pictures?            | Tobias   | Completed   | [4]          |          |
+| Create a dropdown for amount of travelers    | Tobias   | Completed   | [4]          |          |
+| Refactor some components                     | Everyone | In progress | [7]          |          |
 
 ---
