@@ -13,7 +13,7 @@ const PassengerAmountField = () => {
             <label htmlFor="adults">Passengers 18+:</label>
             <CustomInputField />
 
-            <label htmlFor="children">Passengers under 18:</label>
+            <label htmlFor="children">Passengers 0-17:</label>
             <CustomInputField />
         </div>
     );

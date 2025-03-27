@@ -29,6 +29,7 @@ const Navbar = ({ onNavClick }) => {
         <li><a href="#" onClick={() => onNavClick("deals")}>Deals</a></li>
         <li><a href="#" onClick={() => onNavClick("about")}>About</a></li>
         <li><a href="#" onClick={() => onNavClick("login")}>Log in</a></li>
+        <li><a href="#" onClick={() => onNavClick("heart")}>💖</a></li>
       </ul>
     </nav>
   );
