@@ -7,11 +7,9 @@ import NewFlightsContainer from "./components/cards/searched-flights/NewFlightsC
 import MainPageHero from "./components/hero/mainPageHero/MainPageHero";
 import DealsPageHero from "./components/hero/dealsPageHero/DealsPageHero";
 import LogInPageHero from "./components/hero/logInPageHero/LogInPageHero";
-import CreateAccountPageHero from "./components/hero/createAccountHero/CreateAccountHero";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/header/Navbar";
 import AboutUs from "./components/about/AboutUs";
-import PassengerAmountField from "./components/searchBar/PassengerAmountField";
 
 function App() {
   const [activePage, setActivePage] = useState("home");

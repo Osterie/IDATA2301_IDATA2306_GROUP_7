@@ -1,7 +1,6 @@
 import React from "react";
 import "./aboutUs.css"; // Make sure this path is correct for your project
 import RoleContainer from "./RoleContainer";
-import ContactForm from "./ContactForm";
 
 const AboutUs = () => {
   return (
