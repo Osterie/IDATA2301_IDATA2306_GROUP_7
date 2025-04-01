@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.*;
 
 import ntnu.no.stud.services.FavoriteFlightService;
 
+import ntnu.no.stud.entities.*;
+
 import java.util.List;
 
 @RestController
