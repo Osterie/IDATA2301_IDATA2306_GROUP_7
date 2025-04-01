@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./favoriteFlightPage.css"; // Import CSS file
 
 const API_URL = "http://localhost:3000/api/favorites";
 
@@ -36,14 +37,15 @@ const FavoriteFlightsPage = () => {
     };
 
     return (
-        <div>
-            <h2>Favorite Flights</h2>
-            <button onClick={addFlight}>Add Flight</button>
-            <ul>
+        <div className="favorite-flights-container">
+            <h2>Favorite Flights ✈️</h2>
+            <ul className="flights-list">
                 {flights.map(flight => (
-                    <li key={flight.id}>
-                        {flight.airline} {flight.flightNumber} ({flight.departure} → {flight.destination})
-                        <button onClick={() => deleteFlight(flight.id)}>Delete</button>
+                    <li key={flight.id} className="flight-card">
+                        <span className="flight-info">
+                            {flight.airline} {flight.flightNumber} ({flight.departure} → {flight.destination})
+                        </span>
+                        <button className="delete-button" onClick={() => deleteFlight(flight.id)}>Remove</button>
                     </li>
                 ))}
             </ul>

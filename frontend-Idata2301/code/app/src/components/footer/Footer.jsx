@@ -9,7 +9,7 @@ const Footer = () => {
         <div id="contact">
           <div id="contactTitle">Info</div>
           <div className="contactInfo">
-            Mail: &nbsp;<a href="mailto:flightfinder@gmail.com">flightfinder@gmail.com</a>
+            Mail: &nbsp;<a href="mailto:flightfindercustomerservice@gmail.com">flightfindercustomerservice@gmail.com</a>
           </div>
         </div>
         <div id="bottomBox">© Flight Finder 2025</div>
