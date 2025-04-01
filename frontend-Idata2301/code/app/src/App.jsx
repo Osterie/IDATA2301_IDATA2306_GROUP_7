@@ -10,6 +10,7 @@ import LogInPageHero from "./components/hero/logInPageHero/LogInPageHero";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/header/Navbar";
 import AboutUs from "./components/about/AboutUs";
+import FavoriteFlightsPage from "./components/favorite/FavoriteFlightPage";
 
 function App() {
   const [activePage, setActivePage] = useState("home");
@@ -44,6 +45,7 @@ function App() {
         )}
         {activePage === "about" && <AboutUs />}
         {activePage === "login" && <LogInPageHero />}
+        {activePage === "favorite" && <FavoriteFlightsPage />}
       </main>
 
       <Footer />
