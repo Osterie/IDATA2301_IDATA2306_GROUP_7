@@ -34,7 +34,7 @@ const FilterSidebar = () => {
   };
 
   return (
-    <div>
+    <div className="sidebar-mother">
       {/* Mobile Button to Toggle Sidebar */}
       <button className="toggle-sidebar-btn" onClick={() => setIsSidebarVisible(!isSidebarVisible)}>
         {isSidebarVisible ? "Hide Filters" : "Show Filters"}
@@ -49,7 +49,7 @@ const FilterSidebar = () => {
 
         {/* Sort By */}
         <div className="filter-section">
-          <label htmlFor="sort">Sort by</label>
+          <label className="filter-title" htmlFor="sort">Sort by</label>
           <select id="sort">
             <option value="price">Price</option>
             <option value="time">Time</option>
@@ -59,7 +59,7 @@ const FilterSidebar = () => {
 
         {/* Price Range */}
         <div className="filter-section">
-          <DualRangeSlider label="Price Range" min={0} max={1000} callback={(min, max) => console.log(min, max)} />
+          <DualRangeSlider label="Price Range" min={0} max={15000} callback={(min, max) => console.log(min, max)} />
         </div>
 
         {/* Stops Dropdown */}

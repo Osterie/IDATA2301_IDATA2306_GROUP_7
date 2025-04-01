@@ -7,7 +7,7 @@
 .dual-range-slider-container {
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    margin-bottom: 10px;
 }
 
 .dual-range-slider-control {
@@ -21,8 +21,8 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    font-size: 24px;
-    color: #635a5a;
+    font-size: 16px;
+    color: var(--text-color);
 }
 
 .dual-range-slider-sliders-container {
@@ -57,11 +57,10 @@
 
 
 .dual-range-slider-number-input {
-    color: #8a8383;
     width: 90px;
     /* height: 30px; */
     font-size: 20px;
-    border: none;
+    border-radius: 5px;
 }
 
 .dual-range-slider-number-input::-webkit-inner-spin-button, 
