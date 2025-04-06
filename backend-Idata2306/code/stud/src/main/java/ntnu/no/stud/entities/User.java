@@ -1,10 +1,18 @@
 package ntnu.no.stud.entities;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "user")
@@ -18,13 +26,19 @@ public class User {
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(name = "password_hash", nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    public User() { }
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<UserRole> roles = new HashSet<>();
+
+    private boolean active = true;
+
+    public User() {
+    }
 
     public User(String username, String password, String email) {
         this.username = username;
@@ -63,5 +77,53 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<UserRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<UserRole> roles) {
+        this.roles = roles;
+    }
+
+    public void addRole(UserRole role) {
+        this.roles.add(role);
+        role.setUser(this); // Set the user in the UserRole object
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    /**
+     * Check if this user is an admin.
+     *
+     * @return True if the user has admin role, false otherwise
+     */
+    public boolean isAdmin() {
+        return this.hasRole("ADMIN");
+    }
+
+    /**
+     * Check if the user has a specified role.
+     *
+     * @param roleName Name of the role
+     * @return True if hte user has the role, false otherwise.
+     */
+    public boolean hasRole(String roleName) {
+        boolean found = false;
+        Iterator<UserRole> it = roles.iterator();
+        while (!found && it.hasNext()) {
+            UserRole role = it.next();
+            if (role.getRole().equals(roleName)) {
+                found = true;
+            }
+        }
+        return found;
     }
 }

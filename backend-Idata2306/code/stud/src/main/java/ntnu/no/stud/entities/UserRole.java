@@ -13,7 +13,7 @@ import jakarta.persistence.JoinColumn;
 
 @Entity
 @Table(name = "user_roles")
-public class UserRoles {
+public class UserRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +28,9 @@ public class UserRoles {
     private String role;
     
 
-    public UserRoles() { }
+    public UserRole() { }
 
-    public UserRoles(User user, String role) {
+    public UserRole(User user, String role) {
         this.user = user;
         this.role = role;
     }
