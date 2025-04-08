@@ -40,6 +40,6 @@ Sprint stenographer: Daniel
 | Filtering of searched flights | Adrian   | Not completed | [4]          |          |
 | Test recommented cards        | Daniel   | Not completed | [4]          |          |
 | Shopping cart                 | Daniel   | Not completed | [6]          |          |
-
+| Experiment with cookies       | Tobias   | Not completed | [4]          |          |
 
 ---
