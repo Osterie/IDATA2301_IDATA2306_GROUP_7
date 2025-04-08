@@ -36,7 +36,7 @@ Sprint stenographer: Daniel
 
 | Story/Task                  | Assignee | Status        | Story Points | Comments |
 | --------------------------- | -------- | ------------- | ------------ | -------- |
-| Identity/authentication     | Adrian   | Not completed | [8]          |          |
+| Identity/authentication     | Adrian   | Completed     | [8]          |          |
 | Encryption                  | Tobias   | Not completed | [5]          |          |
 | Class for adding dummy data | Daniel   | Not completed | [4]          |          |
 | Add swagger                 | Adrian   | Not completed | [2]          |          |

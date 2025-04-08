@@ -35,7 +35,8 @@ Sprint stenographer: Daniel
 
 | Story/Task                    | Assignee | Status        | Story Points | Comments |
 | ----------------------------- | -------- | ------------- | ------------ | -------- |
-| Admin panel                   | Adrian   | Not completed | [7]          |          |
+| Identity/authentication       | Adrian   | Completed     | [7]          |          |
+| Admin panel                   | Adrian   | Not completed | [6]          |          |
 | Favorit page                  | Tobias   | Not completed | [6]          |          |
 | Filtering of searched flights | Adrian   | Not completed | [4]          |          |
 | Test recommented cards        | Daniel   | Not completed | [4]          |          |
