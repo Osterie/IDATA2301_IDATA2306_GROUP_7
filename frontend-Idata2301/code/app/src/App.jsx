@@ -13,6 +13,12 @@ import AboutUs from "./components/about/AboutUs";
 import FavoriteFlightsPage from "./components/favorite/FavoriteFlightPage";
 import CookieConsent from "react-cookie-consent";
 import Cookies from "js-cookie";
+import {
+  hasConsent,
+  setLastSearch,
+  getLastSearch,
+  setCountryFromIP,
+} from "./utils/cookieUtils";
 
 function App() {
   const [activePage, setActivePage] = useState("home");
@@ -25,33 +31,16 @@ function App() {
   // Checks if user has already consented to cookies
   // If no consent: Ask
   useEffect(() => {
-    const hasConsent = Cookies.get("userConsent");
-
-    if (hasConsent) {
-      // Set country from IP only if not already set
-      if (!Cookies.get("country")) {
-        fetch("https://ipapi.co/json/")
-          .then((res) => res.json())
-          .then((data) => {
-            Cookies.set("country", data.country_name, { expires: 30 });
-            // TODO: These seem to not work (But it may be that I dont see them)
-            Cookies.set("departureAirport", data.country_code === "NO" ? "OSL" : ""); // Default for Norway
-            Cookies.set("preferredCurrency", data.currency, { expires: 30 });
-          });
-      }
-      // Restore last search if available
-      const lastSearch = Cookies.get("lastSearch");
-      if (lastSearch) {
-        console.log("Restoring last search:", JSON.parse(lastSearch));
-        // Optionally use this to prefill components
-      }
+    if (hasConsent()) {
+      setCountryFromIP(); // Automatically sets country, airport, currency
+      const last = getLastSearch();
+      if (last) console.log("Restoring search:", last);
     }
   }, []);
-
-  // Save last search cookie when flights change
+  
   useEffect(() => {
     if (flights.length > 0) {
-      Cookies.set("lastSearch", JSON.stringify(flights), { expires: 7 });
+      setLastSearch(flights);
     }
   }, [flights]);
 
