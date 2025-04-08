@@ -1,3 +1,6 @@
+import { sendAuthenticationRequest } from "./authentication.js";
+import { redirectTo, showFormError } from "../tools.js";
+
 // Login-form related stuff
 
 const loginFormButton = document.getElementById("login-form-button");
@@ -9,7 +12,7 @@ if (loginFormButton) {
  * Submit the login form
  * @param event
  */
-function submitLoginForm(event) {
+export function submitLoginForm(event) {
   event.preventDefault(); // Don't submit the form using the regular HTTP POST
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
@@ -19,6 +22,6 @@ function submitLoginForm(event) {
 /**
  * This function will be called when login was successful
  */
-function onLoginSuccess() {
+export function onLoginSuccess() {
   redirectTo("/index.html");
 }

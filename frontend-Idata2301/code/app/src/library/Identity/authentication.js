@@ -1,10 +1,14 @@
+import {sendApiRequest} from "../requests.js";
+import {getCookie, setCookie, deleteCookie} from "../tools.js";
+import {redirectTo} from "../navigation.js";
+
 // Authentication stuff
 
 /**
  * Get the currently authenticated user
  * @returns User object or null if user is not authenticated
  */
-function getAuthenticatedUser() {
+export function getAuthenticatedUser() {
   let user = null;
   const username = getCookie("current_username");
   const commaSeparatedRoles = getCookie("current_user_roles");
@@ -23,7 +27,7 @@ function getAuthenticatedUser() {
  * @param user
  * @returns {boolean}
  */
-function isAdmin(user) {
+export function isAdmin(user) {
   return user && user.roles && user.roles.includes("ROLE_ADMIN");
 }
 
@@ -34,7 +38,7 @@ function isAdmin(user) {
  * @param successCallback Function to call on success
  * @param errorCallback Function to call on error, with response text as the parameter
  */
-function sendAuthenticationRequest(username, password, successCallback, errorCallback) {
+export function sendAuthenticationRequest(username, password, successCallback, errorCallback) {
   const postData = {
     "username": username,
     "password": password
@@ -47,6 +51,7 @@ function sendAuthenticationRequest(username, password, successCallback, errorCal
       if (userData) {
         setCookie("current_username", userData.username);
         setCookie("current_user_roles", userData.roles.join(","));
+        setCookie("current_email", userData.email);
       }
       successCallback();
     },
@@ -63,7 +68,7 @@ function sendAuthenticationRequest(username, password, successCallback, errorCal
  * @param token JWT token string
  * @returns {any} Decoded JWT object
  */
-function parseJwt(token) {
+export function parseJwt(token) {
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
@@ -78,7 +83,7 @@ function parseJwt(token) {
  * @param jwtString
  * @return User object
  */
-function parseJwtUser(jwtString) {
+export function parseJwtUser(jwtString) {
   let user = null;
   const jwtObject = parseJwt(jwtString);
   if (jwtObject) {
@@ -94,7 +99,7 @@ function parseJwtUser(jwtString) {
 /**
  * Log-out the user
  */
-function doLogout() {
+export function doLogout() {
   console.log("Logging out...");
   deleteAuthorizationCookies();
   redirectTo("/index.html");
@@ -103,7 +108,7 @@ function doLogout() {
 /**
  * Delete all cookies related to authorization (user session)
  */
-function deleteAuthorizationCookies() {
+export function deleteAuthorizationCookies() {
   deleteCookie("jwt");
   deleteCookie("current_username");
   deleteCookie("current_user_roles");

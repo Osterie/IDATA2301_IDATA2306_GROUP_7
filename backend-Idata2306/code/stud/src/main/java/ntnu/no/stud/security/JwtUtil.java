@@ -46,7 +46,6 @@ public class JwtUtil {
   }
 
   private SecretKey getSigningKey() {
-    System.out.println("Secret key: " + secretKey); // For debugging  TODO remove me
     byte[] keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
     return new SecretKeySpec(keyBytes, 0, keyBytes.length, "HmacSHA256");
   }

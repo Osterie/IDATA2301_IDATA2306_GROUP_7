@@ -1,3 +1,5 @@
+import { getCookie } from "./tools.js";
+
 // All code for sending requests to backend is stored in this file
 
 // The base path where the API is running
@@ -11,7 +13,7 @@ const API_BASE_URL = "http://localhost:8080/api";
  * @param requestBody When supplied, send this data in the request body. Does not work with HTTP GET!
  * @param errorCallback A function called when the response code is not 200
  */
-async function sendApiRequest(
+export async function sendApiRequest(
   method,
   url,
   callback,
@@ -49,7 +51,7 @@ async function sendApiRequest(
  * @param method
  * @return object An object containing the necessary HTTP headers
  */
-function constructRequestHeaders(method) {
+export function constructRequestHeaders(method) {
   let headers = {};
 
   if (method.toLowerCase() !== "get") {

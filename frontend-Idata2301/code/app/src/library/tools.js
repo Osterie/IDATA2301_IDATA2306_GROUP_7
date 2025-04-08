@@ -6,7 +6,7 @@
  * @param cname Cookie name (key)
  * @returns {string} Value of the cookie or "" if cookie not found
  */
-function getCookie(cname) {
+export function getCookie(cname) {
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
   let ca = decodedCookie.split(';');
@@ -29,7 +29,7 @@ function getCookie(cname) {
  * @param cvalue Value of the cookie
  * @param exdays expiry time in days
  */
-function setCookie(cname, cvalue, exdays) {
+export function setCookie(cname, cvalue, exdays) {
   const d = new Date();
   d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
   let expires = "expires=" + d.toUTCString();
@@ -40,7 +40,7 @@ function setCookie(cname, cvalue, exdays) {
  * Delete a cookie
  * @param cookieName Name of the cookie to delete
  */
-function deleteCookie(cookieName) {
+export function deleteCookie(cookieName) {
   setCookie(cookieName, "", -1);
 }
 
@@ -48,7 +48,7 @@ function deleteCookie(cookieName) {
  * Execute the function func after the page is loaded
  * @param func Function to run when the page is loaded
  */
-function runOnLoad(func) {
+export function runOnLoad(func) {
   document.addEventListener("DOMContentLoaded", func);
 }
 
@@ -57,7 +57,7 @@ function runOnLoad(func) {
  * Show an error message for a form
  * @param errorMessage The error message to show
  */
-function showFormError(errorMessage) {
+export function showFormError(errorMessage) {
   showFormResult(errorMessage, "error");
 }
 
@@ -65,7 +65,7 @@ function showFormError(errorMessage) {
  * Show a success message for a form
  * @param successMessage The success message to show
  */
-function showFormSuccess(successMessage) {
+export function showFormSuccess(successMessage) {
   showFormResult(successMessage, "success");
 }
 
@@ -74,7 +74,7 @@ function showFormSuccess(successMessage) {
  * @param message The message to show
  * @param resultType Type of the result: error or success
  */
-function showFormResult(message, resultType) {
+export function showFormResult(message, resultType) {
   const resultElement = document.getElementById("result-message");
   resultElement.classList.add(resultType);
   resultElement.classList.remove("hidden");

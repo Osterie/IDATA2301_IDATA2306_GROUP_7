@@ -1,11 +1,11 @@
 package ntnu.no.stud.controllers;
 
 import java.io.IOException;
+import ntnu.no.stud.AccessUserService;
 import ntnu.no.stud.dto.AuthenticationRequest;
 import ntnu.no.stud.dto.AuthenticationResponse;
 import ntnu.no.stud.dto.SignupDto;
 import ntnu.no.stud.security.JwtUtil;
-import ntnu.no.stud.AccessUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +43,6 @@ public class AuthenticationController {
 
     System.out.println(authenticationRequest.getUsername());
     System.out.println(authenticationRequest.getPassword());
-    System.out.println(authenticationRequest.getEmail());
 
     try {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(

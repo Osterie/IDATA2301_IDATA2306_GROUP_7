@@ -7,10 +7,11 @@ import NewFlightsContainer from "./components/cards/searched-flights/NewFlightsC
 import MainPageHero from "./components/hero/mainPageHero/MainPageHero";
 import DealsPageHero from "./components/hero/dealsPageHero/DealsPageHero";
 import LogInPageHero from "./components/hero/logInPageHero/LogInPageHero";
+import CreateAccount from "./pages/createAccount";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/header/Navbar";
 import AboutUs from "./components/about/AboutUs";
-import FavoriteFlightsPage from "./components/favorite/FavoriteFlightPage";
+// import FavoriteFlightsPage from "./components/favorite/FavoriteFlightPage";
 import CookieConsent from "react-cookie-consent";
 import Cookies from "js-cookie";
 import {
@@ -19,6 +20,7 @@ import {
   getLastSearch,
   setCountryFromIP,
 } from "./utils/cookieUtils";
+import LoginForm from "./components/Identity/LoginForm";
 
 function App() {
   const [activePage, setActivePage] = useState("home");
@@ -70,8 +72,9 @@ function App() {
           </>
         )}
         {activePage === "about" && <AboutUs />}
-        {activePage === "login" && <LogInPageHero />}
-        {activePage === "favorite" && <FavoriteFlightsPage />}
+        {activePage === "login" && <LogInPageHero onNavClick={handleNavClick} />}
+        {activePage === "create-account" && <CreateAccount />}
+        {/* {activePage === "favorite" && <FavoriteFlightsPage />} */}
       </main>
 
       <Footer />
