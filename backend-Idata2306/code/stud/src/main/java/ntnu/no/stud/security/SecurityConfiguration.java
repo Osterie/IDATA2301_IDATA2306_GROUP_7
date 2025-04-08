@@ -58,6 +58,10 @@ public class SecurityConfiguration {
         // Disable CSRF and CORS checks. Without this it will be hard to make automated tests.
         .csrf(AbstractHttpConfigurer::disable)
         .cors(AbstractHttpConfigurer::disable)
+        // Allow access to Swagger UI and related endpoints
+        .authorizeHttpRequests((auth) -> auth
+        .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll())  // Allow Swagger UI and docs
+        
         // Authentication and signup is accessible for everyone
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/authenticate").permitAll())
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/signup").permitAll())

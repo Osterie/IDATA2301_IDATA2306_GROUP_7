@@ -39,7 +39,7 @@ Sprint stenographer: Daniel
 | Identity/authentication     | Adrian   | Completed     | [8]          |          |
 | Encryption                  | Tobias   | Not completed | [5]          |          |
 | Class for adding dummy data | Daniel   | Not completed | [4]          |          |
-| Add swagger                 | Adrian   | Not completed | [2]          |          |
+| Add swagger                 | Adrian   | Completed     | [2]          |          |
 | Add logging                 | Everyone | Not completed | [4]          |          |
 | Better error handling       | Everyone | Not completed | [5]          |          |
 | Endpoint for favoriting     | Tobias   | Not completed | [5]          |          |
