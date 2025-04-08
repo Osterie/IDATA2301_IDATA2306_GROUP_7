@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./filter.css";
 import DualRangeSlider from "./slider";
 
-const FilterSidebar = () => {
+const FilterSidebar = ({ flights, setFlights }) => {
   const [showStops, setShowStops] = useState(false);
   const [showCompanies, setShowCompanies] = useState(false);
   const [selectedCompanies, setSelectedCompanies] = useState({
@@ -33,6 +33,21 @@ const FilterSidebar = () => {
     }
   };
 
+    // Callback for price range change
+    const handlePriceRangeChange = (min, max) => {
+      
+      // Update flights to hide those outside the selected price range
+      const updatedFlights = flights.map(flight => {
+        if (flight.price < min || flight.price > max) {
+          return { ...flight, isHidden: true };  // Set isHidden to true if price is outside range
+        } else {
+          return { ...flight, isHidden: false };  // Otherwise, make sure it's visible
+        }
+      });
+      
+      setFlights(updatedFlights);  // Update flights in parent component
+    };
+
   return (
     <div className="sidebar-mother">
       {/* Mobile Button to Toggle Sidebar */}
@@ -59,7 +74,7 @@ const FilterSidebar = () => {
 
         {/* Price Range */}
         <div className="filter-section">
-          <DualRangeSlider label="Price Range" min={0} max={15000} callback={(min, max) => console.log(min, max)} />
+          <DualRangeSlider label="Price Range" min={0} max={15000} callback={handlePriceRangeChange} />
         </div>
 
         {/* Stops Dropdown */}

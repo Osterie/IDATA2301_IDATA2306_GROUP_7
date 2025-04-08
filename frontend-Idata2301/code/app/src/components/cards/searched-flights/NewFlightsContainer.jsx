@@ -3,10 +3,13 @@ import NewFlightCard from "./NewFlightCard";
 import "./flightsContainer.css"; 
 
 const FlightsContainer = ({ flights }) => {  // Receive flights as a prop
+
   return (
     <div className="flights-container">
       {flights.length > 0 ? (
-        flights.map((flight, index) => <NewFlightCard key={index} flight={flight} />)
+        flights
+          .filter(flight => !flight.isHidden)  // Filter out flights where isHidden is true
+          .map((flight, index) => <NewFlightCard key={index} flight={flight} />)
       ) : (
         <p>No flights found fitting given criteria.</p>
       )}
