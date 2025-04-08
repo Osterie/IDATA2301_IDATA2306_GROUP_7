@@ -63,7 +63,7 @@ const LoginPageHero = ({ onNavClick }) => {
           <button type="submit">Log In</button>
         </form>
         
-        <a id="create-account-link" href="#" onClick={() => onNavClick("create-account")}>Create Account</a>
+        <a id="create-account-link" href="#" onClick={() => onNavClick("create-account")}>Dont have an account? Create one!</a>
 
       </div>
 
