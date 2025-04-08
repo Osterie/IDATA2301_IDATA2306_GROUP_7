@@ -3,6 +3,8 @@ package ntnu.no.stud.controllers;
 import ntnu.no.stud.dto.UserProfileDto;
 import ntnu.no.stud.entities.User;
 import ntnu.no.stud.AccessUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin(origins = "*") // Allow frontend access
 public class UserController {
+
+  private static final Logger logger = LoggerFactory.getLogger(UserController.class); // Logger instance
+
   @Autowired
   private AccessUserService userService;
 
@@ -30,25 +35,19 @@ public class UserController {
    */
   @GetMapping("/api/users/{username}")
   public ResponseEntity<?> getProfile(@PathVariable String username) {
+    logger.info("Request received to fetch profile for username: {}", username);
+    
     User sessionUser = userService.getSessionUser();
     if (sessionUser != null && sessionUser.getUsername().equals(username)) {
       UserProfileDto profile = new UserProfileDto(sessionUser.getEmail());
-      // simulateLongOperation();
+      logger.info("Successfully fetched profile for username: {}", username);
       return new ResponseEntity<>(profile, HttpStatus.OK);
     } else if (sessionUser == null) {
-      return new ResponseEntity<>("Profile data accessible only to authenticated users",
-          HttpStatus.UNAUTHORIZED);
+      logger.warn("Unauthorized access attempt for username: {}", username);
+      return new ResponseEntity<>("Profile data accessible only to authenticated users", HttpStatus.UNAUTHORIZED);
     } else {
-      return new ResponseEntity<>("Profile data for other users not accessible!",
-          HttpStatus.FORBIDDEN);
-    }
-  }
-
-  private static void simulateLongOperation() {
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      throw new RuntimeException(e);
+      logger.warn("Forbidden access attempt for username: {}", username);
+      return new ResponseEntity<>("Profile data for other users not accessible!", HttpStatus.FORBIDDEN);
     }
   }
 
@@ -59,29 +58,41 @@ public class UserController {
    * @return HTTP 200 OK or error code with error message
    */
   @PutMapping("/api/users/{username}")
-  public ResponseEntity<String> updateProfile(@PathVariable String username,
-                                              @RequestBody UserProfileDto profileData) {
+  public ResponseEntity<String> updateProfile(@PathVariable String username, @RequestBody UserProfileDto profileData) {
+    logger.info("Request received to update profile for username: {}", username);
+    
     User sessionUser = userService.getSessionUser();
     ResponseEntity<String> response;
+    
     if (sessionUser != null && sessionUser.getUsername().equals(username)) {
       if (profileData != null) {
         if (userService.updateProfile(sessionUser, profileData)) {
           simulateLongOperation();
+          logger.info("Successfully updated profile for username: {}", username);
           response = new ResponseEntity<>("", HttpStatus.OK);
         } else {
-          response = new ResponseEntity<>("Could not update Profile data",
-              HttpStatus.INTERNAL_SERVER_ERROR);
+          logger.error("Failed to update profile for username: {}", username);
+          response = new ResponseEntity<>("Could not update Profile data", HttpStatus.INTERNAL_SERVER_ERROR);
         }
       } else {
+        logger.error("Profile data not supplied for username: {}", username);
         response = new ResponseEntity<>("Profile data not supplied", HttpStatus.BAD_REQUEST);
       }
     } else if (sessionUser == null) {
-      response = new ResponseEntity<>("Profile data accessible only to authenticated users",
-          HttpStatus.UNAUTHORIZED);
+      logger.warn("Unauthorized access attempt to update profile for username: {}", username);
+      response = new ResponseEntity<>("Profile data accessible only to authenticated users", HttpStatus.UNAUTHORIZED);
     } else {
-      response = new ResponseEntity<>("Profile data for other users not accessible!",
-          HttpStatus.FORBIDDEN);
+      logger.warn("Forbidden access attempt to update profile for username: {}", username);
+      response = new ResponseEntity<>("Profile data for other users not accessible!", HttpStatus.FORBIDDEN);
     }
     return response;
+  }
+
+  private static void simulateLongOperation() {
+    try {
+      Thread.sleep(2000);  // Simulating a long operation, e.g., a database transaction
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
   }
 }
