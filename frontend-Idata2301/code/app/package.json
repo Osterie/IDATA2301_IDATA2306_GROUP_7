@@ -8,6 +8,8 @@
     "@testing-library/user-event": "^13.5.0",
     "app": "file:",
     "axios": "^1.8.4",
+    "js-cookie": "^3.0.5",
+    "react-cookie-consent": "^9.0.0",
     "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4"
   },
