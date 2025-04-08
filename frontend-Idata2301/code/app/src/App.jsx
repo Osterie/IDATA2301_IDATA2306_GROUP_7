@@ -66,7 +66,7 @@ function App() {
           <>
             <DealsPageHero/>
             <section className="search-section">
-              <FilterSidebar />
+              <FilterSidebar flights={flights} setFlights={setFlights} />
               <NewFlightsContainer flights={flights} />  {/* Pass flights to NewFlightsContainer */}
             </section>
           </>
