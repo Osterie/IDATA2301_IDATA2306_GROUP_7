@@ -22,7 +22,6 @@ import {
   getLastSearch,
   setCountryFromIP,
 } from "./utils/cookieUtils";
-import LoginForm from "./components/Identity/LoginForm";
 
 function App() {
   const [activePage, setActivePage] = useState("home");

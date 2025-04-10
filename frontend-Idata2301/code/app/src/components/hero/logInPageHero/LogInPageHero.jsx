@@ -57,7 +57,8 @@ const LoginPageHero = ({ onNavClick }) => {
             />
           </div>
 
-          {message && <p id="result-message">{message}</p>}
+          {message && <p id="result-message" style={{ color: 'red' }}>{message}</p>} {/* Display error message here */}
+
 
 
           <button type="submit">Log In</button>

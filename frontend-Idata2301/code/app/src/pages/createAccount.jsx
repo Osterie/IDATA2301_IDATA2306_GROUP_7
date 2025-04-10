@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { sendApiRequest } from '../library/requests'; // Adjust the import path as needed
+import { sendAuthenticationRequest } from '../library/Identity/authentication'; // Adjust the import path as needed
 
 
 const CreateAccount = () => {
@@ -19,11 +20,31 @@ const CreateAccount = () => {
         "email": email,
       };
   
-      // TODO have different success and failure callbacks
-      await sendApiRequest("POST", "/signup", () => console.log("success"), signupData, (error) => console.log("failure: " + error));
-  
-      // Login with backend 
-    };
+    // Send the API request and handle success or failure
+    await sendApiRequest(
+      "POST",
+      "/signup",
+      async ()  => {
+        // Success callback
+        console.log("succesfully created account")
+          await sendAuthenticationRequest(username, password,
+            () => {
+              console.log("succesfully logged in account")
+              // Redirect to the main page or perform any other action
+              window.location.href = '/index.html'; // Adjust the URL as needed
+            },
+            (error) => {
+              setMessage(`Login failed: ${error}`);
+            }
+          );
+      },
+      signupData,
+      (error) => {
+        setMessage(`Error: ${error}`) // Error callback, displaying the error message
+        console.log("Error creating account: ", error)
+       }
+    );
+  };
 
   return (
     <section>
@@ -71,6 +92,9 @@ const CreateAccount = () => {
           </div>
           <button type="submit">Sign Up</button>
         </form>
+
+        {message && <p style={{ color: 'red' }}>{message}</p>} {/* Display error message here */}
+
       </div>
     </section>
   );

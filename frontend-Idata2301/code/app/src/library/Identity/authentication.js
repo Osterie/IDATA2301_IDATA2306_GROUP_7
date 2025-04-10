@@ -44,7 +44,7 @@ export function isAdmin(user) {
  * @param successCallback Function to call on success
  * @param errorCallback Function to call on error, with response text as the parameter
  */
-export function sendAuthenticationRequest(username, password, successCallback, errorCallback) {
+export async function sendAuthenticationRequest(username, password, successCallback, errorCallback) {
   const postData = {
     "username": username,
     "password": password

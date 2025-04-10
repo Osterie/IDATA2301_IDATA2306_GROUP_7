@@ -48,3 +48,8 @@
 #create-account-link:hover{
   background: #0056b3;
 }
+
+#result-message{
+  font-size: 16px;
+  max-width: 300px;
+}
