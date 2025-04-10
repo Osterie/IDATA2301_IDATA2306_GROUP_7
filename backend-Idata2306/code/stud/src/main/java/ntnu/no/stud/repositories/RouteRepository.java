@@ -9,6 +9,6 @@ public interface RouteRepository extends CrudRepository<Route, Integer> {
 
   Route findById(int id);
 
-  @Query(value = "SELECT * FROM Route ORDER BY RAND() LIMIT 1")
+  @Query(value = "SELECT * FROM Route ORDER BY RAND() LIMIT 1", nativeQuery = true)
   Route findRandomRoute();
 }

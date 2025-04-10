@@ -21,6 +21,6 @@ public interface ExtraFeatureRepository extends CrudRepository<ExtraFeature, Int
   ExtraFeature findByName(@Param("name") String name);
 
 
-  @Query(value = "SELECT * FROM ExtraFeature ORDER BY RAND() LIMIT 1")
+  @Query(value = "SELECT * FROM extra_feature ORDER BY RAND() LIMIT 1", nativeQuery = true)
   ExtraFeature findRandomExtraFeature();
 }

@@ -27,6 +27,6 @@ public interface FlightRepository extends CrudRepository<Flight, Integer> {
     @Query("SELECT f FROM Flight f")
     List<Flight> findAllFlights();
 
-    @Query(value = "SELECT * FROM Flight ORDER BY RAND() LIMIT 1")
+    @Query(value = "SELECT * FROM Flight ORDER BY RAND() LIMIT 1", nativeQuery = true)
     Flight findRandomFlight();
 }

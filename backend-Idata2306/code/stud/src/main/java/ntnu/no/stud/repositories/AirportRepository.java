@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface AirportRepository extends CrudRepository<Airport, Integer> {
 
-    @Query(value = "SELECT * FROM Airport ORDER BY RAND() LIMIT 1")
+    @Query(value = "SELECT * FROM Airport ORDER BY RAND() LIMIT 1", nativeQuery = true)
     Airport findRandomAirport();
 }

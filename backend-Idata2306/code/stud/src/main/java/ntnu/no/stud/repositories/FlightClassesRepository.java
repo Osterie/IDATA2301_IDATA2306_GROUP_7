@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface FlightClassesRepository extends CrudRepository<FlightClasses, Integer> {
 
-    @Query(value = "SELECT * FROM FlightClasses ORDER BY RAND() LIMIT 1")
+    @Query(value = "SELECT * FROM FlightClasses ORDER BY RAND() LIMIT 1", nativeQuery = true)
     FlightClasses findRandomFlightClasses();
 }
