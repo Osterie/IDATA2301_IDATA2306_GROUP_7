@@ -1,32 +1,32 @@
-CREATE TABLE airport(
+CREATE TABLE IF NOT EXISTS airport(
     airport_code CHAR(3) PRIMARY KEY,
     city VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE class(
+CREATE TABLE IF NOT EXISTS class(
     id INT PRIMARY KEY AUTO_INCREMENT,
     name Varchar(50) NOT NULL UNIQUE
 );
 
-CREATE TABLE flight(
+CREATE TABLE IF NOT EXISTS flight(
     id INT PRIMARY KEY AUTO_INCREMENT,
     name Varchar(100) NOT NULL,
     company Varchar(255) NOT NULL
 );
 
-CREATE TABLE extra_feature (
+CREATE TABLE IF NOT EXISTS extra_feature (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name Varchar(50) NOT NULL UNIQUE
 );
 
-CREATE TABLE user(
+CREATE TABLE IF NOT EXISTS user(
     id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE route(
+CREATE TABLE IF NOT EXISTS route(
     id INT PRIMARY KEY AUTO_INCREMENT,
     departure_airport_code CHAR(3) NOT NULL,
     arrival_airport_code CHAR(3) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE route(
     FOREIGN KEY (arrival_airport_code) REFERENCES airport(airport_code)
 );
 
-CREATE TABLE scheduled_flights(
+CREATE TABLE IF NOT EXISTS scheduled_flights(
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     flight_id INT NOT NULL,
     route_id INT NOT NULL,
@@ -44,7 +44,7 @@ CREATE TABLE scheduled_flights(
     FOREIGN KEY (route_id) REFERENCES route(id)
 );
 
-Create Table favorite_flights ( 
+Create Table IF NOT EXISTS favorite_flights ( 
     flight_id INT NOT NULL,
     user_id INT NOT NULL,
 
@@ -52,14 +52,14 @@ Create Table favorite_flights (
     FOREIGN KEY (flight_id) REFERENCES flight(id)
 );
 
-CREATE TABLE flight_accommodations (
+CREATE TABLE IF NOT EXISTS flight_accommodations (
     flight_id INT NOT NULL,
     feature_id INT NOT NULL,
     FOREIGN KEY (flight_id) REFERENCES flight(id),
     FOREIGN KEY (feature_id) REFERENCES extra_feature(id)
 );
 
-CREATE TABLE flight_classes(
+CREATE TABLE IF NOT EXISTS flight_classes(
     class_id INT NOT NULL,
     flight_id INT NOT NULL,
     available_seats INT UNSIGNED NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE flight_classes(
     FOREIGN KEY (flight_id) REFERENCES flight(id)
 );
 
-CREATE TABLE price(
+CREATE TABLE IF NOT EXISTS price(
     id INT PRIMARY KEY AUTO_INCREMENT,
     class_id INT NOT NULL,
     price INT UNSIGNED NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE price(
     CONSTRAINT CHK_Price_Discount_Range CHECK (discount BETWEEN 0 AND 100)
 );
 
-Create Table purchases (
+Create Table IF NOT EXISTS purchases (
     user_id INT NOT NULL,
     flight_id INT NOT NULL,
     price_id INT NOT NULL,
