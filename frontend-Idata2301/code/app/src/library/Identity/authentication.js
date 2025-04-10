@@ -102,7 +102,7 @@ export function parseJwtUser(jwtString) {
 export function doLogout() {
   console.log("Logging out...");
   deleteAuthorizationCookies();
-  redirectTo("/index.html");
+  window.location.href = '/index.html'; // Adjust the URL as needed
 }
 
 /**
