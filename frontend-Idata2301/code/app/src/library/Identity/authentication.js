@@ -12,12 +12,18 @@ export function getAuthenticatedUser() {
   let user = null;
   const username = getCookie("current_username");
   const commaSeparatedRoles = getCookie("current_user_roles");
-  if (username && commaSeparatedRoles) {
+  if (username) {
     const roles = commaSeparatedRoles.split(",");
     user = {
       "username": username,
       "roles": roles
     }
+  }
+
+  if (!user) {
+    console.log("User not authenticated");
+    console.log(username)
+    console.log(commaSeparatedRoles)
   }
   return user;
 }
