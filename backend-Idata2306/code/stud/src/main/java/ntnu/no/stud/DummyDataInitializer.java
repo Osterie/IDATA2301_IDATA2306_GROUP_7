@@ -37,22 +37,22 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
    */
   @Override
   public void onApplicationEvent(ApplicationReadyEvent event) {
-    Optional<User> existingAdminUser = userRepository.findByUsername("admin");
+    Optional<User> existingAdminUser = userRepository.findByUsername("chuck");
     if (existingAdminUser.isEmpty()) {
       logger.info("Importing test data...");
   
       try {
         // Create admin user
-        userService.tryCreateNewUser("admin", "adminPassword", "admin@gmail.com");
-        User admin = userRepository.findByUsername("admin").orElseThrow();
+        userService.tryCreateNewUser("chuck", "Nunchucks2024", "chuck@gmail.com");
+        User admin = userRepository.findByUsername("chuck").orElseThrow();
   
         UserRole adminRole = new UserRole(admin, "ADMIN");
         admin.addRole(adminRole);
         userRepository.save(admin); // Will cascade to roles if CascadeType.ALL is set
   
         // Create default user
-        userService.tryCreateNewUser("defaultUser", "defaultUserPassword", "defaultUser@gmail.com");
-        User defaultUser = userRepository.findByUsername("defaultUser").orElseThrow();
+        userService.tryCreateNewUser("dave", "Dangerous2024", "dave@gmail.com");
+        User defaultUser = userRepository.findByUsername("dave").orElseThrow();
   
         UserRole userRole = new UserRole(defaultUser, "USER");
         defaultUser.addRole(userRole);
