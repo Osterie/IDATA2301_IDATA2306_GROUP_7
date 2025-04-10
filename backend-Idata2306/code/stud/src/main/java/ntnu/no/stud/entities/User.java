@@ -1,9 +1,5 @@
 package ntnu.no.stud.entities;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -120,7 +119,7 @@ public class User {
         Iterator<UserRole> it = roles.iterator();
         while (!found && it.hasNext()) {
             UserRole role = it.next();
-            if (role.getRole().equals(roleName)) {
+            if (role.getRole().equalsIgnoreCase(roleName)) {
                 found = true;
             }
         }

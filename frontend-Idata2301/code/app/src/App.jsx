@@ -11,6 +11,8 @@ import CreateAccount from "./pages/createAccount";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/header/Navbar";
 import AboutUs from "./components/about/AboutUs";
+import AdminPage from "./components/admin/AdminPage";
+import { getAuthenticatedUser, isAdmin } from "./library/Identity/authentication"; // adjust path as needed
 // import FavoriteFlightsPage from "./components/favorite/FavoriteFlightPage";
 import CookieConsent from "react-cookie-consent";
 import Cookies from "js-cookie";
@@ -25,6 +27,12 @@ import LoginForm from "./components/Identity/LoginForm";
 function App() {
   const [activePage, setActivePage] = useState("home");
   const [flights, setFlights] = useState([]);  // Store flight data
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const loggedInUser = getAuthenticatedUser();
+    setUser(loggedInUser);
+  }, []);
 
   const handleNavClick = (page) => {
     setActivePage(page);
@@ -51,7 +59,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Navbar onNavClick={handleNavClick} />
+        <Navbar onNavClick={handleNavClick} user={user} />
       </header>
 
       <main>
@@ -73,6 +81,7 @@ function App() {
         )}
         {activePage === "about" && <AboutUs />}
         {activePage === "login" && <LogInPageHero onNavClick={handleNavClick} />}
+        {activePage === "admin" && <AdminPage />}
         {activePage === "create-account" && <CreateAccount />}
         {/* {activePage === "favorite" && <FavoriteFlightsPage />} */}
       </main>

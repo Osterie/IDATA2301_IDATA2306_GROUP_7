@@ -32,35 +32,58 @@ const FilterSidebar = ({ flights, setFlights }) => {
 
 
   const handleCompanyChange = (company) => {
-    const updatedCompanies = { ...selectedCompanies, [company]: !selectedCompanies[company] };
+    let updatedCompanies;
   
-    // If 'all' is checked or unchecked, update all company checkboxes
     if (company === "all") {
       const newState = !selectedCompanies.all;
-      const updatedState = companies.reduce((acc, company) => {
-        acc[company] = newState;
-        return acc;
-      }, {});
-      setSelectedCompanies({ ...updatedState, all: newState });
+      updatedCompanies = {
+        all: newState,
+        ...companies.reduce((acc, company) => {
+          acc[company] = newState;
+          return acc;
+        }, {})
+      };
     } else {
-      setSelectedCompanies(updatedCompanies);
+      updatedCompanies = {
+        ...selectedCompanies,
+        [company]: !selectedCompanies[company],
+        all: false, // If any individual company is changed, uncheck "all"
+      };
     }
+  
+    setSelectedCompanies(updatedCompanies);
+  
+    // Re-filter flights using current price range and updated companies
+    const minPrice = findMinPrice(flights);
+    const maxPrice = findMaxPrice(flights);
+  
+    const updatedFlights = flights.map(flight => {
+      const flightCompany = flight.scheduledFlight.flight.company;
+      const isPriceInRange = flight.price >= minPrice && flight.price <= maxPrice;
+      const isCompanySelected = updatedCompanies[flightCompany];
+  
+      const isHidden = !(isPriceInRange && isCompanySelected);
+      return { ...flight, isHidden };
+    });
+  
+    setFlights(updatedFlights);
   };
+  
 
   // Callback for price range change
   const handlePriceRangeChange = (min, max) => {
-    
-    // Update flights to hide those outside the selected price range
     const updatedFlights = flights.map(flight => {
-      if (flight.price < min || flight.price > max) {
-        return { ...flight, isHidden: true };  // Set isHidden to true if price is outside range
-      } else {
-        return { ...flight, isHidden: false };  // Otherwise, make sure it's visible
-      }
+      const flightCompany = flight.scheduledFlight.flight.company;
+      const isPriceInRange = flight.price >= min && flight.price <= max;
+      const isCompanySelected = selectedCompanies[flightCompany];
+  
+      const isHidden = !(isPriceInRange && isCompanySelected);
+      return { ...flight, isHidden };
     });
-    
-    setFlights(updatedFlights);  // Update flights in parent component
+  
+    setFlights(updatedFlights);
   };
+  
 
   return (
     <div className="sidebar-mother">

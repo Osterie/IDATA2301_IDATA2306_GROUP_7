@@ -37,11 +37,30 @@ export const getLastSearch = () => {
 
 // === Location (IP-based) ===
 export const setCountryFromIP = async () => {
-  const res = await fetch("https://ipapi.co/json/");
-  const data = await res.json();
-  Cookies.set("country", data.country_name, { expires: 30 });
-  setPreferredCurrency(data.currency);
-  setDepartureAirport(data.country_code === "NO" ? "OSL" : "");
+
+  if (Cookies.get("country")) return; // Country already set
+
+  try{
+    const res = await fetch("https://ipapi.co/json/");
+
+    // Check if the status code is 429 (Too Many Requests)
+    if (res.status === 429) {
+      throw new Error('Rate limit exceeded');
+    }
+
+    const data = await res.json();
+    Cookies.set("country", data.country_name, { expires: 30 });
+    setPreferredCurrency(data.currency);
+    setDepartureAirport(data.country_code === "NO" ? "OSL" : "");
+  }
+  catch (error) {
+    if (error.message === 'Rate limit exceeded') {
+      console.error("Failed to use cookies api for ipaip.co/json/, rate limit exceeded:", error);
+    }
+    else{
+      console.error("Failed to use cookies api for ipaip.co/json/, error:", error);
+    }
+  }
 };
 
 export const getCountry = () => Cookies.get("country");

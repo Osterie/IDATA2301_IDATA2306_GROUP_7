@@ -28,7 +28,7 @@ export function getAuthenticatedUser() {
  * @returns {boolean}
  */
 export function isAdmin(user) {
-  return user && user.roles && user.roles.includes("ROLE_ADMIN");
+  return user && user.roles && user.roles.includes("admin");
 }
 
 /**
@@ -102,7 +102,7 @@ export function parseJwtUser(jwtString) {
 export function doLogout() {
   console.log("Logging out...");
   deleteAuthorizationCookies();
-  redirectTo("/index.html");
+  window.location.href = '/index.html'; // Adjust the URL as needed
 }
 
 /**
