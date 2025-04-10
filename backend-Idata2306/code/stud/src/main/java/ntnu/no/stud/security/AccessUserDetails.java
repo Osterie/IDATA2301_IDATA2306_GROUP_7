@@ -24,7 +24,7 @@ public class AccessUserDetails implements UserDetails {
   /**
    * Create access object.
    *
-   * @param user Teh user to copy data from
+   * @param user The user to copy data from
    */
   public AccessUserDetails(User user) {
     this.username = user.getUsername();

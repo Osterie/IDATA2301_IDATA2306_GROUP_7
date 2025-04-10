@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import "./nav.css";
 import logo from "./images/logo3.png";
+import { isAdmin } from "../../library/Identity/authentication"; // adjust path
 
-const Navbar = ({ onNavClick }) => {
+const Navbar = ({ onNavClick, user }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const showAdmin = user && isAdmin(user);
 
   return (
     <nav>
@@ -29,6 +32,9 @@ const Navbar = ({ onNavClick }) => {
         <li><a href="#" onClick={() => onNavClick("deals")}>Deals</a></li>
         <li><a href="#" onClick={() => onNavClick("about")}>About</a></li>
         <li><a href="#" onClick={() => onNavClick("login")}>Log in</a></li>
+        {showAdmin && (
+          <li><a href="#" onClick={() => onNavClick("admin")}>Admin</a></li>
+        )}
         <li><a href="#" onClick={() => onNavClick("favorite")}>💖</a></li>
       </ul>
     </nav>
