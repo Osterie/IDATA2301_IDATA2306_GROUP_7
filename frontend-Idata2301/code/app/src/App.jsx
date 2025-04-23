@@ -13,7 +13,6 @@ import Navbar from "./components/header/Navbar";
 import AboutUs from "./components/about/AboutUs";
 import AdminPage from "./components/admin/AdminPage";
 import { getAuthenticatedUser, isAdmin } from "./library/Identity/authentication"; // adjust path as needed
-// import FavoriteFlightsPage from "./components/favorite/FavoriteFlightPage";
 import CookieConsent from "react-cookie-consent";
 import Cookies from "js-cookie";
 import {
@@ -22,6 +21,7 @@ import {
   getLastSearch,
   setCountryFromIP,
 } from "./utils/cookieUtils";
+import FlightDetailPage from "./components/flightDetailPage/FlightDetailPage";
 
 function App() {
   const [activePage, setActivePage] = useState("home");
@@ -82,7 +82,8 @@ function App() {
         {activePage === "login" && <LogInPageHero onNavClick={handleNavClick} />}
         {activePage === "admin" && <AdminPage />}
         {activePage === "create-account" && <CreateAccount />}
-        {/* {activePage === "favorite" && <FavoriteFlightsPage />} */}
+        {activePage === "favorite" //&& <FlightDetailPage flight={selectedFlight} onAddToCart={(flight) => console.log("Add to cart:", flight)} onBuyNow={(flight) => console.log("Buying:", flight)} />
+        }
       </main>
 
       <Footer />
