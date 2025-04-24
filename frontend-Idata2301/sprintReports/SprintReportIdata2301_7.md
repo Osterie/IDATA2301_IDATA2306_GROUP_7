@@ -44,9 +44,9 @@ Sprint stenographer: Adrian
 | Test recommented cards                                                                              | Daniel   | Not completed | [4]          |          |
 | Purchasing a product                                                                                | Daniel   | Not completed | [4]          |          |
 | Favoriting a product                                                                                | Tobias   | Not completed | [4]          |          |
-| Product detail page (Product image, Product description, Product price for the different providers) | Tobias   | Not completed | [6]          |          |
+| Product detail page (Product image, Product description, Product price for the different providers) | Tobias   | Needs testing | [6]          |          |
 | Admin hide/show products                                                                            | Adrian   | Not completed | [4]          |          |
-| Convert currency to desired currency or auto                                                        | Tobias   | Not completed | [5]          |          |
+| Created utils for converting currency                                                               | Tobias   | Completed | [5]          |          |
 | Docker                                                                                              | Everyone | Not completed | [6]          |          |
 | Shopping cart                                                                                       | Daniel   | Not completed | [6]          |          |
 | Favorite page                                                                                       | Tobias   | Not completed | [5]          |          |
