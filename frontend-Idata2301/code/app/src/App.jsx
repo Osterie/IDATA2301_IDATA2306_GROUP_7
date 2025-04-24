@@ -12,6 +12,7 @@ import Footer from "./components/footer/Footer";
 import Navbar from "./components/header/Navbar";
 import AboutUs from "./components/about/AboutUs";
 import AdminPage from "./components/admin/AdminPage";
+import ManageUserPage from "./components/admin/ManageUserPage";
 import { getAuthenticatedUser, isAdmin } from "./library/Identity/authentication"; // adjust path as needed
 import CookieConsent from "react-cookie-consent";
 import Cookies from "js-cookie";
@@ -80,7 +81,8 @@ function App() {
         )}
         {activePage === "about" && <AboutUs />}
         {activePage === "login" && <LogInPageHero onNavClick={handleNavClick} />}
-        {activePage === "admin" && <AdminPage />}
+        {activePage === "admin" && <AdminPage setActivePage={setActivePage} />}
+        {activePage === "manage-users" && <ManageUserPage />}
         {activePage === "create-account" && <CreateAccount />}
         {activePage === "favorite" //&& <FlightDetailPage flight={selectedFlight} onAddToCart={(flight) => console.log("Add to cart:", flight)} onBuyNow={(flight) => console.log("Buying:", flight)} />
         }

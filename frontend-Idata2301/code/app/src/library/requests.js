@@ -28,21 +28,25 @@ export async function sendApiRequest(
 
   try {
     const response = await fetch(API_BASE_URL + url, parameters);
-    const responseText = await response.text();
 
-    if (response.status === 200) {
-      let responseJson = "";
-      if (responseText) {
-        responseJson = JSON.parse(responseText);
+    let responseJson = null;
+    const contentType = response.headers.get("content-type");
+
+    if (response.ok) {
+      if (contentType && contentType.includes("application/json")) {
+        responseJson = await response.json();
+      } else {
+        // Use text only if not JSON
+        const responseText = await response.text();
+        responseJson = responseText || null;
       }
       callback(responseJson);
-    } else if (errorCallback) {
-      errorCallback(responseText);
+    } else {
+      const errorText = await response.text();
+      if (errorCallback) errorCallback(errorText);
     }
   } catch (error) {
-    if (errorCallback) {
-      errorCallback(error);
-    }
+    if (errorCallback) errorCallback(error.message || error);
   }
 }
 

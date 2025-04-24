@@ -34,7 +34,25 @@ export function getAuthenticatedUser() {
  * @returns {boolean}
  */
 export function isAdmin(user) {
-  return user && user.roles && user.roles.includes("admin");
+
+  if (!user) {
+    console.log("User is null");
+    return false;
+  }
+
+  
+  const roles = user.roles;
+  if (!roles) {
+    console.log("User has no roles");
+    return false;
+  }
+  
+  for (let i = 0; i < roles.length; i++) {
+    if (roles[i].toUpperCase() === "ADMIN") {
+      console.log("User is admin");
+      return true;
+    }
+  }
 }
 
 /**
@@ -54,6 +72,7 @@ export async function sendAuthenticationRequest(username, password, successCallb
     function (jwtResponse) {
       setCookie("jwt", jwtResponse.jwt);
       const userData = parseJwtUser(jwtResponse.jwt);
+      console.log(userData)
       if (userData) {
         setCookie("current_username", userData.username);
         setCookie("current_user_roles", userData.roles.join(","));

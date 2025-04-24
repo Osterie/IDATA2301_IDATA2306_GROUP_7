@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { isAdmin, getAuthenticatedUser } from "../../library/Identity/authentication.js";
 
-const AdminPage = () => {
-  const [isAuthorized, setIsAuthorized] = useState(null); // null = still checking
+const AdminPage = ({ setActivePage }) => {
+  const [isAuthorized, setIsAuthorized] = useState(null);
 
   useEffect(() => {
     const user = getAuthenticatedUser();
@@ -24,6 +24,9 @@ const AdminPage = () => {
     <main>
       <h1>Admin Page</h1>
       <p>This is the admin page. Only accessible to users with admin rights.</p>
+      <button onClick={() => setActivePage("manage-users")}>
+        Manage Users
+      </button>
     </main>
   );
 };

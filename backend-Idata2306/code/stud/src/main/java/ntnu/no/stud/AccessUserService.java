@@ -1,6 +1,7 @@
 package ntnu.no.stud;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import ntnu.no.stud.dto.UserProfileDto;
 import ntnu.no.stud.entities.User;
@@ -45,6 +46,10 @@ public class AccessUserService implements UserDetailsService {
     Authentication authentication = securityContext.getAuthentication();
     String username = authentication.getName();
     return userRepository.findByUsername(username).orElse(null);
+  }
+
+  public Iterable<User> getAllUsers() {
+    return userRepository.findAll();
   }
 
   /**
@@ -120,6 +125,16 @@ public class AccessUserService implements UserDetailsService {
     }
     User user = new User(username, createHash(password), email);
     userRepository.save(user);
+  }
+
+  public boolean deleteUser(int id) {
+    Optional<User> user = userRepository.findById(id);
+    if (user.isPresent()) {
+      userRepository.delete(user.get());
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**

@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -87,6 +89,48 @@ public class UserController {
     }
     return response;
   }
+
+  // Retreives all users (if you are authenticated as admin) 
+  @GetMapping("/api/getUsers")
+  // @PreAuthorize("hasRole('ADMIN')")
+  public ResponseEntity<?> getAllUsers() {
+    logger.info("Request received to fetch all users.");
+    
+    User sessionUser = userService.getSessionUser();
+    if (sessionUser != null && sessionUser.isAdmin()) {
+      return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+    } else if (sessionUser == null) {
+      logger.warn("Unauthorized access attempt to fetch all users.");
+      return new ResponseEntity<>("Access to user list is only for authenticated admins", HttpStatus.UNAUTHORIZED);
+    } else {
+      logger.warn("Forbidden access attempt to fetch all users.");
+      return new ResponseEntity<>("Access to user list is only for authenticated admins", HttpStatus.FORBIDDEN);
+    }
+  }
+
+  @DeleteMapping("/api/deleteUser/{id}")
+  public ResponseEntity<?> deleteUser(@PathVariable int id) {
+
+    logger.info("Request received to delete user with ID: {}", id);
+    
+    User sessionUser = userService.getSessionUser();
+    if (sessionUser != null && sessionUser.isAdmin()) {
+      if (userService.deleteUser(id)) {
+        logger.info("Successfully deleted user with ID: {}", id);
+        return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
+      } else {
+        logger.error("Failed to delete user with ID: {}", id);
+        return new ResponseEntity<>("Failed to delete user", HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+    } else if (sessionUser == null) {
+      logger.warn("Unauthorized access attempt to delete user with ID: {}", id);
+      return new ResponseEntity<>("Access to delete users is only for authenticated admins", HttpStatus.UNAUTHORIZED);
+    } else {
+      logger.warn("Forbidden access attempt to delete user with ID: {}", id);
+      return new ResponseEntity<>("Access to delete users is only for authenticated admins", HttpStatus.FORBIDDEN);
+    }
+  }
+
 
   private static void simulateLongOperation() {
     try {
