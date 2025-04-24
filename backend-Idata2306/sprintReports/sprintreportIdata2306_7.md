@@ -34,8 +34,8 @@ Sprint stenographer: Adrian
 | Finish class for adding dummy data                                         | Daniel   | In progress   | [3]          |          |
 | Finish Endpoint for favoriting                                             | Tobias   | In progress   | [3]          |          |
 | Endpoints for purchasing                                                   | Daniel   | In progress   | [5]          |          |
-| Endpoints for adding/removing roles from users                             | Adrian   | Completed | [5]          |          |
-| Endpoints for deleting users as admin                                      | Adrian   | Not completed | [5]          |          |
+| Endpoints for adding/removing roles from users                             | Adrian   | Completed     | [5]          |          |
+| Endpoints for deleting users as admin                                      | Adrian   | Completed     | [5]          |          |
 | Add a table column for if a product is hidden or not (price table perhaps) | Tobias   | Not completed | [3]          |          |
 | Endpoints for showing/hiding a product as admin                            | Adrian   | Not completed | [5]          |          |
 | Https connection                                                           | Everyone | Not completed | [6]          |          |
