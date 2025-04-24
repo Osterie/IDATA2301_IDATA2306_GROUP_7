@@ -4,11 +4,17 @@ import ntnu.no.stud.entities.Airport;
 import ntnu.no.stud.entities.Route;
 import ntnu.no.stud.repositories.AirportRepository;
 import ntnu.no.stud.repositories.RouteRepository;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RouteInitializer {
+
+    
+    private static final Logger logger = LoggerFactory.getLogger(RouteInitializer.class);
 
     private final RouteRepository routeRepository;
     private final AirportRepository airportRepository;
@@ -39,6 +45,6 @@ public class RouteInitializer {
             routeRepository.save(route);
         }
 
-        System.out.println(numberOfRoutes + " random routes generated successfully.");
+        logger.info("Random routes generated: " + numberOfRoutes + " routes created.");
     }
 }

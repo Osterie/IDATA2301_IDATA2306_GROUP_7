@@ -6,6 +6,9 @@ import ntnu.no.stud.entities.ScheduledFlights;
 import ntnu.no.stud.repositories.FlightClassesRepository;
 import ntnu.no.stud.repositories.PriceRepository;
 import ntnu.no.stud.repositories.ScheduledFlightsRepository;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +16,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class PriceInitializer {
+
+    
+    private static final Logger logger = LoggerFactory.getLogger(PriceInitializer.class);
 
     private final PriceRepository priceRepository;
     private final ScheduledFlightsRepository scheduledFlightsRepository;
@@ -31,14 +37,14 @@ public class PriceInitializer {
             // Fetch a random scheduled flight from the database
             ScheduledFlights randomScheduledFlight = scheduledFlightsRepository.findRandomScheduledFlight();
             if (randomScheduledFlight == null) {
-                System.err.println("Cannot generate prices: No scheduled flights available.");
+                logger.error("Cannot generate prices: No scheduled flights available.");
                 return;
             }
 
             // Fetch a random flight class from the database
             FlightClasses randomFlightClass = flightClassesRepository.findRandomFlightClasses();
             if (randomFlightClass == null) {
-                System.err.println("Cannot generate prices: No flight classes available.");
+                logger.error("Cannot generate prices: No flight classes available.");
                 return;
             }
 
@@ -58,7 +64,7 @@ public class PriceInitializer {
         }
         
 
-        System.out.println(numberOfPrices + " random prices generated successfully.");
+        logger.info(numberOfPrices + " random prices generated successfully.");
     }
 
     private String generateRandomPriceCode() {

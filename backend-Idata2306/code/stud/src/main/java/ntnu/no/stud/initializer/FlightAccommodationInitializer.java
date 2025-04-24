@@ -34,17 +34,23 @@ public class FlightAccommodationInitializer {
     public void generateRandomFlightAccommodations() {
         List<Flight> flights = flightRepository.findAllFlights();
 
+        if (flights == null || flights.isEmpty()) {
+            logger.error("Cannot generate flight accommodations: No flights available.");
+            throw new RuntimeException("Flight accommodation generation failed: No flights available.");
+        }
+
         for (Flight flight : flights) {
 
             // Fetch a random extra feature from the database
             ExtraFeature randomExtraFeature = extraFeatureRepository.findRandomExtraFeature();
             if (randomExtraFeature == null) {
                 logger.error("Cannot generate flight accommodations: No extra features available.");
-                return;
+                throw new RuntimeException("Flight accommodation generation failed: No extra features available.");
             }
 
             // Create and save the flight accommodation
             FlightAccommodation flightAccommodation = new FlightAccommodation(flight, randomExtraFeature);
+            
             flightAccommodationRepository.save(flightAccommodation);
 
         }
