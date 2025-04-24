@@ -91,6 +91,11 @@ public class User {
         role.setUser(this); // Set the user in the UserRole object
     }
 
+    public void removeRole(UserRole role) {
+        this.roles.remove(role);
+        role.setUser(null); // Remove the user from the UserRole object
+    }
+
     public boolean isActive() {
         return active;
     }
