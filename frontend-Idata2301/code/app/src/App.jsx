@@ -13,7 +13,7 @@ import Navbar from "./components/header/Navbar";
 import AboutUs from "./components/about/AboutUs";
 import AdminPage from "./components/admin/AdminPage";
 import ManageUserPage from "./components/admin/ManageUserPage";
-import { getAuthenticatedUser, isAdmin } from "./library/Identity/authentication"; // adjust path as needed
+import { getAuthenticatedUser, checkJwtOnLoad } from "./library/Identity/authentication"; // adjust path as needed
 import CookieConsent from "react-cookie-consent";
 import Cookies from "js-cookie";
 import {
@@ -33,6 +33,11 @@ function App() {
     const loggedInUser = getAuthenticatedUser();
     setUser(loggedInUser);
   }, []);
+
+  // // Check JWT on load
+  // useEffect(() => {
+  //   checkJwtOnLoad();
+  // }, []);
 
   const handleNavClick = (page) => {
     setActivePage(page);

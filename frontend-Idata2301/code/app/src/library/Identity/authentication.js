@@ -10,6 +10,12 @@ import {redirectTo} from "../navigation.js";
  */
 export function getAuthenticatedUser() {
   let user = null;
+
+  if (!checkJwtOnLoad()) {
+    console.log("JWT expired, user not authenticated");
+    return null;
+  }
+
   const username = getCookie("current_username");
   const commaSeparatedRoles = getCookie("current_user_roles");
   if (username) {
@@ -70,7 +76,7 @@ export async function sendAuthenticationRequest(username, password, successCallb
   sendApiRequest(
     "POST", "/authenticate",
     function (jwtResponse) {
-      setCookie("jwt", jwtResponse.jwt);
+      setCookie("jwt", jwtResponse.jwt, getExpirationMilliseconds(jwtResponse.jwt));
       const userData = parseJwtUser(jwtResponse.jwt);
       console.log(userData)
       if (userData) {
@@ -94,6 +100,8 @@ export async function sendAuthenticationRequest(username, password, successCallb
  * @returns {any} Decoded JWT object
  */
 export function parseJwt(token) {
+  if (!token) return null;
+
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
@@ -101,6 +109,13 @@ export function parseJwt(token) {
   }).join(''));
 
   return JSON.parse(jsonPayload);
+}
+
+function getExpirationMilliseconds(jwt) {
+  const payload = parseJwt(jwt);
+  if (!payload || !payload.exp) return null;
+  const expirationMilliseconds = payload.exp;
+  return expirationMilliseconds * 1000;
 }
 
 /**
@@ -114,7 +129,8 @@ export function parseJwtUser(jwtString) {
   if (jwtObject) {
     user = {
       "username": jwtObject.sub,
-      "roles": jwtObject.roles.map(r => r.authority)
+      "roles": jwtObject.roles.map(r => r.authority),
+      "exp": jwtObject.exp,
     }
   }
   return user;
@@ -137,20 +153,24 @@ export function deleteAuthorizationCookies() {
   deleteCookie("jwt");
   deleteCookie("current_username");
   deleteCookie("current_user_roles");
+  console.log("Deleted authorization cookies");
 }
-
 
 function isJwtExpired(jwt) {
   const payload = parseJwtUser(jwt);
   if (!payload || !payload.exp) return true;
   const now = Math.floor(Date.now() / 1000);
+  console.log("JWT expires at:", new Date(payload.exp * 1000).toUTCString());
+  console.log("Current time is:", new Date(now * 1000).toUTCString());
+
   return payload.exp < now;
 }
 
-function checkJwtOnLoad() {
+export function checkJwtOnLoad() {
   const jwt = getCookie("jwt");
   if (!jwt || isJwtExpired(jwt)) {
     deleteAuthorizationCookies(); // delete jwt, username, etc.
-    window.location.href = "/login";
+    return false;
   }
+  return true;
 }

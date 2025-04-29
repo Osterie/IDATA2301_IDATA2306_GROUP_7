@@ -124,3 +124,7 @@ nav ul li a:hover {
     height: 40px; /* Adjust based on your design */
   }
 }
+
+.log-out-button{
+  background-color: #c82333;
+}

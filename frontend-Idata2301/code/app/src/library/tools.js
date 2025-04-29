@@ -27,11 +27,11 @@ export function getCookie(cname) {
  * Code copied from https://www.w3schools.com/js/js_cookies.asp
  * @param cname Name of the cookie (key)
  * @param cvalue Value of the cookie
- * @param exdays expiry time in days
+ * @param exdays expiry time in milliseconds
  */
-export function setCookie(cname, cvalue, exdays) {
+export function setCookie(cname, cvalue, exMilliseconds) {
   const d = new Date();
-  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  d.setTime((exMilliseconds));
   let expires = "expires=" + d.toUTCString();
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }

@@ -38,7 +38,7 @@ const Navbar = ({ onNavClick, user }) => {
         {/* Conditionally show Log In or Log Out */}
           {user ? (
           <>
-            <li><a href="#" onClick={doLogout}>Log Out</a></li>
+            <li><a href="#" className="log-out-button" onClick={doLogout}>Log Out</a></li>
           </>
         ) : (
           <li><a href="#" onClick={() => onNavClick("login")}>Log In</a></li>
