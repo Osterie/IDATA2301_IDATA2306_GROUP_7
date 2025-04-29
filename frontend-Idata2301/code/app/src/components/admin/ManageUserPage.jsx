@@ -51,18 +51,18 @@ const ManageUserPage = () => {
         <p>Loading users...</p>
       ) : (
         // TODO change style to be css
-        <div class="user-card-container"> 
+        <div className="user-card-container"> 
           {users.map((user) => (
             <div
               key={user.id}
-              class = "user-card"
+              className = "user-card"
             >
               <h3>{user.username}</h3>
               <p><strong>Email:</strong> {user.email}</p>
               <p><strong>Roles:</strong> {user.roles.map((r) => r.role).join(", ")}</p>
               <button
                 onClick={() => handleDelete(user.id)}
-                class="delete-user-button"
+                className="delete-user-button"
               >
                 Delete
               </button>

@@ -55,6 +55,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
         User defaultUser = userRepository.findByUsername("dave").orElseThrow();
   
         UserRole userRole = new UserRole(defaultUser, "USER");
+        defaultUser.addRole(adminRole);
         defaultUser.addRole(userRole);
         userRepository.save(defaultUser);
   

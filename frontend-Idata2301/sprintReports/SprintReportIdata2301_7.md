@@ -39,6 +39,7 @@ Sprint stenographer: Adrian
 | Story/Task                                                                                          | Assignee | Status        | Story Points | Comments |
 | --------------------------------------------------------------------------------------------------- | -------- | ------------- | ------------ | -------- |
 | Show users from admin panel                                                                         | Adrian   | Completed     | [4]          |          |
+| JWT expiration and auto logout on expiration.                                                       | Adrian   | Completed     | [4]          |          |
 | Delete users from admin panel                                                                       | Adrian   | Completed     | [5]          |          |
 | Add/Remove roles from users from admin panel                                                        | Adrian   | Not completed | [5]          |          |
 | Filtering of searched flights                                                                       | Adrian   | Not completed | [4]          |          |
