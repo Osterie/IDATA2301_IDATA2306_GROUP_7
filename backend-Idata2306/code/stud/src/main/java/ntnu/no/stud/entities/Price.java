@@ -40,15 +40,20 @@ public class Price {
     @JoinColumn(name = "scheduled_flights_id", nullable = false)
     private ScheduledFlights scheduledFlight;
 
+    @Column(name = "is_hidden", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean isHidden;
+
+
     public Price() { }
 
-    public Price(FlightClasses flightClassId, int price, String priceCode, String provider, int discount, ScheduledFlights scheduledFlight) {
+    public Price(FlightClasses flightClassId, int price, String priceCode, String provider, int discount, ScheduledFlights scheduledFlight, boolean isHidden) {
         this.flightClassId = flightClassId;
         this.price = price;
         this.priceCode = priceCode;
         this.provider = provider;
         this.discount = discount;
         this.scheduledFlight = scheduledFlight;
+        this.isHidden = isHidden;
     }
 
     // Getters and Setters
@@ -106,5 +111,13 @@ public class Price {
 
     public void setScheduledFlight(ScheduledFlights scheduledFlight) {
         this.scheduledFlight = scheduledFlight;
+    }
+
+    public boolean getIsHidden() {
+        return isHidden;
+    }
+
+    public void setIsHidden(boolean isHidden) {
+        this.isHidden = isHidden;
     }
 }
