@@ -46,7 +46,9 @@ export async function sendApiRequest(
       if (errorCallback) errorCallback(errorText);
     }
   } catch (error) {
-    if (errorCallback) errorCallback(error.message || error);
+    // Handle network or other errors (e.g., server down)
+    const errorMessage = error.message || "An unknown error occurred.";
+    if (errorCallback) errorCallback(errorMessage);
   }
 }
 

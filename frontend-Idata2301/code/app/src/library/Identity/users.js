@@ -9,6 +9,7 @@ export async function getAllUsers() {
         console.log("Success:", userResponse);
         resolve(userResponse);
       },
+      null, 
       function (errorText) {
         console.error("Error:", errorText);
         reject(errorText);

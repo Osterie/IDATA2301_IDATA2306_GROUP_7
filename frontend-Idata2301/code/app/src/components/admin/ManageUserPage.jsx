@@ -19,8 +19,7 @@ const ManageUserPage = () => {
         setUsers(response); // Assuming the response is an array of user objects
       } catch (error) {
         console.error("Error fetching users:", error);
-        setError(error);
-
+        setError("The server is currently down. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -34,13 +33,7 @@ const ManageUserPage = () => {
       // Call your API here
       await deleteUser(userId);
       console.log(`User with ID ${userId} deleted`);
-      // setUsers(users.filter((user) => user.id !== userId));
-      // setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
-      setUsers((prevUsers) => {
-        const updated = prevUsers.filter((user) => user.id !== userId);
-        console.log("Updated users:", updated);
-        return updated;
-      });
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
     } catch (error) {
       console.error("Error deleting user:", error);
     }
@@ -77,8 +70,9 @@ const ManageUserPage = () => {
 
       {loading ? (
         <p>Loading users...</p>
+      ) : error ? (
+        <p style={{ color: "red" }}>{error}</p> // Show the error message if there's an error
       ) : (
-        // TODO change style to be css
         <div className="user-card-container">
           {users.map((user) => (
             <div key={user.id} className="user-card">
