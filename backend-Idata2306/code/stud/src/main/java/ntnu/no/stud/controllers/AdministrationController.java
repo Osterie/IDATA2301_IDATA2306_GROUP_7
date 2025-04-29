@@ -9,6 +9,7 @@ import ntnu.no.stud.dto.AuthenticationResponse;
 import ntnu.no.stud.dto.SignupDto;
 import ntnu.no.stud.entities.User;
 import ntnu.no.stud.entities.UserRole;
+import ntnu.no.stud.models.AddRoleModel;
 import ntnu.no.stud.models.EditUsersInRoleModel;
 import ntnu.no.stud.repositories.PriceRepository;
 import ntnu.no.stud.repositories.RoleRepository;
@@ -43,6 +44,30 @@ public class AdministrationController {
     public AdministrationController(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+    }
+
+    @PostMapping("api/addRole")
+    public ResponseEntity<String> AddRole(@RequestBody AddRoleModel model){
+
+        // Check if the user exists in the database
+        User user = userRepository.findById(model.getId()).orElse(null);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found: " + model.getId());
+        }
+
+        // Check if user already has role.
+        boolean hasRole = user.hasRole(model.getRoleName());
+        if (hasRole) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User already has role: " + model.getRoleName());
+        }
+
+        // Create a new role and add it to the user
+        UserRole role = new UserRole(user, model.getRoleName());
+
+        user.addRole(role);
+        userRepository.save(user); // Save the user, which will cascade to the role if CascadeType.ALL is set
+
+        return ResponseEntity.ok("Role added successfully to user: " + model.getId());
     }
 
     
