@@ -25,7 +25,9 @@ public class FlightInitializer {
     }
 
     public void generateRandomFlights(int numberOfFlights) {
+        try {
         for (int i = 0; i < numberOfFlights; i++) {
+            
             // Generate random flight number
             String flightNumber = "FL" + ThreadLocalRandom.current().nextInt(1000, 9999);
 
@@ -37,8 +39,13 @@ public class FlightInitializer {
             // Create and save the flight
             Flight flight = new Flight(flightNumber, airline);
             flightRepository.save(flight);
-        }
 
-        logger.info(numberOfFlights + " random flights generated successfully.");
+        }
+        
+
+    logger.info(numberOfFlights + " random flights generated successfully.");
+    } catch (Exception e) {
+        logger.error("Error generating flight: " + e.getMessage());
+    }
     }
 }

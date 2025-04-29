@@ -26,6 +26,7 @@ public class RouteInitializer {
     }
 
     public void generateRandomRoutes(int numberOfRoutes) {
+        try {
         for (int i = 0; i < numberOfRoutes; i++) {
             // Fetch a random departure airport
             Airport departure = airportRepository.findRandomAirport();
@@ -46,5 +47,8 @@ public class RouteInitializer {
         }
 
         logger.info("Random routes generated: " + numberOfRoutes + " routes created.");
+        } catch (Exception e) {
+            logger.error("Error generating routes: " + e.getMessage());
+        }
     }
 }

@@ -16,6 +16,8 @@ import ntnu.no.stud.repositories.PriceRepository;
 import ntnu.no.stud.repositories.RouteRepository;
 import ntnu.no.stud.repositories.ScheduledFlightsRepository;
 import ntnu.no.stud.repositories.ExtraFeatureRepository;
+import ntnu.no.stud.repositories.ClassRepository;
+import ntnu.no.stud.repositories.FlightClassesRepository;
 
 
 
@@ -31,6 +33,12 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
 
     @Autowired
     private FlightRepository flightRepository;
+
+    @Autowired
+    private ClassRepository classRepository;
+
+    @Autowired 
+    private FlightClassesRepository flightClassesRepository;
 
     @Autowired
     private RouteRepository routeRepository;
@@ -66,22 +74,32 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         //TODO: remove return    
-        // if (true) {
-        //     return;
-        // }
+         //if (true) {
+         //    return;
+         //}
 
         // Step 1: Load data from SQL files if necessary
-        createTables();
-        try {        
+    
+        try {   
+        //createDatabase();     
         createTables();
         if (airportRepository.count() == 0) {
             loadAirports();
         }
-        if (routeRepository.count() == 0) {
-            loadRoutes();
+        if (classRepository.count() == 0) {
+            loadClass();
         }
         if (flightRepository.count() == 0) {
             loadFlight();
+        }
+        if (flightClassesRepository.count() == 0) {
+            loadFlightClasses();
+        }
+        if (routeRepository.count() == 0) {
+            loadRoutes();
+        }
+        if (scheduledFlightsRepository.count() == 0) {
+            loadScheduledFlights();
         }
         if (priceRepository.count() == 0) {
             loadPrices();
@@ -91,9 +109,6 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
         }
         if (flightAccommodationRepository.count() == 0) {
             loadFlightAccommodations();
-        }
-        if (scheduledFlightsRepository.count() == 0) {
-            loadScheduledFlights();
         }
         } catch (Exception e) {
             logger.error("Failed to load data from SQL files.", e);
@@ -134,7 +149,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
 
     public void loadScheduledFlights() {
         try {
-            // Read the SQL file as a string
+            // SQL to insert scheduled flight data
             String sql = "INSERT INTO testconnection.scheduled_flights (`date`, flight_id, route_id)\r\n" + 
                                 "VALUES\r\n" + 
                                 "    ('2025-04-01', 18, 1),  -- Delta Flight 425, JFK to LAX\r\n" + 
@@ -157,7 +172,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
 
     public void loadAirports() {
         try {
-            // Read the SQL file as a string
+            // SQL to insert airport data
             String sql = "INSERT INTO testconnection.airport (airport_code, city)" +
                 "VALUES" +
                 "('JFK', 'New York')," +
@@ -180,11 +195,9 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
              jdbcTemplate.execute(sql);
              logger.info("Airports loaded successfully.");
         } catch (DataAccessException e) {
-            // Handle database-related exceptions
            logger.error("Database error occurred while loading airports.", e);
            throw new RuntimeException("Failed to load airports due to a database error.", e);
        } catch (Exception e) {
-           // Handle general exceptions
            logger.error("Unexpected error occurred while loading airports.", e);
            throw new RuntimeException("Failed to load airports due to an unexpected error.", e);
        }
@@ -192,7 +205,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
 
     public void loadRoutes() {
         try {
-            // Read the SQL file as a string
+            // SQL to insert class data
             String sql = "INSERT INTO testconnection.route (arrival_airport_code, departure_airport_code)\r\n" + //
                                 "VALUES\r\n" + //
                                 "    (1, 2),   -- JFK (New York) to LAX (Los Angeles)\r\n" + 
@@ -209,11 +222,9 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
             jdbcTemplate.execute(sql);
             logger.info("Routes loaded successfully.");
         } catch (DataAccessException e) {
-             // Handle database-related exceptions
             logger.error("Database error occurred while loading routes.", e);
             throw new RuntimeException("Failed to load routes due to a database error.", e);
         } catch (Exception e) {
-            // Handle general exceptions
             logger.error("Unexpected error occurred while loading routes.", e);
             throw new RuntimeException("Failed to load routes due to an unexpected error.", e);
         }
@@ -221,28 +232,26 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
 
     public void loadPrices() {
         try {
-            // Read the SQL file as a string
-            String sql = "INSERT INTO testconnection.price (discount, price, price_code, provider, class_id, scheduled_flights_id)\r\n" + 
-                                "VALUES\r\n" + 
-                                "    (0, 500, 'USD', 'Skyscanner', 1, 21),  -- Flight 18, Route 1 (JFK to LAX)\r\n" + 
-                                "    (10, 400, 'NOK', 'CheapOair', 2, 22),  -- Flight 19, Route 2 (ORD to AES)\r\n" + 
-                                "    (0, 550, 'EUR', 'Orbitz', 8, 23),  -- Flight 20, Route 3 (AMS to LHR)\r\n" + 
-                                "    (5, 600, 'CHF', 'OneTravel', 7, 24),  -- Flight 21, Route 4 (FCO to CDG)\r\n" + 
-                                "    (0, 450, 'EUR', 'Travelocity', 1, 25),  -- Flight 22, Route 5 (DFW to FRA)\r\n" + 
-                                "    (15, 700, 'USD', 'Google Flights', 8, 26),  -- Flight 23, Route 6 (HND to DXB)\r\n" + 
-                                "    (0, 650, 'EUR', 'JustFly', 2, 27),  -- Flight 24, Route 7 (DOH to SYD)\r\n" + 
-                                "    (10, 800, 'USD', 'eDreams', 7, 28),  -- Flight 25, Route 8 (SIN to JFK)\r\n" + 
-                                "    (5, 550, 'AED', 'Priceline', 4, 29),  -- Flight 26, Route 9 (AMS to ZRH)\r\n" + 
-                                "    (0, 450, 'QAR', 'American Airlines Website', 1, 30);  -- Flight 27, Route 10 (CDG to DFW)";
+            // SQL to insert price data
+            String sql = "INSERT INTO testconnection.price (price, price_code, provider, discount, class_id, scheduled_flights_id)\r\n" +
+            "VALUES\r\n" +
+            "    (500, 'USD', 'Skyscanner', 0, 1, 21),\r\n" +
+            "    (400, 'NOK', 'CheapOair', 10, 2, 22),\r\n" +
+            "    (550, 'EUR', 'Orbitz', 0, 3, 23),\r\n" +
+            "    (600, 'CHF', 'OneTravel', 5, 4, 24),\r\n" +
+            "    (450, 'EUR', 'Travelocity', 0, 5, 25),\r\n" +
+            "    (700, 'USD', 'Google Flights', 15, 6, 26),\r\n" +
+            "    (650, 'EUR', 'JustFly', 0, 7, 27),\r\n" +
+            "    (800, 'USD', 'eDreams', 10, 8, 28),\r\n" +
+            "    (550, 'AED', 'Priceline', 5, 9, 29),\r\n" +
+            "    (450, 'QAR', 'American Airlines Website', 0, 10, 30);";
             // Execute the SQL
             jdbcTemplate.execute(sql);
             logger.info("Prices loaded successfully.");
         } catch (DataAccessException e) {
-            // Handle database-related exceptions
            logger.error("Database error occurred while loading prices.", e);
            throw new RuntimeException("Failed to load prices due to a database error.", e);
        } catch (Exception e) {
-           // Handle general exceptions
            logger.error("Unexpected error occurred while loading prices.", e);
            throw new RuntimeException("Failed to load prices due to an unexpected error.", e);
        }
@@ -250,7 +259,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
 
     public void loadExtraFeatures() {
         try {
-            // Read the SQL file as a string
+            // SQL to insert extra feature data
             String sql = "INSERT INTO testconnection.extra_feature\r\n" + 
                                 "(name) VALUES\r\n" + 
                                 "\t('Complimentary Wi-Fi'),\r\n" + 
@@ -289,11 +298,9 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
             jdbcTemplate.execute(sql);
             logger.info("Extra features loaded successfully.");
         } catch (DataAccessException e) {
-            // Handle database-related exceptions
            logger.error("Database error occurred while loading extra features.", e);
            throw new RuntimeException("Failed to load extra features due to a database error.", e);
        } catch (Exception e) {
-           // Handle general exceptions
            logger.error("Unexpected error occurred while loading extra features.", e);
            throw new RuntimeException("Failed to load extra features due to an unexpected error.", e);
        }
@@ -301,7 +308,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
 
     public void loadFlightAccommodations() {
         try {
-            // Read the SQL file as a string
+            // SQL to insert flight accomodation data
             String sql = "INSERT INTO testconnection.flight_accommodation (feature_id, flight_id) \r\n" + 
                                 "VALUES\r\n" + 
                                 "    (1, 18), (2, 18), (3, 18),   -- Delta Flight 425\r\n" + 
@@ -320,11 +327,9 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
             jdbcTemplate.execute(sql);
             logger.info("Flight accommodations loaded successfully.");
         } catch (DataAccessException e) {
-            // Handle database-related exceptions
            logger.error("Database error occurred while loading flight accommodations.", e);
            throw new RuntimeException("Failed to load flight accommodations due to a database error.", e);
        } catch (Exception e) {
-           // Handle general exceptions
            logger.error("Unexpected error occurred while loading flight accommodations.", e);
            throw new RuntimeException("Failed to load flight accommodations due to an unexpected error.", e);
        }
@@ -333,7 +338,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
 
     public void loadFlight() {
         try {
-            // Read the SQL file as a string
+            // SQL to insert flight data
             String sql = "INSERT INTO testconnection.flight (company, name)\r\n" + 
                                 "\tVALUES\r\n" + 
                                 "\t\t('Delta Air Lines', 'Delta Flight 425'),\r\n" + 
@@ -351,19 +356,47 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
             jdbcTemplate.execute(sql);
             logger.info("Flight class loaded successfully.");
         } catch (DataAccessException e) {
-            // Handle database-related exceptions
            logger.error("Database error occurred while loading flights.", e);
            throw new RuntimeException("Failed to load flights due to a database error.", e);
        } catch (Exception e) {
-           // Handle general exceptions
            logger.error("Unexpected error occurred while loading flights.", e);
            throw new RuntimeException("Failed to load flights due to an unexpected error.", e);
        }
     }
 
+    public void loadFlightClasses() {
+        try {
+            // SQL to insert flight class data
+            String sql = "INSERT INTO testconnection.flight_classes (available_seats, flight_id, class_id)\r\n" +
+                         "VALUES\r\n" +
+                         "    (20, 18, 1)," + "(30, 18, 2)," + "(15, 18, 6),   -- Delta Flight 425\r\n" +
+                         "    (50, 19, 4)," + "(60, 19, 1)," + "(30, 19, 5),   -- Norwegian Flight 708\r\n" +
+                         "    (40, 20, 1)," + "(20, 20, 8)," + "(10, 20, 9),   -- KLM Flight 605\r\n" +
+                         "    (15, 21, 7)," + "(20, 21, 6)," + "(25, 21, 3),   -- Swiss Flight 110\r\n" +
+                         "    (50, 22, 2)," + "(30, 22, 6)," + "(10, 22, 9),   -- Alitalia Flight 560\r\n" +
+                         "    (25, 23, 1)," + "(35, 23, 5)," + "(40, 23, 4),   -- AA Flight 220\r\n" +
+                         "    (60, 24, 2)," + "(20, 24, 9)," + "(15, 24, 3),   -- Lufthansa Flight 445\r\n" +
+                         "    (45, 25, 4)," + "(35, 25, 1)," + "(20, 25, 8),   -- Air France Flight 123\r\n" +
+                         "    (25, 26, 9)," + "(50, 26, 7)," + "(40, 26, 8),   -- Emirates Flight 204\r\n" +
+                         "    (30, 27, 2)," + "(40, 27, 9)," + "(25, 27, 5),   -- Qatar Airways Flight 905\r\n" +
+                         "    (50, 28, 1)," + "(15, 28, 10)," + "(20, 28, 8);  -- Singapore Airlines Flight 26";
+    
+            // Execute the SQL
+            jdbcTemplate.execute(sql);
+            logger.info("Flight classes loaded successfully.");
+        } catch (DataAccessException e) {
+            logger.error("Database error occurred while loading flight classes.", e);
+            throw new RuntimeException("Failed to load flight classes due to a database error.", e);
+        } catch (Exception e) {
+            logger.error("Unexpected error occurred while loading flight classes.", e);
+            throw new RuntimeException("Failed to load flight classes due to an unexpected error.", e);
+        }
+    }
+
+
     public void createTables() {
         try {
-            // Read the SQL file as a string
+            // SQL to create tables
             String sql = "CREATE TABLE IF NOT EXISTS airport(\r\n" + 
                                 "    airport_code CHAR(3) PRIMARY KEY,\r\n" + 
                                 "    city VARCHAR(255) NOT NULL\r\n" + 
@@ -379,6 +412,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
                                 "    name Varchar(100) NOT NULL,\r\n" + 
                                 "    company Varchar(255) NOT NULL\r\n" + 
                                 ");\r\n" + 
+                                "\r\n ALTER TABLE flight AUTO_INCREMENT = 18; \r\n" +
                                 "\r\n" + 
                                 "CREATE TABLE IF NOT EXISTS extra_feature (\r\n" + 
                                 "    id INT PRIMARY KEY AUTO_INCREMENT,\r\n" + 
@@ -410,6 +444,8 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
                                 "    FOREIGN KEY (route_id) REFERENCES route(id)\r\n" + 
                                 ");\r\n" + 
                                 "\r\n" + 
+                                "\r\n ALTER TABLE scheduled_flights AUTO_INCREMENT = 21; \r\n" +
+                                "\r\n" + 
                                 "Create Table IF NOT EXISTS favorite_flights ( \r\n" + 
                                 "    flight_id INT NOT NULL,\r\n" + 
                                 "    user_id INT NOT NULL,\r\n" + 
@@ -418,7 +454,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
                                 "    FOREIGN KEY (flight_id) REFERENCES flight(id)\r\n" + 
                                 ");\r\n" + 
                                 "\r\n" + 
-                                "CREATE TABLE IF NOT EXISTS flight_accommodations (\r\n" + 
+                                "CREATE TABLE IF NOT EXISTS flight_accommodation (\r\n" + 
                                 "    flight_id INT NOT NULL,\r\n" + 
                                 "    feature_id INT NOT NULL,\r\n" + 
                                 "    FOREIGN KEY (flight_id) REFERENCES flight(id),\r\n" + 
@@ -436,11 +472,11 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
                                 "\r\n" + 
                                 "CREATE TABLE IF NOT EXISTS price(\r\n" + 
                                 "    id INT PRIMARY KEY AUTO_INCREMENT,\r\n" + 
-                                "    class_id INT NOT NULL,\r\n" + 
                                 "    price INT UNSIGNED NOT NULL,\r\n" + 
                                 "    price_code CHAR(3) NOT NULL,\r\n" + 
                                 "    provider VARCHAR(64),\r\n" + 
                                 "    discount INT UNSIGNED DEFAULT 0,\r\n" + 
+                                "    class_id INT NOT NULL,\r\n" + 
                                 "    scheduled_flights_id INT NOT NULL,\r\n" + 
                                 "\r\n" + 
                                 "    FOREIGN KEY (class_id) REFERENCES class(id),\r\n" + 
@@ -469,6 +505,35 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
             logger.info("Tables created successfully.");
         } catch (Exception e) {
             logger.error("Failed to create tables.", e);
+        }
+    }
+
+    public void loadClass() {
+        try {
+            // SQL to insert class data
+            String sql = "INSERT INTO testconnection.class (name)\r\n" +
+                         "VALUES\r\n" +
+                         "    ('Economy'),\r\n" +
+                         "    ('Economy Flex'),\r\n" +
+                         "    ('Business'),\r\n" +
+                         "    ('Premium Economy'),\r\n" +
+                         "    ('Main Cabin'),\r\n" +
+                         "    ('Main Cabin Extra'),\r\n" +
+                         "    ('La Première'),\r\n" +
+                         "    ('First Class'),\r\n" +
+                         "    ('Qsuite'),\r\n" +
+                         "    ('Business Class'),\r\n" +
+                         "    ('Suites');";
+    
+            // Execute the SQL
+            jdbcTemplate.execute(sql);
+            logger.info("Classes loaded successfully.");
+        } catch (DataAccessException e) {
+            logger.error("Database error occurred while loading classes.", e);
+            throw new RuntimeException("Failed to load classes due to a database error.", e);
+        } catch (Exception e) {
+            logger.error("Unexpected error occurred while loading classes.", e);
+            throw new RuntimeException("Failed to load classes due to an unexpected error.", e);
         }
     }
 

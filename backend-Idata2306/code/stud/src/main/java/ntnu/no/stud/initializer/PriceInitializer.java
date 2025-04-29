@@ -33,6 +33,7 @@ public class PriceInitializer {
     }
 
     public void generateRandomPrices(int numberOfPrices) {
+        try {
         for (int i = 0; i < numberOfPrices; i++) {
             // Fetch a random scheduled flight from the database
             ScheduledFlights randomScheduledFlight = scheduledFlightsRepository.findRandomScheduledFlight();
@@ -65,6 +66,10 @@ public class PriceInitializer {
         
 
         logger.info(numberOfPrices + " random prices generated successfully.");
+
+        } catch (Exception e) {
+                logger.error("Error generating price: " + e.getMessage());
+            }
     }
 
     private String generateRandomPriceCode() {

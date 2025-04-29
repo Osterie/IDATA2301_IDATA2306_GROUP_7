@@ -39,6 +39,7 @@ public class FlightAccommodationInitializer {
             throw new RuntimeException("Flight accommodation generation failed: No flights available.");
         }
 
+        try {
         for (Flight flight : flights) {
 
             // Fetch a random extra feature from the database
@@ -57,5 +58,10 @@ public class FlightAccommodationInitializer {
 
         logger.info("Random flight accommodations generated for all flights.");
 
-    }
+        } catch (Exception e) {
+            logger.error("Error generating flight accommodations: " + e.getMessage(), e);
+            throw new RuntimeException("Flight accommodation generation failed: " + e.getMessage(), e);
+            }
+        }
+
 }
