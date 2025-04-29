@@ -1,0 +1,24 @@
+.user-card-container{ 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 1rem; 
+}
+
+
+.user-card{
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 1rem;
+    width: 250px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.delete-user-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 1rem;
+}

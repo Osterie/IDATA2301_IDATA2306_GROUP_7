@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { getAllUsers } from "../../library/Identity/users.js";
 import { deleteUser } from "../../library/Identity/users.js"; // You'll implement this
+import "./manageUserPage.css";
+
 
 const ManageUserPage = () => {
   const [users, setUsers] = useState([]);
@@ -48,32 +50,19 @@ const ManageUserPage = () => {
       {loading ? (
         <p>Loading users...</p>
       ) : (
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+        // TODO change style to be css
+        <div class="user-card-container"> 
           {users.map((user) => (
             <div
               key={user.id}
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: "12px",
-                padding: "1rem",
-                width: "250px",
-                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
-              }}
+              class = "user-card"
             >
               <h3>{user.username}</h3>
               <p><strong>Email:</strong> {user.email}</p>
               <p><strong>Roles:</strong> {user.roles.map((r) => r.role).join(", ")}</p>
               <button
                 onClick={() => handleDelete(user.id)}
-                style={{
-                  backgroundColor: "#e74c3c",
-                  color: "white",
-                  border: "none",
-                  padding: "0.5rem 1rem",
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                  marginTop: "1rem",
-                }}
+                class="delete-user-button"
               >
                 Delete
               </button>

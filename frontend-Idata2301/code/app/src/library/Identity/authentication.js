@@ -138,3 +138,19 @@ export function deleteAuthorizationCookies() {
   deleteCookie("current_username");
   deleteCookie("current_user_roles");
 }
+
+
+function isJwtExpired(jwt) {
+  const payload = parseJwtUser(jwt);
+  if (!payload || !payload.exp) return true;
+  const now = Math.floor(Date.now() / 1000);
+  return payload.exp < now;
+}
+
+function checkJwtOnLoad() {
+  const jwt = getCookie("jwt");
+  if (!jwt || isJwtExpired(jwt)) {
+    deleteAuthorizationCookies(); // delete jwt, username, etc.
+    window.location.href = "/login";
+  }
+}
