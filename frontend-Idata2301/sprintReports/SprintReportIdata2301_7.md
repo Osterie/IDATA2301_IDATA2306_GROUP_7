@@ -38,7 +38,7 @@ Sprint stenographer: Adrian
 
 | Story/Task                                                                                          | Assignee | Status        | Story Points | Comments |
 | --------------------------------------------------------------------------------------------------- | -------- | ------------- | ------------ | -------- |
-| Shwo users from admin panel                                                                         | Adrian   | Completed     | [4]          |          |
+| Show users from admin panel                                                                         | Adrian   | Completed     | [4]          |          |
 | Delete users from admin panel                                                                       | Adrian   | Completed     | [5]          |          |
 | Add/Remove roles from users from admin panel                                                        | Adrian   | Not completed | [5]          |          |
 | Filtering of searched flights                                                                       | Adrian   | Not completed | [4]          |          |
@@ -48,7 +48,7 @@ Sprint stenographer: Adrian
 | Product detail page (Product image, Product description, Product price for the different providers) | Tobias   | Needs testing | [6]          |          |
 | Admin hide/show products                                                                            | Adrian   | Not completed | [4]          |          |
 | Created utils for converting currency                                                               | Tobias   | Completed     | [5]          |          |
-| Docker                                                                                              | Everyone | Not completed | [6]          |          |
+| Docker                                                                                              | Tobias   | Completed     | [6]          |          |
 | Shopping cart                                                                                       | Daniel   | Not completed | [6]          |          |
 | Favorite page                                                                                       | Tobias   | Not completed | [5]          |          |
 | History of purchases                                                                                | Adrian   | Not completed | [5]          |          |
