@@ -52,12 +52,12 @@ Create Table IF NOT EXISTS favorite_flights (
     FOREIGN KEY (flight_id) REFERENCES flight(id)
 );
 
-CREATE TABLE IF NOT EXISTS flight_accommodations (
+CREATE TABLE IF NOT EXISTS flight_accommodation (
     flight_id INT NOT NULL,
     feature_id INT NOT NULL,
     FOREIGN KEY (flight_id) REFERENCES flight(id),
     FOREIGN KEY (feature_id) REFERENCES extra_feature(id)
-);
+) AUTO_INCREMENT = 21;
 
 CREATE TABLE IF NOT EXISTS flight_classes(
     class_id INT NOT NULL,
