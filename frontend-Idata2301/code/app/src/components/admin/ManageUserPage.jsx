@@ -50,7 +50,19 @@ const ManageUserPage = () => {
       console.log(`Assigning role "${newRole}" to user ID ${userId}`);
       await assignRoleToUser(userId, newRole); // <- call your API
 
-      // Optionally update UI state here to reflect the new role
+      // After successful role assignment, update the user's roles locally
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === userId
+            ? {
+                ...user,
+                roles: [...user.roles, { role: newRole }], // Add new role to the user's roles
+              }
+            : user
+        )
+      );
+
+      // Optionally, reset the state for editing and the new role input
       setEditingUserId(null);
       setNewRole("");
     } catch (error) {
