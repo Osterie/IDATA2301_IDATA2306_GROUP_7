@@ -1,6 +1,10 @@
 package ntnu.no.stud.initializer;
 
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,6 +13,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import ntnu.no.stud.AccessUserService;
+import ntnu.no.stud.entities.User;
+import ntnu.no.stud.entities.UserRole;
 import ntnu.no.stud.repositories.AirportRepository;
 import ntnu.no.stud.repositories.FlightAccommodationRepository;
 import ntnu.no.stud.repositories.FlightRepository;
@@ -18,10 +25,7 @@ import ntnu.no.stud.repositories.ScheduledFlightsRepository;
 import ntnu.no.stud.repositories.ExtraFeatureRepository;
 import ntnu.no.stud.repositories.ClassRepository;
 import ntnu.no.stud.repositories.FlightClassesRepository;
-
-
-
-
+import ntnu.no.stud.repositories.UserRepository;
 
 
 
@@ -59,24 +63,53 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     private ScheduledFlightsRepository scheduledFlightsRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private AccessUserService userService;
+
+    @Autowired
     private FlightInitializer flightInitializer;
 
     @Autowired
     private RouteInitializer routeInitializer;
 
-    @Autowired
-    private PriceInitializer priceInitializer;
-
-    @Autowired
-    private FlightAccommodationInitializer flightAccommodationInitializer;
 
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-        //TODO: remove return    
-         //if (true) {
-         //    return;
-         //}
+        
+        Optional<User> existingAdminUser = userRepository.findByUsername("chuck");
+        if (existingAdminUser.isEmpty()) {
+          logger.info("Importing test data...");
+  
+          try {
+           // Create admin user
+            userService.tryCreateNewUser("chuck", "Nunchucks2024", "chuck@gmail.com");
+            User admin = userRepository.findByUsername("chuck").orElseThrow();
+  
+            UserRole adminRole = new UserRole(admin, "ADMIN");
+            admin.addRole(adminRole);
+            userRepository.save(admin); // Will cascade to roles if CascadeType.ALL is set
+  
+            // Create default user
+            userService.tryCreateNewUser("dave", "Dangerous2024", "dave@gmail.com");
+            User defaultUser = userRepository.findByUsername("dave").orElseThrow();
+  
+            UserRole userRole = new UserRole(defaultUser, "USER");
+            defaultUser.addRole(adminRole);
+            defaultUser.addRole(userRole);
+            userRepository.save(defaultUser);
+  
+            logger.info("DONE importing test data");
+  
+          } catch (IOException e) {
+            logger.error("Failed to import test data: {}", e.getMessage());
+          }
+        } else {
+          logger.info("Users already in the database, not importing anything");
+        }
+
 
         // Step 1: Load data from SQL files if necessary
     

@@ -33,7 +33,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
    * 
    * @return a greeting message
    */
-  @GetMapping("/hello")
+  /**@GetMapping("/hello")
   public String greeting() {
     return "Hei, Verden!!";
   }
@@ -42,7 +42,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
   @PreAuthorize("hasRole('ADMIN')")
   public String greetingSecure() {
     return "Hei, Verden, vi er trygge!!";
-  }
+  }*/
 
 // /**
 //  * Adds a flight to the flight table
