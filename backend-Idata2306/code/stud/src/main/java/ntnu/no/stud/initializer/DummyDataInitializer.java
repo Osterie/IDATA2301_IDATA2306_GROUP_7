@@ -118,20 +118,11 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
 
         // Step 2: Use initializers to generate random data
         try {
-            if (routeRepository.count() > 0 && flightRepository.count() == 0) {
+            if (airportRepository.count() > 0 && routeRepository.count() > 0) {
+                routeInitializer.generateRandomRoutes(100); // Generate 10 random routes
+            }
+            if (routeRepository.count() > 0 && flightRepository.count() > 0) {
                 flightInitializer.generateRandomFlights(100); // Generate 100 random flights
-            }
-            
-            if (airportRepository.count() > 0 && routeRepository.count() == 0) {
-                routeInitializer.generateRandomRoutes(10); // Generate 10 random routes
-            }
-            
-            if (flightRepository.count() > 0 && priceRepository.count() == 0) {
-                priceInitializer.generateRandomPrices(50); // Generate 50 random prices
-            }
-            
-            if (flightRepository.count() > 0 && extraFeatureRepository.count() > 0) {
-                flightAccommodationInitializer.generateRandomFlightAccommodations(); // Generate flight accommodations
             }
         } catch (Exception e) {
             logger.error("Failed to generate random data.", e);
@@ -233,7 +224,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     public void loadPrices() {
         try {
             // SQL to insert price data
-            String sql = "INSERT INTO testconnection.price (price, price_code, provider, discount, class_id, scheduled_flights_id)\r\n" +
+            String sql = "INSERT INTO testconnection.price (price, currency_code, provider, discount, class_id, scheduled_flights_id)\r\n" +
             "VALUES\r\n" +
             "    (500, 'USD', 'Skyscanner', 0, 1, 21),\r\n" +
             "    (400, 'NOK', 'CheapOair', 10, 2, 22),\r\n" +
@@ -473,7 +464,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
                                 "CREATE TABLE IF NOT EXISTS price(\r\n" + 
                                 "    id INT PRIMARY KEY AUTO_INCREMENT,\r\n" + 
                                 "    price INT UNSIGNED NOT NULL,\r\n" + 
-                                "    price_code CHAR(3) NOT NULL,\r\n" + 
+                                "    currency_code CHAR(3) NOT NULL,\r\n" + 
                                 "    provider VARCHAR(64),\r\n" + 
                                 "    discount INT UNSIGNED DEFAULT 0,\r\n" + 
                                 "    class_id INT NOT NULL,\r\n" + 

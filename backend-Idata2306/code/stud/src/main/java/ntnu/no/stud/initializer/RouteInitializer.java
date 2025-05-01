@@ -51,4 +51,29 @@ public class RouteInitializer {
             logger.error("Error generating routes: " + e.getMessage());
         }
     }
+
+    public void generateRandomRoutes() {
+        try {
+            // Fetch a random departure airport
+            Airport departure = airportRepository.findRandomAirport();
+            if (departure == null) {
+                System.err.println("Cannot generate routes: No airports available.");
+                return;
+            }
+
+            // Fetch a random destination airport
+            Airport destination;
+            do {
+                destination = airportRepository.findRandomAirport();
+            } while (destination == null || departure.equals(destination)); // Ensure departure and destination are different
+
+            // Create and save the route
+            Route route = new Route(departure, destination);
+            routeRepository.save(route);
+
+        logger.info("Random routes generated");
+        } catch (Exception e) {
+            logger.error("Error generating routes: " + e.getMessage());
+        }
+    }
 }

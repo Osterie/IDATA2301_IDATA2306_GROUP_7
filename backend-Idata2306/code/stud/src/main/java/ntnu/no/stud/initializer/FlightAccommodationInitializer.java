@@ -5,13 +5,10 @@ import ntnu.no.stud.entities.Flight;
 import ntnu.no.stud.entities.FlightAccommodation;
 import ntnu.no.stud.repositories.ExtraFeatureRepository;
 import ntnu.no.stud.repositories.FlightAccommodationRepository;
-import ntnu.no.stud.repositories.FlightRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class FlightAccommodationInitializer {
@@ -19,49 +16,38 @@ public class FlightAccommodationInitializer {
     private static final Logger logger = LoggerFactory.getLogger(FlightAccommodationInitializer.class);
 
     private final FlightAccommodationRepository flightAccommodationRepository;
-    private final FlightRepository flightRepository;
     private final ExtraFeatureRepository extraFeatureRepository;
 
     @Autowired
     public FlightAccommodationInitializer(FlightAccommodationRepository flightAccommodationRepository,
-                                          FlightRepository flightRepository,
                                           ExtraFeatureRepository extraFeatureRepository) {
         this.flightAccommodationRepository = flightAccommodationRepository;
-        this.flightRepository = flightRepository;
         this.extraFeatureRepository = extraFeatureRepository;
     }
 
-    public void generateRandomFlightAccommodations() {
-        List<Flight> flights = flightRepository.findAllFlights();
-
-        if (flights == null || flights.isEmpty()) {
-            logger.error("Cannot generate flight accommodations: No flights available.");
-            throw new RuntimeException("Flight accommodation generation failed: No flights available.");
-        }
-
+    public void addRandomAccommodationToFlight(Flight flight) {
         try {
-        for (Flight flight : flights) {
-
-            // Fetch a random extra feature from the database
+            // Gets a random extra feature from the database
             ExtraFeature randomExtraFeature = extraFeatureRepository.findRandomExtraFeature();
             if (randomExtraFeature == null) {
-                logger.error("Cannot generate flight accommodations: No extra features available.");
-                throw new RuntimeException("Flight accommodation generation failed: No extra features available.");
+                logger.error("Cannot add accommodation: No extra features available.");
+                throw new RuntimeException("Accommodation addition failed: No extra features available.");
             }
 
-            // Create and save the flight accommodation
-            FlightAccommodation flightAccommodation = new FlightAccommodation(flight, randomExtraFeature);
-            
-            flightAccommodationRepository.save(flightAccommodation);
+            boolean exists = flightAccommodationRepository.existsByFlightAndExtraFeature(flight, randomExtraFeature);
+            if (!exists) {
+                // Creates and save the flight accommodation
+                FlightAccommodation flightAccommodation = new FlightAccommodation(flight, randomExtraFeature);
+                flightAccommodationRepository.save(flightAccommodation);
 
-        }
+                logger.info("Random accommodation added to flight: " + flight.getName());
+            }
 
-        logger.info("Random flight accommodations generated for all flights.");
+            logger.info("Accommodation already exists for flight: " + flight.getName() + " with feature: " + randomExtraFeature.getName());
 
         } catch (Exception e) {
-            logger.error("Error generating flight accommodations: " + e.getMessage(), e);
-            throw new RuntimeException("Flight accommodation generation failed: " + e.getMessage(), e);
-            }
+            logger.error("Error adding accommodation to flight: " + flight.getName(), e);
+            throw new RuntimeException("Accommodation addition failed for flight: " + flight.getName(), e);
         }
-
+    }
 }

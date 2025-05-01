@@ -27,8 +27,8 @@ public class Price {
     @Column(name = "price", nullable = false)
     private int price;
 
-    @Column(name = "price_code", length = 3, nullable = false)
-    private String priceCode;
+    @Column(name = "currency_code", length = 3, nullable = false)
+    private String currencyCode;
 
     @Column(name = "provider")
     private String provider;
@@ -42,10 +42,10 @@ public class Price {
 
     public Price() { }
 
-    public Price(FlightClasses flightClassId, int price, String priceCode, String provider, int discount, ScheduledFlights scheduledFlight) {
+    public Price(FlightClasses flightClassId, int price, String currencyCode, String provider, int discount, ScheduledFlights scheduledFlight) {
         this.flightClassId = flightClassId;
         this.price = price;
-        this.priceCode = priceCode;
+        this.currencyCode = currencyCode;
         this.provider = provider;
         this.discount = discount;
         this.scheduledFlight = scheduledFlight;
@@ -76,12 +76,12 @@ public class Price {
         this.price = price;
     }
 
-    public String getPriceCode() {
-        return priceCode;
+    public String getCurrencyCode() {
+        return currencyCode;
     }
 
-    public void setPriceCode(String priceCode) {
-        this.priceCode = priceCode;
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
     }
 
     public String getProvider() {

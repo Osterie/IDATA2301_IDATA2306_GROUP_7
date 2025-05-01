@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS price(
     id INT PRIMARY KEY AUTO_INCREMENT,
     class_id INT NOT NULL,
     price INT UNSIGNED NOT NULL,
-    price_code CHAR(3) NOT NULL,
+    currency_code CHAR(3) NOT NULL,
     provider VARCHAR(64),
     discount INT UNSIGNED DEFAULT 0,
     scheduled_flights_id INT NOT NULL,
