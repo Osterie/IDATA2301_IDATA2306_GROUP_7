@@ -32,3 +32,37 @@
     cursor: pointer;
     margin-top: 1rem;
 }
+
+.roles-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .role-card {
+    background-color: #f0f0f0;
+    padding: 3px 5px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .remove-role-button {
+    background-color: grey;
+    color: white;
+    border: none;
+    padding: 3px 7px;
+    border-radius: 100%;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  
+  .remove-role-button:hover {
+    background-color: #c82333;
+  }
+  
+  .add-role-button,
+  .delete-user-button {
+    margin-top: 10px;
+  }
+  

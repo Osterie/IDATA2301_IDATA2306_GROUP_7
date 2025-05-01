@@ -58,3 +58,26 @@ export async function assignRoleToUser(userId, role) {
   });
 }
 
+export async function removeRoleFromUser(userId, role) {
+  return new Promise((resolve, reject) => {
+    const postData = {
+      id: userId,
+      roleName: role
+    };
+
+    sendApiRequest(
+      "POST",
+      "/removeRole", // Assuming the full endpoint is handled as /api/removeRole
+      function (userResponse) {
+        console.log("Success:", userResponse);
+        resolve(userResponse);
+      },
+      postData,
+      function (errorText) {
+        console.error("Error:", errorText);
+        reject(errorText);
+      }
+    );
+  });
+}
+

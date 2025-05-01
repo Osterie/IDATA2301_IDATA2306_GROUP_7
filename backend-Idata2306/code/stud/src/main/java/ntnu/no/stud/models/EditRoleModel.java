@@ -1,15 +1,15 @@
 package ntnu.no.stud.models;
 
-public class AddRoleModel {
+public class EditRoleModel {
 
     private int id;
 
     private String roleName;
 
 
-    public AddRoleModel() { }
+    public EditRoleModel() { }
 
-    public AddRoleModel(int id, String roleName) {
+    public EditRoleModel(int id, String roleName) {
         this.id = id;
         this.roleName = roleName;
     }

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { getAllUsers } from "../../library/Identity/users.js";
 import { deleteUser } from "../../library/Identity/users.js"; // You'll implement this
-import "./manageUserPage.css";
 import { assignRoleToUser } from "../../library/Identity/users.js"; // You'll implement this
+import { removeRoleFromUser } from "../../library/Identity/users.js"; // You'll implement this
+import "./manageUserPage.css";
 
 const ManageUserPage = () => {
   const [users, setUsers] = useState([]);
@@ -30,7 +31,6 @@ const ManageUserPage = () => {
 
   const handleDelete = async (userId) => {
     try {
-      // Call your API here
       await deleteUser(userId);
       console.log(`User with ID ${userId} deleted`);
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
@@ -46,23 +46,20 @@ const ManageUserPage = () => {
 
   const handleConfirmRole = async (userId) => {
     try {
-      // Call your backend to add role here
       console.log(`Assigning role "${newRole}" to user ID ${userId}`);
       await assignRoleToUser(userId, newRole); // <- call your API
 
-      // After successful role assignment, update the user's roles locally
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
           user.id === userId
             ? {
                 ...user,
-                roles: [...user.roles, { role: newRole }], // Add new role to the user's roles
+                roles: [...user.roles, { role: newRole }] // Add new role to the user's roles
               }
             : user
         )
       );
 
-      // Optionally, reset the state for editing and the new role input
       setEditingUserId(null);
       setNewRole("");
     } catch (error) {
@@ -73,6 +70,24 @@ const ManageUserPage = () => {
   const handleCancelRole = () => {
     setEditingUserId(null);
     setNewRole("");
+  };
+
+  const handleRemoveRole = async (userId, role) => {
+    try {
+      await removeRoleFromUser(userId, role);
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user.id === userId
+            ? {
+                ...user,
+                roles: user.roles.filter((r) => r.role !== role) // Remove the role from the user
+              }
+            : user
+        )
+      );
+    } catch (error) {
+      console.error("Error removing role:", error);
+    }
   };
 
   return (
@@ -92,10 +107,23 @@ const ManageUserPage = () => {
               <p>
                 <strong>Email:</strong> {user.email}
               </p>
-              <p>
-                <strong>Roles:</strong>{" "}
-                {user.roles.map((r) => r.role).join(", ")}
-              </p>
+              <div>
+                <strong>Roles:</strong>
+                <div className="roles-container">
+                  {user.roles.map((r) => (
+                    <div key={r.role} className="role-card">
+                      <button
+                        onClick={() => handleRemoveRole(user.id, r.role)}
+                        className="remove-role-button"
+                        >
+                        x
+                      </button>
+                      <span>{r.role}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               <button
                 onClick={() => handleDelete(user.id)}
                 className="delete-user-button"
