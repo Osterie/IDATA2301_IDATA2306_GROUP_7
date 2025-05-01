@@ -14,8 +14,12 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://" + ServerConfig.FRONTEND_HOST.getValue() + ":" + ServerConfig.FRONTEND_PORT.getValue()) // React frontend URL
-                        .allowedMethods("GET", "POST", "PUT", "DELETE");
+            .allowedOrigins("127.0.0.1:3000") // Ensure correct frontend URL
+            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+            .allowedHeaders("*");
+                        // .allowedOrigins("http://" + ServerConfig.FRONTEND_HOST.getValue() + ":" + ServerConfig.FRONTEND_PORT.getValue()) // React frontend URL
+                        // .allowedOrigins("*") // Allow all origins for testing purposes // TODO REMOVE
+                        // .allowedMethods("GET", "POST", "PUT", "DELETE");
             }
         };
     }

@@ -25,21 +25,29 @@ Sprint stenographer: Daniel
 - Shopping cart
 
 - **Completed Work:**
-
+- Identity/authentication     
+- Filtering of searched flights 
+- Experiment with cookies 
 
 - **Not Completed:**
+- Admin panel          
+- Favorit page        
+- Test recommented cards      
+- Shopping cart     
 
+  
 ---
 
 ## **Sprint Progress**
 
-| Story/Task                    | Assignee | Status        | Story Points | Comments |
-| ----------------------------- | -------- | ------------- | ------------ | -------- |
-| Admin panel                   | Adrian   | Not completed | [7]          |          |
-| Favorit page                  | Tobias   | Not completed | [6]          |          |
-| Filtering of searched flights | Adrian   | Not completed | [4]          |          |
-| Test recommented cards        | Daniel   | Not completed | [4]          |          |
-| Shopping cart                 | Daniel   | Not completed | [6]          |          |
-
+| Story/Task                    | Assignee | Status        | Story Points | Comments            |
+| ----------------------------- | -------- | ------------- | ------------ | ------------------- |
+| Identity/authentication       | Adrian   | Completed     | [7]          |                     |
+| Admin panel                   | Adrian   | In progress   | [6]          | Needs functionality |
+| Favorit page                  | Tobias   | In progress   | [6]          | Needs functionality |
+| Filtering of searched flights | Adrian   | Completed     | [4]          |                     |
+| Test recommented cards        | Daniel   | In progress   | [4]          |                     |
+| Shopping cart                 | Daniel   | Not completed | [6]          |                     |
+| Experiment with cookies       | Tobias   | Completed     | [4]          |                     |
 
 ---

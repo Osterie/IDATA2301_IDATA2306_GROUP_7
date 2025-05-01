@@ -2,12 +2,9 @@
 
 // import java.math.BigDecimal;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.core.metrics.jfr.FlightRecorderApplicationStartup;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.RequestBody;
-// import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.metrics.jfr.FlightRecorderApplicationStartup;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 // import ntnu.no.stud.repositories.FlightRepository;
 
@@ -30,16 +27,22 @@
 // @Autowired
 // //private FlightRepository flightRepository; // Inject the repository
 
-// /**
-//  * 
-//  * Responds to HTTP GET requests for /hello.*
-//  * 
-//  * @return a greeting message
-//  */
-// @GetMapping("/hello")
-// public String greeting() {
-// return "Hei, Verden!!";
-// }
+  /**
+   * 
+   * Responds to HTTP GET requests for /hello.*
+   * 
+   * @return a greeting message
+   */
+  @GetMapping("/hello")
+  public String greeting() {
+    return "Hei, Verden!!";
+  }
+
+  @GetMapping("/helloSecure")
+  @PreAuthorize("hasRole('ADMIN')")
+  public String greetingSecure() {
+    return "Hei, Verden, vi er trygge!!";
+  }
 
 // /**
 //  * Adds a flight to the flight table

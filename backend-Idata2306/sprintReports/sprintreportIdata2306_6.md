@@ -29,21 +29,37 @@ Sprint stenographer: Daniel
 
 
 - **Completed Work:**
+- Identity/authentication                 
+- Add swagger                         
+
+
+
+- **Not Completed:**
+- Encryption            
+- Class for adding dummy data           
+- Add logging        
+- Better error handling  
+- Endpoint for favoriting   
+
 
 ---
+
+
+
+
 
 ## **Sprint Progress**
 
 | Story/Task                  | Assignee | Status        | Story Points | Comments |
 | --------------------------- | -------- | ------------- | ------------ | -------- |
-| Identity/authentication     | Adrian   | Not completed | [8]          |          |
-| Encryption                  | Tobias   | Not completed | [5]          |          |
-| Class for adding dummy data | Daniel   | Not completed | [4]          |          |
-| Add swagger                 | Adrian   | Not completed | [2]          |          |
-| Add logging                 | Everyone | Not completed | [4]          |          |
-| Better error handling       | Everyone | Not completed | [5]          |          |
-| Endpoint for favoriting     | Tobias   | Not completed | [5]          |          |
-| Endpoints for purchasing    | Daniel   | Not completed | [5]          |          |
+| Identity/authentication     | Adrian   | Completed     | [8]          |          |
+| Encryption                  | Tobias   | Dropped       | [5]          | Handeled by framework         |
+| Class for adding dummy data | Daniel   | In progress   | [6]          |          |
+| Add swagger                 | Adrian   | Completed     | [2]          |          |
+| Add logging                 | Everyone | In progress   | [4]          | Task remove, will do perpertually       |
+| Better error handling       | Everyone | Not completed | [5]          | Task remove, will do perpertually         |
+| Endpoint for favoriting     | Tobias   | In progress   | [5]          |          |
+| Endpoint for purchasing     | Daniel   | In progress   | [5]          |          |
 
 
 

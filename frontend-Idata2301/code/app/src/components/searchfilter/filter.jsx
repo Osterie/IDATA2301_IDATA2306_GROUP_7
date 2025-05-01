@@ -2,36 +2,88 @@ import React, { useState } from "react";
 import "./filter.css";
 import DualRangeSlider from "./slider";
 
-const FilterSidebar = () => {
+function findMinPrice(flights) {
+  return Math.min(...flights.map(flight => flight.price));
+}
+function findMaxPrice(flights) {
+  return Math.max(...flights.map(flight => flight.price));
+}
+
+// Dynamically extract unique companies from the flights array
+function getUniqueCompanies(flights) {
+  const companies = flights.map(flight => flight.scheduledFlight.flight.company);
+  return [...new Set(companies)]; // Remove duplicates
+};
+
+const FilterSidebar = ({ flights, setFlights }) => {
   const [showStops, setShowStops] = useState(false);
   const [showCompanies, setShowCompanies] = useState(false);
+  const companies = getUniqueCompanies(flights);
   const [selectedCompanies, setSelectedCompanies] = useState({
-    all: false,
-    klm: false,
-    norwegian: false,
-    sas: false,
-    wideroe: false,
+    all: true,  // "All Companies" checked by default
+    ...companies.reduce((acc, company) => {
+      acc[company] = true;  // All individual companies checked by default
+      return acc;
+    }, {})
   });
   const [isSidebarVisible, setIsSidebarVisible] = useState(false); // State for mobile toggle
 
+  console.log(flights)
+
+
   const handleCompanyChange = (company) => {
+    let updatedCompanies;
+  
     if (company === "all") {
       const newState = !selectedCompanies.all;
-      setSelectedCompanies({
+      updatedCompanies = {
         all: newState,
-        klm: newState,
-        norwegian: newState,
-        sas: newState,
-        wideroe: newState,
-      });
+        ...companies.reduce((acc, company) => {
+          acc[company] = newState;
+          return acc;
+        }, {})
+      };
     } else {
-      const updatedCompanies = { ...selectedCompanies, [company]: !selectedCompanies[company] };
-      updatedCompanies.all = Object.keys(updatedCompanies)
-        .filter((key) => key !== "all")
-        .every((key) => updatedCompanies[key]);
-      setSelectedCompanies(updatedCompanies);
+      updatedCompanies = {
+        ...selectedCompanies,
+        [company]: !selectedCompanies[company],
+        all: false, // If any individual company is changed, uncheck "all"
+      };
     }
+  
+    setSelectedCompanies(updatedCompanies);
+  
+    // Re-filter flights using current price range and updated companies
+    const minPrice = findMinPrice(flights);
+    const maxPrice = findMaxPrice(flights);
+  
+    const updatedFlights = flights.map(flight => {
+      const flightCompany = flight.scheduledFlight.flight.company;
+      const isPriceInRange = flight.price >= minPrice && flight.price <= maxPrice;
+      const isCompanySelected = updatedCompanies[flightCompany];
+  
+      const isHidden = !(isPriceInRange && isCompanySelected);
+      return { ...flight, isHidden };
+    });
+  
+    setFlights(updatedFlights);
   };
+  
+
+  // Callback for price range change
+  const handlePriceRangeChange = (min, max) => {
+    const updatedFlights = flights.map(flight => {
+      const flightCompany = flight.scheduledFlight.flight.company;
+      const isPriceInRange = flight.price >= min && flight.price <= max;
+      const isCompanySelected = selectedCompanies[flightCompany];
+  
+      const isHidden = !(isPriceInRange && isCompanySelected);
+      return { ...flight, isHidden };
+    });
+  
+    setFlights(updatedFlights);
+  };
+  
 
   return (
     <div className="sidebar-mother">
@@ -59,7 +111,7 @@ const FilterSidebar = () => {
 
         {/* Price Range */}
         <div className="filter-section">
-          <DualRangeSlider label="Price Range" min={0} max={15000} callback={(min, max) => console.log(min, max)} />
+          <DualRangeSlider label="Price Range" min={findMinPrice(flights)} max={findMaxPrice(flights)} callback={handlePriceRangeChange} />
         </div>
 
         {/* Stops Dropdown */}
@@ -96,17 +148,17 @@ const FilterSidebar = () => {
                 <input
                   type="checkbox"
                   id="all-companies"
-                  checked={selectedCompanies.all}
+                  checked={Object.values(selectedCompanies).every(val => val)}
                   onChange={() => handleCompanyChange("all")}
                 />
                 <label htmlFor="all-companies"><strong>All Companies</strong></label>
               </div>
-              {["klm", "norwegian", "sas", "wideroe"].map((company) => (
+              {companies.map((company) => (
                 <div key={company}>
                   <input
                     type="checkbox"
                     id={company}
-                    checked={selectedCompanies[company]}
+                    checked={selectedCompanies[company] || false}
                     onChange={() => handleCompanyChange(company)}
                   />
                   <label htmlFor={company}>{company.toUpperCase()}</label>
@@ -115,6 +167,7 @@ const FilterSidebar = () => {
             </div>
           )}
         </div>
+
 
         {/* Travel Time */}
         <div className="filter-section">
@@ -126,3 +179,5 @@ const FilterSidebar = () => {
 };
 
 export default FilterSidebar;
+
+
