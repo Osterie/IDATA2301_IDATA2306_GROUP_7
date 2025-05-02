@@ -43,6 +43,7 @@ Sprint stenographer: Tobias
 | Shopping cart                                 | Daniel   | In progress    | [6]          | Needs to communicate with backend           |
 | Favoriting a product                          | Tobias   | Paused         | [4]          |                                             |
 | Favorite page                                 | Tobias   | Paused         | [5]          |                                             |
-| Setting page for profile and customization    | Tobias   | Not completed  | [7]          |                                             |
+| Setting page for profile and customization    | Tobias   | In progress    | [7]          |                                             |
+| Fix ugly login page                           | Tobias   | Not completed  | [3]          |                                             |
 | Try using docker                              | Everyone | Not completed  | [5]          |                                             |
 ---
