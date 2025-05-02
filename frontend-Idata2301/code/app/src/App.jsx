@@ -15,14 +15,13 @@ import AdminPage from "./components/admin/AdminPage";
 import ManageUserPage from "./components/admin/ManageUserPage";
 import { getAuthenticatedUser, checkJwtOnLoad } from "./library/Identity/authentication"; // adjust path as needed
 import CookieConsent from "react-cookie-consent";
-import Cookies from "js-cookie";
+import SettingsMenu from "./components/settings/SettingsMenu";
 import {
   hasConsent,
   setLastSearch,
   getLastSearch,
   setCountryFromIP,
 } from "./utils/cookieUtils";
-import FlightDetailPage from "./components/flightDetailPage/FlightDetailPage";
 
 function App() {
   const [activePage, setActivePage] = useState("home");
@@ -89,7 +88,7 @@ function App() {
         {activePage === "admin" && <AdminPage setActivePage={setActivePage} />}
         {activePage === "manage-users" && <ManageUserPage />}
         {activePage === "create-account" && <CreateAccount />}
-        {activePage === "favorite" //&& <FlightDetailPage flight={selectedFlight} onAddToCart={(flight) => console.log("Add to cart:", flight)} onBuyNow={(flight) => console.log("Buying:", flight)} />
+        {activePage === "settings" && <SettingsMenu />
         }
       </main>
 
