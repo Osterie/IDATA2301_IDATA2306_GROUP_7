@@ -174,7 +174,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     public void loadScheduledFlights() {
         try {
             // SQL to insert scheduled flight data
-            String sql = "INSERT INTO testconnection.scheduled_flights (`date`, flight_id, route_id)\r\n" + 
+            String sql = "INSERT INTO flight_application.scheduled_flights (`date`, flight_id, route_id)\r\n" + 
                                 "VALUES\r\n" + 
                                 "    ('2025-04-01', 18, 1),  -- Delta Flight 425, JFK to LAX\r\n" + 
                                 "    ('2025-04-02', 19, 2),  -- Norwegian Flight 708, ORD to AES\r\n" + 
@@ -197,7 +197,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     public void loadAirports() {
         try {
             // SQL to insert airport data
-            String sql = "INSERT INTO testconnection.airport (airport_code, city)" +
+            String sql = "INSERT INTO flight_application.airport (airport_code, city)" +
                 "VALUES" +
                 "('JFK', 'New York')," +
                 "('LAX', 'Los Angeles')," +
@@ -230,7 +230,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     public void loadRoutes() {
         try {
             // SQL to insert class data
-            String sql = "INSERT INTO testconnection.route (arrival_airport_code, departure_airport_code)\r\n" + //
+            String sql = "INSERT INTO flight_application.route (arrival_airport_code, departure_airport_code)\r\n" + //
                                 "VALUES\r\n" + //
                                 "    (1, 2),   -- JFK (New York) to LAX (Los Angeles)\r\n" + 
                                 "    (3, 4),   -- ORD (Chicago) to AES (Ålesund)\r\n" + 
@@ -257,7 +257,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     public void loadPrices() {
         try {
             // SQL to insert price data
-            String sql = "INSERT INTO testconnection.price (price, currency_code, provider, discount, class_id, scheduled_flights_id)\r\n" +
+            String sql = "INSERT INTO flight_application.price (price, currency_code, provider, discount, class_id, scheduled_flights_id)\r\n" +
             "VALUES\r\n" +
             "    (500, 'USD', 'Skyscanner', 0, 1, 21),\r\n" +
             "    (400, 'NOK', 'CheapOair', 10, 2, 22),\r\n" +
@@ -284,7 +284,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     public void loadExtraFeatures() {
         try {
             // SQL to insert extra feature data
-            String sql = "INSERT INTO testconnection.extra_feature\r\n" + 
+            String sql = "INSERT INTO flight_application.extra_feature\r\n" + 
                                 "(name) VALUES\r\n" + 
                                 "\t('Complimentary Wi-Fi'),\r\n" + 
                                 "    ('Seat-back Screens'),\r\n" + 
@@ -333,7 +333,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     public void loadFlightAccommodations() {
         try {
             // SQL to insert flight accomodation data
-            String sql = "INSERT INTO testconnection.flight_accommodation (feature_id, flight_id) \r\n" + 
+            String sql = "INSERT INTO flight_application.flight_accommodation (feature_id, flight_id) \r\n" + 
                                 "VALUES\r\n" + 
                                 "    (1, 18), (2, 18), (3, 18),   -- Delta Flight 425\r\n" + 
                                 "    (4, 19), (5, 19), (6, 19),   -- Norwegian Flight 708\r\n" + 
@@ -363,7 +363,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     public void loadFlight() {
         try {
             // SQL to insert flight data
-            String sql = "INSERT INTO testconnection.flight (company, name)\r\n" + 
+            String sql = "INSERT INTO flight_application.flight (company, name)\r\n" + 
                                 "\tVALUES\r\n" + 
                                 "\t\t('Delta Air Lines', 'Delta Flight 425'),\r\n" + 
                                 "        ('Norwegian Air Shuttle', 'Norwegian Flight 708'),\r\n" + 
@@ -391,7 +391,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     public void loadFlightClasses() {
         try {
             // SQL to insert flight class data
-            String sql = "INSERT INTO testconnection.flight_classes (available_seats, flight_id, class_id)\r\n" +
+            String sql = "INSERT INTO flight_application.flight_classes (available_seats, flight_id, class_id)\r\n" +
                          "VALUES\r\n" +
                          "    (20, 18, 1)," + "(30, 18, 2)," + "(15, 18, 6),   -- Delta Flight 425\r\n" +
                          "    (50, 19, 4)," + "(60, 19, 1)," + "(30, 19, 5),   -- Norwegian Flight 708\r\n" +
@@ -535,7 +535,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     public void loadClass() {
         try {
             // SQL to insert class data
-            String sql = "INSERT INTO testconnection.class (name)\r\n" +
+            String sql = "INSERT INTO flight_application.class (name)\r\n" +
                          "VALUES\r\n" +
                          "    ('Economy'),\r\n" +
                          "    ('Economy Flex'),\r\n" +
