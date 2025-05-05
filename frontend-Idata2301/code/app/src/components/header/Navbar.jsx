@@ -47,7 +47,7 @@ const Navbar = ({ onNavClick, user }) => {
         {showAdmin && (
           <li><a href="#" onClick={() => onNavClick("admin")}>Admin</a></li>
         )}
-        <li><a href="#" onClick={() => onNavClick("favorite")}>💖</a></li>
+        <li><a href="#" onClick={() => onNavClick("settings")}>⚙️</a></li>
       </ul>
     </nav>
   );
