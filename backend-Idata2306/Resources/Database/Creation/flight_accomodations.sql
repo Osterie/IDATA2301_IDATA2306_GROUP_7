@@ -1,4 +1,4 @@
-CREATE TABLE flight_accommodations (
+CREATE TABLE flight_accommodation (
     flight_id INT NOT NULL,
     feature_id INT NOT NULL,
     FOREIGN KEY (flight_id) REFERENCES flight(id),

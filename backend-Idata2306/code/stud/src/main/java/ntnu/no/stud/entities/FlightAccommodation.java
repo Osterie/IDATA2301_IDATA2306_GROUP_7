@@ -22,7 +22,7 @@ import jakarta.persistence.ManyToOne;
 // import jakarta.persistence.JoinColumn;
 
 // @Entity
-// @Table(name = "flight_accommodations")
+// @Table(name = "flight_accommodation")
 // public class FlightAccommodation {
 
 //     @Id

@@ -23,4 +23,10 @@ public interface FlightRepository extends CrudRepository<Flight, Integer> {
     // @Query("SELECT f FROM Flight f WHERE f.route = :route AND f.departureDate BETWEEN :startDate AND :endDate AND f.airline IN :airlines")
     @Query("SELECT f FROM Flight f")
     List<Flight> searchForFlights(@Param("route") Route route, @Param("fromDate") LocalDate fromDate, @Param("toDate") LocalDate toDate, @Param("passengers") List<Passenger> passengers);
+
+    @Query("SELECT f FROM Flight f")
+    List<Flight> findAllFlights();
+
+    @Query(value = "SELECT * FROM Flight ORDER BY RAND() LIMIT 1", nativeQuery = true)
+    Flight findRandomFlight();
 }

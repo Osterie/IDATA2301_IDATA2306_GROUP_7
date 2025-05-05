@@ -272,7 +272,7 @@
         <mxCell id="xdYvlDu0u07e66ifGCEE-45" value="price Int UNSIGNED NOT NULL " style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" parent="xdYvlDu0u07e66ifGCEE-42" vertex="1">
           <mxGeometry y="78" width="391" height="26" as="geometry" />
         </mxCell>
-        <mxCell id="xdYvlDu0u07e66ifGCEE-46" value="price_code char(3) NOT NULL" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" parent="xdYvlDu0u07e66ifGCEE-42" vertex="1">
+        <mxCell id="xdYvlDu0u07e66ifGCEE-46" value="currency_code char(3) NOT NULL" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" parent="xdYvlDu0u07e66ifGCEE-42" vertex="1">
           <mxGeometry y="104" width="391" height="26" as="geometry" />
         </mxCell>
         <mxCell id="xdYvlDu0u07e66ifGCEE-44" value="provider Varchar(64) " style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rounded=0;shadow=0;html=0;" parent="xdYvlDu0u07e66ifGCEE-42" vertex="1">
