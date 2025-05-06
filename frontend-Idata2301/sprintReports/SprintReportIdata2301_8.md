@@ -36,7 +36,7 @@ Sprint stenographer: Tobias
 | -------------------------------------------- | -------- | -------------- | ------------ | ------------------------------------------- |
 | Add/Remove roles from users from admin panel | Adrian   | Completed      | [5]          |                                             |
 | Filtering of searched flights                | Adrian   | Not completed  | [4]          | Needs to be filtered by date and passengers |
-| Admin hide/show products                     | Adrian   | Not completed  | [4]          | Not started                                 |
+| Admin hide/show products                     | Adrian   | Completed      | [4]          |                                             |
 | History of purchases                         | Adrian   | Not completed  | [5]          | Not started                                 |
 | Purchasing a product                         | Daniel   | In progress    | [4]          |                                             |
 | Test recommended cards                       | Daniel   | In progress    | [4]          |                                             |
