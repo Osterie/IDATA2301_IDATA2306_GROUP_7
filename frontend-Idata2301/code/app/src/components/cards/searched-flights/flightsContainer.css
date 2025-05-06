@@ -4,12 +4,22 @@
   width: 60%;
 }
 
-.flights-grid {
+/* .flights-grid {
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center cards */
+  flex-direction: column;
   gap: 10px;
+} */
+
+.flights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  align-items: center; /* Center cards */
+  justify-items: center;
+  width: 100%;
+  height: 100%;
 }
+
 
 /* Responsive Styles */
 @media (max-width: 900px) {
