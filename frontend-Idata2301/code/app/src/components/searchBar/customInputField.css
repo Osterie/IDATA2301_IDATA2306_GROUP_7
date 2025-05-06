@@ -8,7 +8,7 @@
 /* Responsive Input Number Section */
 .input-number {
     width: 100%; /* Takes full width of the parent */
-    max-width: 600px; /* Adjust if needed */
+    max-width: 1000px; /* Adjust if needed */
     padding-bottom: 0.4rem;
     display: flex;
     align-items: center;
@@ -57,7 +57,7 @@
 }
 
 /* Mobile Responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 1050px) {
     .input-number {
         flex-wrap: wrap; /* Wrap elements */
         justify-content: center; /* Center align */
