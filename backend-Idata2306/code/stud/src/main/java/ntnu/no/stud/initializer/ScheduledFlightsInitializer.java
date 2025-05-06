@@ -19,43 +19,54 @@ public class ScheduledFlightsInitializer {
 
     private static final Logger logger = LoggerFactory.getLogger(ScheduledFlightsInitializer.class);
 
-    @Autowired
     private final PriceInitializer priceInitializer;
-
-    @Autowired
     private final ScheduledFlightsRepository scheduledFlightsRepository;
-
-    @Autowired
     private final RouteRepository routeRepository;
 
     @Autowired
     public ScheduledFlightsInitializer(ScheduledFlightsRepository scheduledFlightsRepository,
-                                      PriceInitializer priceInitializer,
-                                      RouteRepository routeRepository) {
+                                       PriceInitializer priceInitializer,
+                                       RouteRepository routeRepository) {
         this.scheduledFlightsRepository = scheduledFlightsRepository;
         this.priceInitializer = priceInitializer;
         this.routeRepository = routeRepository;
     }
 
     public void generateRandomScheduledFlightForFlight(Flight flight) {
+        // Generate a random date within the next 365 days
+        LocalDate randomDate = LocalDate.now().plusDays(ThreadLocalRandom.current().nextInt(1, 365));
+        generateScheduledFlight(flight, randomDate, null);
+    }
+
+    public void generateRandomScheduledFlightForFlight(Flight flight, Route route) {
+        // Generate a random date within the next 365 days
+        LocalDate randomDate = LocalDate.now().plusDays(ThreadLocalRandom.current().nextInt(1, 365));
+        generateScheduledFlight(flight, randomDate, route);
+    }
+
+    public void generateRandomScheduledFlightForFlight(Flight flight, LocalDate date) {
+        generateScheduledFlight(flight, date, null);
+    }
+
+    private void generateScheduledFlight(Flight flight, LocalDate date, Route route) {
         try {
-            // Fetch all available routes
-            Route route = routeRepository.findRandomRoute();
-    
+            // Fetch a random route
+            if (route == null) {
+                route = routeRepository.findRandomRoute();
+            }
+
             if (route == null) {
                 logger.error("Cannot generate scheduled flight: No routes available.");
                 return;
             }
-    
-            // Generate a random date within the next year
-            LocalDate randomDate = LocalDate.now().plusDays(ThreadLocalRandom.current().nextInt(1, 365));
-    
+
             // Create and save the scheduled flight
-            ScheduledFlights scheduledFlights = new ScheduledFlights(flight, route, randomDate);
+            ScheduledFlights scheduledFlights = new ScheduledFlights(flight, route, date);
             scheduledFlightsRepository.save(scheduledFlights);
 
+            // Generate price for the scheduled flight
             priceInitializer.generatePriceForScheduledFlight(scheduledFlights);
-    
+
             logger.info("Scheduled flight created successfully for flight: " + flight.getName());
         } catch (Exception e) {
             logger.error("Error generating scheduled flight for flight: " + flight.getName(), e);

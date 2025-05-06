@@ -3,6 +3,7 @@ package ntnu.no.stud.initializer;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -13,7 +14,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+
 import ntnu.no.stud.AccessUserService;
+import ntnu.no.stud.entities.Route;
 import ntnu.no.stud.entities.User;
 import ntnu.no.stud.entities.UserRole;
 import ntnu.no.stud.repositories.AirportRepository;
@@ -26,6 +29,7 @@ import ntnu.no.stud.repositories.ExtraFeatureRepository;
 import ntnu.no.stud.repositories.ClassRepository;
 import ntnu.no.stud.repositories.FlightClassesRepository;
 import ntnu.no.stud.repositories.UserRepository;
+
 
 
 
@@ -151,12 +155,21 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
 
         // Step 2: Use initializers to generate random data
         try {
+
+            int numberOfRoutes = 10; // Number of routes to generate
+            int numberOfFlights = 100; // Number of flights to generate
+            int numberOfTestFlights = 10; // Number of test flights to generate
+            Route testRoute = routeRepository.findById(9);
+
             if (airportRepository.count() > 0 && routeRepository.count() > 0) {
-                routeInitializer.generateRandomRoutes(100); // Generate 10 random routes
+                routeInitializer.generateRandomRoutes(numberOfRoutes); // Generate random routes
             }
             if (routeRepository.count() > 0 && flightRepository.count() > 0) {
-                flightInitializer.generateRandomFlights(100); // Generate 100 random flights
+                flightInitializer.generateRandomFlights(numberOfFlights); // Generate random flights
             }
+
+
+            flightInitializer.generateRandomFlights(numberOfTestFlights, testRoute);
         } catch (Exception e) {
             logger.error("Failed to generate random data.", e);
         }
@@ -561,4 +574,29 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
         }
     }
 
+    public void updateScheduledFlights() {
+        try {
+            // Query to get the latest scheduled flight date
+            String sql = "SELECT MAX(date) FROM flight_application.scheduled_flights";
+            LocalDate latestDate = jdbcTemplate.queryForObject(sql, LocalDate.class);
+    
+            // Determine the starting date for generating new scheduled flights
+            LocalDate startDate = (latestDate != null && latestDate.isAfter(LocalDate.now()))
+                    ? latestDate.plusDays(1) // Start from the day after the latest date
+                    : LocalDate.now();       // Start from today if no flights exist or latest date is in the past
+    
+            // Calculate the end date (365 days from today)
+            LocalDate endDate = LocalDate.now().plusDays(365);
+    
+            // Generate new scheduled flights for each day from startDate to endDate
+            while (!startDate.isAfter(endDate)) {
+                flightInitializer.generateRandomFlights(15, startDate);
+                startDate = startDate.plusDays(1); // Move to the next day
+            }
+    
+            logger.info("Scheduled flights updated successfully.");
+        } catch (Exception e) {
+            logger.error("Failed to update scheduled flights.", e);
+        }
+    }
 }
