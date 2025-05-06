@@ -65,8 +65,8 @@ public class SecurityConfiguration {
         // Authentication and signup is accessible for everyone
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/authenticate").permitAll())
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/signup").permitAll())
-        // Products are also available to everyone
-        .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/products").permitAll())
+        // searchForFlights are also available to everyone
+        .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/searchForFlights").permitAll())
         // Allow HTTP OPTIONS requests - CORS pre-flight requests
         .authorizeHttpRequests((auth) -> auth.requestMatchers(HttpMethod.OPTIONS).permitAll())
         // Any other request will be authenticated with a stateless policy

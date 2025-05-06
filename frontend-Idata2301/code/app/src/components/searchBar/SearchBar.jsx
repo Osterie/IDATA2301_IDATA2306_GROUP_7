@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import './searchBar.css';
 import PassengerAmountField from './PassengerAmountField';
 
+import {sendApiRequest} from "../../library/requests";
+
+
 const SearchBar = ({ setFlights, setActivePage  }) => {  // Receive setFlights as a prop
     const [formData, setFormData] = useState({
         departure: '',
@@ -19,68 +22,22 @@ const SearchBar = ({ setFlights, setActivePage  }) => {  // Receive setFlights a
         e.preventDefault();
         
         try {
-            // const response = await fetch('http://localhost:8080/searchForFlights', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(formData)
-            // });
-            
-            // if (!response.ok) {
-            //     throw new Error('Network response was not ok');
-            // }
-            
-            // const fetchedData = await response.json();
-            // console.log('Flight search results:', fetchedData);
+            await sendApiRequest(
+                "POST", "/searchForFlights",
 
-            let testData = [
-                {
-                    "id": 8,
-                    "flightClassId": {
-                        "id": 7,
-                        "flightClass": {
-                            "id": 1,
-                            "name": "Economy"
-                        },
-                        "flight": {
-                            "id": 20,
-                            "name": "KLM Flight 605",
-                            "company": "KLM Royal Dutch Airlines"
-                        },
-                        "availableSeats": 40
+                    function (fetchedData) {
+                        // const fetchedData = response.json();
+                        console.log('Flight search results:', fetchedData);
+                        setFlights(fetchedData);  // Store flights in state
+                        setActivePage("deals");  // ✅ Navigate to the Deals page
                     },
-                    "price": 800,
-                    "priceCode": "USD",
-                    "provider": "eDreams",
-                    "discount": 10,
-                    "scheduledFlight": {
-                        "id": 28,
-                        "flight": {
-                            "id": 25,
-                            "name": "AF Flight 123",
-                            "company": "Air France"
-                        },
-                        "route": {
-                            "id": 8,
-                            "departureAirport": {
-                                "id": 1,
-                                "airportCode": "JFK",
-                                "city": "New York"
-                            },
-                            "arrivalAirport": {
-                                "id": 16,
-                                "airportCode": "SIN",
-                                "city": "Singapore"
-                            }
-                        },
-                        "date": "2025-04-08"
+                    JSON.stringify(formData),
+                    function (errorResponse) {
+                        console.log("Error: " + errorResponse);
+                        throw new Error('Network response was not ok');
                     }
-                }
-            ];
+            )
 
-            const data = testData;  // TODO Replace with fetchedData
-
-            setFlights(data);  // Store flights in state
-            setActivePage("deals");  // ✅ Navigate to the Deals page
         } catch (error) {
             console.error('Error searching for flights:', error);
         }

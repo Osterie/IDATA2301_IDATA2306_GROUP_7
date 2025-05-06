@@ -23,7 +23,9 @@ export async function sendApiRequest(
   let parameters = { method: method, headers: constructRequestHeaders(method) };
 
   if (requestBody) {
-    parameters.body = JSON.stringify(requestBody);
+    parameters.body = typeof requestBody === 'string'
+      ? requestBody
+      : JSON.stringify(requestBody);
   }
 
   try {

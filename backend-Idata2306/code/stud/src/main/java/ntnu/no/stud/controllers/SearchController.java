@@ -1,25 +1,15 @@
 package ntnu.no.stud.controllers;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-
+import ntnu.no.stud.entities.Price;
+import ntnu.no.stud.models.SearchedFlight;
+import ntnu.no.stud.repositories.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import ntnu.no.stud.entities.Airport;
-import ntnu.no.stud.entities.ClassEntity;
-import ntnu.no.stud.entities.Flight;
-import ntnu.no.stud.entities.Price;
-import ntnu.no.stud.entities.Route;
-import ntnu.no.stud.entities.ScheduledFlights;
-import ntnu.no.stud.models.Passenger;
-import ntnu.no.stud.models.SearchedFlight;
-import ntnu.no.stud.repositories.PriceRepository;
 
 /**
  * 
@@ -32,7 +22,7 @@ public class SearchController {
   @Autowired
   private PriceRepository priceRepository; // Inject the repository
 
-  @PostMapping("/searchForFlights")
+  @PostMapping("/api/searchForFlights")
   public List<Price> searchForFlights(@RequestBody SearchedFlight searchedFlight) {
 
     // ScheduledFlights scheduledFlight = searchedFlight.getScheduledFlights();
