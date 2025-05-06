@@ -34,6 +34,7 @@ const SearchBar = ({ setFlights, setActivePage  }) => {  // Receive setFlights a
                     JSON.stringify(formData),
                     function (errorResponse) {
                         console.log("Error: " + errorResponse);
+                        console.error("API error:", errorResponse);
                         throw new Error('Network response was not ok');
                     }
             )

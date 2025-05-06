@@ -1,12 +1,12 @@
 import React from 'react';
 import './dealsPageHero.css';
-import SearchBar from '../../searchBar/SearchBar'; // Import the SearchBar
+import SearchBar from '../../searchBar/SearchBar';
 
-const DealsPageHero = () => {
+const DealsPageHero = ({ setFlights, setActivePage }) => {
   return (
     <section className="deals-hero">
       <div className="deals-hero-container">
-        <SearchBar />
+        <SearchBar setFlights={setFlights} setActivePage={setActivePage} />
       </div>
     </section>
   );

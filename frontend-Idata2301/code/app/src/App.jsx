@@ -76,13 +76,14 @@ function App() {
         )}
         {activePage === "deals" && (
           <>
-            <DealsPageHero/>
+            <DealsPageHero setFlights={setFlights} setActivePage={setActivePage} />
             <section className="search-section">
               <FilterSidebar flights={flights} setFlights={setFlights} />
-              <NewFlightsContainer flights={flights} />  {/* Pass flights to NewFlightsContainer */}
+              <NewFlightsContainer flights={flights} />
             </section>
           </>
         )}
+
         {activePage === "about" && <AboutUs />}
         {activePage === "login" && <LogInPageHero onNavClick={handleNavClick} />}
         {activePage === "admin" && <AdminPage setActivePage={setActivePage} />}
