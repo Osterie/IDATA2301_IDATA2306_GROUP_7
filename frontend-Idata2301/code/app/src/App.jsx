@@ -3,7 +3,7 @@ import "./App.css";
 import FilterSidebar from "./components/searchfilter/filter";
 import ProductCardContainer from "./components/cards/deals/ProductCardContainer";
 import ProductCardHeader from "./components/cards/deals/ProductCardHeader";
-import NewFlightsContainer from "./components/cards/searched-flights/NewFlightsContainer";
+import FlightsContainer from "./components/cards/searched-flights/FlightsContainer";
 import MainPageHero from "./components/hero/mainPageHero/MainPageHero";
 import DealsPageHero from "./components/hero/dealsPageHero/DealsPageHero";
 import LogInPageHero from "./components/hero/logInPageHero/LogInPageHero";
@@ -79,7 +79,7 @@ function App() {
             <DealsPageHero setFlights={setFlights} setActivePage={setActivePage} />
             <section className="search-section">
               <FilterSidebar flights={flights} setFlights={setFlights} />
-              <NewFlightsContainer flights={flights} />
+              <FlightsContainer flights={flights} />
             </section>
           </>
         )}
