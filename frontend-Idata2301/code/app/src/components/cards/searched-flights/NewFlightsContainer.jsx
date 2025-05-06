@@ -5,7 +5,7 @@ import "./flightsContainer.css";
 const FlightsContainer = ({ flights }) => {  // Receive flights as a prop
 
   return (
-    <div className="flights-container">
+    <div className="flights-container flights-grid">
       {flights.length > 0 ? (
         flights
           .filter(flight => !flight.isHidden)  // Filter out flights where isHidden is true

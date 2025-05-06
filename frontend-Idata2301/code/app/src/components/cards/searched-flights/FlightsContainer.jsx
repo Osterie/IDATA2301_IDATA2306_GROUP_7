@@ -44,7 +44,7 @@ const FlightsContainer = () => {
   }, []);
 
   return (
-    <div className="flights-container">
+    <div className="flights-container flights-grid">
       {flights.map((flight, index) => (
         <FlightCard key={index} flight={flight} />
       ))}

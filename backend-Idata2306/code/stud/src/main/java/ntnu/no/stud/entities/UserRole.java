@@ -1,7 +1,6 @@
 package ntnu.no.stud.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,9 +27,9 @@ public class UserRole {
 
     @Column(name = "role", nullable = false)
     private String role;
-    
 
-    public UserRole() { }
+    public UserRole() {
+    }
 
     public UserRole(User user, String role) {
         this.user = user;
@@ -60,5 +59,20 @@ public class UserRole {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof UserRole))
+            return false;
+        UserRole that = (UserRole) o;
+        return role.equalsIgnoreCase(that.role) && user.getId() == that.user.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return role.toLowerCase().hashCode() + 31 * user.getId();
     }
 }
