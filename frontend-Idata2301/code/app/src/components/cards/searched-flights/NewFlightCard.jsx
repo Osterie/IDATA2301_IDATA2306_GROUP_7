@@ -1,5 +1,5 @@
 import React from "react";
-import "./flightCard.css";
+import "./newFlightCard.css";
 import { sendApiRequest } from "../../../library/requests";
 
 const NewFlightCard = ({ flight, userIsAdmin, onVisibilityChange }) => {

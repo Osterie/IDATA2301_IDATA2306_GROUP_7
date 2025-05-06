@@ -79,7 +79,7 @@ function App() {
             <DealsPageHero setFlights={setFlights} setActivePage={setActivePage} />
             <section className="search-section">
               <FilterSidebar flights={flights} setFlights={setFlights} />
-              <FlightsContainer flights={flights} />
+              <FlightsContainer flights={flights} user={user} />
             </section>
           </>
         )}

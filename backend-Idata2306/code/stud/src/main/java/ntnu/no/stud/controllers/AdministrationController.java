@@ -7,10 +7,12 @@ import ntnu.no.stud.AccessUserService;
 import ntnu.no.stud.dto.AuthenticationRequest;
 import ntnu.no.stud.dto.AuthenticationResponse;
 import ntnu.no.stud.dto.SignupDto;
+import ntnu.no.stud.entities.Price;
 import ntnu.no.stud.entities.User;
 import ntnu.no.stud.entities.UserRole;
 import ntnu.no.stud.models.EditRoleModel;
 import ntnu.no.stud.models.EditUsersInRoleModel;
+import ntnu.no.stud.models.SetProductVisibilityModel;
 import ntnu.no.stud.repositories.PriceRepository;
 import ntnu.no.stud.repositories.RoleRepository;
 import ntnu.no.stud.repositories.UserRepository;
@@ -41,9 +43,13 @@ public class AdministrationController {
     @Autowired
     private RoleRepository roleRepository; // Inject the repository
 
-    public AdministrationController(UserRepository userRepository, RoleRepository roleRepository) {
+    @Autowired
+    private PriceRepository priceRepository; // Inject the repository
+
+    public AdministrationController(UserRepository userRepository, RoleRepository roleRepository, PriceRepository priceRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.priceRepository = priceRepository;
     }
 
     @PostMapping("api/addRole")
@@ -134,129 +140,23 @@ public class AdministrationController {
         return ResponseEntity.ok("Users updated successfully.");        
     }
     
-    // [HttpPost]
+    @PostMapping("/api/setFlightProductVisibility")
+    public ResponseEntity<String> SetFlightProductVisibility(@RequestBody SetProductVisibilityModel model) {
+        // Check if the priceId is valid
+        if (model.getPriceId() <= 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid priceId: " + model.getPriceId());
+        }
 
-    // public async Task<IActionResult> EditUser(EditUserViewModel model)
-    //     {
-    //         //First Fetch the User by Id from the database
-    //         ApplicationUser user = await _userManager.FindByIdAsync(model.Id);
+        // Check if the product exists in the database
+        Price price = priceRepository.findById(model.getPriceId()).orElse(null);
+        if (price == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found: " + model.getPriceId());
+        }
 
-    //         //Check if the User Exists in the database
-    //         if (user == null)
-    //         {
-    //             //If the User does not exists in the database, then return Not Found Error View
-    //             ViewBag.ErrorMessage = $"User with Id = {model.Id} cannot be found";
-    //             return View("NotFound");
-    //         }
-    //         else
-    //         {
-    //             //If the User Exists, then proceed and update the data
-    //             //Populate the user instance with the data from EditUserViewModel
-    //             user.UserName = model.UserName;
-    //             // user.Email = model.Email;
-    //             // user.FirstName = model.FirstName;
-    //             // user.LastName = model.LastName;
+        // Set the visibility of the product
+        price.setIsHidden(model.doHide());
+        priceRepository.save(price); // Save the product
 
-    //             //UpdateAsync Method will update the user data in the AspNetUsers Identity table
-    //             IdentityResult result = await _userManager.UpdateAsync(user);
-
-    //             if (result.Succeeded)
-    //             {
-    //                 //Once user data updated redirect to the ListUsers view
-    //                 return RedirectToAction("ListUsers");
-    //             }
-    //             else
-    //             {
-    //                 //In case any error, stay in the same view and show the model validation error
-    //                 foreach (IdentityError error in result.Errors)
-    //                 {
-    //                     ModelState.AddModelError("", error.Description);
-    //                 }
-    //                 return View(model);
-    //             }
-    //         }
-    //     }
-
-    // [HttpPost]
-
-    // public async Task<IActionResult> DeleteUser(string UserId)
-    //     {
-    //         //First Fetch the User you want to Delete
-    //         ApplicationUser user = await _userManager.FindByIdAsync(UserId);
-
-    //         if (user == null)
-    //         {
-    //             // Handle the case where the user wasn't found
-    //             ViewBag.ErrorMessage = $"User with Id = {UserId} cannot be found";
-    //             return View("NotFound");
-    //         }
-    //         else
-    //         {
-    //             //Delete the User Using DeleteAsync Method of UserManager Service
-    //             IdentityResult result = await _userManager.DeleteAsync(user);
-
-    //             if (result.Succeeded)
-    //             {
-    //                 // Handle a successful delete
-    //                 return RedirectToAction("ListUsers");
-    //             }
-    //             else
-    //             {
-    //                 // Handle failure
-    //                 foreach (IdentityError error in result.Errors)
-    //                 {
-    //                     ModelState.AddModelError("", error.Description);
-    //                 }
-    //             }
-
-    //             return View("ListUsers");
-    //         }
-    //     }
-
-    // [HttpPost]
-
-    // public async Task<IActionResult> ManageUserRoles(
-    //         List<UserRolesViewModel> model,
-    //         string UserId
-    //     )
-    //     {
-    //         ApplicationUser user = await _userManager.FindByIdAsync(UserId);
-    //         if (user == null)
-    //         {
-    //             ViewBag.ErrorMessage = $"User with Id = {UserId} cannot be found";
-    //             return View("NotFound");
-    //         }
-
-    //         //fetch the list of roles the specified user belongs to
-    //         IList<string> roles = await _userManager.GetRolesAsync(user);
-
-    //         //Then remove all the assigned roles for this user
-    //         IdentityResult result = await _userManager.RemoveFromRolesAsync(user, roles);
-
-    //         if (!result.Succeeded)
-    //         {
-    //             ModelState.AddModelError("", "Cannot remove user existing roles");
-    //             return View(model);
-    //         }
-
-    //         List<string> RolesToBeAssigned = model
-    //             .Where(x => x.IsSelected)
-    //             .Select(y => y.RoleName)
-    //             .ToList();
-
-    //         //If At least 1 Role is assigned, Any Method will return true
-    //         if (RolesToBeAssigned.Any())
-    //         {
-    //             //add a user to multiple roles simultaneously
-    //             result = await _userManager.AddToRolesAsync(user, RolesToBeAssigned);
-    //             if (!result.Succeeded)
-    //             {
-    //                 ModelState.AddModelError("", "Cannot Add Selected Roles to User");
-    //                 return View(model);
-    //             }
-    //         }
-
-    //         return RedirectToAction("EditUser", new { UserId = UserId });
-    //     }
-
+        return ResponseEntity.ok("Product visibility updated successfully: " + model.getPriceId());
+    }
 }
