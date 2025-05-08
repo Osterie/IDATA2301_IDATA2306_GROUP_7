@@ -30,41 +30,48 @@ const LoginPageHero = ({ onNavClick }) => {
     <section className="hero">
       <div className="login-hero-container">
         <h1>Welcome Back!</h1>
-        <p>Please log in to continue</p>
+        <p>Log in here:</p>
         <form onSubmit={handleSubmit}>
 
           <div className="form-group">
-            <label className="sr-only" htmlFor="username">Username</label>
+            <label htmlFor="username">E-post</label>
             <input
               type="text"
               id="username"
               name="username"
-              placeholder="Username"
+              placeholder="eksempel@epost.no"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-
           </div>
+
           <div className="form-group">
-            <label className="sr-only" htmlFor="password">Password</label>
+            <label htmlFor="password">Passord</label>
             <input
               type="password"
               id="password"
               name="password"
-              placeholder="Password"
+              placeholder="******"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
-          {message && <p id="result-message" style={{ color: 'red' }}>{message}</p>} {/* Display error message here */}
+          <div className="form-links">
+            <a href="#">Lage nytt passord?</a>
+            <a href="#">Logg inn med SMS</a>
+          </div>
 
+          {message && <p id="result-message">{message}</p>}
 
+          <button type="submit" className="primary-button">Logg inn</button>
 
-          <button type="submit">Log In</button>
+          <div className="divider">
+            <hr /><span>or</span><hr />
+          </div>
         </form>
         
-        <a id="create-account-link" href="#" onClick={() => onNavClick("create-account")}>Dont have an account? Create one!</a>
+        <a id="create-account-link" href="#" onClick={() => onNavClick("create-account")}>If you dont have one, create one!</a>
 
       </div>
 

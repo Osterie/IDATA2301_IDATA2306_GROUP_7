@@ -1,55 +1,88 @@
 .login-hero-container {
-    background-size: cover;
-    padding: 50px 0;
-
-  }
-  .login-hero-container {
-    max-width: 600px;
-    margin: 0 auto;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 10px;
-    z-index: 2;
-  }
-  .form-group {
-    margin-bottom: 15px;
-  }
-  .login-hero-container label {
-    text-align: center;
-    color: white;
-    display: block;
-    margin-bottom: 5px;
-  }
-  .login-hero-container input {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    z-index: 3;
-  }
-  .login-hero-container button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background: #007BFF;
-    color: white;
-    cursor: pointer;
-    z-index: 3;
-    margin-bottom: 20px;
-  }
-  button:hover {
-    background: #0056b3;
-  }
-
-#create-account-link{
-  color: white;
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  z-index: 10;
 }
 
-#create-account-link:hover{
-  background: #0056b3;
+.login-hero-container h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 5px;
+  text-align: center;
 }
 
-#result-message{
-  font-size: 16px;
-  max-width: 300px;
+.login-hero-container p {
+  font-size: 1rem;
+  margin-bottom: 25px;
+  color: black;
+}
+
+.login-hero-container a {
+  color: #000;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.login-hero-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #222;
+}
+
+.login-hero-container input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.form-links {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.primary-button {
+  width: 100%;
+  background-color: var(--call-to-action-color);
+  border: none;
+  color: #000;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.primary-button:hover {
+  background-color: #e6b800;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.divider hr {
+  flex-grow: 1;
+  border: none;
+  border-top: 1px solid #ccc;
 }
