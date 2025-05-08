@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './logInPageHero.css';
-import { sendAuthenticationRequest } from '../../../library/Identity/authentication'; // Adjust the import path as needed
+import { sendAuthenticationRequest } from '../../../../library/Identity/authentication'; // Adjust the import path as needed
 
 const LoginPageHero = ({ onNavClick }) => {
 

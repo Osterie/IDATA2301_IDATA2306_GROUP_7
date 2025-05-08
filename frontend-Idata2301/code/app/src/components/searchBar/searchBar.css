@@ -32,8 +32,7 @@
 }
 
 .search-form button:hover {
-    background-color: var(--contrast-text-color);
-    color: var(--text-color);
+    background-color: var(--call-to-action-highlight-color);
 }
 
 .dropdown-button {

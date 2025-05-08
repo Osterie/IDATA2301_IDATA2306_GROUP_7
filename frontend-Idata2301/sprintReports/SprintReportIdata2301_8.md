@@ -44,7 +44,7 @@ Sprint stenographer: Tobias
 | Favoriting a product                         | Tobias   | Paused         | [4]          |                                             |
 | Favorite page                                | Tobias   | Paused         | [5]          |                                             |
 | Setting page for profile and customization   | Tobias   | In progress    | [7]          |                                             |
-| Fix ugly login page                          | Tobias   | Not completed  | [3]          |                                             |
+| Fix ugly login page                          | Tobias   | Completed      | [3]          |                                             |
 | Fix styling problems in deals page           | Tobias   | Completed      | [3]          |                                             |
 | Try using docker                             | Everyone | Not completed  | [5]          |                                             |
 | Product detail page                          | Tobias   | Completed(90%) | [6]          | Needs testing                               |

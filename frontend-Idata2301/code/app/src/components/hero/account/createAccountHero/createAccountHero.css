@@ -1,0 +1,62 @@
+/* Scoped to create-account only */
+.create-account-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    z-index: 10;
+  }
+  
+  .create-account-container h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 5px;
+    text-align: center;
+
+  }
+  .create-account-container p {
+    font-size: 1rem;
+    margin-bottom: 25px;
+    color: black;
+  }
+  
+  .create-account-form-group {
+    margin-bottom: 20px;
+  }
+  
+  .create-account-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #222;
+  }
+  
+  .create-account-container input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+  .create-account-button {
+    width: 100%;
+    background-color: var(--call-to-action-color);
+    border: none;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .create-account-button:hover {
+    background-color: var(--call-to-action-highlight-color);
+  }
+  

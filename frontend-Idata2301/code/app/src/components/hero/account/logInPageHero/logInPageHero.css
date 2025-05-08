@@ -69,7 +69,7 @@
 }
 
 .primary-button:hover {
-  background-color: #e6b800;
+  background-color: var(--call-to-action-highlight-color);
 }
 
 .divider {
