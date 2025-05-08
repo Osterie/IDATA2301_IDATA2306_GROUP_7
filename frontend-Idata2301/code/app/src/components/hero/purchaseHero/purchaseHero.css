@@ -35,6 +35,6 @@
     cursor: pointer;
   }
   
-  button:hover {
+  purchase-hero-container button:hover {
     background: #0056b3;
   }

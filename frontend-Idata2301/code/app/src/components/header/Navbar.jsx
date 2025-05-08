@@ -35,7 +35,6 @@ const Navbar = ({ onNavClick, user }) => {
         <li><a href="#" onClick={() => onNavClick("home")}>Home</a></li>
         <li><a href="#" onClick={() => onNavClick("deals")}>Deals</a></li>
         <li><a href="#" onClick={() => onNavClick("about")}>About</a></li>
-        <li><a href="#" onClick={() => onNavClick("shoppingCart")}>Shopping Cart</a></li>
           
         {/* Conditionally show Log In or Log Out */}
           {user ? (
@@ -51,7 +50,6 @@ const Navbar = ({ onNavClick, user }) => {
         )}
 
         <li><a href="#" onClick={() => onNavClick("settings")}>⚙️</a></li>
-        <li><a href="#" onClick={() => onNavClick("favorite")}>💖</a></li>
         <li><a href="#" onClick={() => onNavClick("shoppingCart")}>🛒</a></li>
 
       </ul>

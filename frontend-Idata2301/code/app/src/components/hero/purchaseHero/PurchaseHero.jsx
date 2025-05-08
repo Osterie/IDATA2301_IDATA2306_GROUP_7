@@ -1,23 +1,39 @@
 import React from "react";
-import "./purchaseHero.css"; // Import the corresponding CSS file for styling
+import axios from "axios";
+import { clearShoppingCart } from "../../../utils/shoppingCartUtils";
+
+import "./purchaseHero.css";
 
 const PurchaseHero = ({ cartFlights }) => {
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
+
+  const API_URL = "http://localhost:3000/api/favorites";// Replace with correct API endpoint
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const formData = new FormData(event.target);
 
-    // Extract form data
     const data = {
       fullName: formData.get("full-name"),
       email: formData.get("email"),
-      cardNumber: formData.get("card-number"),
-      expiryDate: formData.get("expiry-date"),
-      cvv: formData.get("cvv"),
+      flights: cartFlights,
     };
 
-    console.log("Form submitted:", data);
-    print("Purchase completed successfully!"); 
+    try {
+      // Send a POST request to the backend
+      const response = await axios.post(API_URL, data);
+      console.log("Purchase successful:", response.data);
+
+      // Clear the shopping cart
+      clearShoppingCart();
+
+      // Show a success message or redirect the user
+      alert("Purchase completed successfully!");
+    } catch (error) {
+      console.error("Error completing purchase:", error);
+      alert("Failed to complete purchase. Please try again.");
+    }
   };
+
 
   return (
     <section className="hero">
@@ -52,24 +68,6 @@ const PurchaseHero = ({ cartFlights }) => {
           <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input type="email" id="email" name="email" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="card-number">Card Number:</label>
-            <input type="text" id="card-number" name="card-number" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="expiry-date">Expiry Date:</label>
-            <input
-              type="text"
-              id="expiry-date"
-              name="expiry-date"
-              placeholder="MM/YY"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="cvv">CVV:</label>
-            <input type="password" id="cvv" name="cvv" required />
           </div>
           <button type="submit">Complete Purchase</button>
         </form>

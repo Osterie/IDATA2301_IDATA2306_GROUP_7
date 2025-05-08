@@ -7,6 +7,7 @@ import FlightsContainer from "./components/cards/searched-flights/FlightsContain
 import MainPageHero from "./components/hero/mainPageHero/MainPageHero";
 import DealsPageHero from "./components/hero/dealsPageHero/DealsPageHero";
 import LogInPageHero from "./components/hero/logInPageHero/LogInPageHero";
+import PurchaseHero from "./components/hero/purchaseHero/PurchaseHero";
 import ShoppingCartHero from "./components/hero/shoppingCartPageHero/shoppingCartHero";
 import CreateAccount from "./pages/createAccount";
 import Footer from "./components/footer/Footer";
@@ -93,6 +94,7 @@ function App() {
         {activePage === "settings" && <SettingsMenu user={user} />
         }
         {activePage === "shoppingCart" && <ShoppingCartHero />}
+        {activePage === "purchase" && <PurchaseHero />}
       </main>
 
       <Footer />
