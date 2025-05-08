@@ -7,6 +7,7 @@ import FlightsContainer from "./components/cards/searched-flights/FlightsContain
 import MainPageHero from "./components/hero/mainPageHero/MainPageHero";
 import DealsPageHero from "./components/hero/dealsPageHero/DealsPageHero";
 import LogInPageHero from "./components/hero/logInPageHero/LogInPageHero";
+import ShoppingCartHero from "./components/hero/shoppingCartPageHero/shoppingCartHero";
 import CreateAccount from "./pages/createAccount";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/header/Navbar";
@@ -91,6 +92,7 @@ function App() {
         {activePage === "create-account" && <CreateAccount />}
         {activePage === "settings" && <SettingsMenu />
         }
+        {activePage === "shoppingCart" && <ShoppingCartHero />}
       </main>
 
       <Footer />

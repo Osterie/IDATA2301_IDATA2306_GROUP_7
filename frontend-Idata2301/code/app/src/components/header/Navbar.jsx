@@ -21,6 +21,7 @@ const Navbar = ({ onNavClick, user }) => {
         <div className={`bar ${isMenuOpen ? "open" : ""}`}></div>
         <div className={`bar ${isMenuOpen ? "open" : ""}`}></div>
         <div className={`bar ${isMenuOpen ? "open" : ""}`}></div>
+        <div className={`bar ${isMenuOpen ? "open" : ""}`}></div>
       </div>
 
       <a href="/" className="logo">
@@ -34,6 +35,7 @@ const Navbar = ({ onNavClick, user }) => {
         <li><a href="#" onClick={() => onNavClick("home")}>Home</a></li>
         <li><a href="#" onClick={() => onNavClick("deals")}>Deals</a></li>
         <li><a href="#" onClick={() => onNavClick("about")}>About</a></li>
+        <li><a href="#" onClick={() => onNavClick("shoppingCart")}>Shopping Cart</a></li>
           
         {/* Conditionally show Log In or Log Out */}
           {user ? (
@@ -47,7 +49,11 @@ const Navbar = ({ onNavClick, user }) => {
         {showAdmin && (
           <li><a href="#" onClick={() => onNavClick("admin")}>Admin</a></li>
         )}
+
         <li><a href="#" onClick={() => onNavClick("settings")}>⚙️</a></li>
+        <li><a href="#" onClick={() => onNavClick("favorite")}>💖</a></li>
+        <li><a href="#" onClick={() => onNavClick("shoppingCart")}>🛒</a></li>
+
       </ul>
     </nav>
   );

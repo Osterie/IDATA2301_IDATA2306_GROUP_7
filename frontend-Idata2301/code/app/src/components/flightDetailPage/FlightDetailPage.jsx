@@ -1,5 +1,6 @@
 import React from "react";
 import "./flightDetailPage.css";
+import { addToShoppingCart } from "../../../utils/shoppingCartUtils"; 
 
 const FlightDetailPage = ({ flight, onAddToCart, onBuyNow }) => {
   const {
@@ -20,6 +21,10 @@ const FlightDetailPage = ({ flight, onAddToCart, onBuyNow }) => {
       },
     },
   } = flight;
+
+  const handleAddToCart = () => {
+    const result = addToShoppingCart(flight);
+  };
 
   return (
     <div className="flight-detail-page">
@@ -51,7 +56,7 @@ const FlightDetailPage = ({ flight, onAddToCart, onBuyNow }) => {
       </div>
 
       <div className="action-buttons">
-        <button className="btn add-to-cart" onClick={() => onAddToCart(flight)}>Add to Cart</button>
+        <button className="btn add-to-cart" onClick={handleAddToCart}>Add to cart</button>
         <button className="btn buy-now" onClick={() => onBuyNow(flight)}>Buy Now</button>
       </div>
     </div>

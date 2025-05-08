@@ -1,6 +1,7 @@
 import React from "react";
 import "./flightCard.css";
 import { sendApiRequest } from "../../../library/requests";
+import { addToShoppingCart } from "../../../utils/shoppingCartUtils"; 
 
 const NewFlightCard = ({ flight, userIsAdmin, onVisibilityChange }) => {
   const {
@@ -23,6 +24,10 @@ const NewFlightCard = ({ flight, userIsAdmin, onVisibilityChange }) => {
       },
     },
   } = flight;
+
+  const handleAddToCart = () => {
+    const result = addToShoppingCart(flight);
+  };
 
   const handleToggleVisibility = async () => {
     const formData = {
@@ -79,7 +84,9 @@ const NewFlightCard = ({ flight, userIsAdmin, onVisibilityChange }) => {
       </div>
 
       <button className="new-book-button">Details</button>
-      <button className="new-book-button">Add to cart</button>
+      <button className="new-book-button" onClick={handleAddToCart}>
+        Add to cart
+      </button>
 
       <p className="new-provider">Provider: {provider}</p>
 
