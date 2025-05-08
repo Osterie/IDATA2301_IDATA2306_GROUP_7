@@ -3,7 +3,7 @@ import "./flightCard.css";
 import { sendApiRequest } from "../../../library/requests";
 import { addToShoppingCart } from "../../../utils/shoppingCartUtils"; 
 
-const NewFlightCard = ({ flight, userIsAdmin, onVisibilityChange }) => {
+const NewFlightCard = ({ flight, userIsAdmin, onVisibilityChange, purchasable = true }) => {
   const {
     id,
     flightClassId: {
@@ -74,7 +74,12 @@ const NewFlightCard = ({ flight, userIsAdmin, onVisibilityChange }) => {
       </div>
 
       <p className="new-date">Date: {date}</p>
-      <p className="new-seats">Available Seats: {availableSeats}</p>
+
+
+
+     {purchasable && (
+        <p className="new-seats">Available Seats: {availableSeats}</p>
+      )}
 
       <div className="new-price-section">
         <p className="new-price">
@@ -84,9 +89,12 @@ const NewFlightCard = ({ flight, userIsAdmin, onVisibilityChange }) => {
       </div>
 
       <button className="new-book-button">Details</button>
-      <button className="new-book-button" onClick={handleAddToCart}>
-        Add to cart
-      </button>
+
+      {purchasable && (
+        <button className="new-book-button" onClick={handleAddToCart}>
+          Add to cart
+        </button>
+      )}
 
       <p className="new-provider">Provider: {provider}</p>
 

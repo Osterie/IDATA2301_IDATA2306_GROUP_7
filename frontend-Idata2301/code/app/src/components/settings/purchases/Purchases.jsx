@@ -52,6 +52,7 @@ const PurchasedFlights = ({user}) => {
             <NewFlightCard
               key={flight.id}
               flight={flight.price}
+              purchasable={false}
             />
           ))
       ) : (
