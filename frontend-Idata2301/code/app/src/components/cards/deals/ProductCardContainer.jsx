@@ -1,17 +1,57 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./productCardContainer.css";
 import ProductCard from "./ProductCard";
 
-const products = [
-  { id: 1, title: "Product 1", description: "This is a very good product", img: "https://picsum.photos/250/150?rnd=1" },
-  { id: 2, title: "Product 2", description: "This product is not that good, but we need to clear the stock anyway", img: "https://picsum.photos/250/150?rnd=2", highlighted: true },
-  { id: 3, title: "Product 3", description: "This is another product", img: "https://picsum.photos/250/150?rnd=3" },
-  { id: 4, title: "Product 4", description: "You can get this for free in GitHub, but we need money", img: "https://picsum.photos/250/150?rnd=4" },
-  { id: 5, title: "Product 5", description: "This is somehow also a product", img: "https://picsum.photos/250/150?rnd=5" },
-  { id: 6, title: "Product 6", description: "We love Chuck Norris", img: "https://picsum.photos/250/150?rnd=6" }
-];
+const API_BASE_URL = "http://localhost:3000/api/flights";
 
 const ProductContainer = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        // Fetch the cheapest flight
+        const cheapestResponse = await axios.post(`${API_BASE_URL}/cheapest`);
+        const cheapestFlight = cheapestResponse.data;
+
+        // Fetch flights departing tomorrow
+        const tomorrowResponse = await axios.post(`${API_BASE_URL}/tomorrow`);
+        const flightsTomorrow = tomorrowResponse.data;
+
+        // Fetch 4 random flights
+        const randomResponse = await axios.post(`${API_BASE_URL}/random`, { count: 4 });
+        const randomFlights = randomResponse.data;
+
+        // Combine all flights into a single array
+        const combinedProducts = [
+          { ...cheapestFlight, highlighted: true },
+          ...flightsTomorrow,
+          ...randomFlights,
+        ];
+
+        setProducts(combinedProducts);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        setError("Failed to load products.");
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return <p>Loading products...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
   return (
     <section className="product-container">
       {products.map((product) => (
@@ -22,5 +62,3 @@ const ProductContainer = () => {
 };
 
 export default ProductContainer;
-
-

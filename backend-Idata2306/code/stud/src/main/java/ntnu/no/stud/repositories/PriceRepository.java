@@ -38,4 +38,14 @@ public interface PriceRepository extends CrudRepository<Price, Integer> {
         List<Price> searchForFlights(@Param("departure") String departure, @Param("arrival") String arrival,
                         @Param("fromDate") LocalDate fromDate, @Param("toDate") LocalDate toDate);
 
+        @Query("SELECT p FROM Price p ORDER BY FUNCTION('RAND') LIMIT :count")
+        List<Price> findRandomFlights(int count);
+
+        @Query("SELECT p FROM Price p ORDER BY p.price ASC LIMIT 1")
+        Price findCheapestFlight();
+
+        @Query("SELECT p FROM Price p WHERE p.scheduledFlight.date = :date")
+        List<Price> findFlightByDate(LocalDate date);
+
+
 }
