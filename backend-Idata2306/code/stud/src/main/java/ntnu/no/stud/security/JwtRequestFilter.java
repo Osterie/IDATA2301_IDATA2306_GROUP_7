@@ -7,8 +7,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.Iterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,18 +39,29 @@ public class JwtRequestFilter extends OncePerRequestFilter {
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                   FilterChain filterChain)
       throws ServletException, IOException {
+  
     String jwtToken = getJwtToken(request);
+    if (jwtToken == null) {
+      logger.warn("No JWT token found in Authorization header");
+    }
+  
     String username = jwtToken != null ? getUsernameFrom(jwtToken) : null;
-
+  
     if (username != null && notAuthenticatedYet()) {
       UserDetails userDetails = getUserDetailsFromDatabase(username);
-      if (jwtUtil.validateToken(jwtToken, userDetails)) {
+      if (userDetails == null) {
+        logger.warn("User details not found for username: " + username);
+      } else if (jwtUtil.validateToken(jwtToken, userDetails)) {
         registerUserAsAuthenticated(request, userDetails);
+        logger.info("JWT validated. User '{}' authenticated.", username);
+      } else {
+        logger.warn("JWT token is invalid for user: " + username);
       }
     }
-
+  
     filterChain.doFilter(request, response);
   }
+  
 
   private UserDetails getUserDetailsFromDatabase(String username) {
     UserDetails userDetails = null;

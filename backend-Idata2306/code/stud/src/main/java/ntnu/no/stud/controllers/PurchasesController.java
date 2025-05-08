@@ -1,18 +1,21 @@
 package ntnu.no.stud.controllers;
 
-import ntnu.no.stud.entities.Price;
+import ntnu.no.stud.entities.Purchases;
 import ntnu.no.stud.repositories.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.LocalDate;
 import java.util.List;
 
 
+/**
+ * Controller responsible for handling purchases.
+ */
 @RestController
-@RequestMapping("/api")
 @CrossOrigin(origins = "*") 
 public class PurchasesController {
 
@@ -21,10 +24,16 @@ public class PurchasesController {
     @Autowired
     private PurchaseRepository purchaseRepository;
 
-    // Endpoint to fetch the users purchases
-    @GetMapping("/purchases/{userId}")
-    public Purchases getUserPurchases(@RequestParam Long userId){
+
+    @GetMapping("/api/purchases")
+    public ResponseEntity<?> getUserPurchases(@RequestParam Long userId) {
         logger.info("Fetching purchases for user with ID: {}", userId);
-        return purchaseRepository.findPurchasesByUserId(userId);
+        List<Purchases> purchases = purchaseRepository.findAllByUserId(userId);
+        
+        if (purchases == null || purchases.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No purchases found for user " + userId);
+        }
+    
+        return ResponseEntity.ok(purchases);
     }
 }
