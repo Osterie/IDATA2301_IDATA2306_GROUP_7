@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getShoppingCart, removeFromShoppingCart } from "../../../utils/shoppingCartUtils";
 import "./shoppingCartHero.css";
 
-const ShoppingCartHero = ({onNavnClick}) => {
+const ShoppingCartHero = ({onNavClick}) => {
   const [cart, setCart] = useState([]);
   
   useEffect(() => {
@@ -15,7 +15,7 @@ const ShoppingCartHero = ({onNavnClick}) => {
   };
 
   const onPurchaseClick = () => {
-    onNavnClick("/purchase"); 
+    onNavClick("/purchase"); 
   };
 
   return (

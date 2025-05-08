@@ -1,4 +1,4 @@
-.shopping-cart-container {
+.shopping-cart-container  {
     color: white;
   }
   
@@ -11,7 +11,7 @@
   }
   
   .available-flights,
-  .cart {
+  .cart h2 {
     margin-bottom: 20px;
     padding: 15px;
     background: rgba(255, 255, 255, 0.9);
@@ -19,17 +19,17 @@
     text-align: left;
   }
   
-  .shopping-cart-container.available-flights h2,
+  .shopping-cart-container.available-flights,
   .cart h2 {
     margin-bottom: 10px;
   }
   
-  shopping-cart-container ul {
+  .shopping-cart-container ul {
     list-style: none;
     padding: 0;
   }
   
-  shopping-cart-container li {
+  .shopping-cart-container li {
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ddd;
@@ -37,15 +37,17 @@
     background: #f9f9f9;
   }
   
-  shopping-cart-container button {
+  .shopping-cart-container button {
+    z-index: 1000;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     background: #007BFF;
     color: white;
     cursor: pointer;
+    transition: background 0.3s ease;
   }
   
-  shopping-cart-container button:hover {
+  .shopping-cart-container button:hover {
     background: #0056b3;
   }

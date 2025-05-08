@@ -42,7 +42,6 @@ public class FlightClassesInitializer {
             FlightClasses flightClasses = new FlightClasses(classEntity, flight, availableSeats);
             flightClassesRepository.save(flightClasses);
     
-            logger.info("Flight class created: Flight = " + flight.getName() + ", Class = " + classEntity.getName() + ", Seats = " + availableSeats);
         } catch (Exception e) {
             logger.error("Error generating flight classes for flight: " + flight.getName(), e);
         }

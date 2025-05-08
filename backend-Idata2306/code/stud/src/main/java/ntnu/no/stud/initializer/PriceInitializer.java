@@ -76,7 +76,6 @@ public class PriceInitializer {
             Price price = new Price(randomFlightClass, priceValue, priceCode, provider, 0, scheduledFlight);
             priceRepository.save(price);
 
-            logger.info("Price created successfully for scheduled flight: " + scheduledFlight.getId());
         } catch (Exception e) {
             logger.error("Error generating price for scheduled flight: " + scheduledFlight.getId(), e);
         }

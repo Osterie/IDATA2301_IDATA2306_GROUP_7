@@ -93,7 +93,7 @@ function App() {
         {activePage === "create-account" && <CreateAccount />}
         {activePage === "settings" && <SettingsMenu user={user} />
         }
-        {activePage === "shoppingCart" && <ShoppingCartHero />}
+        {activePage === "shoppingCart" && (<ShoppingCartHero onNavClick={handleNavClick} />)}
         {activePage === "purchase" && <PurchaseHero />}
       </main>
 

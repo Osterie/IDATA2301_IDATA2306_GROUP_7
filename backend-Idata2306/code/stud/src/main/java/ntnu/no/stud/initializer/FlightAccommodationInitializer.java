@@ -39,11 +39,7 @@ public class FlightAccommodationInitializer {
                 // Creates and save the flight accommodation
                 FlightAccommodation flightAccommodation = new FlightAccommodation(flight, randomExtraFeature);
                 flightAccommodationRepository.save(flightAccommodation);
-
-                logger.info("Random accommodation added to flight: " + flight.getName());
-            }
-
-            logger.info("Accommodation already exists for flight: " + flight.getName() + " with feature: " + randomExtraFeature.getName());
+                }
 
         } catch (Exception e) {
             logger.error("Error adding accommodation to flight: " + flight.getName(), e);

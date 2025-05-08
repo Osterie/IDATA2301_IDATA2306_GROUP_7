@@ -57,7 +57,7 @@ public class RouteInitializer {
             // Fetch a random departure airport
             Airport departure = airportRepository.findRandomAirport();
             if (departure == null) {
-                System.err.println("Cannot generate routes: No airports available.");
+                logger.error("Cannot generate routes: No airports available.");
                 return;
             }
 
@@ -71,7 +71,6 @@ public class RouteInitializer {
             Route route = new Route(departure, destination);
             routeRepository.save(route);
 
-        logger.info("Random routes generated");
         } catch (Exception e) {
             logger.error("Error generating routes: " + e.getMessage());
         }

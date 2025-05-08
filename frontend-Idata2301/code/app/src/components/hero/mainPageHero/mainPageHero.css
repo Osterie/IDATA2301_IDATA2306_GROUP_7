@@ -19,7 +19,7 @@ html, body {
     align-items: center;
 }
 
-/* Add an overlay between the background image and the text */
+/* Add an overlay between the background image and the text
 .hero::before {
     content: '';
     position: absolute;
@@ -28,8 +28,9 @@ html, body {
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.4);  /* Adjust opacity */
-    z-index: 1;  /* Ensures the overlay is behind the text */
-}
+    /* z-index: 1;  Ensures the overlay is behind the text */
+/* }
+
 
 /* Ensure the text stays on top of the overlay */
 .hero-container {

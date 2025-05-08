@@ -67,7 +67,6 @@ public class ScheduledFlightsInitializer {
             // Generate price for the scheduled flight
             priceInitializer.generatePriceForScheduledFlight(scheduledFlights);
 
-            logger.info("Scheduled flight created successfully for flight: " + flight.getName());
         } catch (Exception e) {
             logger.error("Error generating scheduled flight for flight: " + flight.getName(), e);
         }
