@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * Contains authentication information, needed by UserDetailsService.
  */
 public class AccessUserDetails implements UserDetails {
+  private final int id;
   private final String username;
   private final String password;
   private final String email;
@@ -27,6 +28,7 @@ public class AccessUserDetails implements UserDetails {
    * @param user The user to copy data from
    */
   public AccessUserDetails(User user) {
+    this.id = user.getId();
     this.username = user.getUsername();
     this.password = user.getPassword();
     this.email = user.getEmail();
@@ -44,6 +46,10 @@ public class AccessUserDetails implements UserDetails {
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return authorities;
+  }
+
+  public int getId() {
+    return id;
   }
 
   @Override

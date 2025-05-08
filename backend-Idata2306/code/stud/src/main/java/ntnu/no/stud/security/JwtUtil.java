@@ -29,6 +29,11 @@ public class JwtUtil {
   private static final String ROLE_KEY = "roles";
 
   /**
+   * Key inside JWT token where user id is stored.
+   */
+  private static final String ID_KEY = "id";
+
+  /**
    * Generate a JWT token for an authenticated user.
    *
    * @param userDetails Object containing user details
@@ -39,8 +44,15 @@ public class JwtUtil {
     final long millisecondsInSevenDays = 7L * 24 * 60 * 60 * 1000; // 7 days in milliseconds
     final long sevendDaysFromNow = timeNow + millisecondsInSevenDays;
 
+    int userId = -1;
+
+    if (userDetails instanceof AccessUserDetails) {
+      userId = ((AccessUserDetails) userDetails).getId();
+    }
+
     return Jwts.builder()
         .subject(userDetails.getUsername())
+        .claim(ID_KEY, userId)
         .claim(ROLE_KEY, userDetails.getAuthorities())
         .issuedAt(new Date(timeNow))
         .expiration(new Date(sevendDaysFromNow))

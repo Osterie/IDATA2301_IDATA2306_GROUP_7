@@ -17,10 +17,12 @@ export function getAuthenticatedUser() {
   }
 
   const username = getCookie("current_username");
+  const id = getCookie("current_user_id");
   const commaSeparatedRoles = getCookie("current_user_roles");
   if (username) {
     const roles = commaSeparatedRoles.split(",");
     user = {
+      "id": id,
       "username": username,
       "roles": roles
     }
@@ -80,6 +82,7 @@ export async function sendAuthenticationRequest(username, password, successCallb
       const userData = parseJwtUser(jwtResponse.jwt);
       console.log(userData)
       if (userData) {
+        setCookie("current_user_id", userData.id);
         setCookie("current_username", userData.username);
         setCookie("current_user_roles", userData.roles.join(","));
         setCookie("current_email", userData.email);
@@ -128,6 +131,7 @@ export function parseJwtUser(jwtString) {
   const jwtObject = parseJwt(jwtString);
   if (jwtObject) {
     user = {
+      "id" : jwtObject.id,
       "username": jwtObject.sub,
       "roles": jwtObject.roles.map(r => r.authority),
       "exp": jwtObject.exp,
@@ -151,6 +155,7 @@ export function doLogout() {
  */
 export function deleteAuthorizationCookies() {
   deleteCookie("jwt");
+  deleteCookie("current_user_id");
   deleteCookie("current_username");
   deleteCookie("current_user_roles");
   console.log("Deleted authorization cookies");
