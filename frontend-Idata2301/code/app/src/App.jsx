@@ -90,7 +90,7 @@ function App() {
         {activePage === "admin" && <AdminPage setActivePage={setActivePage} />}
         {activePage === "manage-users" && <ManageUserPage />}
         {activePage === "create-account" && <CreateAccount />}
-        {activePage === "settings" && <SettingsMenu />
+        {activePage === "settings" && <SettingsMenu user={user} />
         }
         {activePage === "shoppingCart" && <ShoppingCartHero />}
       </main>
