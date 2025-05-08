@@ -21,8 +21,11 @@ Sprint stenographer: Tobias
 - Docker
 
 - **Completed Work:**
+- Hiding products
 
 - **Not Completed:**
+- Purchasing
+- HTTPS
 
 ---
 
@@ -33,7 +36,7 @@ Sprint stenographer: Tobias
 | Endpoints for purchasing                        | Daniel   | In progress   | [5]          |          |
 | Endpoints for showing/hiding a product as admin | Adrian   | Completed     | [5]          |          |
 | Finish Endpoint for favoriting                  | Tobias   | Paused        | [3]          |          |
-| Try using docker on your side                   | Everyone | Not Completed | [3]          |          |
+| Try using docker                                | Everyone | Not Completed | [3]          |          |
 | Https connection                                | Everyone | Not completed | [6]          |          |
 
 ---
