@@ -14,15 +14,15 @@ const ProductContainer = () => {
     const fetchProducts = async () => {
       try {
         // Fetch the cheapest flight
-        const cheapestResponse = await axios.post(`${API_BASE_URL}/cheapest`);
+        const cheapestResponse = await axios.get(`${API_BASE_URL}/cheapest`);
         const cheapestFlight = cheapestResponse.data;
 
         // Fetch flights departing tomorrow
-        const tomorrowResponse = await axios.post(`${API_BASE_URL}/tomorrow`);
+        const tomorrowResponse = await axios.get(`${API_BASE_URL}/tomorrow`);
         const flightsTomorrow = tomorrowResponse.data;
 
         // Fetch 4 random flights
-        const randomResponse = await axios.post(`${API_BASE_URL}/random`, { count: 4 });
+        const randomResponse = await axios.get(`${API_BASE_URL}/random?count=4`);
         const randomFlights = randomResponse.data;
 
         // Combine all flights into a single array

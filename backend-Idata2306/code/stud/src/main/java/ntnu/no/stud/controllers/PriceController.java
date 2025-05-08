@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
+
 
 @RestController
 @RequestMapping("/api/flights")
@@ -22,7 +22,7 @@ public class PriceController {
     private PriceRepository priceRepository;
 
     // Endpoint to fetch the cheapest flight
-    @PostMapping("/cheapest")
+    @GetMapping("/cheapest")
     public Price getCheapestFlight() {
         logger.info("Fetching the cheapest flight");
         return priceRepository.findCheapestFlight();
@@ -30,7 +30,7 @@ public class PriceController {
     }
 
     // Endpoint to fetch flights departing tomorrow
-    @PostMapping("/tomorrow")
+    @GetMapping("/tomorrow")
     public List<Price> getFlightsTomorrow() {
         logger.info("Fetching flight for tomorrow");
         LocalDate tomorrow = LocalDate.now().plusDays(1);
@@ -38,9 +38,8 @@ public class PriceController {
     }
 
     // Endpoint to fetch random flights
-    @PostMapping("/random")
-    public List<Price> getRandomFlights(@RequestBody Map<String, Integer> request) {
-        int count = request.get("count");
+    @GetMapping("/random")
+    public List<Price> getRandomFlights(@RequestParam int count) {
         logger.info("Fetching {} random flights", count);
         return priceRepository.findRandomFlights(count);
     }
