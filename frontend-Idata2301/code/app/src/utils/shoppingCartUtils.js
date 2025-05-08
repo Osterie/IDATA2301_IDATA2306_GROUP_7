@@ -26,3 +26,7 @@ export const removeFromShoppingCart = (flightId) => {
   Cookies.set(COOKIE_NAME, JSON.stringify(updatedCart), { expires: 7 }); // Update cookies
   return updatedCart;
 };
+
+export const clearShoppingCart = () => {
+  Cookies.remove(COOKIE_NAME); // Clear the shopping cart from cookies
+}
