@@ -3,9 +3,9 @@ import styles from "./settingsMenu.module.css";
 
 import ProfileSettings from "./profile/ProfileSettings";
 import FavoriteFlights from "./favoriteFlights/FavoriteFlights";
-import PurchasedFlights from "./purchaces/Purchaces";
+import PurchasedFlights from "./purchases/Purchases";
 
-const SettingsMenu = () => {
+const SettingsMenu = ({user}) => {
   const [activeTab, setActiveTab] = useState("profile");
 
   const renderTabContent = () => {
@@ -15,7 +15,7 @@ const SettingsMenu = () => {
       case "favorites":
         return <FavoriteFlights />;
       case "purchased":
-        return <PurchasedFlights />;
+        return <PurchasedFlights user={user} />;
       default:
         return null;
     }
