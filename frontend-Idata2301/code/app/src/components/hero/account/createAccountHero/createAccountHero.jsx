@@ -43,7 +43,7 @@ const CreateAccount = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="create-account-form-group">
-            <label htmlFor="username">Brukernavn</label>
+            <label htmlFor="username">Username</label>
             <input
               type="text"
               id="username"
@@ -56,12 +56,12 @@ const CreateAccount = () => {
           </div>
 
           <div className="create-account-form-group">
-            <label htmlFor="email">E-post</label>
+            <label htmlFor="email">E-mail</label>
             <input
               type="email"
               id="email"
               name="email"
-              placeholder="eksempel@epost.no"
+              placeholder="example@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -69,7 +69,7 @@ const CreateAccount = () => {
           </div>
 
           <div className="create-account-form-group">
-            <label htmlFor="password">Passord</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
@@ -84,7 +84,7 @@ const CreateAccount = () => {
           {message && <p id="result-message">{message}</p>}
 
           <button type="submit" className="create-account-button">
-            Opprett konto
+            Create account
           </button>
         </form>
       </div>

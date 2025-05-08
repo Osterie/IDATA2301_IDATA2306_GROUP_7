@@ -34,19 +34,19 @@ const LoginPageHero = ({ onNavClick }) => {
         <form onSubmit={handleSubmit}>
 
           <div className="form-group">
-            <label htmlFor="username">E-post</label>
+            <label htmlFor="username">Username</label>
             <input
               type="text"
               id="username"
               name="username"
-              placeholder="eksempel@epost.no"
+              placeholder="your username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Passord</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
@@ -58,13 +58,13 @@ const LoginPageHero = ({ onNavClick }) => {
           </div>
 
           <div className="form-links">
-            <a href="#">Lage nytt passord?</a>
-            <a href="#">Logg inn med SMS</a>
+            <a href="#">Create new password?</a>
+            <a href="#">Log in with SMS</a>
           </div>
 
           {message && <p id="result-message">{message}</p>}
 
-          <button type="submit" className="primary-button">Logg inn</button>
+          <button type="submit" className="primary-button">Log in</button>
 
           <div className="divider">
             <hr /><span>or</span><hr />
