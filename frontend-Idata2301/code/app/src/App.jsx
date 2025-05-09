@@ -24,11 +24,13 @@ import {
   getLastSearch,
   setCountryFromIP,
 } from "./utils/cookieUtils";
+import FlightDetailPage from "./components/flightDetailPage/FlightDetailPage";
 
 function App() {
   const [activePage, setActivePage] = useState("home");
   const [flights, setFlights] = useState([]);  // Store flight data
   const [user, setUser] = useState(null);
+  const [selectedFlight, setSelectedFlight] = useState(null);
 
   useEffect(() => {
     const loggedInUser = getAuthenticatedUser();
@@ -81,9 +83,17 @@ function App() {
             <DealsPageHero setFlights={setFlights} setActivePage={setActivePage} />
             <section className="search-section">
               <FilterSidebar flights={flights} setFlights={setFlights} />
-              <FlightsContainer flights={flights} user={user} />
+              <FlightsContainer
+                flights={flights}
+                user={user}
+                setSelectedFlight={setSelectedFlight}
+                setActivePage={setActivePage}
+              />
             </section>
           </>
+        )}
+        {activePage === "flight-details" && selectedFlight && (
+          <FlightDetailPage flight={selectedFlight} />
         )}
 
         {activePage === "about" && <AboutUs />}

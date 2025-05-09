@@ -43,7 +43,7 @@ Sprint stenographer: Daniel
 | Favoriting a product                      | Tobias   | Paused         | [4]          |                                              |
 | Favorite page                             | Tobias   | Paused         | [5]          |                                              |
 | Try using docker                          | Everyone | Not completed  | [5]          |                                              |
-| Product detail page                       | Tobias   | Completed(90%) | [6]          | Needs testing                                |
+| Product detail page                       | Tobias   | Completed      | [6]          | Works, but needs better styling              |
 | Better searching                          | Adrian   | Not completed  | [7]          |                                              |
 | Currency convertion                       | Daniel   | Not completed  | [4]          |                                              |
 | Display final price after discount        | Daniel   | Not completed  | [2]          |                                              |

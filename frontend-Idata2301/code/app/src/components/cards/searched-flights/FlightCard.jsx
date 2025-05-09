@@ -1,9 +1,16 @@
 import React from "react";
 import "./flightCard.css";
 import { sendApiRequest } from "../../../library/requests";
-import { addToShoppingCart } from "../../../utils/shoppingCartUtils"; 
+import { addToShoppingCart } from "../../../utils/shoppingCartUtils";
 
-const NewFlightCard = ({ flight, userIsAdmin, onVisibilityChange, purchasable = true }) => {
+const NewFlightCard = ({
+  flight,
+  userIsAdmin,
+  onVisibilityChange,
+  purchasable = true,
+  setSelectedFlight,
+  setActivePage,
+}) => {
   const {
     id,
     flightClassId: {
@@ -26,7 +33,7 @@ const NewFlightCard = ({ flight, userIsAdmin, onVisibilityChange, purchasable = 
   } = flight;
 
   const handleAddToCart = () => {
-    const result = addToShoppingCart(flight);
+    addToShoppingCart(flight);
   };
 
   const handleToggleVisibility = async () => {
@@ -53,42 +60,42 @@ const NewFlightCard = ({ flight, userIsAdmin, onVisibilityChange, purchasable = 
 
   return (
     <div className="new-flight-card">
-      <h2>
-        {company} - {flightName}
-      </h2>
+      <h2>{company} - {flightName}</h2>
       <p className="new-class-name">Class: {flightClassName}</p>
 
       <div className="new-flight-details">
         <div className="new-departure">
           <p className="label">Departure</p>
-          <p>
-            {departureCity} ({departureCode})
-          </p>
+          <p>{departureCity} ({departureCode})</p>
         </div>
         <div className="new-arrival">
           <p className="label">Arrival</p>
-          <p>
-            {arrivalCity} ({arrivalCode})
-          </p>
+          <p>{arrivalCity} ({arrivalCode})</p>
         </div>
       </div>
 
       <p className="new-date">Date: {date}</p>
 
-
-
-     {purchasable && (
+      {purchasable && (
         <p className="new-seats">Available Seats: {availableSeats}</p>
       )}
 
       <div className="new-price-section">
-        <p className="new-price">
-          ${price} {priceCode}
-        </p>
+        <p className="new-price">${price} {priceCode}</p>
         {discount > 0 && <p className="new-discount">Discount: {discount}%</p>}
       </div>
 
-      <button className="new-book-button">Details</button>
+      <button
+        className="new-book-button"
+        onClick={() => {
+          if (setSelectedFlight && setActivePage) {
+            setSelectedFlight(flight);
+            setActivePage("flight-details");
+          }
+        }}
+      >
+        Details
+      </button>
 
       {purchasable && (
         <button className="new-book-button" onClick={handleAddToCart}>
