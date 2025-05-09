@@ -3,7 +3,12 @@ import NewFlightCard from "./FlightCard";
 import "./flightsContainer.css";
 import { isAdmin } from "../../../library/Identity/authentication";
 
-const FlightsContainer = ({ flights: initialFlights, user }) => {
+const FlightsContainer = ({
+  flights: initialFlights,
+  user,
+  setSelectedFlight, 
+  setActivePage     
+}) => {
   const userIsAdmin = user && isAdmin(user);
   const [flights, setFlights] = useState([]);
 
@@ -30,6 +35,8 @@ const FlightsContainer = ({ flights: initialFlights, user }) => {
               flight={flight}
               userIsAdmin={userIsAdmin}
               onVisibilityChange={handleVisibilityChange}
+              setSelectedFlight={setSelectedFlight}  
+              setActivePage={setActivePage}          
             />
           ))
       ) : (

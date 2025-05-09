@@ -1,6 +1,6 @@
 import React from "react";
 import "./flightDetailPage.css";
-import { addToShoppingCart } from "../../../utils/shoppingCartUtils"; 
+import { addToShoppingCart } from "../../utils/shoppingCartUtils";
 
 const FlightDetailPage = ({ flight, onAddToCart, onBuyNow }) => {
   const {
