@@ -37,7 +37,9 @@ const PurchasedFlights = ({user}) => {
 
   // Call the function to fetch purchased flights when the component mounts
   useEffect(() => {
-    fetchPurchasedFlights();
+    if (user){
+      fetchPurchasedFlights();
+    }
   }, []);
 
   return (
