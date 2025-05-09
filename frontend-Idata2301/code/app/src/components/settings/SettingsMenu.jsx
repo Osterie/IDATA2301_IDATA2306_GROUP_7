@@ -40,14 +40,17 @@ const SettingsMenu = ({user}) => {
         >
           Favorite Flights
         </button>
-        <button
-          className={`${styles.tabButton} ${
-            activeTab === "purchased" ? styles.activeTab : ""
-          }`}
-          onClick={() => setActiveTab("purchased")}
-        >
-          Purchased Flights
-        </button>
+
+        {user && (
+          <button
+            className={`${styles.tabButton} ${
+              activeTab === "purchased" ? styles.activeTab : ""
+            }`}
+            onClick={() => setActiveTab("purchased")}
+          >
+            Purchased Flights
+          </button>
+        )}
       </div>
       <div className={styles.tabContent}>{renderTabContent()}</div>
     </div>
