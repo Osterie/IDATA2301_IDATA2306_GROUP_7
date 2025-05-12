@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import './searchBar.css';
 import PassengerAmountField from './PassengerAmountField';
 
-import {sendApiRequest} from "../../library/requests";
+import { sendApiRequest } from "../../library/requests";
 
-
-const SearchBar = ({ setFlights, setActivePage  }) => {  // Receive setFlights as a prop
+const SearchBar = ({ setFlights, navigate }) => {
     const [formData, setFormData] = useState({
         departure: '',
         arrival: '',
@@ -20,23 +19,21 @@ const SearchBar = ({ setFlights, setActivePage  }) => {  // Receive setFlights a
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         try {
             await sendApiRequest(
                 "POST", "/searchForFlights",
-
-                    function (fetchedData) {
-                        // const fetchedData = response.json();
-                        console.log('Flight search results:', fetchedData);
-                        setFlights(fetchedData);  // Store flights in state
-                        setActivePage("deals");  // ✅ Navigate to the Deals page
-                    },
-                    JSON.stringify(formData),
-                    function (errorResponse) {
-                        console.log("Error: " + errorResponse);
-                        throw new Error('Network response was not ok');
-                    }
-            )
+                function (fetchedData) {
+                    console.log('Flight search results:', fetchedData);
+                    setFlights(fetchedData);
+                    navigate("/deals");
+                },
+                JSON.stringify(formData),
+                function (errorResponse) {
+                    console.log("Error: " + errorResponse);
+                    throw new Error('Network response was not ok');
+                }
+            );
 
         } catch (error) {
             console.error('Error searching for flights:', error);

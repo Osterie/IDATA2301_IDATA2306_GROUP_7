@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
+
 import FilterSidebar from "./components/searchfilter/filter";
 import ProductCardContainer from "./components/cards/deals/ProductCardContainer";
 import ProductCardHeader from "./components/cards/deals/ProductCardHeader";
@@ -15,7 +17,7 @@ import Navbar from "./components/header/Navbar";
 import AboutUs from "./components/about/AboutUs";
 import AdminPage from "./components/admin/AdminPage";
 import ManageUserPage from "./components/admin/ManageUserPage";
-import { getAuthenticatedUser, checkJwtOnLoad } from "./library/Identity/authentication"; // adjust path as needed
+import { getAuthenticatedUser } from "./library/Identity/authentication";
 import CookieConsent from "react-cookie-consent";
 import SettingsMenu from "./components/settings/SettingsMenu";
 import {
@@ -27,42 +29,34 @@ import {
 import FlightDetailPage from "./components/flightDetailPage/FlightDetailPage";
 
 function App() {
-  const [activePage, setActivePage] = useState("home");
-  const [flights, setFlights] = useState([]);  // Store flight data
+  const [flights, setFlights] = useState([]);
   const [user, setUser] = useState(null);
   const [selectedFlight, setSelectedFlight] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loggedInUser = getAuthenticatedUser();
     setUser(loggedInUser);
   }, []);
 
-  // // Check JWT on load
-  // useEffect(() => {
-  //   checkJwtOnLoad();
-  // }, []);
-
-  const handleNavClick = (page) => {
-    setActivePage(page);
-  };
-
-  // Checks if user has already consented to cookies
-  // If no consent: Ask
   useEffect(() => {
     if (hasConsent()) {
-      setCountryFromIP(); // Automatically sets country, airport, currency
+      setCountryFromIP();
       const last = getLastSearch();
       if (last) console.log("Restoring search:", last);
     }
   }, []);
-  
+
   useEffect(() => {
     if (flights.length > 0) {
       setLastSearch(flights);
     }
   }, [flights]);
 
-
+  const handleNavClick = (page) => {
+    navigate(`/${page}`);
+  };
 
   return (
     <div className="App">
@@ -71,45 +65,57 @@ function App() {
       </header>
 
       <main>
-        {activePage === "home" && (
-          <>
-            <MainPageHero setFlights={setFlights} setActivePage={setActivePage} />
-            <ProductCardHeader />
-            <ProductCardContainer />
-          </>
-        )}
-        {activePage === "deals" && (
-          <>
-            <DealsPageHero setFlights={setFlights} setActivePage={setActivePage} />
-            <section className="search-section">
-              <FilterSidebar flights={flights} setFlights={setFlights} />
-              <FlightsContainer
-                flights={flights}
-                user={user}
-                setSelectedFlight={setSelectedFlight}
-                setActivePage={setActivePage}
-              />
-            </section>
-          </>
-        )}
-        {activePage === "flight-details" && selectedFlight && (
-          <FlightDetailPage flight={selectedFlight} />
-        )}
-
-        {activePage === "about" && <AboutUs />}
-        {activePage === "login" && <LogInPageHero onNavClick={handleNavClick} />}
-        {activePage === "admin" && <AdminPage setActivePage={setActivePage} />}
-        {activePage === "manage-users" && <ManageUserPage />}
-        {activePage === "create-account" && <CreateAccount />}
-        {activePage === "settings" && <SettingsMenu user={user} />
-        }
-        {activePage === "shoppingCart" && (<ShoppingCartHero onNavClick={handleNavClick} />)}
-        {activePage === "purchase" && <PurchaseHero />}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <MainPageHero setFlights={setFlights} navigate={navigate} />
+                <ProductCardHeader />
+                <ProductCardContainer />
+              </>
+            }
+          />
+          <Route
+            path="/deals"
+            element={
+              <>
+                <DealsPageHero setFlights={setFlights} />
+                <section className="search-section">
+                  <FilterSidebar flights={flights} setFlights={setFlights} />
+                  <FlightsContainer
+                    flights={flights}
+                    user={user}
+                    setSelectedFlight={setSelectedFlight}
+                    navigate={navigate}
+                  />
+                </section>
+              </>
+            }
+          />
+          <Route
+            path="/flight-details"
+            element={
+              selectedFlight ? (
+                <FlightDetailPage flight={selectedFlight} />
+              ) : (
+                <div>Please select a flight from the deals page.</div>
+              )
+            }
+          />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/login" element={<LogInPageHero onNavClick={handleNavClick} />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/manage-users" element={<ManageUserPage />} />
+          <Route path="/create-account" element={<CreateAccount />} />
+          <Route path="/settings" element={<SettingsMenu user={user} />} />
+          <Route path="/shoppingCart" element={<ShoppingCartHero onNavClick={handleNavClick} />} />
+          <Route path="/purchase" element={<PurchaseHero />} />
+        </Routes>
       </main>
 
       <Footer />
 
-      {/* Cookie Consent banner shown globally */}
       <CookieConsent
         location="bottom"
         buttonText="Accept"

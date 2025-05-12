@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { doLogout } from "../../library/Identity/authentication"; // adjust path
+import { Link, useNavigate } from "react-router-dom";
+import { doLogout, isAdmin } from "../../library/Identity/authentication";
 import "./nav.css";
 import logo from "./images/logo3.png";
-import { isAdmin } from "../../library/Identity/authentication"; // adjust path
 
 const Navbar = ({ onNavClick, user }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -13,7 +14,10 @@ const Navbar = ({ onNavClick, user }) => {
 
   const showAdmin = user && isAdmin(user);
 
-  console.log(user);
+  const handleLogout = () => {
+    doLogout();
+    navigate("/");
+  };
 
   return (
     <nav>
@@ -21,37 +25,34 @@ const Navbar = ({ onNavClick, user }) => {
         <div className={`bar ${isMenuOpen ? "open" : ""}`}></div>
         <div className={`bar ${isMenuOpen ? "open" : ""}`}></div>
         <div className={`bar ${isMenuOpen ? "open" : ""}`}></div>
-        <div className={`bar ${isMenuOpen ? "open" : ""}`}></div>
       </div>
 
-      <a href="/" className="logo">
+      <Link to="/" className="logo">
         <div className="logo-container">
           <img src={logo} alt="Logo" />
           <h1>Flight Finder</h1>
         </div>
-      </a>
+      </Link>
 
       <ul className={isMenuOpen ? "active" : ""}>
-        <li><a href="#" onClick={() => onNavClick("home")}>Home</a></li>
-        <li><a href="#" onClick={() => onNavClick("deals")}>Deals</a></li>
-        <li><a href="#" onClick={() => onNavClick("about")}>About</a></li>
-          
-        {/* Conditionally show Log In or Log Out */}
-          {user ? (
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/deals">Deals</Link></li>
+        <li><Link to="/about">About</Link></li>
+
+        {user ? (
           <>
-            <li><a href="#" className="log-out-button" onClick={doLogout}>Log Out</a></li>
+            <li><a href="#" className="log-out-button" onClick={handleLogout}>Log Out</a></li>
           </>
         ) : (
-          <li><a href="#" onClick={() => onNavClick("login")}>Log In</a></li>
+          <li><Link to="/login">Log In</Link></li>
         )}
 
         {showAdmin && (
-          <li><a href="#" onClick={() => onNavClick("admin")}>Admin</a></li>
+          <li><Link to="/admin">Admin</Link></li>
         )}
 
-        <li><a href="#" onClick={() => onNavClick("settings")}>⚙️</a></li>
-        <li><a href="#" onClick={() => onNavClick("shoppingCart")}>🛒</a></li>
-
+        <li><Link to="/settings">⚙️</Link></li>
+        <li><Link to="/shoppingCart">🛒</Link></li>
       </ul>
     </nav>
   );
