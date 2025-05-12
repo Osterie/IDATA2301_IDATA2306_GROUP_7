@@ -24,23 +24,33 @@ public class PriceController {
     // Endpoint to fetch the cheapest flight
     @GetMapping("/cheapest")
     public Price getCheapestFlight() {
-        logger.info("Fetching the cheapest flight");
         return priceRepository.findCheapestFlight();
 
+    }
+
+    // Endpoint to fetch flights departing today
+    @GetMapping("/today")
+    public List<Price> getFlightsToday() {
+        LocalDate today = LocalDate.now();
+        return priceRepository.findRandomFlightByDate(today);
     }
 
     // Endpoint to fetch flights departing tomorrow
     @GetMapping("/tomorrow")
     public List<Price> getFlightsTomorrow() {
-        logger.info("Fetching flight for tomorrow");
         LocalDate tomorrow = LocalDate.now().plusDays(1);
-        return priceRepository.findFlightByDate(tomorrow);
+        return priceRepository.findRandomFlightByDate(tomorrow);
     }
 
     // Endpoint to fetch random flights
     @GetMapping("/random")
-    public List<Price> getRandomFlights(@RequestParam int count) {
-        logger.info("Fetching {} random flights", count);
-        return priceRepository.findRandomFlights(count);
+    public List<Price> getRandomFlights() {
+        return priceRepository.findRandomFlights();
+    }
+
+    // Endpoint to fetch highest discounted flight
+    @GetMapping("/highest-discount")
+    public List<Price> getHighestDiscountedFlight() {
+        return priceRepository.findHighestDiscountFlight();
     }
 }

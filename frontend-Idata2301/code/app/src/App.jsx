@@ -75,7 +75,7 @@ function App() {
           <>
             <MainPageHero setFlights={setFlights} setActivePage={setActivePage} />
             <ProductCardHeader />
-            <ProductCardContainer />
+            <ProductCardContainer setFlights={setFlights} setActivePage={setActivePage}/>
           </>
         )}
         {activePage === "deals" && (
