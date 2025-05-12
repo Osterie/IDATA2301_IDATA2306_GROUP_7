@@ -32,6 +32,7 @@ function App() {
   const [flights, setFlights] = useState([]);
   const [user, setUser] = useState(null);
   const [selectedFlight, setSelectedFlight] = useState(null);
+  const [activePage, setActivePage] = useState(""); // <-- Define the activePage state here
 
   const navigate = useNavigate();
 
@@ -55,6 +56,7 @@ function App() {
   }, [flights]);
 
   const handleNavClick = (page) => {
+    setActivePage(page); // <-- Set the active page when navigation happens
     navigate(`/${page}`);
   };
 
@@ -105,7 +107,7 @@ function App() {
           />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/login" element={<LogInPageHero onNavClick={handleNavClick} />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin" element={<AdminPage setActivePage={setActivePage} />} />
           <Route path="/manage-users" element={<ManageUserPage />} />
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="/settings" element={<SettingsMenu user={user} />} />
