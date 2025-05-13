@@ -4,7 +4,12 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Random;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -234,10 +239,8 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
              logger.info("Airports loaded successfully.");
         } catch (DataAccessException e) {
            logger.error("Database error occurred while loading airports.", e);
-           throw new RuntimeException("Failed to load airports due to a database error.", e);
        } catch (Exception e) {
            logger.error("Unexpected error occurred while loading airports.", e);
-           throw new RuntimeException("Failed to load airports due to an unexpected error.", e);
        }
     }
 
@@ -261,10 +264,8 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
             logger.info("Routes loaded successfully.");
         } catch (DataAccessException e) {
             logger.error("Database error occurred while loading routes.", e);
-            throw new RuntimeException("Failed to load routes due to a database error.", e);
         } catch (Exception e) {
             logger.error("Unexpected error occurred while loading routes.", e);
-            throw new RuntimeException("Failed to load routes due to an unexpected error.", e);
         }
     }
 
@@ -288,10 +289,8 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
             logger.info("Prices loaded successfully.");
         } catch (DataAccessException e) {
            logger.error("Database error occurred while loading prices.", e);
-           throw new RuntimeException("Failed to load prices due to a database error.", e);
        } catch (Exception e) {
            logger.error("Unexpected error occurred while loading prices.", e);
-           throw new RuntimeException("Failed to load prices due to an unexpected error.", e);
        }
     }
 
@@ -337,10 +336,8 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
             logger.info("Extra features loaded successfully.");
         } catch (DataAccessException e) {
            logger.error("Database error occurred while loading extra features.", e);
-           throw new RuntimeException("Failed to load extra features due to a database error.", e);
        } catch (Exception e) {
            logger.error("Unexpected error occurred while loading extra features.", e);
-           throw new RuntimeException("Failed to load extra features due to an unexpected error.", e);
        }
     }
 
@@ -366,10 +363,8 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
             logger.info("Flight accommodations loaded successfully.");
         } catch (DataAccessException e) {
            logger.error("Database error occurred while loading flight accommodations.", e);
-           throw new RuntimeException("Failed to load flight accommodations due to a database error.", e);
        } catch (Exception e) {
            logger.error("Unexpected error occurred while loading flight accommodations.", e);
-           throw new RuntimeException("Failed to load flight accommodations due to an unexpected error.", e);
        }
     }
 
@@ -395,41 +390,50 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
             logger.info("Flight class loaded successfully.");
         } catch (DataAccessException e) {
            logger.error("Database error occurred while loading flights.", e);
-           throw new RuntimeException("Failed to load flights due to a database error.", e);
        } catch (Exception e) {
            logger.error("Unexpected error occurred while loading flights.", e);
-           throw new RuntimeException("Failed to load flights due to an unexpected error.", e);
        }
     }
 
     public void loadFlightClasses() {
-        try {
-            // SQL to insert flight class data
-            String sql = "INSERT INTO flight_application.flight_classes (available_seats, flight_id, class_id)\r\n" +
-                         "VALUES\r\n" +
-                         "    (20, 18, 1)," + "(30, 18, 2)," + "(15, 18, 6),   -- Delta Flight 425\r\n" +
-                         "    (50, 19, 4)," + "(60, 19, 1)," + "(30, 19, 5),   -- Norwegian Flight 708\r\n" +
-                         "    (40, 20, 1)," + "(20, 20, 8)," + "(10, 20, 9),   -- KLM Flight 605\r\n" +
-                         "    (15, 21, 7)," + "(20, 21, 6)," + "(25, 21, 3),   -- Swiss Flight 110\r\n" +
-                         "    (50, 22, 2)," + "(30, 22, 6)," + "(10, 22, 9),   -- Alitalia Flight 560\r\n" +
-                         "    (25, 23, 1)," + "(35, 23, 5)," + "(40, 23, 4),   -- AA Flight 220\r\n" +
-                         "    (60, 24, 2)," + "(20, 24, 9)," + "(15, 24, 3),   -- Lufthansa Flight 445\r\n" +
-                         "    (45, 25, 4)," + "(35, 25, 1)," + "(20, 25, 8),   -- Air France Flight 123\r\n" +
-                         "    (25, 26, 9)," + "(50, 26, 7)," + "(40, 26, 8),   -- Emirates Flight 204\r\n" +
-                         "    (30, 27, 2)," + "(40, 27, 9)," + "(25, 27, 5),   -- Qatar Airways Flight 905\r\n" +
-                         "    (50, 28, 1)," + "(15, 28, 10)," + "(20, 28, 8);  -- Singapore Airlines Flight 26";
-    
-            // Execute the SQL
-            jdbcTemplate.execute(sql);
-            logger.info("Flight classes loaded successfully.");
-        } catch (DataAccessException e) {
-            logger.error("Database error occurred while loading flight classes.", e);
-            throw new RuntimeException("Failed to load flight classes due to a database error.", e);
-        } catch (Exception e) {
-            logger.error("Unexpected error occurred while loading flight classes.", e);
-            throw new RuntimeException("Failed to load flight classes due to an unexpected error.", e);
+    try {
+        // Get all flight IDs from your flights table
+        String fetchFlightsSql = "SELECT id FROM flight_application.flight";
+        List<Integer> flightIds = jdbcTemplate.queryForList(fetchFlightsSql, Integer.class);
+
+        // We'll use a set of available class IDs to randomly assign
+        List<Integer> availableClassIds = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        Random random = new Random();
+
+        // Build SQL insert
+        StringBuilder insertSql = new StringBuilder("INSERT INTO flight_application.flight_classes (available_seats, flight_id, class_id) VALUES ");
+
+        List<String> valueRows = new ArrayList<>();
+
+        for (Integer flightId : flightIds) {
+            // Pick 3 unique random class IDs
+            Collections.shuffle(availableClassIds);
+            List<Integer> classIds = availableClassIds.subList(0, 3);
+
+            for (Integer classId : classIds) {
+                int seats = random.nextInt(81) + 20; // 20 to 100
+                valueRows.add(String.format("(%d, %d, %d)", seats, flightId, classId));
+            }
         }
+
+        // Join the value rows into the final SQL
+        insertSql.append(String.join(", ", valueRows)).append(";");
+
+        jdbcTemplate.execute(insertSql.toString());
+        logger.info("Random flight classes loaded for all flights.");
+
+    } catch (DataAccessException e) {
+        logger.error("Database error occurred while loading flight classes.", e);
+    } catch (Exception e) {
+        logger.error("Unexpected error occurred while loading flight classes.", e);
     }
+}
+
 
 
     public void createTables() {
@@ -568,10 +572,8 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
             logger.info("Classes loaded successfully.");
         } catch (DataAccessException e) {
             logger.error("Database error occurred while loading classes.", e);
-            throw new RuntimeException("Failed to load classes due to a database error.", e);
         } catch (Exception e) {
             logger.error("Unexpected error occurred while loading classes.", e);
-            throw new RuntimeException("Failed to load classes due to an unexpected error.", e);
         }
     }
 
