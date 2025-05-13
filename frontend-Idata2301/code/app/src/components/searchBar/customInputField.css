@@ -1,0 +1,80 @@
+/* Parent container should take up full width */
+.passenger-amount-container {
+    width: 100%; /* Takes up the full available space */
+    display: flex;
+    justify-content: center; /* Centers content */
+}
+
+/* Responsive Input Number Section */
+.input-number {
+    width: 100%; /* Takes full width of the parent */
+    max-width: 1000px; /* Adjust if needed */
+    padding-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: solid 2px var(--primary-color);
+    justify-content: space-between; /* Distribute items */
+}
+
+/* Input should be flexible */
+.input-number input {
+    flex: 1; /* Allows it to grow based on space */
+    min-width: 60px;
+    max-width: 150px;
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 0.4rem;
+    border-radius: 8px;
+}
+
+/* Buttons container */
+.input-number-actions {
+    display: flex;
+    gap: 0.6rem;
+}
+
+/* Buttons should be responsive */
+.input-number-actions button {
+    display: flex;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    font-weight: 900;
+    color: #fff;
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* Hover effect */
+.input-number-actions button:hover {
+    background-color: var(--primary-color);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1050px) {
+    .input-number {
+        flex-wrap: wrap; /* Wrap elements */
+        justify-content: center; /* Center align */
+        text-align: center;
+    }
+
+    .input-number input {
+        max-width: 100px;
+    }
+
+    .input-number-actions {
+        gap: 0.4rem;
+    }
+
+    .input-number-actions button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+}

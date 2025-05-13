@@ -1,0 +1,73 @@
+---------------------------HOME PAGE
+
+
+HEADER
+
+	Logo opp i venstre
+	Contact us?
+	About us?
+	Login
+
+MAIN
+
+	HERO SECTION
+
+		SLOGAN
+
+		Origin
+		Destination
+		From time
+		To time
+		Passangers/class
+		Search button
+
+	Cards with popular choices and such	
+
+
+	Reminder of call to action, search for flights button.
+
+FOOTER
+
+	Contact us
+	About us
+	Trademark
+	Privacy agreement
+	Other?
+
+
+
+--------------------
+
+
+----------------------Search Page-------------
+
+	
+		
+	Header same
+
+	LEFT Sidebar
+		
+		Sort by (price, time, transfers), dropdown
+		Price range, slider with min and max
+		Stops, checkboxes (Direct, 1 transfer, 2+ transfer)
+		Company, checkboxes
+		Travel time, slider
+		Emissions?
+
+	
+	Under header, entered flight info. (same search bar thing as in home page)
+
+
+	Main area
+		
+		Cards
+			Company
+			From time
+			To time
+			Travel time
+			Price
+			Click button.
+
+
+---------------------------------------------------------
+		

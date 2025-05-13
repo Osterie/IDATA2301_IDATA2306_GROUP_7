@@ -1,0 +1,81 @@
+body {
+  background-color: var(--background-color);
+}
+
+/* Search section */
+.search-section {
+  width: 100%;
+  display: flex;
+}
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .search-section {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+  }
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* CSS variables */
+:root{
+  /* Main colors */
+  --primary-color: #182833;
+  --secondary-color: #183040;
+  --background-color: rgb(240,240,250);
+  --box-color: white;
+  --bottom-color: #101520;
+
+  /* Contrast colors */
+  --primary-contrast: #FDA300;
+  --call-to-action-color: #FDA300;
+  --call-to-action-highlight-color: #FFC24D;
+
+  /* Text color */
+  --text-color: black;
+  --border-color: black;
+
+  /* Contrast text color */
+  --contrast-text-color: white;
+  --contrast-border-color: white;
+
+  /* Shadow color */
+  --shadow-color: lightgray;
+
+}

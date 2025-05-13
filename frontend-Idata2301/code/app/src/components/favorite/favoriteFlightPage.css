@@ -1,0 +1,50 @@
+/* FavoriteFlights.css */
+.favorite-flights-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h2 {
+    color: var(--text-color);
+    font-size: 24px;
+}
+
+.flights-list {
+    list-style: none;
+    padding: 0;
+}
+
+.flight-card {
+    background: white;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flight-info {
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+.delete-button {
+    background-color: #c82333;
+    color: var(--contrast-text-color);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.delete-button:hover {
+    background: #cc0000;
+}

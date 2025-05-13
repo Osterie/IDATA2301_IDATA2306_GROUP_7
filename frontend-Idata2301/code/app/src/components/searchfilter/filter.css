@@ -1,0 +1,134 @@
+/* Sidebar Styling */
+.sidebar-mother {
+  width: 20%;
+}
+
+.filter-sidebar {
+  width: 100%; /* Full width by default */
+  height: 100vh;
+  background-color: var(--contrast-text-color);
+  color: var(--primary-text-color);
+  padding: 20px;
+  border-radius: 12px;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Sidebar sections */
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filter-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+/* Dropdown Button */
+.dropdown-btn {
+  background: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: left;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+/* Checkboxes */
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Finish Button (Mobile Only) */
+.finish-btn {
+  display: none;
+  background: red;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 5px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.finish-btn:hover {
+  background: darkred;
+}
+
+/* Toggle Sidebar Button (Mobile) */
+.toggle-sidebar-btn {
+  display: none;
+  background: var(--secondary-color);
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 1050px) {
+  .sidebar-mother {
+    width: 100%;
+  }
+
+  .filter-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    padding: 20px;
+  }
+
+  .filter-sidebar.show {
+    transform: translateX(0);
+  }
+
+  .finish-btn {
+    display: block;
+  }
+
+  .toggle-sidebar-btn {
+    display: block;
+  }
+
+  /* Dropdown Button */
+  .dropdown-btn {
+    background: var(--primary-contrast);
+    color: var(--text-color);
+  }
+
+  /* Dropdown Content */
+  .dropdown-content {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}

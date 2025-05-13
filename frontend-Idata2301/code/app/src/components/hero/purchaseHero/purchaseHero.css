@@ -1,0 +1,40 @@
+.purchase-hero-container {
+    color: white;
+  }
+  
+  .purchase-hero-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  purchase-hero-container label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  purchase-hero-container input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  purchase-hero-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #007BFF;
+    color: white;
+    cursor: pointer;
+  }
+  
+  purchase-hero-container button:hover {
+    background: #0056b3;
+  }

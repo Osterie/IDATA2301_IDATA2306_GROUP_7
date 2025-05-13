@@ -1,0 +1,130 @@
+/* General Styles */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Navbar Styles */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--primary-color);
+  height: 80px;
+  width: 100%;
+  padding: 0 20px;
+  z-index: 3;
+}
+
+/* Adjust the .logo div to use Flexbox */
+nav .logo {
+  display: flex;
+  align-items: center;  /* Vertically aligns the logo and text */
+}
+
+nav .logo-container {
+  display: flex;
+  align-items: center;  /* Aligns logo image and text horizontally */
+}
+
+nav .logo img {
+  height: 60px; /* Adjust based on your design */
+  width: auto;
+  margin-right: 10px; /* Adds space between the logo image and the text */
+}
+
+nav .logo h1 {
+  margin: 0; /* Removes any default margin around the text */
+  color: var(--contrast-text-color); /* Adjusts the text color */
+  font-size: 24px; /* Adjust text size as needed */
+}
+
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 10px;
+}
+
+nav ul li a {
+  color: var(--contrast-text-color);
+  font-size: 17px;
+  padding: 7px 13px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+nav ul li a.active,
+nav ul li a:hover {
+  background: var(--contrast-text-color);
+  transition: 0.5s;
+  color: var(--text-color);
+}
+
+/* Hamburger Menu Styles */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 24px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.hamburger-menu .bar {
+  height: 4px;
+  width: 100%;
+  background-color: var(--contrast-text-color);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger-menu .bar.open:nth-child(1) {
+  transform: rotate(45deg) translateY(10px);
+}
+
+.hamburger-menu .bar.open:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu .bar.open:nth-child(3) {
+  transform: rotate(-45deg) translateY(-10px);
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .hamburger-menu {
+    display: flex;
+  }
+  nav ul {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: var(--secondary-color);
+    top: 80px;
+    left: -100%;
+    text-align: center;
+    flex-direction: column;
+    transition: all 0.5s;
+  }
+  nav ul li {
+    margin: 50px 0;
+  }
+  nav ul li a {
+    font-size: 20px;
+  }
+  nav ul.active {
+    left: 0;
+  }
+  nav .logo img {
+    height: 40px; /* Adjust based on your design */
+  }
+}
+
+.log-out-button{
+  background-color: #c82333;
+}

@@ -1,0 +1,64 @@
+/* AboutUs.css */
+.about-us-section {
+    padding: 2rem;
+    font-family: 'Arial', sans-serif;
+    background-color: var(--contrast-text-color);
+    color: #333;
+    margin: 0 auto;
+    max-width: 900px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .about-us-section h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+  }
+  
+  .about-us-section h2 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-top: 1.5rem;
+    border-bottom: 2px solid var(--text-color);
+    padding-bottom: 0.5rem;
+  }
+  
+  .about-us-section p {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  
+  .about-us-info-container {
+    margin-bottom: 2rem;
+  }
+  
+  .about-us-text-container {
+    line-height: 1.8;
+    color: #555;
+  }
+  
+  .about-us-text-container p {
+    margin-bottom: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .about-us-section {
+      padding: 1.5rem;
+    }
+  
+    .about-us-section h1 {
+      font-size: 2rem;
+    }
+  
+    .about-us-section h2 {
+      font-size: 1.3rem;
+    }
+  
+    .about-us-section p {
+      font-size: 0.9rem;
+    }
+  }
+  

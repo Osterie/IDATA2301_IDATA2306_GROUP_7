@@ -1,0 +1,88 @@
+  .new-flight-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .new-flight-card h2 {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 5px;
+  }
+  
+  .new-class-name {
+    font-size: 14px;
+    font-weight: bold;
+    color: #16a085;
+  }
+  
+  .new-flight-details {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+  }
+  
+  .label {
+    font-size: 12px;
+    color: #7f8c8d;
+  }
+  
+  .new-date, .new-seats {
+    font-size: 14px;
+    font-weight: bold;
+    color: #34495e;
+  }
+  
+  .new-price-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .new-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #e74c3c;
+  }
+  
+  .new-discount {
+    font-size: 14px;
+    color: #27ae60;
+    font-weight: bold;
+  }
+  
+  .new-provider {
+    font-size: 12px;
+    color: #7f8c8d;
+    margin-top: 5px;
+  }
+
+  
+  /* Add this for the admin button */
+  .toggle-visibility-button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: #f39c12;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .toggle-visibility-button:hover {
+    background-color: #d35400;
+  }
+  

@@ -1,0 +1,12 @@
+INSERT INTO flight_application.route (arrival_airport_code, departure_airport_code)
+VALUES
+    (1, 2),   -- JFK (New York) to LAX (Los Angeles)
+    (3, 4),   -- ORD (Chicago) to AES (Ålesund)
+    (5, 7),   -- AMS (Amsterdam) to LHR (London Heathrow)
+    (8, 9),   -- FCO (Rome) to CDG (Paris)
+    (10, 11), -- DFW (Dallas) to FRA (Frankfurt)
+    (12, 13), -- HND (Tokyo) to DXB (Dubai)
+    (14, 15), -- DOH (Doha) to SYD (Sydney)
+    (16, 1),  -- SIN (Singapore) to JFK (New York)
+    (5, 6),   -- AMS (Amsterdam) to ZRH (Zurich)
+    (9, 10);  -- CDG (Paris) to DFW (Dallas)

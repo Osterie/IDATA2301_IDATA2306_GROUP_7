@@ -1,0 +1,81 @@
+/* Reset global styles */
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+/* Body styles */
+body {
+  margin: 2rem;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+/* Typography */
+h1 {
+  font-size: 4.8rem;
+  text-align: center;
+}
+h2 {
+  font-size: 3.2rem;
+}
+p {
+  font-size: 2rem;
+  text-align: center;
+}
+
+/* Product container - Distribute space evenly */
+#product-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly; /* Spreads items evenly */
+  gap: 2rem; /* Space between rows */
+  max-width: 120rem; /* Prevents stretching too wide */
+  margin: 0 auto; /* Centers the container itself */
+}
+
+/* Card styles */
+.card {
+  width: 25rem;
+  height: 40rem;
+  border: 0.1rem dashed darkgray;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0 0.5rem lightgray;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Description box inside cards */
+.card-description {
+  padding: 1rem 2rem;
+}
+
+/* Highlighted card */
+.card.highlighted {
+  box-shadow: 0 0 2rem 1rem rgba(200, 200, 200, 0.75);
+}
+
+/* Hover animation */
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 1rem lightgray;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #product-container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .card {
+      width: 90%; /* Make the cards take up most of the screen */
+      height: auto; /* Allow flexible height */
+  }
+}
