@@ -8,7 +8,7 @@ import jakarta.persistence.*;
  * like a website, image URL, and image data.
  */
 @Entity
-@Table(name = "company")
+@Table(name = "flight_company")
 public class FlightCompany {
 
     /**

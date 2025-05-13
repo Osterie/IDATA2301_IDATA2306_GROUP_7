@@ -20,8 +20,7 @@ public class FlightCompanyInitializer {
         this.flightCompanyRepository = flightCompanyRepository;
     }
 
-    @PostConstruct
-    public void init() {
+    public void flightCompanyInitializer() {
         createCompany("American Airlines", "https://aa.com", "https://images.app.goo.gl/n1EZ86hcbnWW3r399", "AA");
         createCompany("Delta Air Lines", "https://delta.com", "https://images.app.goo.gl/zYxSrW6yM3jmM6cV7", "Delta");
         createCompany("Lufthansa", "https://lufthansa.com", "https://images.app.goo.gl/YCBLVgLaUvVErdV38", "LH");

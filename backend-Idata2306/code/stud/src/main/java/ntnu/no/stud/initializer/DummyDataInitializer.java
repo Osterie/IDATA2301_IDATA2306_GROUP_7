@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ import ntnu.no.stud.repositories.ScheduledFlightsRepository;
 import ntnu.no.stud.repositories.ExtraFeatureRepository;
 import ntnu.no.stud.repositories.ClassRepository;
 import ntnu.no.stud.repositories.FlightClassesRepository;
+import ntnu.no.stud.repositories.FlightCompanyRepository;
 import ntnu.no.stud.repositories.UserRepository;
 
 
@@ -61,6 +63,9 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     private FlightClassesRepository flightClassesRepository;
 
     @Autowired
+    private FlightCompanyRepository flightCompanyRepository;
+
+    @Autowired
     private RouteRepository routeRepository;
 
     @Autowired
@@ -79,6 +84,9 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     private ScheduledFlightsRepository scheduledFlightsRepository;
 
     @Autowired
+    private FlightCompanyInitializer flightCompanyInitializer;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -89,6 +97,17 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
 
     @Autowired
     private RouteInitializer routeInitializer;
+
+    @Autowired
+    ExtraFeatureInitializer extraFeatureInitializer;
+
+    @Autowired
+    AirportInitializer airportInitializer;
+
+    @Autowired
+    ClassInitializer classInitializer;
+
+    
 
 
 
@@ -126,387 +145,34 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
         } else {
           logger.info("Users already in the database, not importing anything");
         }
-
-
-        // Step 1: Load data from SQL files if necessary
     
         try {   
-        //createDatabase();     
-        // createTables();
         if (airportRepository.count() == 0) {
-            loadAirports();
-        }
-        if (classRepository.count() == 0) {
-            loadClass();
-        }
-        if (flightRepository.count() == 0) {
-            loadFlight();
-        }
-        if (flightClassesRepository.count() == 0) {
-            loadFlightClasses();
-        }
-        if (routeRepository.count() == 0) {
-            loadRoutes();
-        }
-        if (scheduledFlightsRepository.count() == 0) {
-            loadScheduledFlights();
-        }
-        if (priceRepository.count() == 0) {
-            loadPrices();
+            airportInitializer.loadAirports();
         }
         if (extraFeatureRepository.count() == 0) {
-            loadExtraFeatures();
+            extraFeatureInitializer.loadExtraFeatures();
         }
-        if (flightAccommodationRepository.count() == 0) {
-            loadFlightAccommodations();
+        if (flightCompanyRepository.count() == 0) {
+            flightCompanyInitializer.flightCompanyInitializer();
+        }
+        if (classRepository.count() == 0) {
+            classInitializer.loadClasses();
+        }
+        if (routeRepository.count() == 0) {
+            routeInitializer.generateRoutes();
+        }
+        if (flightRepository.count() == 0) {
+            int numberOfFlights = 1000; 
+            flightInitializer.generateRandomFlights(numberOfFlights);
         }
         } catch (Exception e) {
             logger.error("Failed to load data from SQL files.", e);
         }
-
-
-
-        // Step 2: Use initializers to generate random data
-        try {
-
-            int numberOfRoutes = 10; // Number of routes to generate
-            int numberOfFlights = 100; // Number of flights to generate
-            int numberOfTestFlights = 10; // Number of test flights to generate
-            Route testRoute = routeRepository.findById(9);
-
-            if (airportRepository.count() > 0 && routeRepository.count() > 0) {
-                routeInitializer.generateRandomRoutes(numberOfRoutes); // Generate random routes
-            }
-            if (routeRepository.count() > 0 && flightRepository.count() > 0) {
-                flightInitializer.generateRandomFlights(numberOfFlights); // Generate random flights
-            }
-
-
-            flightInitializer.generateRandomFlights(numberOfTestFlights, testRoute);
-        } catch (Exception e) {
-            logger.error("Failed to generate random data.", e);
-        }
     }
 
 
-
-
-
-
-
-    public void loadScheduledFlights() {
-        try {
-            // Get all flight IDs and route IDs
-            String fetchFlightsSql = "SELECT id FROM flight_application.flight";
-            String fetchRoutesSql = "SELECT id FROM flight_application.routes";
     
-            List<Integer> flightIds = jdbcTemplate.queryForList(fetchFlightsSql, Integer.class);
-            List<Integer> routeIds = jdbcTemplate.queryForList(fetchRoutesSql, Integer.class);
-    
-            if (routeIds.isEmpty()) {
-                logger.warn("No routes found. Cannot schedule flights.");
-                return;
-            }
-    
-            Random random = new Random();
-            StringBuilder insertSql = new StringBuilder("INSERT INTO flight_application.scheduled_flights (`date`, flight_id, route_id) VALUES ");
-    
-            List<String> valueRows = new ArrayList<>();
-    
-            LocalDate startDate = LocalDate.of(2025, 4, 1);
-    
-            for (int i = 0; i < flightIds.size(); i++) {
-                int flightId = flightIds.get(i);
-                int routeId = routeIds.get(random.nextInt(routeIds.size()));
-    
-                // Spread dates evenly from startDate
-                LocalDate flightDate = startDate.plusDays(i);
-    
-                valueRows.add(String.format("('%s', %d, %d)", flightDate, flightId, routeId));
-            }
-    
-            insertSql.append(String.join(", ", valueRows)).append(";");
-    
-            jdbcTemplate.execute(insertSql.toString());
-            logger.info("Scheduled flights loaded successfully.");
-    
-        } catch (DataAccessException e) {
-            logger.error("Database error while loading scheduled flights.", e);
-        } catch (Exception e) {
-            logger.error("Unexpected error while loading scheduled flights.", e);
-        }
-    }
-    
-
-    public void loadAirports() {
-        try {
-            // SQL to insert airport data
-            String sql = "INSERT INTO flight_application.airport (airport_code, city)" +
-                "VALUES" +
-                "('JFK', 'New York')," +
-                "('LAX', 'Los Angeles')," +
-                "('ORD', 'Chicago')," +
-                "('AES', 'Ålesund')," +
-                "('AMS', 'Amsterdam')," +
-                "('ZRH', 'Zurich')," +
-                "('LHR', 'London Heathrow')," +
-                "('FCO', 'Rome')," +
-                "('CDG', 'Paris')," +
-                "('DFW', 'Dallas')," +
-                "('FRA', 'Frankfurt')," +
-                "('HND', 'Tokyo')," +
-                "('DXB', 'Dubai')," +
-                "('DOH', 'Doha')," +
-                "('SYD', 'Sydney')," +
-                "('SIN', 'Singapore')";
-             // Execute the SQL
-             jdbcTemplate.execute(sql);
-             logger.info("Airports loaded successfully.");
-        } catch (DataAccessException e) {
-           logger.error("Database error occurred while loading airports.", e);
-       } catch (Exception e) {
-           logger.error("Unexpected error occurred while loading airports.", e);
-       }
-    }
-
-public void loadRoutes() {
-    try {
-        // Fetch all airport IDs
-        String fetchAirportsSql = "SELECT id FROM flight_application.airport";
-        List<Integer> airportIds = jdbcTemplate.queryForList(fetchAirportsSql, Integer.class);
-
-        if (airportIds.size() < 2) {
-            logger.warn("Not enough airports to create routes.");
-            return;
-        }
-
-        Random random = new Random();
-        StringBuilder insertSql = new StringBuilder("INSERT INTO flight_application.route (arrival_airport_code, departure_airport_code) VALUES ");
-        List<String> valueRows = new ArrayList<>();
-
-        int numberOfRoutes = 10;
-        Set<String> usedPairs = new HashSet<>();
-
-        while (valueRows.size() < numberOfRoutes) {
-            int dep = airportIds.get(random.nextInt(airportIds.size()));
-            int arr = airportIds.get(random.nextInt(airportIds.size()));
-
-            if (dep != arr) {
-                String key = dep + "-" + arr;
-                if (!usedPairs.contains(key)) {
-                    usedPairs.add(key);
-                    valueRows.add(String.format("(%d, %d)", arr, dep)); // Note: arrival first, as in your original SQL
-                }
-            }
-        }
-
-        insertSql.append(String.join(", ", valueRows)).append(";");
-
-        jdbcTemplate.execute(insertSql.toString());
-        logger.info("Routes loaded successfully.");
-
-    } catch (DataAccessException e) {
-        logger.error("Database error occurred while loading routes.", e);
-    } catch (Exception e) {
-        logger.error("Unexpected error occurred while loading routes.", e);
-    }
-}
-
-
-    public void loadPrices() {
-        try {
-            // Fetch all scheduled flight IDs
-            String fetchScheduledFlightsSql = "SELECT id FROM flight_application.scheduled_flights";
-            List<Integer> scheduledFlightIds = jdbcTemplate.queryForList(fetchScheduledFlightsSql, Integer.class);
-    
-            // Static lists of currencies and providers
-            List<String> currencies = Arrays.asList("USD", "EUR", "NOK", "CHF", "AED", "QAR");
-            List<String> providers = Arrays.asList("Skyscanner", "CheapOair", "Orbitz", "OneTravel", "Travelocity",
-                                                   "Google Flights", "JustFly", "eDreams", "Priceline", "AA Website");
-    
-            Random random = new Random();
-            StringBuilder insertSql = new StringBuilder("INSERT INTO flight_application.price (price, currency_code, provider, discount, class_id, scheduled_flights_id) VALUES ");
-    
-            List<String> valueRows = new ArrayList<>();
-    
-            for (Integer scheduledFlightId : scheduledFlightIds) {
-                int price = (random.nextInt((900 - 300) / 10 + 1) * 10) + 300;
-                String currency = currencies.get(random.nextInt(currencies.size()));
-                String provider = providers.get(random.nextInt(providers.size()));
-                int discount = random.nextInt(5 + 1) * 5;
-                int classId = 1 + random.nextInt(10);
-    
-                // Escape single quotes in provider names (just in case)
-                provider = provider.replace("'", "''");
-    
-                valueRows.add(String.format("(%d, '%s', '%s', %d, %d, %d)", price, currency, provider, discount, classId, scheduledFlightId));
-            }
-    
-            insertSql.append(String.join(", ", valueRows)).append(";");
-    
-            jdbcTemplate.execute(insertSql.toString());
-            logger.info("Random prices loaded successfully for all scheduled flights.");
-    
-        } catch (DataAccessException e) {
-            logger.error("Database error occurred while loading prices.", e);
-        } catch (Exception e) {
-            logger.error("Unexpected error occurred while loading prices.", e);
-        }
-    }
-    
-
-    public void loadExtraFeatures() {
-        try {
-            // SQL to insert extra feature data
-            String sql = "INSERT INTO flight_application.extra_feature\r\n" + 
-                                "(name) VALUES\r\n" + 
-                                "\t('Complimentary Wi-Fi'),\r\n" + 
-                                "    ('Seat-back Screens'),\r\n" + 
-                                "    ('Free Snacks'),\r\n" + 
-                                "    ('Free Breakfast'),\r\n" + 
-                                "    ('Seat Reservation'),\r\n" + 
-                                "    ('Fast Track'),\r\n" + 
-                                "    ('In-flight Magazine'),\r\n" + 
-                                "    ('Extra Legroom'),\r\n" + 
-                                "    ('Complimentary Meals'),\r\n" + 
-                                "    ('Lounge Access'),\r\n" + 
-                                "    ('Enhanced Entertainment System'),\r\n" + 
-                                "    ('Priority Boarding'),\r\n" + 
-                                "    ('Lounge Access'),\r\n" + 
-                                "    ('Swiss Chocolates'),\r\n" + 
-                                "    ('Priority Check-in'),\r\n" + 
-                                "    ('Complimentary Drinks'),\r\n" + 
-                                "    ('Italian Cuisine'),\r\n" + 
-                                "    ('Reserved Overhead Space'),\r\n" + 
-                                "    ('Alitalia Lounges'),\r\n" + 
-                                "    ('Wi-Fi'),\r\n" + 
-                                "    ('On-demand Video'),\r\n" + 
-                                "    ('Lounges Access'),\r\n" + 
-                                "    ('Michelin-starred Menus'),\r\n" + 
-                                "    ('Personal Coat Service'),\r\n" + 
-                                "    ('Flat-bed Seats'),\r\n" + 
-                                "    ('Shower Spas'),\r\n" + 
-                                "    ('Award-winning Cuisine'),\r\n" + 
-                                "    ('Fully Lie-flat Beds'),\r\n" + 
-                                "    ('4000 Entertainment Options'),\r\n" + 
-                                "    ('Book the Cook Service'),\r\n" + 
-                                "    ('Givenchy Amenities'),\r\n" + 
-                                "    ('Standalone Beds');";
-            // Execute the SQL
-            jdbcTemplate.execute(sql);
-            logger.info("Extra features loaded successfully.");
-        } catch (DataAccessException e) {
-           logger.error("Database error occurred while loading extra features.", e);
-       } catch (Exception e) {
-           logger.error("Unexpected error occurred while loading extra features.", e);
-       }
-    }
-
-public void loadFlightAccommodations() {
-    try {
-        // Get all flight IDs from the flights table
-        String fetchFlightsSql = "SELECT id FROM flight_application.flight";
-        List<Integer> flightIds = jdbcTemplate.queryForList(fetchFlightsSql, Integer.class);
-
-        // Define the range of available feature IDs (1–32 for example)
-        List<Integer> featureIds = IntStream.rangeClosed(1, 32).boxed().collect(Collectors.toList());
-
-        StringBuilder insertSql = new StringBuilder(
-            "INSERT INTO flight_application.flight_accommodation (feature_id, flight_id) VALUES ");
-
-        List<String> valueRows = new ArrayList<>();
-
-        for (Integer flightId : flightIds) {
-            // Shuffle and take 3 unique feature IDs
-            Collections.shuffle(featureIds);
-            List<Integer> selectedFeatures = featureIds.subList(0, 3);
-
-            for (Integer featureId : selectedFeatures) {
-                valueRows.add(String.format("(%d, %d)", featureId, flightId));
-            }
-        }
-
-        insertSql.append(String.join(", ", valueRows)).append(";");
-
-        jdbcTemplate.execute(insertSql.toString());
-        logger.info("Random flight accommodations loaded for all flights.");
-
-    } catch (DataAccessException e) {
-        logger.error("Database error occurred while loading flight accommodations.", e);
-    } catch (Exception e) {
-        logger.error("Unexpected error occurred while loading flight accommodations.", e);
-    }
-}
-
-
-
-    public void loadFlight() {
-        try {
-            // SQL to insert flight data
-            String sql = "INSERT INTO flight_application.flight (company, name)\r\n" + 
-                                "\tVALUES\r\n" + 
-                                "\t\t('Delta Air Lines', 'Delta Flight 425'),\r\n" + 
-                                "        ('Norwegian Air Shuttle', 'Norwegian Flight 708'),\r\n" + 
-                                "        ('KLM Royal Dutch Airlines', 'KLM Flight 605'),\r\n" + 
-                                "        ('Swiss International Air Lines', 'Swiss Flight 110'),\r\n" + 
-                                "        ('Alitalia', 'Alitalia Flight 560'),\r\n" + 
-                                "        ('American Airlines', 'AA Flight 220'),\r\n" + 
-                                "        ('Lufthansa', 'LH Flight 445'),\r\n" + 
-                                "        ('Air France', 'AF Flight 123'),\r\n" + 
-                                "        ('Emirates', 'EK Flight 204'),\r\n" + 
-                                "        ('Qatar Airways', 'QR Flight 905'),\r\n" + 
-                                "        ('Singapore Airlines', 'SQ Flight 26');";
-            // Execute the SQL
-            jdbcTemplate.execute(sql);
-            logger.info("Flight class loaded successfully.");
-        } catch (DataAccessException e) {
-           logger.error("Database error occurred while loading flights.", e);
-       } catch (Exception e) {
-           logger.error("Unexpected error occurred while loading flights.", e);
-       }
-    }
-
-    public void loadFlightClasses() {
-    try {
-        // Get all flight IDs from your flights table
-        String fetchFlightsSql = "SELECT id FROM flight_application.flight";
-        List<Integer> flightIds = jdbcTemplate.queryForList(fetchFlightsSql, Integer.class);
-
-        // We'll use a set of available class IDs to randomly assign
-        List<Integer> availableClassIds = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        Random random = new Random();
-
-        // Build SQL insert
-        StringBuilder insertSql = new StringBuilder("INSERT INTO flight_application.flight_classes (available_seats, flight_id, class_id) VALUES ");
-
-        List<String> valueRows = new ArrayList<>();
-
-        for (Integer flightId : flightIds) {
-            // Pick 3 unique random class IDs
-            Collections.shuffle(availableClassIds);
-            List<Integer> classIds = availableClassIds.subList(0, 3);
-
-            for (Integer classId : classIds) {
-                int seats = random.nextInt(81) + 20; // 20 to 100
-                valueRows.add(String.format("(%d, %d, %d)", seats, flightId, classId));
-            }
-        }
-
-        // Join the value rows into the final SQL
-        insertSql.append(String.join(", ", valueRows)).append(";");
-
-        jdbcTemplate.execute(insertSql.toString());
-        logger.info("Random flight classes loaded for all flights.");
-
-    } catch (DataAccessException e) {
-        logger.error("Database error occurred while loading flight classes.", e);
-    } catch (Exception e) {
-        logger.error("Unexpected error occurred while loading flight classes.", e);
-    }
-}
-
-
-
     public void createTables() {
         try {
             // SQL to create tables
@@ -621,32 +287,6 @@ public void loadFlightAccommodations() {
         }
     }
 
-    public void loadClass() {
-        try {
-            // SQL to insert class data
-            String sql = "INSERT INTO flight_application.class (name)\r\n" +
-                         "VALUES\r\n" +
-                         "    ('Economy'),\r\n" +
-                         "    ('Economy Flex'),\r\n" +
-                         "    ('Business'),\r\n" +
-                         "    ('Premium Economy'),\r\n" +
-                         "    ('Main Cabin'),\r\n" +
-                         "    ('Main Cabin Extra'),\r\n" +
-                         "    ('La Première'),\r\n" +
-                         "    ('First Class'),\r\n" +
-                         "    ('Qsuite'),\r\n" +
-                         "    ('Business Class'),\r\n" +
-                         "    ('Suites');";
-    
-            // Execute the SQL
-            jdbcTemplate.execute(sql);
-            logger.info("Classes loaded successfully.");
-        } catch (DataAccessException e) {
-            logger.error("Database error occurred while loading classes.", e);
-        } catch (Exception e) {
-            logger.error("Unexpected error occurred while loading classes.", e);
-        }
-    }
 
     public void updateScheduledFlights() {
         try {

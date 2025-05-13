@@ -44,6 +44,7 @@ public class PriceInitializer {
             // Generate random price
             int priceValue = ThreadLocalRandom.current().nextInt(1, 30) * 50;
 
+            int discount = generateRandomDiscount(); // Generate a random discount
 
             // Randomy select a price code
             String[] priceCodes = {
@@ -73,11 +74,26 @@ public class PriceInitializer {
             String provider = providers[ThreadLocalRandom.current().nextInt(providers.length)];
 
             // Create and save the price
-            Price price = new Price(randomFlightClass, priceValue, priceCode, provider, 0, scheduledFlight);
+            Price price = new Price(randomFlightClass, priceValue, priceCode, provider, discount, scheduledFlight);
             priceRepository.save(price);
 
         } catch (Exception e) {
             logger.error("Error generating price for scheduled flight: " + scheduledFlight.getId(), e);
         }
     }
+    /**
+ * Generates a random discount with 75% probability of being 0 and 25% probability of being 5, 10, 15, 20, or 25.
+ * @return the generated discount
+ */
+private int generateRandomDiscount() {
+    int randomValue = ThreadLocalRandom.current().nextInt(100); // Generate a random number between 0 and 99
+    if (randomValue < 75) {
+        return 0; // 75% chance of being 0
+    } else {
+        // 25% chance of being one of the increments (5, 10, 15, 20, 25)
+        int[] possibleDiscounts = {5, 10, 15, 20, 25};
+        return possibleDiscounts[ThreadLocalRandom.current().nextInt(possibleDiscounts.length)];
+    }
+}
+
 }
