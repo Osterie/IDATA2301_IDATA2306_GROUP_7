@@ -7,8 +7,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -41,6 +45,9 @@ import ntnu.no.stud.repositories.UserRepository;
 
 @Component
 public class DummyDataInitializer implements ApplicationListener<ApplicationReadyEvent> {
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     private static final Logger logger = LoggerFactory.getLogger(DummyDataInitializer.class);
 
@@ -187,31 +194,49 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
 
 
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
     public void loadScheduledFlights() {
         try {
-            // SQL to insert scheduled flight data
-            String sql = "INSERT INTO flight_application.scheduled_flights (`date`, flight_id, route_id)\r\n" + 
-                                "VALUES\r\n" + 
-                                "    ('2025-04-01', 18, 1),  -- Delta Flight 425, JFK to LAX\r\n" + 
-                                "    ('2025-04-02', 19, 2),  -- Norwegian Flight 708, ORD to AES\r\n" + 
-                                "    ('2025-04-03', 20, 3),  -- KLM Flight 605, AMS to LHR\r\n" + 
-                                "    ('2025-04-04', 21, 4),  -- Swiss Flight 110, FCO to CDG\r\n" + 
-                                "    ('2025-04-05', 22, 5),  -- Alitalia Flight 560, DFW to FRA\r\n" + 
-                                "    ('2025-04-06', 23, 6),  -- AA Flight 220, HND to DXB\r\n" + 
-                                "    ('2025-04-07', 24, 7),  -- Lufthansa Flight 445, DOH to SYD\r\n" + 
-                                "    ('2025-04-08', 25, 8),  -- Air France Flight 123, SIN to JFK\r\n" + 
-                                "    ('2025-04-09', 26, 9),  -- Emirates Flight 204, AMS to ZRH\r\n" + 
-                                "    ('2025-04-10', 27, 10); -- Qatar Airways Flight 905, CDG to DFW";
-            // Execute the SQL
-            jdbcTemplate.execute(sql);
+            // Get all flight IDs and route IDs
+            String fetchFlightsSql = "SELECT id FROM flight_application.flights";
+            String fetchRoutesSql = "SELECT id FROM flight_application.routes";
+    
+            List<Integer> flightIds = jdbcTemplate.queryForList(fetchFlightsSql, Integer.class);
+            List<Integer> routeIds = jdbcTemplate.queryForList(fetchRoutesSql, Integer.class);
+    
+            if (routeIds.isEmpty()) {
+                logger.warn("No routes found. Cannot schedule flights.");
+                return;
+            }
+    
+            Random random = new Random();
+            StringBuilder insertSql = new StringBuilder("INSERT INTO flight_application.scheduled_flights (`date`, flight_id, route_id) VALUES ");
+    
+            List<String> valueRows = new ArrayList<>();
+    
+            LocalDate startDate = LocalDate.of(2025, 4, 1);
+    
+            for (int i = 0; i < flightIds.size(); i++) {
+                int flightId = flightIds.get(i);
+                int routeId = routeIds.get(random.nextInt(routeIds.size()));
+    
+                // Spread dates evenly from startDate
+                LocalDate flightDate = startDate.plusDays(i);
+    
+                valueRows.add(String.format("('%s', %d, %d)", flightDate, flightId, routeId));
+            }
+    
+            insertSql.append(String.join(", ", valueRows)).append(";");
+    
+            jdbcTemplate.execute(insertSql.toString());
             logger.info("Scheduled flights loaded successfully.");
-    } catch (RuntimeException e) {
-        logger.error("Error during application initialization: " + e.getMessage(), e);
+    
+        } catch (DataAccessException e) {
+            logger.error("Database error while loading scheduled flights.", e);
+        } catch (Exception e) {
+            logger.error("Unexpected error while loading scheduled flights.", e);
+        }
     }
-    }
+    
 
     public void loadAirports() {
         try {
@@ -244,55 +269,91 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
        }
     }
 
-    public void loadRoutes() {
-        try {
-            // SQL to insert class data
-            String sql = "INSERT INTO flight_application.route (arrival_airport_code, departure_airport_code)\r\n" + //
-                                "VALUES\r\n" + //
-                                "    (1, 2),   -- JFK (New York) to LAX (Los Angeles)\r\n" + 
-                                "    (3, 4),   -- ORD (Chicago) to AES (Ålesund)\r\n" + 
-                                "    (5, 7),   -- AMS (Amsterdam) to LHR (London Heathrow)\r\n" + 
-                                "    (8, 9),   -- FCO (Rome) to CDG (Paris)\r\n" + 
-                                "    (10, 11), -- DFW (Dallas) to FRA (Frankfurt)\r\n" + 
-                                "    (12, 13), -- HND (Tokyo) to DXB (Dubai)\r\n" + 
-                                "    (14, 15), -- DOH (Doha) to SYD (Sydney)\r\n" + 
-                                "    (16, 1),  -- SIN (Singapore) to JFK (New York)\r\n" + 
-                                "    (5, 6),   -- AMS (Amsterdam) to ZRH (Zurich)\r\n" + 
-                                "    (9, 10);  -- CDG (Paris) to DFW (Dallas)";
-            // Execute the SQL
-            jdbcTemplate.execute(sql);
-            logger.info("Routes loaded successfully.");
-        } catch (DataAccessException e) {
-            logger.error("Database error occurred while loading routes.", e);
-        } catch (Exception e) {
-            logger.error("Unexpected error occurred while loading routes.", e);
+public void loadRoutes() {
+    try {
+        // Fetch all airport IDs
+        String fetchAirportsSql = "SELECT id FROM flight_application.airport";
+        List<Integer> airportIds = jdbcTemplate.queryForList(fetchAirportsSql, Integer.class);
+
+        if (airportIds.size() < 2) {
+            logger.warn("Not enough airports to create routes.");
+            return;
         }
+
+        Random random = new Random();
+        StringBuilder insertSql = new StringBuilder("INSERT INTO flight_application.route (arrival_airport_code, departure_airport_code) VALUES ");
+        List<String> valueRows = new ArrayList<>();
+
+        int numberOfRoutes = 10;
+        Set<String> usedPairs = new HashSet<>();
+
+        while (valueRows.size() < numberOfRoutes) {
+            int dep = airportIds.get(random.nextInt(airportIds.size()));
+            int arr = airportIds.get(random.nextInt(airportIds.size()));
+
+            if (dep != arr) {
+                String key = dep + "-" + arr;
+                if (!usedPairs.contains(key)) {
+                    usedPairs.add(key);
+                    valueRows.add(String.format("(%d, %d)", arr, dep)); // Note: arrival first, as in your original SQL
+                }
+            }
+        }
+
+        insertSql.append(String.join(", ", valueRows)).append(";");
+
+        jdbcTemplate.execute(insertSql.toString());
+        logger.info("Routes loaded successfully.");
+
+    } catch (DataAccessException e) {
+        logger.error("Database error occurred while loading routes.", e);
+    } catch (Exception e) {
+        logger.error("Unexpected error occurred while loading routes.", e);
     }
+}
+
 
     public void loadPrices() {
         try {
-            // SQL to insert price data
-            String sql = "INSERT INTO flight_application.price (price, currency_code, provider, discount, class_id, scheduled_flights_id)\r\n" +
-            "VALUES\r\n" +
-            "    (500, 'USD', 'Skyscanner', 0, 1, 21),\r\n" +
-            "    (400, 'NOK', 'CheapOair', 10, 2, 22),\r\n" +
-            "    (550, 'EUR', 'Orbitz', 0, 3, 23),\r\n" +
-            "    (600, 'CHF', 'OneTravel', 5, 4, 24),\r\n" +
-            "    (450, 'EUR', 'Travelocity', 0, 5, 25),\r\n" +
-            "    (700, 'USD', 'Google Flights', 15, 6, 26),\r\n" +
-            "    (650, 'EUR', 'JustFly', 0, 7, 27),\r\n" +
-            "    (800, 'USD', 'eDreams', 10, 8, 28),\r\n" +
-            "    (550, 'AED', 'Priceline', 5, 9, 29),\r\n" +
-            "    (450, 'QAR', 'American Airlines Website', 0, 10, 30);";
-            // Execute the SQL
-            jdbcTemplate.execute(sql);
-            logger.info("Prices loaded successfully.");
+            // Fetch all scheduled flight IDs
+            String fetchScheduledFlightsSql = "SELECT id FROM flight_application.scheduled_flights";
+            List<Integer> scheduledFlightIds = jdbcTemplate.queryForList(fetchScheduledFlightsSql, Integer.class);
+    
+            // Static lists of currencies and providers
+            List<String> currencies = Arrays.asList("USD", "EUR", "NOK", "CHF", "AED", "QAR");
+            List<String> providers = Arrays.asList("Skyscanner", "CheapOair", "Orbitz", "OneTravel", "Travelocity",
+                                                   "Google Flights", "JustFly", "eDreams", "Priceline", "AA Website");
+    
+            Random random = new Random();
+            StringBuilder insertSql = new StringBuilder("INSERT INTO flight_application.price (price, currency_code, provider, discount, class_id, scheduled_flights_id) VALUES ");
+    
+            List<String> valueRows = new ArrayList<>();
+    
+            for (Integer scheduledFlightId : scheduledFlightIds) {
+                int price = (random.nextInt((900 - 300) / 10 + 1) * 10) + 300;
+                String currency = currencies.get(random.nextInt(currencies.size()));
+                String provider = providers.get(random.nextInt(providers.size()));
+                int discount = random.nextInt(5 + 1) * 5;
+                int classId = 1 + random.nextInt(10);
+    
+                // Escape single quotes in provider names (just in case)
+                provider = provider.replace("'", "''");
+    
+                valueRows.add(String.format("(%d, '%s', '%s', %d, %d, %d)", price, currency, provider, discount, classId, scheduledFlightId));
+            }
+    
+            insertSql.append(String.join(", ", valueRows)).append(";");
+    
+            jdbcTemplate.execute(insertSql.toString());
+            logger.info("Random prices loaded successfully for all scheduled flights.");
+    
         } catch (DataAccessException e) {
-           logger.error("Database error occurred while loading prices.", e);
-       } catch (Exception e) {
-           logger.error("Unexpected error occurred while loading prices.", e);
-       }
+            logger.error("Database error occurred while loading prices.", e);
+        } catch (Exception e) {
+            logger.error("Unexpected error occurred while loading prices.", e);
+        }
     }
+    
 
     public void loadExtraFeatures() {
         try {
@@ -341,32 +402,42 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
        }
     }
 
-    public void loadFlightAccommodations() {
-        try {
-            // SQL to insert flight accomodation data
-            String sql = "INSERT INTO flight_application.flight_accommodation (feature_id, flight_id) \r\n" + 
-                                "VALUES\r\n" + 
-                                "    (1, 18), (2, 18), (3, 18),   -- Delta Flight 425\r\n" + 
-                                "    (4, 19), (5, 19), (6, 19),   -- Norwegian Flight 708\r\n" + 
-                                "    (7, 20), (8, 20), (9, 20),   -- KLM Flight 605\r\n" + 
-                                "    (10, 21), (11, 21), (12, 21), -- Swiss Flight 110\r\n" + 
-                                "    (13, 22), (14, 22), (15, 22), -- Alitalia Flight 560\r\n" + 
-                                "    (16, 23), (17, 23), (18, 23), -- AA Flight 220\r\n" + 
-                                "    (19, 24), (20, 24), (21, 24), -- Lufthansa Flight 445\r\n" + 
-                                "    (22, 25), (23, 25), (24, 25), -- Air France Flight 123\r\n" + 
-                                "    (25, 26), (26, 26), (27, 26), -- Emirates Flight 204\r\n" + 
-                                "    (28, 27), (29, 27), (30, 27), -- Qatar Airways Flight 905\r\n" + 
-                                "    (31, 28), (32, 28), (1, 28);  -- Singapore Airlines Flight 26\r\n" + 
-                                "";
-            // Execute the SQL
-            jdbcTemplate.execute(sql);
-            logger.info("Flight accommodations loaded successfully.");
-        } catch (DataAccessException e) {
-           logger.error("Database error occurred while loading flight accommodations.", e);
-       } catch (Exception e) {
-           logger.error("Unexpected error occurred while loading flight accommodations.", e);
-       }
+public void loadFlightAccommodations() {
+    try {
+        // Get all flight IDs from the flights table
+        String fetchFlightsSql = "SELECT id FROM flight_application.flights";
+        List<Integer> flightIds = jdbcTemplate.queryForList(fetchFlightsSql, Integer.class);
+
+        // Define the range of available feature IDs (1–32 for example)
+        List<Integer> featureIds = IntStream.rangeClosed(1, 32).boxed().collect(Collectors.toList());
+
+        StringBuilder insertSql = new StringBuilder(
+            "INSERT INTO flight_application.flight_accommodation (feature_id, flight_id) VALUES ");
+
+        List<String> valueRows = new ArrayList<>();
+
+        for (Integer flightId : flightIds) {
+            // Shuffle and take 3 unique feature IDs
+            Collections.shuffle(featureIds);
+            List<Integer> selectedFeatures = featureIds.subList(0, 3);
+
+            for (Integer featureId : selectedFeatures) {
+                valueRows.add(String.format("(%d, %d)", featureId, flightId));
+            }
+        }
+
+        insertSql.append(String.join(", ", valueRows)).append(";");
+
+        jdbcTemplate.execute(insertSql.toString());
+        logger.info("Random flight accommodations loaded for all flights.");
+
+    } catch (DataAccessException e) {
+        logger.error("Database error occurred while loading flight accommodations.", e);
+    } catch (Exception e) {
+        logger.error("Unexpected error occurred while loading flight accommodations.", e);
     }
+}
+
 
 
     public void loadFlight() {
