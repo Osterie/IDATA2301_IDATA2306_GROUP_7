@@ -44,6 +44,15 @@ html, body {
     font-size: 18px;
     color: var(--contrast-text-color);
 }
+
+.footer-about > p {
+    color: var(--contrast-text-color);
+    margin-top: 10px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 10px;
+}
+
 @media (max-width: 900px){
     #contactTitle {
         text-align: center;
@@ -53,5 +62,10 @@ html, body {
     }
     #bottomBox {
         text-align: center;
+    }
+    .footer-about > p {
+        color: var(--contrast-text-color);
+        margin-left: 5%;
+        margin-right: 5%;
     }
 }
