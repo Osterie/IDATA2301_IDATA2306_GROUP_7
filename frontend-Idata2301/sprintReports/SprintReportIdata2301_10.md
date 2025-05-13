@@ -63,7 +63,7 @@ Sprint stenographer: Daniel
 - Responsive website, looking good on both desktop and mobile device.
 - Accessibility and usability considered. Lighthouse tests passing (for usability, not necessarily for SEO, Performance and PWA).
 - The style is fitting the given theme of the business
-- 
+- In the product page you should specify the link to the advertisement where the image was taken from!
 
 
 ## Comments

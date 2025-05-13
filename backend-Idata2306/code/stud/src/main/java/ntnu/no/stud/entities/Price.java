@@ -27,7 +27,7 @@ public class Price {
     @Column(name = "price", nullable = false)
     private int price;
 
-    @Column(name = "currency_code", length = 3, nullable = false)
+    @Column(name = "currency_code", length = 3)
     private String currencyCode;
 
     @Column(name = "provider")

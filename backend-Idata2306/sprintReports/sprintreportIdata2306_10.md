@@ -50,6 +50,8 @@ Sprint stenographer: Adrian
 
 - Vi må si at en extra feature vi har er dummy data lagern
 
+- In the product page you should specify the link to the advertisement where the image was taken from!
+
 
 
 
