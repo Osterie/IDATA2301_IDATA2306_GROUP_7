@@ -5,8 +5,8 @@ Sprint stenographer: Daniel
 
 ## **Sprint Overview**
 
-- **Sprint Number:** Sprint 9
-- **Duration:** 08.05.2025 - 15.05.2025
+- **Sprint Number:** Sprint 10
+- **Duration:** 15.05.2025 - 20.05.2025
 - **Sprint Goal:** Finish more functionality
 - **Team Members:**
   - Tobias Olsen Reiakvam - TobyJavascript
@@ -55,6 +55,16 @@ Sprint stenographer: Daniel
 | Add purchasing date to purchase           | Adrian   | Not completed  | [2]          | Low priority                                 |
 
 ---
+
+
+- README
+- Design guidelines
+- Semantic elements used (div and span are last resort). 
+- Responsive website, looking good on both desktop and mobile device.
+- Accessibility and usability considered. Lighthouse tests passing (for usability, not necessarily for SEO, Performance and PWA).
+- The style is fitting the given theme of the business
+- 
+
 
 ## Comments
 - Product detail page (Product image, Product description, Product price for the different providers)

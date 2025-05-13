@@ -5,7 +5,7 @@ Sprint stenographer: Tobias
 
 ## **Sprint Overview**
 
-- **Sprint Number:** Sprint 7
+- **Sprint Number:** Sprint 8
 - **Duration:** 01.05.2025 - 08.05.2025
 - **Sprint Goal:** API
 - **Team Members:**

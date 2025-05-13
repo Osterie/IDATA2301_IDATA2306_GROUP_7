@@ -1,13 +1,13 @@
 # **Sprint Report**
 
-Sprint master: Daniel
-Sprint stenographer: Daniel
+Sprint master: Adrian
+Sprint stenographer: Adrian
 
 ## **Sprint Overview**
 
-- **Sprint Number:** Sprint 9
-- **Duration:** 08.05.2025 - 15.05.2025
-- **Sprint Goal:** Images and some endpoints
+- **Sprint Number:** Sprint 10
+- **Duration:** 15.05.2025 - 20.05.2025
+- **Sprint Goal:** 
 - **Team Members:**
   - Tobias Olsen Reiakvam - TobyJavascript
   - Adrian Gjøsund Bjørge - Osterie / Adrian Gjøsund Bjørge
@@ -18,9 +18,6 @@ Sprint stenographer: Daniel
 ## **Sprint Summary**
 
 - **Total Planned Work:**
-- Add table for company
-- Endpoints for pages
-- Better searching
 
 - **Completed Work:**
 
@@ -46,6 +43,13 @@ Sprint stenographer: Daniel
 | Finish reccomended cards         | Daniel   | In progress   | [5]          |              |
 | Add purchasing date to purchases | Adrian   | Not completed | [3]          | Low priority |
 | Endpoint for hidden flight       | Daniel   | Not completed | [4]          |              |
+
+- Remember to include the following disclaimer somewhere in your website (on the bottom?): This website is a result of a university group project, performed in the course IDATA2301 Web technologies, at NTNU. All the information provided here is a result of imagination. Any resemblance with real companies or products is a coincidence
+
+- README
+
+- Vi må si at en extra feature vi har er dummy data lagern
+
 
 
 

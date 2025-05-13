@@ -84,7 +84,9 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     public void onApplicationEvent(ApplicationReadyEvent event) {
         
         Optional<User> existingAdminUser = userRepository.findByUsername("chuck");
-        if (existingAdminUser.isEmpty()) {
+        Optional<User> existingDefaultUser = userRepository.findByUsername("dave");
+
+        if (existingAdminUser.isEmpty() && existingDefaultUser.isEmpty()) {
           logger.info("Importing test data...");
   
           try {
@@ -100,9 +102,8 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
             userService.tryCreateNewUser("dave", "Dangerous2024", "dave@gmail.com");
             User defaultUser = userRepository.findByUsername("dave").orElseThrow();
   
-            UserRole userRole = new UserRole(defaultUser, "USER");
-            defaultUser.addRole(adminRole);
-            defaultUser.addRole(userRole);
+            // UserRole userRole = new UserRole(defaultUser, "USER");
+            // defaultUser.addRole(userRole);
             userRepository.save(defaultUser);
   
             logger.info("DONE importing test data");

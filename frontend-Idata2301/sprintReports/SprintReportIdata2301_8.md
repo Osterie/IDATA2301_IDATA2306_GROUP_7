@@ -6,7 +6,7 @@ Sprint stenographer: Tobias
 ## **Sprint Overview**
 
 - **Sprint Number:** Sprint 8
-- **Duration:** 01.05.2025 - 8.05.2025
+- **Duration:** 01.05.2025 - 08.05.2025
 - **Sprint Goal:** Product pages
 - **Team Members:**
   - Tobias Olsen Reiakvam - TobyJavascript
