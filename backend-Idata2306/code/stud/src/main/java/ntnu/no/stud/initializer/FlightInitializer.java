@@ -1,6 +1,7 @@
 package ntnu.no.stud.initializer;
 
 import ntnu.no.stud.entities.Flight;
+import ntnu.no.stud.entities.FlightCompany;
 import ntnu.no.stud.entities.Route;
 import ntnu.no.stud.repositories.FlightRepository;
 import ntnu.no.stud.repositories.RouteRepository;
@@ -8,7 +9,6 @@ import ntnu.no.stud.repositories.RouteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -29,6 +29,9 @@ public class FlightInitializer {
 
     @Autowired
     private FlightAccommodationInitializer flightAccommodationInitializer;
+
+    @Autowired
+    private FlightCompanyInitializer flightCompanyInitializer;
 
     private final FlightRepository flightRepository;
 
@@ -73,7 +76,6 @@ public class FlightInitializer {
                     scheduledFlightsInitializer.generateRandomScheduledFlightForFlight(flight, date);
                 } else if ((route != null)) {
                     scheduledFlightsInitializer.generateRandomScheduledFlightForFlight(flight, route);
-                    
                 } else {
                     scheduledFlightsInitializer.generateRandomScheduledFlightForFlight(flight);
                 }
@@ -112,8 +114,15 @@ public class FlightInitializer {
         // Combine the prefix and flight number
         String flightName = prefix + " Flight " + flightNumber;
 
+        // Look up FlightCompany from initializer
+        FlightCompany company = flightCompanyInitializer.getCompanyMap().get(airline);
+
+        if (company == null) {
+            throw new IllegalStateException("FlightCompany not found for airline: " + airline);
+        }
+
         // Create and save the flight
-        Flight flight = new Flight(flightName, airline);
+        Flight flight = new Flight(flightName, company);
         flightRepository.save(flight);
 
         return flight;

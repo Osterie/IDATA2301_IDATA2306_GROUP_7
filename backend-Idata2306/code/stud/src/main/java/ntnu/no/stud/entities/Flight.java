@@ -1,11 +1,6 @@
 package ntnu.no.stud.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 /**
  * Represents a flight with basic identifying information such as name and company.
@@ -33,8 +28,9 @@ public class Flight {
     /**
      * The airline company operating the flight.
      */
-    @Column(name = "company", nullable = false)
-    private String company;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    private FlightCompany company;
 
     public Flight() { }
 
@@ -44,7 +40,7 @@ public class Flight {
      * @param name the name of the flight.
      * @param company the company operating the flight.
      */
-    public Flight(String name, String company) {
+    public Flight(String name, FlightCompany company) {
         this.name = name;
         this.company = company;
     }
@@ -66,16 +62,16 @@ public class Flight {
         this.name = name;
     }
 
-    public String getCompany() {
+    public FlightCompany getCompany() {
         return company;
     }
 
-    public void setCompany(String company) {
+    public void setCompany(FlightCompany company) {
         this.company = company;
     }
 
     @Override
     public String toString() {
-        return "Flight{id=" + id + ", name='" + name + "', company='" + company + "'}";
+        return "Flight{id=" + id + ", name='" + name + "', company='" + company.getName() + "'}";
     }
 }
