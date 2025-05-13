@@ -16,7 +16,6 @@ function getUniqueCompanies(flights) {
 };
 
 const FilterSidebar = ({ flights, setFlights }) => {
-  const [showStops, setShowStops] = useState(false);
   const [showCompanies, setShowCompanies] = useState(false);
   const companies = getUniqueCompanies(flights);
   const [selectedCompanies, setSelectedCompanies] = useState({
@@ -27,9 +26,6 @@ const FilterSidebar = ({ flights, setFlights }) => {
     }, {})
   });
   const [isSidebarVisible, setIsSidebarVisible] = useState(false); // State for mobile toggle
-
-  console.log(flights)
-
 
   const handleCompanyChange = (company) => {
     let updatedCompanies;
@@ -103,38 +99,14 @@ const FilterSidebar = ({ flights, setFlights }) => {
         <div className="filter-section">
           <label className="filter-title" htmlFor="sort">Sort by</label>
           <select id="sort">
-            <option value="price">Price</option>
-            <option value="time">Time</option>
-            <option value="transfers">Transfers</option>
+            <option value="price-ascending">Price, ascending</option>
+            <option value="price-descending">Price, descending</option>
           </select>
         </div>
 
         {/* Price Range */}
         <div className="filter-section">
           <DualRangeSlider label="Price Range" min={findMinPrice(flights)} max={findMaxPrice(flights)} callback={handlePriceRangeChange} />
-        </div>
-
-        {/* Stops Dropdown */}
-        <div className="filter-section">
-          <button className="dropdown-btn" onClick={() => setShowStops(!showStops)}>
-            Stops {showStops ? "▲" : "▼"}
-          </button>
-          {showStops && (
-            <div className="dropdown-content">
-              <div>
-                <input type="checkbox" id="direct" />
-                <label htmlFor="direct">Direct</label>
-              </div>
-              <div>
-                <input type="checkbox" id="one-stop" />
-                <label htmlFor="one-stop">1 Stop</label>
-              </div>
-              <div>
-                <input type="checkbox" id="two-plus-stops" />
-                <label htmlFor="two-plus-stops">2+ Stops</label>
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Company Dropdown */}
@@ -168,11 +140,6 @@ const FilterSidebar = ({ flights, setFlights }) => {
           )}
         </div>
 
-
-        {/* Travel Time */}
-        <div className="filter-section">
-          <DualRangeSlider label="Travel time (t)" min={1} max={24} callback={(min, max) => console.log(min, max)} />
-        </div>
       </div>
     </div>
   );
