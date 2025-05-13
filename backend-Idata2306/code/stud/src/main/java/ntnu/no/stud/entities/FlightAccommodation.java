@@ -38,7 +38,7 @@ import jakarta.persistence.ManyToOne;
 // }
 
 @Entity
-@Table(name = "FlightAccommodation")
+@Table(name = "flight_accommodation")
 public class FlightAccommodation {
 
     @Id
