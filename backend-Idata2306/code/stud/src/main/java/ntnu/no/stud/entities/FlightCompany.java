@@ -24,13 +24,18 @@ public class FlightCompany {
     @Column(name = "image_data")
     private byte[] imageData;
 
+    @Lob
+    @Column(name = "logo_image_data")
+    private byte[] logoImageData;
+
     public FlightCompany() {}
 
-    public FlightCompany(String name, String websiteUrl, String imageUrl, byte[] imageData) {
+    public FlightCompany(String name, String websiteUrl, String imageUrl, byte[] imageData, byte[] logoImageData) {
         this.name = name;
         this.websiteUrl = websiteUrl;
         this.imageUrl = imageUrl;
         this.imageData = imageData;
+        this.logoImageData = logoImageData;
     }
 
     // Getters and setters...
@@ -73,6 +78,10 @@ public class FlightCompany {
 
     public void setImageData(byte[] imageData) {
         this.imageData = imageData;
+    }
+
+    public void setLogoImageData(byte[] logoImageData) {
+        this.logoImageData = logoImageData;
     }
 
     @Override

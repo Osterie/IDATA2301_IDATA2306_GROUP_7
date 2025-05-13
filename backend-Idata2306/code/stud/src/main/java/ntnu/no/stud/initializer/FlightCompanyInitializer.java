@@ -38,7 +38,7 @@ public class FlightCompanyInitializer {
 
     private void createCompany(String name, String website, String imageUrl) {
         if (!flightCompanyRepository.existsByName(name)) {
-            FlightCompany company = new FlightCompany(name, website, imageUrl, null);
+            FlightCompany company = new FlightCompany(name, website, imageUrl, null, null);
             flightCompanyRepository.save(company);
             companyMap.put(name, company);
         } else {
