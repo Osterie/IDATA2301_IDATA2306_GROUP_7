@@ -1,10 +1,10 @@
 package ntnu.no.stud.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 // package ntnu.no.stud.entities;
 
@@ -31,7 +31,7 @@ import jakarta.persistence.GenerationType;
 
 
 @Entity
-@Table(name = "ExtraFeature")
+@Table(name = "extra_feature")
 public class ExtraFeature {
 
 

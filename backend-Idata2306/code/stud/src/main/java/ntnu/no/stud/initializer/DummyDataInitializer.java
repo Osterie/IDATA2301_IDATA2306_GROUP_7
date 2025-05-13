@@ -120,7 +120,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     
         try {   
         //createDatabase();     
-        createTables();
+        // createTables();
         if (airportRepository.count() == 0) {
             loadAirports();
         }

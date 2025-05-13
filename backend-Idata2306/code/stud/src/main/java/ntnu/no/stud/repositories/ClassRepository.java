@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ClassRepository extends CrudRepository<ClassEntity, Integer> {
 
-    @Query(value = "SELECT * FROM Class ORDER BY RAND() LIMIT 1", nativeQuery = true)
+    @Query(value = "SELECT * FROM class ORDER BY RAND() LIMIT 1", nativeQuery = true)
     ClassEntity getRandomClass();
 }
