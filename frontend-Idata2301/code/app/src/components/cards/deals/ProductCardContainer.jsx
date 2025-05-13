@@ -106,7 +106,7 @@ const ProductContainer = ({
             allProducts.push(
               ...randomFlight.map((flight) => ({
                 ...flight,
-                description: "Most populair flight",
+                description: "Most popular flight",
                 date: flight.scheduledFlight.date,
                 price: flight.price,
                 currencyCode: flight.currencyCode,
@@ -124,7 +124,7 @@ const ProductContainer = ({
             allProducts.push(
               ...randomFlight.map((flight) => ({
                 ...flight,
-                description: "Another populair flight",
+                description: "Another popular flight",
                 date: flight.scheduledFlight.date,
                 price: flight.price,
                 currencyCode: flight.currencyCode,

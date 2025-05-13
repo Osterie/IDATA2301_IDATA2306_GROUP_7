@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface FlightClassesRepository extends CrudRepository<FlightClasses, Integer> {
 
-    @Query(value = "SELECT * FROM Flight_classes ORDER BY RAND() LIMIT 1", nativeQuery = true)
+    @Query(value = "SELECT * FROM flight_classes ORDER BY RAND() LIMIT 1", nativeQuery = true)
     FlightClasses findRandomFlightClasses();
 
-    @Query(value = "SELECT * FROM Flight_classes WHERE flight_id = :flightId", nativeQuery = true)
+    @Query(value = "SELECT * FROM flight_classes WHERE flight_id = :flightId", nativeQuery = true)
     List<FlightClasses> findByFlightId(int flightId);
 }
