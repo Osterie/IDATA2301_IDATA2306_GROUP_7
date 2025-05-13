@@ -14,6 +14,9 @@ public class FlightCompany {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
+    @Column(name = "abbreviation", nullable = false, unique = true)
+    private String abbreviation;
+
     @Column(name = "website_url")
     private String websiteUrl;
 
@@ -30,12 +33,13 @@ public class FlightCompany {
 
     public FlightCompany() {}
 
-    public FlightCompany(String name, String websiteUrl, String imageUrl, byte[] imageData, byte[] logoImageData) {
+    public FlightCompany(String name, String websiteUrl, String imageUrl, byte[] imageData, byte[] logoImageData, String abbreviation) {
         this.name = name;
         this.websiteUrl = websiteUrl;
         this.imageUrl = imageUrl;
         this.imageData = imageData;
         this.logoImageData = logoImageData;
+        this.abbreviation = abbreviation;
     }
 
     // Getters and setters...
@@ -46,6 +50,10 @@ public class FlightCompany {
 
     public String getName() {
         return name;
+    }
+
+    public String getAbbreviation() {
+        return abbreviation;
     }
 
     public String getWebsiteUrl() {
@@ -66,6 +74,10 @@ public class FlightCompany {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setAbbreviation(String abbreviation) {
+        this.abbreviation = abbreviation;
     }
 
     public void setWebsiteUrl(String websiteUrl) {
