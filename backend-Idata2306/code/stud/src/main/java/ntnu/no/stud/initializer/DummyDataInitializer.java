@@ -197,7 +197,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     public void loadScheduledFlights() {
         try {
             // Get all flight IDs and route IDs
-            String fetchFlightsSql = "SELECT id FROM flight_application.flights";
+            String fetchFlightsSql = "SELECT id FROM flight_application.flight";
             String fetchRoutesSql = "SELECT id FROM flight_application.routes";
     
             List<Integer> flightIds = jdbcTemplate.queryForList(fetchFlightsSql, Integer.class);
@@ -405,7 +405,7 @@ public void loadRoutes() {
 public void loadFlightAccommodations() {
     try {
         // Get all flight IDs from the flights table
-        String fetchFlightsSql = "SELECT id FROM flight_application.flights";
+        String fetchFlightsSql = "SELECT id FROM flight_application.flight";
         List<Integer> flightIds = jdbcTemplate.queryForList(fetchFlightsSql, Integer.class);
 
         // Define the range of available feature IDs (1–32 for example)
