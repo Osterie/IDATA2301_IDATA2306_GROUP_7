@@ -61,34 +61,34 @@ const FlightCard = ({
   };
 
   return (
-    <div className="new-flight-card">
+    <div className="flight-card">
       <h2>{companyName} - {flightName}</h2>
-      <p className="new-class-name">Class: {flightClassName}</p>
+      <p className="class-name">Class: {flightClassName}</p>
 
-      <div className="new-flight-details">
-        <div className="new-departure">
+      <div className="flight-details">
+        <div className="departure">
           <p className="label">Departure</p>
           <p>{departureCity} ({departureCode})</p>
         </div>
-        <div className="new-arrival">
+        <div className="arrival">
           <p className="label">Arrival</p>
           <p>{arrivalCity} ({arrivalCode})</p>
         </div>
       </div>
 
-      <p className="new-date">Date: {date}</p>
+      <p className="date">Date: {date}</p>
 
       {purchasable && (
-        <p className="new-seats">Available Seats: {availableSeats}</p>
+        <p className="seats">Available Seats: {availableSeats}</p>
       )}
 
-      <div className="new-price-section">
-        <p className="new-price">${price} {priceCode}</p>
-        {discount > 0 && <p className="new-discount">Discount: {discount}%</p>}
+      <div className="price-section">
+        <p className="price">${price} {priceCode}</p>
+        {discount > 0 && <p className="discount">Discount: {discount}%</p>}
       </div>
 
       <button
-        className="new-book-button"
+        className="book-button"
         onClick={() => {
           if (setSelectedFlight && setActivePage) {
             setSelectedFlight(flight);
@@ -100,12 +100,12 @@ const FlightCard = ({
       </button>
 
       {purchasable && (
-        <button className="new-book-button" onClick={handleAddToCart}>
+        <button className="book-button" onClick={handleAddToCart}>
           Add to cart
         </button>
       )}
 
-      <p className="new-provider">Provider: {provider}</p>
+      <p className="provider">Provider: {provider}</p>
 
       {userIsAdmin && (
         <button

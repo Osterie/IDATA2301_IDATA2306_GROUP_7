@@ -1,4 +1,4 @@
-  .new-flight-card {
+  .flight-card {
     position: relative;
     background: #ffffff;
     border-radius: 12px;
@@ -13,19 +13,19 @@
     box-sizing: border-box;
   }
 
-  .new-flight-card h2 {
+  .flight-card h2 {
     font-size: 18px;
     color: #2c3e50;
     margin-bottom: 5px;
   }
   
-  .new-class-name {
+  .class-name {
     font-size: 14px;
     font-weight: bold;
     color: #16a085;
   }
   
-  .new-flight-details {
+  .flight-details {
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
@@ -36,32 +36,32 @@
     color: #7f8c8d;
   }
   
-  .new-date, .new-seats {
+  .date, .seats {
     font-size: 14px;
     font-weight: bold;
     color: #34495e;
   }
   
-  .new-price-section {
+  .price-section {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
   }
   
-  .new-price {
+  .price {
     font-size: 16px;
     font-weight: bold;
     color: #e74c3c;
   }
   
-  .new-discount {
+  .discount {
     font-size: 14px;
     color: #27ae60;
     font-weight: bold;
   }
   
-  .new-provider {
+  .provider {
     font-size: 12px;
     color: #7f8c8d;
     margin-top: 5px;
