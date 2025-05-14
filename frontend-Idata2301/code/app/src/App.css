@@ -53,6 +53,10 @@ body {
   }
 }
 
+main {
+  min-height: 100vh;
+}
+
 /* CSS variables */
 :root{
   /* Main colors */
