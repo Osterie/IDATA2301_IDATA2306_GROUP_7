@@ -1,10 +1,10 @@
 package ntnu.no.stud.repositories;
 
 import java.util.List;
-import ntnu.no.stud.entities.Purchases;
+import ntnu.no.stud.entities.Purchase;
 import org.springframework.data.repository.CrudRepository;
 
-public interface PurchaseRepository extends CrudRepository<Purchases, Integer> {
+public interface PurchaseRepository extends CrudRepository<Purchase, Integer> {
 
-    List<Purchases> findAllByUserId(Long userId);
+    List<Purchase> findAllByUserId(Long userId);
 }

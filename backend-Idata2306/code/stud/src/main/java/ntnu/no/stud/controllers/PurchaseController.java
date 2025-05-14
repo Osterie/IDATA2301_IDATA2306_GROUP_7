@@ -1,6 +1,6 @@
 package ntnu.no.stud.controllers;
 
-import ntnu.no.stud.entities.Purchases;
+import ntnu.no.stud.entities.Purchase;
 import ntnu.no.stud.repositories.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +17,9 @@ import java.util.List;
  */
 @RestController
 @CrossOrigin(origins = "*") 
-public class PurchasesController {
+public class PurchaseController {
 
-    private static final Logger logger = LoggerFactory.getLogger(PurchasesController.class);  // Logger instance
+    private static final Logger logger = LoggerFactory.getLogger(PurchaseController.class);  // Logger instance
 
     @Autowired
     private PurchaseRepository purchaseRepository;
@@ -28,7 +28,7 @@ public class PurchasesController {
     @GetMapping("/api/purchases")
     public ResponseEntity<?> getUserPurchases(@RequestParam Long userId) {
         logger.info("Fetching purchases for user with ID: {}", userId);
-        List<Purchases> purchases = purchaseRepository.findAllByUserId(userId);
+        List<Purchase> purchases = purchaseRepository.findAllByUserId(userId);
         
         if (purchases == null || purchases.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No purchases found for user " + userId);

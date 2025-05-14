@@ -263,7 +263,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
                                 "    CONSTRAINT CHK_Price_Discount_Range CHECK (discount BETWEEN 0 AND 100)\r\n" + 
                                 ");\r\n" + 
                                 "\r\n" + 
-                                "Create Table IF NOT EXISTS purchases (\r\n" + 
+                                "Create Table IF NOT EXISTS purchase (\r\n" + 
                                 "    user_id INT NOT NULL,\r\n" + 
                                 "    flight_id INT NOT NULL,\r\n" + 
                                 "    price_id INT NOT NULL,\r\n" + 

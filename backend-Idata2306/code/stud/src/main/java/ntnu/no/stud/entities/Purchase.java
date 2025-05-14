@@ -8,10 +8,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "purchases")
-public class Purchases {
+@Table(name = "purchase")
+public class Purchase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,13 +23,16 @@ public class Purchases {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
+
     @ManyToOne
     @JoinColumn(name = "price_id", nullable = false)
     private Price price;
 
-    public Purchases() { }
+    public Purchase() { }
 
-    public Purchases(User user, Price price) {
+    public Purchase(User user, Price price) {
         this.user = user;
         this.price = price;
     }
