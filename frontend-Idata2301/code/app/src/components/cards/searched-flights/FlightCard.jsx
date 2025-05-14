@@ -15,7 +15,9 @@ const NewFlightCard = ({
     id,
     flightClassId: {
       flightClass: { name: flightClassName },
-      flight: { name: flightName, company },
+      flight: { name: flightName, 
+        company: { name:companyName }
+       },
       availableSeats,
     },
     price,
@@ -60,7 +62,7 @@ const NewFlightCard = ({
 
   return (
     <div className="new-flight-card">
-      <h2>{company} - {flightName}</h2>
+      <h2>{companyName} - {flightName}</h2>
       <p className="new-class-name">Class: {flightClassName}</p>
 
       <div className="new-flight-details">

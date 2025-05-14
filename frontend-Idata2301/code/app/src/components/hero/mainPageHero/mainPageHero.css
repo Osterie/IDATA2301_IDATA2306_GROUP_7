@@ -1,54 +1,70 @@
-/* Ensure the body and html take up full height */
+/* Reset full height */
 html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 /* Hero Section */
 .hero {
-    position: relative;
-    background-image: url('./images/ross-parmly-rf6ywHVkrlY-unsplash.jpg');  /* Set the path to your image */
-    background-size: cover;
-    background-position: center;
-    text-align: center;
-    padding: 80px 20px;
-    height: calc(100vh - 80px);  /* Full height minus navbar height (adjust '60px' if navbar is taller) */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  height: calc(100vh - 80px); /* Adjust this if navbar height changes */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
 }
 
-/* Add an overlay between the background image and the text
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);  /* Adjust opacity */
-    /* z-index: 1;  Ensures the overlay is behind the text */
-/* }
-
-
-/* Ensure the text stays on top of the overlay */
-.hero-container {
-    position: relative;
-    z-index: 2; /* Makes sure text stays on top of the overlay */
+/* Background image layer */
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url('./images/ross-parmly-rf6ywHVkrlY-unsplash.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
 }
 
-.hero h1 {
-    color: var(--contrast-text-color);
-    margin: 0;
-    font-size: 40px
-}
-.hero p {
-    color: var(--contrast-text-color);
-    margin: 0 0 20px 0;
-    font-size: 30px;
+/* Dark overlay layer */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Darken background */
+  z-index: 1;
 }
 
+/* Foreground content */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+}
+
+/* Heading and paragraph */
+.hero-header h1,
+.hero-header p {
+  margin: 0;
+  color: var(--contrast-text-color, #fff); /* Fallback white if CSS var missing */
+}
+
+.hero-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero-header p {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Ensure the SearchBar sits on top */
 .search-bar {
-    z-index: 3;
+  z-index: 3;
 }
