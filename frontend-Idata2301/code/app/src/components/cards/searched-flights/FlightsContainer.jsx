@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import NewFlightCard from "./FlightCard";
+import FlightCard from "./FlightCard";
 import "./flightsContainer.css";
 import { isAdmin } from "../../../library/Identity/authentication";
 
@@ -31,7 +31,7 @@ const FlightsContainer = ({
           // .filter((flight) => !flight.isHidden || userIsAdmin)
           .filter((flight) => !flight.isFilteredOut && (flight.isHidden ? userIsAdmin : true))
           .map((flight) => (
-            <NewFlightCard
+            <FlightCard
               key={flight.id}
               flight={flight}
               userIsAdmin={userIsAdmin}

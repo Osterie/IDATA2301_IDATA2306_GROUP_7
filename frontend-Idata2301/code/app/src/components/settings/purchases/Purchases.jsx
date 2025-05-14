@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import styles from "./purchases.module.css";
 import { sendApiRequest } from "../../../library/requests.js";
-import NewFlightCard from "../../cards/searched-flights/FlightCard.jsx";
+import FlightCard from "../../cards/searched-flights/FlightCard.jsx";
 
 
 
@@ -51,7 +51,7 @@ const PurchasedFlights = ({user}) => {
       {flights.length > 0 ? (
         flights
           .map((flight) => (
-            <NewFlightCard
+            <FlightCard
               key={flight.id}
               flight={flight.price}
               purchasable={false}

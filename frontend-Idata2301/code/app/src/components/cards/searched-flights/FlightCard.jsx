@@ -3,7 +3,7 @@ import "./flightCard.css";
 import { sendApiRequest } from "../../../library/requests";
 import { addToShoppingCart } from "../../../utils/shoppingCartUtils";
 
-const NewFlightCard = ({
+const FlightCard = ({
   flight,
   userIsAdmin,
   onVisibilityChange,
@@ -119,4 +119,4 @@ const NewFlightCard = ({
   );
 };
 
-export default NewFlightCard;
+export default FlightCard;
