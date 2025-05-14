@@ -5,7 +5,6 @@ const Footer = () => {
     <footer className="section4">
       <div id="footerContent">
         {/* Decorative or structural content can remain div */}
-        <div id="bottomTopBox" aria-hidden="true"></div>
 
         <section id="contact" aria-labelledby="contactTitle">
           <h2 id="contactTitle">Info</h2>

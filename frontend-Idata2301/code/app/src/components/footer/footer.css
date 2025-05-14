@@ -15,9 +15,6 @@ html, body {
     float: left;
     background: var(--bottom-color);
 }
-#bottomTopBox {
-    height: 25%;
-}
 #contact {
     height: 45%;
     width: 80%;

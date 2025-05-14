@@ -55,6 +55,7 @@ const PurchasedFlights = ({user}) => {
               key={flight.id}
               flight={flight.price}
               purchasable={false}
+              purchaseDate ={flight.date}
             />
           ))
       ) : (

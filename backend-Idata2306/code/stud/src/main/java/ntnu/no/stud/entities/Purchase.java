@@ -32,9 +32,10 @@ public class Purchase {
 
     public Purchase() { }
 
-    public Purchase(User user, Price price) {
+    public Purchase(User user, Price price, LocalDate date) {
         this.user = user;
         this.price = price;
+        this.date = date;
     }
 
     // Getters and setters
@@ -52,6 +53,14 @@ public class Purchase {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public Price getPrice() {

@@ -95,7 +95,16 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
 
                     for (let i = 0; i < cities.length; i++) {
                         searchTermsMap.set(cities[i], airports[i]);
+                    }
+                    
+                    cities.sort();
+                    airports.sort();
+                    
+                    for (let i = 0; i < cities.length; i++) {
                         searchTerms.push(cities[i]);
+                    }
+
+                    for (let i = 0; i < airports.length; i++) {
                         searchTerms.push(airports[i]);
                     }
                 
