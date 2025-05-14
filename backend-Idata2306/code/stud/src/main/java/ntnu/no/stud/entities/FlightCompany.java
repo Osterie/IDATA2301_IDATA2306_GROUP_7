@@ -1,10 +1,13 @@
 package ntnu.no.stud.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 /**
  * Represents an airline company stored in the database.
- * Each company has a unique name and abbreviation, along with optional branding details
+ * Each company has a unique name and abbreviation, along with optional branding
+ * details
  * like a website, image URL, and image data.
  */
 @Entity
@@ -46,35 +49,42 @@ public class FlightCompany {
     private String imageUrl;
 
     /**
-     * Raw image data (e.g., a banner image) associated with the company, stored as binary.
+     * Raw image data (e.g., a banner image) associated with the company, stored as
+     * binary.
      */
+    @JsonIgnore
     @Lob
-    @Column(name = "image_data")
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "image_data", columnDefinition = "MEDIUMBLOB")
     private byte[] imageData;
 
     /**
      * Raw logo image data for the company, stored as binary.
      */
+    @JsonIgnore
     @Lob
-    @Column(name = "logo_image_data")
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "logo_image_data", columnDefinition = "MEDIUMBLOB")
     private byte[] logoImageData;
 
     /**
      * Default constructor required by JPA.
      */
-    public FlightCompany() {}
+    public FlightCompany() {
+    }
 
     /**
      * Constructs a new FlightCompany with the specified details.
      *
-     * @param name            the full name of the company
-     * @param websiteUrl      the website URL of the company
-     * @param imageUrl        the image URL of the company
-     * @param imageData       the binary image data
-     * @param logoImageData   the binary logo image data
-     * @param abbreviation    the unique abbreviation for the company
+     * @param name          the full name of the company
+     * @param websiteUrl    the website URL of the company
+     * @param imageUrl      the image URL of the company
+     * @param imageData     the binary image data
+     * @param logoImageData the binary logo image data
+     * @param abbreviation  the unique abbreviation for the company
      */
-    public FlightCompany(String name, String websiteUrl, String imageUrl, byte[] imageData, byte[] logoImageData, String abbreviation) {
+    public FlightCompany(String name, String websiteUrl, String imageUrl, byte[] imageData, byte[] logoImageData,
+            String abbreviation) {
         this.name = name;
         this.websiteUrl = websiteUrl;
         this.imageUrl = imageUrl;
@@ -82,6 +92,7 @@ public class FlightCompany {
         this.logoImageData = logoImageData;
         this.abbreviation = abbreviation;
     }
+
     /**
      * Returns the unique ID of the flight company.
      *
