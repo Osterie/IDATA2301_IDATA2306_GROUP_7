@@ -12,7 +12,7 @@ function findMaxPrice(flights) {
 // Dynamically extract unique companies from the flights array
 function getUniqueCompanies(flights) {
   const companies = flights.map(
-    (flight) => flight.scheduledFlight.flight.company
+    (flight) => flight.scheduledFlight.flight.company.name
   );
   return [...new Set(companies)]; // Remove duplicates
 }
@@ -146,7 +146,7 @@ const FilterSidebar = ({ flights, setFlights }) => {
     const maxPrice = priceRange.max;
 
     const updatedFlights = flights.map((flight) => {
-      const flightCompany = flight.scheduledFlight.flight.company;
+      const flightCompany = flight.scheduledFlight.flight.company.name;
       const isPriceInRange =
         flight.price >= minPrice && flight.price <= maxPrice;
       const isCompanySelected = updatedCompanies[flightCompany];
@@ -162,7 +162,7 @@ const FilterSidebar = ({ flights, setFlights }) => {
     setPriceRange({ min, max }); // Save the values for later use
 
     let updatedFlights = flights.map((flight) => {
-      const flightCompany = flight.scheduledFlight.flight.company;
+      const flightCompany = flight.scheduledFlight.flight.company.name;
       const isPriceInRange = flight.price >= min && flight.price <= max;
       const isCompanySelected = selectedCompanies[flightCompany];
 
