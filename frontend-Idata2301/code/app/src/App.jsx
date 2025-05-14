@@ -27,6 +27,17 @@ import {
 import FlightDetailPage from "./components/flightDetailPage/FlightDetailPage";
 
 function App() {
+  const [searchParams, setSearchParams] = useState({
+    departure: "JFK",
+    arrival: "SIN",
+    fromDate: "2020-01-01",
+    toDate: "2030-01-01",
+    // passengers: {
+    //   adults: 1,
+    //   children: 0,
+    //   infants: 0,
+    // },
+  });
   const [activePage, setActivePage] = useState("home");
   const [flights, setFlights] = useState([]);  // Store flight data
   const [user, setUser] = useState(null);
@@ -73,14 +84,14 @@ function App() {
       <main>
         {activePage === "home" && (
           <>
-            <MainPageHero setFlights={setFlights} setActivePage={setActivePage} />
+            <MainPageHero setFlights={setFlights} setActivePage={setActivePage} searchParams={searchParams} setSearchParams={setSearchParams} />
             <ProductCardHeader />
             <ProductCardContainer setFlights={setFlights} setActivePage={setActivePage}/>
           </>
         )}
         {activePage === "deals" && (
           <>
-            <DealsPageHero setFlights={setFlights} setActivePage={setActivePage} />
+            <DealsPageHero setFlights={setFlights} setActivePage={setActivePage} searchParams={searchParams} setSearchParams={setSearchParams} />
             <section className="search-section">
               <FilterSidebar flights={flights} setFlights={setFlights} />
               <FlightsContainer
