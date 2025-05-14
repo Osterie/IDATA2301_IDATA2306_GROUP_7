@@ -39,7 +39,8 @@ Sprint stenographer: Daniel
 | Try using docker                 | Everyone | Not Completed | [3]          |              |
 | Https connection                 | Everyone | Not completed | [6]          |              |
 | Find Images for flights          | Adrian   | Not completed | [3]          |              |
-| Add company table                | Tobias   | Not completed | [5]          |              |
+| Add company table                | Tobias   | Completed     | [5]          |              |
+| Made initializer for companies   | Tobias   | Completed     | [5]          |              |
 | Add company logos for company    | Tobias   | Not completed | [5]          |              |
 | Comment                          | Everyone | Not completed | [8]          |              |
 | Further error loggers            | Everyone | Not completed | [6]          |              |
