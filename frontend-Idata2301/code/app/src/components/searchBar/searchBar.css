@@ -18,7 +18,7 @@
     padding: 12px;
     border: 1px solid #bbb;
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: var(--text-desktop-font-size);
 }
 
 .call-to-action {
@@ -26,7 +26,7 @@
     border: none;
     background-color: var(--call-to-action-color);
     color: var(--text-color);
-    font-size: 1rem;
+    font-size: var(--text-desktop-font-size);
     border-radius: 5px;
     cursor: pointer;
 }
@@ -40,7 +40,7 @@
     border: none;
     background-color: var(--secondary-color);
     color: var(--contrast-text-color);
-    font-size: 1rem;
+    font-size: var(--button-text-desktop-font-size);
     border-radius: 5px;
     cursor: pointer;
 }

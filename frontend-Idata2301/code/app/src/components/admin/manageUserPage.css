@@ -54,7 +54,7 @@
     padding: 3px 7px;
     border-radius: 100%;
     cursor: pointer;
-    font-size: 12px;
+    font-size: var(--text-desktop-font-size);
   }
   
   .remove-role-button:hover {

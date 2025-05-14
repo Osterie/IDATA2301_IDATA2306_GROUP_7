@@ -35,7 +35,7 @@ nav .logo img {
 nav .logo h1 {
   margin: 0; /* Removes any default margin around the text */
   color: var(--contrast-text-color); /* Adjusts the text color */
-  font-size: 24px; /* Adjust text size as needed */
+  font-size: var(--h1-desktop-text-color);
 }
 
 
@@ -52,7 +52,7 @@ nav ul li {
 
 nav ul li a {
   color: var(--contrast-text-color);
-  font-size: 17px;
+  font-size: var(--button-text-desktop-font-size);
   padding: 7px 13px;
   border-radius: 3px;
   text-transform: uppercase;
@@ -115,7 +115,7 @@ nav ul li a:hover {
     margin: 50px 0;
   }
   nav ul li a {
-    font-size: 20px;
+    font-size: var(--button-text-mobile-font-size);
   }
   nav ul.active {
     left: 0;

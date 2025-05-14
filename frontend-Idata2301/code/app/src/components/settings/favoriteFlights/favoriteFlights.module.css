@@ -4,12 +4,12 @@
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: var(--h2-desktop-font-size);
   margin-bottom: 10px;
 }
 
 p {
-  font-size: 1rem;
+  font-size: var(--text-desktop-font-size);
   color: #555;
 }
 
@@ -27,17 +27,17 @@ p {
 }
 
 .flightItem h3 {
-  font-size: 1.2rem;
+  font-size: var(--h3-desktop-font-size);
   margin-bottom: 10px;
 }
 
 .flightItem p {
-  font-size: 1rem;
+  font-size: var(--text-desktop-font-size);
   color: #333;
 }
 
 .error {
   color: red;
-  font-size: 1rem;
+  font-size: var(--text-desktop-font-size);
   font-weight: bold;
 }

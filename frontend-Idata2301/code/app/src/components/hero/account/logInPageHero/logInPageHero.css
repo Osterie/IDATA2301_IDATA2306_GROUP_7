@@ -10,7 +10,7 @@
 }
 
 .login-hero-container h1 {
-  font-size: 2rem;
+  font-size: var(--h1-desktop-font-size);
   font-weight: 700;
   color: #000;
   margin-bottom: 5px;
@@ -18,7 +18,7 @@
 }
 
 .login-hero-container p {
-  font-size: 1rem;
+  font-size: var(--text-desktop-font-size);
   margin-bottom: 25px;
   color: black;
 }
@@ -45,13 +45,13 @@
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 1rem;
+  font-size: var(--text-desktop-font-size);
 }
 
 .form-links {
   display: flex;
   justify-content: space-between;
-  font-size: 0.95rem;
+  font-size: var(--text-desktop-font-size);
   margin-bottom: 20px;
 }
 
@@ -60,7 +60,7 @@
   background-color: var(--call-to-action-color);
   border: none;
   color: #000;
-  font-size: 1rem;
+  font-size: var(--button-text-desktop-font-size);
   font-weight: 600;
   padding: 12px;
   border-radius: 8px;
@@ -77,7 +77,7 @@
   align-items: center;
   gap: 10px;
   color: #666;
-  font-size: 0.9rem;
+  font-size: var(--text-desktop-font-size);
   margin-bottom: 20px;
 }
 

@@ -21,7 +21,7 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    font-size: 16px;
+    font-size: var(--text-desktop-font-size);
     color: var(--text-color);
 }
 
@@ -59,7 +59,7 @@
 .dual-range-slider-number-input {
     width: 90px;
     /* height: 30px; */
-    font-size: 20px;
+    font-size: var(--text-desktop-font-size);
     border-radius: 5px;
 }
 

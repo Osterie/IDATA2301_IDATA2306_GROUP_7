@@ -15,13 +15,13 @@
 }
 
 .flight-card h2 {
-  font-size: 18px;
+  font-size: var(--h2-desktop-font-size);
   color: #2c3e50;
   margin-bottom: 5px;
 }
 
 .flight-card-class-name {
-  font-size: 14px;
+  font-size: var(--text-desktop-font-size);
   font-weight: bold;
   color: #16a085;
 }
@@ -33,12 +33,12 @@
 }
 
 .flight-card-location-label {
-  font-size: 12px;
+  font-size: var(--text-desktop-font-size);
   color: #7f8c8d;
 }
 
 .flight-card-date, .flight-card-seats {
-  font-size: 14px;
+  font-size: var(--text-desktop-font-size);
   font-weight: bold;
   color: #34495e;
 }
@@ -51,19 +51,19 @@
 }
 
 .flight-card-price {
-  font-size: 16px;
+  font-size: var(--text-desktop-font-size);
   font-weight: bold;
   color: #e74c3c;
 }
 
 .flight-card-discount {
-  font-size: 14px;
+  font-size: var(--text-desktop-font-size);
   color: #27ae60;
   font-weight: bold;
 }
 
 .flight-card-provider {
-  font-size: 12px;
+  font-size: var(--text-desktop-font-size);
   color: #7f8c8d;
   margin-top: 5px;
 }
@@ -84,7 +84,7 @@
   border: none;
   color: white;
   padding: 6px 12px;
-  font-size: 12px;
+  font-size: var(--text-desktop-font-size);
   border-radius: 6px;
   cursor: pointer;
 }

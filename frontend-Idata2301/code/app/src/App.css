@@ -63,30 +63,3 @@ body {
 main {
   min-height: 100vh;
 }
-
-/* CSS variables */
-:root{
-  /* Main colors */
-  --primary-color: #182833;
-  --secondary-color: #183040;
-  --background-color: rgb(240,240,250);
-  --box-color: white;
-  --bottom-color: #101520;
-
-  /* Contrast colors */
-  --primary-contrast: #FDA300;
-  --call-to-action-color: #FDA300;
-  --call-to-action-highlight-color: #FFC24D;
-
-  /* Text color */
-  --text-color: black;
-  --border-color: black;
-
-  /* Contrast text color */
-  --contrast-text-color: white;
-  --contrast-border-color: white;
-
-  /* Shadow color */
-  --shadow-color: lightgray;
-
-}

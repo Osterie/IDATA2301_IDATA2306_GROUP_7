@@ -11,7 +11,7 @@
   }
   
   .create-account-container h1 {
-    font-size: 2rem;
+    font-size: var(--h1-desktop-font-size);
     font-weight: 700;
     color: #000;
     margin-bottom: 5px;
@@ -19,7 +19,7 @@
 
   }
   .create-account-container p {
-    font-size: 1rem;
+    font-size: var(--text-desktop-font-size);
     margin-bottom: 25px;
     color: black;
   }
@@ -40,7 +40,7 @@
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 1rem;
+    font-size: var(--text-desktop-font-size);
   }
   
   .create-account-button {
@@ -48,7 +48,7 @@
     background-color: var(--call-to-action-color);
     border: none;
     color: #000;
-    font-size: 1rem;
+    font-size: var(--button-text-desktop-font-size);
     font-weight: 600;
     padding: 12px;
     border-radius: 8px;

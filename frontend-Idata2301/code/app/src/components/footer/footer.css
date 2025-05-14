@@ -22,12 +22,12 @@ html, body {
 }
 #contactTitle {
     margin-bottom: 10px;
-    font-size: 30px;
+    font-size: var(--h1-desktop-font-size);
     color: var(--contrast-text-color);
 }
 .contactInfo {
     color: var(--contrast-text-color);
-    font-size: 18px;
+    font-size: var(--text-desktop-font-size);
 }
 .contactInfo > a {
     color: var(--primary-contrast);

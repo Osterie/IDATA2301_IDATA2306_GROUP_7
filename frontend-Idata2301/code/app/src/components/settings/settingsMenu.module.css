@@ -20,7 +20,7 @@
   border: none;
   padding: 10px 15px;
   text-align: left;
-  font-size: 16px;
+  font-size: var(--button-text-desktop-font-size);
   color: var(--text-color);
   cursor: pointer;
   border-radius: 6px;
