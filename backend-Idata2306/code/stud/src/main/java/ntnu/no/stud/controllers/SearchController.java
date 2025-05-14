@@ -2,11 +2,14 @@ package ntnu.no.stud.controllers;
 
 import java.time.LocalDate;
 import java.util.List;
+import ntnu.no.stud.entities.Airport;
 import ntnu.no.stud.entities.Price;
 import ntnu.no.stud.models.SearchedFlight;
+import ntnu.no.stud.repositories.AirportRepository;
 import ntnu.no.stud.repositories.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +25,9 @@ public class SearchController {
   @Autowired
   private PriceRepository priceRepository; // Inject the repository
 
+  @Autowired
+  private AirportRepository airportRepository; // Inject the repository
+
   @PostMapping("/api/searchForFlights")
   public List<Price> searchForFlights(@RequestBody SearchedFlight searchedFlight) {
 
@@ -36,10 +42,12 @@ public class SearchController {
   }
 
 
-  // @GetMapping("/api/getSearchTerms")
-  // public List<String> getSearchTerms() {
-  //   return priceRepository.getSearchTerms();
-  // }
+  @GetMapping("/api/getSearchTerms")
+  public Iterable<Airport> getAirports() {
+    return airportRepository.findAll(); 
+  }
+
+
 
   /**
    * Adds a flight to the flight table
