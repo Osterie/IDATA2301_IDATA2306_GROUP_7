@@ -11,9 +11,9 @@ const SettingsMenu = ({user}) => {
   const renderTabContent = () => {
     switch (activeTab) {
       case "profile":
-        return <ProfileSettings />;
+        return <ProfileSettings user={user} />;
       case "favorites":
-        return <FavoriteFlights />;
+        return <FavoriteFlights user={user} />;
       case "purchased":
         return <PurchasedFlights user={user} />;
       default:
