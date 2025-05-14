@@ -1,48 +1,74 @@
 package ntnu.no.stud.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.*;
-import ntnu.no.stud.services.FavoriteFlightService;
 import ntnu.no.stud.entities.FavoriteFlight;
+import ntnu.no.stud.entities.Price;
+import ntnu.no.stud.entities.User;
+import ntnu.no.stud.repositories.FavoriteFlightRepository;
+import ntnu.no.stud.repositories.PriceRepository;
+import ntnu.no.stud.repositories.UserRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping("/api/favorites")
-@CrossOrigin(origins = "http://localhost:3000") // Enable CORS for React
+@CrossOrigin(origins = "*")
 public class FavoriteFlightController {
 
-    private static final Logger logger = LoggerFactory.getLogger(FavoriteFlightController.class);  // Logger instance
-    private final FavoriteFlightService service;
+    @Autowired
+    private FavoriteFlightRepository favoriteFlightRepository;
 
-    // Constructor injection of FavoriteFlightService
-    public FavoriteFlightController(FavoriteFlightService service) {
-        this.service = service;
+    @Autowired
+    private PriceRepository priceRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    // Fetch all favorite prices for a specific user
+    @GetMapping("/{userId}")
+    public List<FavoriteFlight> getFavoritesForUser(@PathVariable int userId) {
+        return StreamSupport.stream(favoriteFlightRepository.findAll().spliterator(), false)
+                .filter(fav -> fav.getUser().getId() == userId)
+                .collect(Collectors.toList());
     }
 
-    // Get all favorite flights
-    @GetMapping
-    public List<FavoriteFlight> getAllFlights() {
-        logger.info("Fetching all favorite flights");
-        List<FavoriteFlight> flights = service.getAllFlights();
-        logger.info("Found {} flights", flights.size());  // Log the number of flights retrieved
-        return flights;
+    // Add a favorite price
+    @PostMapping("/")
+    public FavoriteFlight addFavoritePrice(@RequestParam int userId, @RequestParam int priceId) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        Optional<Price> priceOpt = priceRepository.findById(priceId);
+
+        if (userOpt.isPresent() && priceOpt.isPresent()) {
+            User user = userOpt.get();
+            Price price = priceOpt.get();
+
+            // Prevent duplicate
+            boolean exists = StreamSupport.stream(favoriteFlightRepository.findAll().spliterator(), false)
+                    .anyMatch(fav -> fav.getUser().getId() == userId && fav.getPrice().getId() == priceId);
+
+            if (exists) {
+                throw new IllegalStateException("Price is already in user's favorites.");
+            }
+
+            FavoriteFlight favorite = new FavoriteFlight(user, price);
+            return favoriteFlightRepository.save(favorite);
+        } else {
+            throw new IllegalArgumentException("Invalid user or price ID.");
+        }
     }
 
-    // Add a new favorite flight
-    @PostMapping
-    public FavoriteFlight addFlight(@RequestBody FavoriteFlight flight) {
-        logger.info("Adding new favorite flight: {}", flight);
-        FavoriteFlight addedFlight = service.addFlight(flight);
-        logger.info("Successfully added flight: {}", addedFlight);
-        return addedFlight;
-    }
+    // Delete a favorite price
+    @DeleteMapping("/")
+    public void removeFavoritePrice(@RequestParam int userId, @RequestParam int priceId) {
+        List<FavoriteFlight> favorites = StreamSupport.stream(favoriteFlightRepository.findAll().spliterator(), false)
+                .filter(fav -> fav.getUser().getId() == userId && fav.getPrice().getId() == priceId)
+                .collect(Collectors.toList());
 
-    // Delete a favorite flight by ID
-    @DeleteMapping("/{id}")
-    public void deleteFlight(@PathVariable Long id) {
-        logger.info("Attempting to delete flight with ID: {}", id);
-        service.deleteFlight(id);
-        logger.info("Successfully deleted flight with ID: {}", id);
+        favorites.forEach(favoriteFlightRepository::delete);
     }
 }

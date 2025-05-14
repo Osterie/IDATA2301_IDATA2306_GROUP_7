@@ -9,8 +9,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
 /**
- * Represents a user's favorite flight entry.
- * Each favorite is linked to a specific user and a specific flight.
+ * Represents a user's favorite price (flight offer).
+ * Each favorite is linked to a specific user and a specific price.
  */
 @Entity
 @Table(name = "favorite_flights")
@@ -25,30 +25,30 @@ public class FavoriteFlight {
     private int id;
 
     /**
-     * The user who marked the flight as favorite.
+     * The user who marked the price as favorite.
      */
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     /**
-     * The flight that was marked as favorite.
+     * The price (flight offer) that was marked as favorite.
      */
     @ManyToOne
-    @JoinColumn(name = "flight_id", nullable = false)
-    private Flight flight;
+    @JoinColumn(name = "price_id", nullable = false)
+    private Price price;
 
     public FavoriteFlight() { }
 
     /**
-     * Constructs a FavoriteFlight with the specified user and flight.
+     * Constructs a FavoriteFlight with the specified user and price.
      *
-     * @param user The user who favorited the flight.
-     * @param flight The flight that is favorited.
+     * @param user The user who favorited the price.
+     * @param price The price that is favorited.
      */
-    public FavoriteFlight(User user, Flight flight) {
+    public FavoriteFlight(User user, Price price) {
         this.user = user;
-        this.flight = flight;
+        this.price = price;
     }
 
     // Getters and setters
@@ -68,12 +68,11 @@ public class FavoriteFlight {
         this.user = user;
     }
 
-    public Flight getFlight() {
-        return flight;
+    public Price getPrice() {
+        return price;
     }
 
-    public void setFlight(Flight flight) {
-        this.flight = flight;
+    public void setPrice(Price price) {
+        this.price = price;
     }
 }
-
