@@ -35,6 +35,12 @@ public class SearchController {
     return priceRepository.searchForFlights(departure, arrival, fromDate, toDate);
   }
 
+
+  // @GetMapping("/api/getSearchTerms")
+  // public List<String> getSearchTerms() {
+  //   return priceRepository.getSearchTerms();
+  // }
+
   /**
    * Adds a flight to the flight table
    */
