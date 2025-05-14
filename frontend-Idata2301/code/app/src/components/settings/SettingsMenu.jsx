@@ -32,7 +32,9 @@ const SettingsMenu = ({user}) => {
         >
           Profile Settings
         </button>
-        <button
+
+        {user && (
+          <button
           className={`${styles.tabButton} ${
             activeTab === "favorites" ? styles.activeTab : ""
           }`}
@@ -40,6 +42,8 @@ const SettingsMenu = ({user}) => {
         >
           Favorite Flights
         </button>
+        )}
+        
 
         {user && (
           <button

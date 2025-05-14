@@ -28,7 +28,8 @@ const FlightsContainer = ({
     <div className="flights-container flights-grid">
       {flights.length > 0 ? (
         flights
-          .filter((flight) => !flight.isHidden || userIsAdmin)
+          // .filter((flight) => !flight.isHidden || userIsAdmin)
+          .filter((flight) => !flight.isFilteredOut && (flight.isHidden ? userIsAdmin : true))
           .map((flight) => (
             <NewFlightCard
               key={flight.id}
