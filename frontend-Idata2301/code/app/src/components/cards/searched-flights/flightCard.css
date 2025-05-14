@@ -1,88 +1,93 @@
-  .flight-card {
-    position: relative;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-    box-sizing: border-box;
-  }
+.flight-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  box-sizing: border-box;
+}
 
-  .flight-card h2 {
-    font-size: 18px;
-    color: #2c3e50;
-    margin-bottom: 5px;
-  }
-  
-  .class-name {
-    font-size: 14px;
-    font-weight: bold;
-    color: #16a085;
-  }
-  
-  .flight-details {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-  }
-  
-  .label {
-    font-size: 12px;
-    color: #7f8c8d;
-  }
-  
-  .date, .seats {
-    font-size: 14px;
-    font-weight: bold;
-    color: #34495e;
-  }
-  
-  .price-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .price {
-    font-size: 16px;
-    font-weight: bold;
-    color: #e74c3c;
-  }
-  
-  .discount {
-    font-size: 14px;
-    color: #27ae60;
-    font-weight: bold;
-  }
-  
-  .provider {
-    font-size: 12px;
-    color: #7f8c8d;
-    margin-top: 5px;
-  }
+.flight-card h2 {
+  font-size: 18px;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
 
-  
-  /* Add this for the admin button */
-  .toggle-visibility-button {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    background-color: #f39c12;
-    border: none;
-    color: white;
-    padding: 6px 12px;
-    font-size: 12px;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .toggle-visibility-button:hover {
-    background-color: #d35400;
-  }
-  
+.flight-card-class-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #16a085;
+}
+
+.flight-card-flight-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.flight-card-location-label {
+  font-size: 12px;
+  color: #7f8c8d;
+}
+
+.flight-card-date, .flight-card-seats {
+  font-size: 14px;
+  font-weight: bold;
+  color: #34495e;
+}
+
+.flight-card-price-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.flight-card-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+.flight-card-discount {
+  font-size: 14px;
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.flight-card-provider {
+  font-size: 12px;
+  color: #7f8c8d;
+  margin-top: 5px;
+}
+
+.flight-card-purchase-date {
+  color: #4caf50; /* soft green, or choose any accent color */
+  margin-top: -6px;
+  margin-bottom: 8px;
+  font-weight: bold
+}
+
+/* Add this for the admin button */
+.flight-card-toggle-visibility-button {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: #f39c12;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.flight-card-toggle-visibility-button:hover {
+  background-color: #d35400;
+}

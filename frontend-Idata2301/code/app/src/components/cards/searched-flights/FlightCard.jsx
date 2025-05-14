@@ -8,6 +8,7 @@ const FlightCard = ({
   userIsAdmin,
   onVisibilityChange,
   purchasable = true,
+  purchaseDate,
   setSelectedFlight,
   setActivePage,
 }) => {
@@ -63,32 +64,36 @@ const FlightCard = ({
   return (
     <div className="flight-card">
       <h2>{companyName} - {flightName}</h2>
-      <p className="class-name">Class: {flightClassName}</p>
+      <p className="flight-card-class-name">Class: {flightClassName}</p>
 
-      <div className="flight-details">
-        <div className="departure">
-          <p className="label">Departure</p>
+      <div className="flight-card-flight-details">
+        <div className="flight-card-departure">
+          <p className="flight-card-location-label">Departure</p>
           <p>{departureCity} ({departureCode})</p>
         </div>
-        <div className="arrival">
-          <p className="label">Arrival</p>
+        <div className="flight-card-arrival">
+          <p className="flight-card-location-label">Arrival</p>
           <p>{arrivalCity} ({arrivalCode})</p>
         </div>
       </div>
 
-      <p className="date">Date: {date}</p>
+      <p className="flight-card-date">Departure Date: {date}</p>
 
-      {purchasable && (
-        <p className="seats">Available Seats: {availableSeats}</p>
+      {purchaseDate && (
+        <p className="flight-card-purchase-date">Purchased on: {new Date(purchaseDate).toLocaleDateString()}</p>
       )}
 
-      <div className="price-section">
-        <p className="price">${price} {priceCode}</p>
-        {discount > 0 && <p className="discount">Discount: {discount}%</p>}
+      {purchasable && (
+        <p className="flight-card-seats">Available Seats: {availableSeats}</p>
+      )}
+
+      <div className="flight-card-price-section">
+        <p className="flight-card-price">${price} {priceCode}</p>
+        {discount > 0 && <p className="flight-card-discount">Discount: {discount}%</p>}
       </div>
 
       <button
-        className="book-button"
+        className="flight-card-book-button"
         onClick={() => {
           if (setSelectedFlight && setActivePage) {
             setSelectedFlight(flight);
@@ -100,16 +105,16 @@ const FlightCard = ({
       </button>
 
       {purchasable && (
-        <button className="book-button" onClick={handleAddToCart}>
+        <button className="flight-card-book-button" onClick={handleAddToCart}>
           Add to cart
         </button>
       )}
 
-      <p className="provider">Provider: {provider}</p>
+      <p className="flight-card-provider">Provider: {provider}</p>
 
       {userIsAdmin && (
         <button
-          className="toggle-visibility-button"
+          className="flight-card-toggle-visibility-button"
           onClick={handleToggleVisibility}
         >
           {isHidden ? "Show" : "Hide"}
