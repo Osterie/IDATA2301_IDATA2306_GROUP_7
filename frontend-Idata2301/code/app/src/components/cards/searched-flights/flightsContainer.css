@@ -22,6 +22,10 @@
 
 /* Responsive Styles */
 @media (max-width: 900px) {
+  .flights-section {
+    width: 100%;
+  }
+
   .flights-container {
     width: 100%;
   }

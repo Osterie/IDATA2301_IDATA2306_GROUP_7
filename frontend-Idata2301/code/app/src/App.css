@@ -53,6 +53,13 @@ body {
   }
 }
 
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .flights-container {
+    width: 100%;
+  }
+}
+
 main {
   min-height: 100vh;
 }
