@@ -1,7 +1,7 @@
 import './mainPageHero.css';
 import SearchBar from '../../searchBar/SearchBar';
 
-const MainPageHero = ({ setFlights, setActivePage }) => {
+const MainPageHero = ({ setFlights, setActivePage, searchParams, setSearchParams }) => {
   return (
     // Main hero section for flight search
     <section className="hero" aria-label="Flight search section">
@@ -18,7 +18,7 @@ const MainPageHero = ({ setFlights, setActivePage }) => {
           <h1>Find your next adventure</h1>
           <p>Search for the best deals on flights all around the world</p>
         </header>
-        <SearchBar setFlights={setFlights} setActivePage={setActivePage} />
+        <SearchBar setFlights={setFlights} setActivePage={setActivePage} searchParams={searchParams} setSearchParams={setSearchParams} />
       </div>
     </section>
   );
