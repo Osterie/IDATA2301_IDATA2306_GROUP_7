@@ -45,31 +45,65 @@ public class Flight {
         this.company = company;
     }
 
-    // Getters and Setters
+    /**
+     * Returns the unique identifier of the flight.
+     *
+     * @return the flight ID
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets the unique identifier of the flight.
+     *
+     * @param id the ID to assign
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Returns the name of the flight.
+     *
+     * @return the flight name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name of the flight.
+     *
+     * @param name the flight name to assign
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Returns the airline company operating the flight.
+     *
+     * @return the operating {@link FlightCompany}
+     */
     public FlightCompany getCompany() {
         return company;
     }
 
+    /**
+     * Sets the airline company operating the flight.
+     *
+     * @param company the {@link FlightCompany} to associate
+     */
     public void setCompany(FlightCompany company) {
         this.company = company;
     }
 
+    /**
+     * Returns a string representation of the flight.
+     *
+     * @return a string describing the flight
+     */
     @Override
     public String toString() {
         return "Flight{id=" + id + ", name='" + name + "', company='" + company.getName() + "'}";

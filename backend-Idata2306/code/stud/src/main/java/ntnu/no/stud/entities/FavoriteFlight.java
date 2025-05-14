@@ -51,27 +51,56 @@ public class FavoriteFlight {
         this.price = price;
     }
 
-    // Getters and setters
+    /**
+     * Returns the ID of the favorite flight entry.
+     *
+     * @return the ID of this favorite
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets the ID of this favorite flight entry.
+     *
+     * @param id the new ID to assign
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Returns the user who favorited the flight price.
+     *
+     * @return the user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets the user who favorited the flight price.
+     *
+     * @param user the user to associate with this favorite
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
+    /**
+     * Returns the favorited flight price.
+     *
+     * @return the price
+     */
     public Price getPrice() {
         return price;
     }
 
+    /**
+     * Sets the flight price that is marked as favorite.
+     *
+     * @param price the price to associate with this favorite
+     */
     public void setPrice(Price price) {
         this.price = price;
     }

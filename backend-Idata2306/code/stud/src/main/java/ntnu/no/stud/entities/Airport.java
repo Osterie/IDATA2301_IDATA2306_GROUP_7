@@ -48,27 +48,56 @@ public class Airport {
         this.city = city;
     }
 
-    // Getters and Setters
+    /**
+     * Returns the unique ID of the airport.
+     *
+     * @return the airport ID
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets the unique ID of the airport.
+     *
+     * @param id the ID to set
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Returns the 3-letter airport code.
+     *
+     * @return the airport code
+     */
     public String getAirportCode() {
         return airportCode;
     }
 
+    /**
+     * Sets the 3-letter airport code.
+     *
+     * @param airportCode the code to set
+     */
     public void setAirportCode(String airportCode) {
         this.airportCode = airportCode;
     }
 
+    /**
+     * Returns the city where the airport is located.
+     *
+     * @return the city name
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * Sets the city where the airport is located.
+     *
+     * @param city the city name to set
+     */
     public void setCity(String city) {
         this.city = city;
     }
