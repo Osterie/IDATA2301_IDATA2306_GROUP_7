@@ -6,8 +6,8 @@ import { isAdmin } from "../../../library/Identity/authentication";
 const FlightsContainer = ({
   flights: initialFlights,
   user,
-  setSelectedFlight, 
-  setActivePage     
+  setSelectedFlight,
+  setActivePage,
 }) => {
   const userIsAdmin = user && isAdmin(user);
   const [flights, setFlights] = useState([]);
@@ -25,25 +25,30 @@ const FlightsContainer = ({
   };
 
   return (
-    <div className="flights-container flights-grid">
-      {flights.length > 0 ? (
-        flights
-          // .filter((flight) => !flight.isHidden || userIsAdmin)
-          .filter((flight) => !flight.isFilteredOut && (flight.isHidden ? userIsAdmin : true))
-          .map((flight) => (
-            <FlightCard
-              key={flight.id}
-              flight={flight}
-              userIsAdmin={userIsAdmin}
-              onVisibilityChange={handleVisibilityChange}
-              setSelectedFlight={setSelectedFlight}  
-              setActivePage={setActivePage}          
-            />
-          ))
-      ) : (
-        <p>No flights found fitting given criteria.</p>
-      )}
-    </div>
+    <section className="flights-section">
+      <main className="flights-container">
+        {flights.length > 0 ? (
+          flights
+            .filter(
+              (flight) =>
+                !flight.isFilteredOut &&
+                (flight.isHidden ? userIsAdmin : true)
+            )
+            .map((flight) => (
+              <FlightCard
+                key={flight.id}
+                flight={flight}
+                userIsAdmin={userIsAdmin}
+                onVisibilityChange={handleVisibilityChange}
+                setSelectedFlight={setSelectedFlight}
+                setActivePage={setActivePage}
+              />
+            ))
+        ) : (
+          <p>No flights found fitting given criteria.</p>
+        )}
+      </main>
+    </section>
   );
 };
 
