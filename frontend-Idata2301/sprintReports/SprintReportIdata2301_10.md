@@ -51,6 +51,7 @@ Sprint stenographer: Daniel
 | Put footer at the bottom                                                    | Adrian   | Not completed | [3]          |                                              |
 | Invisible background                                                        | Tobias   | Not completed | [2]          |                                              |
 | Remove unnecessary components from filter, add ascending/descending sorting | Adrian   | Completed     | [4]          |                                              |
+| Fix searching from deals page                                               | Adrian   | Completed     | [4]          |                                              |
 | View hidden flights in admin panel                                          | Daniel   | Not completed | [3]          |                                              |
 | Add purchasing date to purchase                                             | Adrian   | Not completed | [2]          | Low priority                                 |
 
