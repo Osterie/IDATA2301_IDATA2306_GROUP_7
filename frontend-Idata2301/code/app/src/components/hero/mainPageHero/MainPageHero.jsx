@@ -3,11 +3,13 @@ import SearchBar from '../../searchBar/SearchBar';
 
 const MainPageHero = ({ setFlights, setActivePage }) => {
   return (
-    <section className="hero">
-      <div className="hero-container">
-        <h1>Find your next adventure</h1>
-        <p>Search for the best deals on flights all around the world</p>
-        <SearchBar setFlights={setFlights} setActivePage={setActivePage} />  {/* Pass setFlights and setActivePage to SearchBar */}
+    // Main hero section for flight search
+    <section className="hero" aria-label="Flight search section">
+
+      {/* Background image layer (purely visual) */}
+      <div className="hero-background" aria-hidden="true" />
+
+      {/* Dark overlay to improve text readability over image */}
       <div className="hero-overlay" aria-hidden="true" />
       
       {/* Foreground content (text and search bar) */}
@@ -16,7 +18,6 @@ const MainPageHero = ({ setFlights, setActivePage }) => {
           <h1>Find your next adventure</h1>
           <p>Search for the best deals on flights all around the world</p>
         </header>
-
         <SearchBar setFlights={setFlights} setActivePage={setActivePage} />
       </div>
     </section>
