@@ -1,18 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './searchBar.css';
 import PassengerAmountField from './PassengerAmountField';
 
 import {sendApiRequest} from "../../library/requests";
 
 
+const getSearchTerms = async () => {
+    try {
+        await sendApiRequest(
+            "GET", "/getSearchTerms",
+            function (response) {
+                console.log(response)
+                // const searchTerms = response.json();
+                // console.log('Search terms:', searchTerms);
+            },
+            null,
+            function (errorResponse) {
+                console.log("Error: " + errorResponse);
+                throw new Error('Network response was not ok for fetching search terms');
+            }
+        )
+
+    }
+    catch (error) {
+        console.error('Error fetching search terms:', error);
+    }
+}
+
 const SearchBar = ({ setFlights, setActivePage  }) => {  // Receive setFlights as a prop
     const [formData, setFormData] = useState({
-        departure: '',
-        arrival: '',
-        fromDate: '',
-        toDate: ''
+        departure: 'JFK',
+        arrival: 'SIN',
+        fromDate: '2020-10-01',
+        toDate: '2030-10-01',
     });
     const [showDropdown, setShowDropdown] = useState(false);
+
+
+    // Fetch search terms when the component mounts
+    useEffect(() => {
+        getSearchTerms();
+    }, []);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });

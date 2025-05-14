@@ -55,52 +55,53 @@ const DualRangeSlider = ({ label, min, max, step = 0.1, callback }) => {
   const handleInputChange = () => {
     let newMin = parseFloat(fromInputRef.current.value);
     let newMax = parseFloat(toInputRef.current.value);
-
+  
     if (newMin > newMax) {
       newMax = newMin;
     }
-
+  
     setMinValue(newMin);
     setMaxValue(newMax);
+    callback(newMin, newMax); // Use new values directly
   };
+  
 
   const handleChange = () => {
     callback(minValue, maxValue);
   };
 
-  // Handle change for min slider/input
   const handleFromSliderChange = () => {
     const fromSlider = fromSliderRef.current;
     const toSlider = toSliderRef.current;
     let newMin = parseFloat(fromSlider.value);
     let newMax = parseFloat(toSlider.value);
-
+  
     if (newMin > newMax) {
       newMin = newMax;
     }
-
+  
     setMinValue(newMin);
     setMaxValue(newMax);
     updateSliderBackground();
-    handleChange();
+    callback(newMin, newMax); // Use new values directly
   };
-
-  // Handle change for max slider/input
+  
   const handleToSliderChange = () => {
     const fromSlider = fromSliderRef.current;
     const toSlider = toSliderRef.current;
     let newMin = parseFloat(fromSlider.value);
     let newMax = parseFloat(toSlider.value);
-
+  
     if (newMin > newMax) {
       newMax = newMin;
     }
-
+  
     setMinValue(newMin);
     setMaxValue(newMax);
     updateSliderBackground();
-    handleChange();
+    callback(newMin, newMax); // Use new values directly
   };
+  
 
   return (
     <div className="dual-range-slider-container">
@@ -116,8 +117,10 @@ const DualRangeSlider = ({ label, min, max, step = 0.1, callback }) => {
           max={max}
           step={step}
           value={minValue}
-          onInput={handleSliderInput}
-          onChange={handleFromSliderChange}
+          onChange={(e) => {
+            handleFromSliderChange();
+            // handleSliderInput();
+          }}
           className="dual-range-slider"
         />
         <input
@@ -127,8 +130,10 @@ const DualRangeSlider = ({ label, min, max, step = 0.1, callback }) => {
           max={max}
           step={step}
           value={maxValue}
-          onInput={handleSliderInput}
-          onChange={handleToSliderChange}
+          onChange={(e) => {
+            handleToSliderChange();
+            // handleSliderInput();
+          }}
           className="dual-range-slider"
         />
       </div>

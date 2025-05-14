@@ -1,21 +1,11 @@
-.flights-container {
-  padding: 20px;
-  text-align: center;
-  width: 60%;
-}
-
-/* .flights-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-} */
-
 .flights-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   align-items: center; /* Center cards */
   justify-items: center;
+  padding: 20px;
+  text-align: center;
   width: 100%;
   height: 100%;
 }

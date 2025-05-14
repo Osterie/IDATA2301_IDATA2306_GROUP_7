@@ -67,6 +67,7 @@ public class SecurityConfiguration {
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/signup").permitAll())
         // searchForFlights are also available to everyone
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/searchForFlights").permitAll())
+        .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/getSearchTerms").permitAll())
         //flight methods are also available to everyone
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/flights/**").permitAll())
         // Allow HTTP OPTIONS requests - CORS pre-flight requests
