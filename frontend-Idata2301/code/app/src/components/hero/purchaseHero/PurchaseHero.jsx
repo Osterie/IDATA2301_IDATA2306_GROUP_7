@@ -4,6 +4,8 @@ import {sendApiRequest} from "../../../library/requests";
 
 import "./purchaseHero.css";
 import FlightCard from "../../cards/searched-flights/FlightCard.jsx";
+import { use } from "react";
+import { getCookie } from "../../../library/tools";
 
 const PurchaseHero = ({ selectedFlight }) => {
   const [flightsToPurchase, setFlightsToPurchase] = useState([]);
@@ -34,19 +36,8 @@ const PurchaseHero = ({ selectedFlight }) => {
 
     const data = {
       flights: flightsToPurchase.map((flight) => ({
-        price: flight.price,
-        currencyCode: flight.currencyCode,
-        date: flight.scheduledFlight.date,
-        airline: flight.flightClassId.flight.name,
-        flightNumber: flight.flightClassId.flight.flightNumber,
-        departure: {
-          city: flight.scheduledFlight.route.departureAirport.city,
-          airportCode: flight.scheduledFlight.route.departureAirport.airportCode,
-        },
-        arrival: {
-          city: flight.scheduledFlight.route.arrivalAirport.city,
-          airportCode: flight.scheduledFlight.route.arrivalAirport.airportCode,
-        },
+        userId: getCookie("userId"),
+        price: flight.price
       })),
     };
 
