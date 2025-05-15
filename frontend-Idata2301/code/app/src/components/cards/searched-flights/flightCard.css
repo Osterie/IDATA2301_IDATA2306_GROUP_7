@@ -8,8 +8,7 @@
   max-width: none;          /* Remove restriction */
   height: auto;             /* Automatically fit content */
   max-height: 300px;
-  flex-direction: column;
-  gap: 10px;
+  margin-bottom: 20px;
   text-align: center;
   box-sizing: border-box;
 }

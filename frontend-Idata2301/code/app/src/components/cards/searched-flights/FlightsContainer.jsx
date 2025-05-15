@@ -26,7 +26,7 @@ const FlightsContainer = ({
 
   return (
     <section className="flights-section">
-      <main className="flights-container">
+      {/* <main className="flights-container"> */}
         {flights.length > 0 ? (
           flights
             .filter(
@@ -45,9 +45,9 @@ const FlightsContainer = ({
               />
             ))
         ) : (
-          <p>No flights found.</p>
+          <p>No flights found fitting given criteria.</p>
         )}
-      </main>
+      {/* </main> */}
     </section>
   );
 };
