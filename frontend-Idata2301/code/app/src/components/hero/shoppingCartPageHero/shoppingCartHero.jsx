@@ -17,7 +17,7 @@ const ShoppingCartHero = ({onNavClick}) => {
 
   
   const onPurchaseClick = () => {
-    onNavClick("/purchase", { state: { cart } }); 
+    onNavClick("purchase", { }); 
   };
 
   const calculateDiscountedPrice = (price, discount) => {

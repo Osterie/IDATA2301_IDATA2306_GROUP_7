@@ -14,4 +14,7 @@ public interface FlightClassesRepository extends CrudRepository<FlightClasses, I
 
     @Query(value = "SELECT * FROM flight_classes WHERE flight_id = :flightId", nativeQuery = true)
     List<FlightClasses> findByFlightId(int flightId);
+
+    @Query(value = "UPDATE flight_classes SET available_seats - 1 WHERE flight_id = :flightId", nativeQuery = true)
+    Void removeAvaliableSeat(int flightId);
 }

@@ -2,6 +2,7 @@ package ntnu.no.stud.controllers;
 
 import ntnu.no.stud.entities.Purchase;
 import ntnu.no.stud.repositories.PurchaseRepository;
+import ntnu.no.stud.repositories.FlightClassesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,9 @@ public class PurchaseController {
     @Autowired
     private PurchaseRepository purchaseRepository;
 
+    @Autowired
+    private FlightClassesRepository flightClassesRepository;
+
 
     @GetMapping("/api/purchases")
     public ResponseEntity<?> getUserPurchases(@RequestParam Long userId) {
@@ -35,5 +39,30 @@ public class PurchaseController {
         }
     
         return ResponseEntity.ok(purchases);
+    }
+
+    @PostMapping("/api/purchaseFlights")
+    public ResponseEntity<?> createPurchaseFlights(@RequestBody List<Purchase> purchases) {
+        logger.info("Creating purchase flights: {}", purchases);    
+        logger.info("Creating purchase flights: {}", purchases);   
+        logger.info("Creating purchase flights: {}", purchases);   
+        logger.info("Creating purchase flights: {}", purchases);   
+
+        if (purchases == null || purchases.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No purchase data provided.");
+        }
+
+        for (Purchase purchase : purchases) {
+
+            Purchase savedPurchase = purchaseRepository.save(purchase);
+            if (savedPurchase == null) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save purchase: " + purchase);
+            }
+            flightClassesRepository.removeAvaliableSeat(savedPurchase.getPrice().getId());
+
+
+        }
+
+        return ResponseEntity.ok("Purchases created successfully.");
     }
 }

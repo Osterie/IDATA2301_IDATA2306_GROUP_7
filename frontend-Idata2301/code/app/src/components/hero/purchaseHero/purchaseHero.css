@@ -1,40 +1,68 @@
-.purchase-hero-container {
-    color: white;
-  }
-  
-  .purchase-hero-container {
-    max-width: 600px;
-    margin: 0 auto;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  purchase-hero-container label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  purchase-hero-container input {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  purchase-hero-container button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background: #007BFF;
-    color: white;
-    cursor: pointer;
-  }
-  
-  purchase-hero-container button:hover {
-    background: #0056b3;
-  }
+.purchase-container {
+  color: rgb(0, 0, 0.5);
+  max-width: 90%;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 0.6rem;
+}
+
+.purchase-container ul {
+list-style: none;
+padding: 0;
+display: flex; /* Use Flexbox for layout */
+flex-wrap: wrap; /* Allow items to wrap to the next row */
+gap: 1rem; /* Add spacing between items */
+}
+
+.purchase-container li {
+flex: 1 1 calc(33.333% - 1rem); /* Make each card take up 1/3 of the row, minus the gap */
+box-sizing: border-box; /* Ensure padding and border are included in the width */
+margin-bottom: 1rem;
+padding: 1rem;
+border: 1px solid #ddd;
+border-radius: 0.5rem;
+background: #f9f9f9;
+}
+
+.available-flights,
+.cart h2 {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 1rem;
+  text-align: left;
+}
+
+.purchase-container ul {
+  list-style: none;
+  padding: 0;
+  display: flex; /* Use Flexbox for layout */
+  flex-wrap: wrap; /* Allow items to wrap to the next row */
+  gap: 1rem; /* Add spacing between items */
+}
+
+.purchase-container li {
+  flex: 1 1 calc(33.333% - 1rem); /* Make each card take up 1/3 of the row, minus the gap */
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  background: #f9f9f9;
+}
+
+.purchase-container button {
+  z-index: 1000;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: #007BFF;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.purchase-container button:hover {
+  background: #0056b3;
+}

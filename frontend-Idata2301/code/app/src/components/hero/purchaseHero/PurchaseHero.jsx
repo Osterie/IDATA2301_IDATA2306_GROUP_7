@@ -1,79 +1,124 @@
-import React from "react";
-import axios from "axios";
-import { clearShoppingCart } from "../../../utils/shoppingCartUtils";
+import React, { useEffect, useState } from "react";
+import { getShoppingCart, clearShoppingCart } from "../../../utils/shoppingCartUtils";
+import {sendApiRequest} from "../../../library/requests";
 
 import "./purchaseHero.css";
+import FlightCard from "../../cards/searched-flights/FlightCard.jsx";
 
-const PurchaseHero = ({ cartFlights }) => {
+const PurchaseHero = ({ selectedFlight }) => {
+  const [flightsToPurchase, setFlightsToPurchase] = useState([]);
+  const [purchasing, setPurchasing] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
 
-  const API_URL = "http://localhost:3000/api/favorites";// Replace with correct API endpoint
+  useEffect(() => {
+    let cart = getShoppingCart();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-
-    const data = {
-      fullName: formData.get("full-name"),
-      email: formData.get("email"),
-      flights: cartFlights,
-    };
-
-    try {
-      // Send a POST request to the backend
-      const response = await axios.post(API_URL, data);
-      console.log("Purchase successful:", response.data);
-
-      // Clear the shopping cart
-      clearShoppingCart();
-
-      // Show a success message or redirect the user
-      alert("Purchase completed successfully!");
-    } catch (error) {
-      console.error("Error completing purchase:", error);
-      alert("Failed to complete purchase. Please try again.");
+    if (
+      selectedFlight &&
+      !cart.some((f) => f.id === selectedFlight.id)
+    ) {
+      cart = [...cart, selectedFlight];
     }
+
+    setFlightsToPurchase(cart);
+  }, [selectedFlight]);
+
+  const calculateDiscountedPrice = (price, discount) => {
+    return discount > 0 ? (price - (price * discount) / 100).toFixed(2) : price;
   };
 
+  const handlePurchase = async () => {
+    setPurchasing(true);
+    setError(null);
+
+    const data = {
+      flights: flightsToPurchase.map((flight) => ({
+        price: flight.price,
+        currencyCode: flight.currencyCode,
+        date: flight.scheduledFlight.date,
+        airline: flight.flightClassId.flight.name,
+        flightNumber: flight.flightClassId.flight.flightNumber,
+        departure: {
+          city: flight.scheduledFlight.route.departureAirport.city,
+          airportCode: flight.scheduledFlight.route.departureAirport.airportCode,
+        },
+        arrival: {
+          city: flight.scheduledFlight.route.arrivalAirport.city,
+          airportCode: flight.scheduledFlight.route.arrivalAirport.airportCode,
+        },
+      })),
+    };
+
+    await sendApiRequest(
+      "POST",
+      "/purchaseFlights",
+      (response) => {
+        console.log("Purchase successful:", response);
+        clearShoppingCart();
+        setSuccess(true);
+      },
+      JSON.stringify(data),
+      (errorResponse) => {
+        console.log("Error: " + errorResponse);
+        setError("Purchase failed. Please try again.");
+      }
+    );
+
+    setPurchasing(false);
+  };
 
   return (
     <section className="hero">
-      <div className="purchase-hero-container">
-        <h1>Complete Your Purchase</h1>
-        <p>Fill in your details to finalize your booking!</p>
+      <div className="purchase-container">
+        <h1>Confirm Your Purchase</h1>
 
-        {/* Display Flights in the Shopping Cart */}
-        <div className="cart-flights">
-          <h2>Your Selected Flights</h2>
-          {cartFlights && cartFlights.length > 0 ? (
-            <ul>
-              {cartFlights.map((flight, index) => (
-                <li key={index}>
-                  <strong>{flight.flightNumber}</strong> - {flight.airline} <br />
-                  Departure: {flight.departure} | Arrival: {flight.arrival} <br />
-                  Price: ${flight.price}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>Your shopping cart is empty.</p>
-          )}
+        <div className="flightsToPurchase">
+        {success ? (
+          <p className="success-message">Thank you for your purchase! 🎉</p>
+        ) : (
+          <>
+            {flightsToPurchase.length === 0 ? (
+              <p>No flights selected for purchase.</p>
+            ) : (
+              <ul>
+                {flightsToPurchase.map((flight) => {
+                  const discountedPrice = calculateDiscountedPrice(flight.price, flight.discount);
+                  return (
+                    <li key={flight.id}>
+                      <strong>{flight.flightClassId.flight.name}</strong> <br />
+                      Departure: {flight.scheduledFlight.route.departureAirport.city} ({flight.scheduledFlight.route.departureAirport.airportCode}) <br />
+                      Arrival: {flight.scheduledFlight.route.arrivalAirport.city} ({flight.scheduledFlight.route.arrivalAirport.airportCode}) <br />
+                      Date: {flight.scheduledFlight.date} <br />
+                      Available Seats: {flight.flightClassId.availableSeats} <br />
+                      Price: {discountedPrice} {flight.currencyCode} {flight.discount > 0 && `(Discount: ${flight.discount}%)`}<br />
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+
+            {error && <p className="error-message">{error}</p>}
+
+            {flightsToPurchase.length > 0 && !success && (
+              <button
+                className="purchase-button"
+                onClick={handlePurchase}
+                disabled={purchasing}
+              >
+                {purchasing ? "Processing..." : "Confirm Purchase"}
+              </button>
+            )}
+          </>
+        )}
         </div>
-
-        {/* Purchase Form */}
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="full-name">Full Name:</label>
-            <input type="text" id="full-name" name="full-name" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" name="email" required />
-          </div>
-          <button type="submit">Complete Purchase</button>
-        </form>
       </div>
     </section>
   );
 };
+
+
+
+
 
 export default PurchaseHero;
