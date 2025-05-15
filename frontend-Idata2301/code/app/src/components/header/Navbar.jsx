@@ -49,8 +49,8 @@ const Navbar = ({ onNavClick, user }) => {
           <li><a href="#" onClick={() => onNavClick("admin")}>Admin</a></li>
         )}
 
-        <li><a href="#" onClick={() => onNavClick("settings")}>⚙️</a></li>
-        <li><a href="#" onClick={() => onNavClick("shoppingCart")}>🛒</a></li>
+        <li><a className="nav-bar-icon" href="#" onClick={() => onNavClick("settings")}>🙍</a></li>
+        <li><a className="nav-bar-icon" href="#" onClick={() => onNavClick("shoppingCart")}>🛒</a></li>
 
       </ul>
     </nav>
