@@ -87,7 +87,7 @@ export async function sendAuthenticationRequest(username, password, successCallb
         setCookie("current_user_roles", userData.roles.join(","));
         setCookie("current_email", userData.email);
       }
-      successCallback();
+      // successCallback();
     },
     postData,
     function (responseText) {
@@ -133,6 +133,7 @@ export function parseJwtUser(jwtString) {
     user = {
       "id" : jwtObject.id,
       "username": jwtObject.sub,
+      "email": jwtObject.email,
       "roles": jwtObject.roles.map(r => r.authority),
       "exp": jwtObject.exp,
     }
@@ -158,6 +159,7 @@ export function deleteAuthorizationCookies() {
   deleteCookie("current_user_id");
   deleteCookie("current_username");
   deleteCookie("current_user_roles");
+  deleteCookie("current_email");
   console.log("Deleted authorization cookies");
 }
 

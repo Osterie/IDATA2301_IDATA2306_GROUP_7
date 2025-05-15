@@ -86,3 +86,7 @@
   border: none;
   border-top: 1px solid #ccc;
 }
+
+#result-message{
+  color:red;
+}

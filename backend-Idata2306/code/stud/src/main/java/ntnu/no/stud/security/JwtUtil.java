@@ -34,6 +34,11 @@ public class JwtUtil {
   private static final String ID_KEY = "id";
 
   /**
+   * Key inside JWT token where email is stored.
+   */
+  private static final String EMAIL_KEY = "email";
+
+  /**
    * Generate a JWT token for an authenticated user.
    *
    * @param userDetails Object containing user details
@@ -45,15 +50,18 @@ public class JwtUtil {
     final long sevendDaysFromNow = timeNow + millisecondsInSevenDays;
 
     int userId = -1;
+    String email = null;
 
     if (userDetails instanceof AccessUserDetails) {
       userId = ((AccessUserDetails) userDetails).getId();
+      email = ((AccessUserDetails) userDetails).getEmail();
     }
 
     return Jwts.builder()
         .subject(userDetails.getUsername())
         .claim(ID_KEY, userId)
         .claim(ROLE_KEY, userDetails.getAuthorities())
+        .claim(EMAIL_KEY, email)
         .issuedAt(new Date(timeNow))
         .expiration(new Date(sevendDaysFromNow))
         .signWith(getSigningKey())

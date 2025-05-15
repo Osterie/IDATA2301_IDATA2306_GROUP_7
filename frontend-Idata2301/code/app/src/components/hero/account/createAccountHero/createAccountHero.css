@@ -60,3 +60,6 @@
     background-color: var(--call-to-action-highlight-color);
   }
   
+#result-message{
+  color:red;
+}

@@ -14,7 +14,7 @@ const LoginPageHero = ({ onNavClick }) => {
 
     sendAuthenticationRequest(username, password,
       () => {
-        setMessage('Login successful! Redirecting...');
+        // setMessage('Login successful! Redirecting...');
         // Redirect to the main page or perform any other action
         window.location.href = '/index.html'; // Adjust the URL as needed
       },
