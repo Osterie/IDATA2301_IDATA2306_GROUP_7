@@ -126,7 +126,7 @@ nav ul li a:hover {
 }
 
 .log-out-button{
-  background-color: #c82333;
+  background-color: var(--serious-button-color);
 }
 
 .nav-bar-icon{

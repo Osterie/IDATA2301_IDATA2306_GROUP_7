@@ -25,7 +25,9 @@ code {
   --secondary-color: #183040;
   --background-color: rgb(240,240,250);
   --box-color: white;
+  --serious-box-color: #ffe6e6;
   --bottom-color: #101520;
+  --serious-button-color: #c82333;
 
   /* Contrast colors */
   --primary-contrast: #FDA300;
