@@ -11,14 +11,17 @@ const FlightCard = ({
   purchaseDate,
   setSelectedFlight,
   setActivePage,
+  isFavorite,
+  onFavoriteToggle,
 }) => {
   const {
     id,
     flightClassId: {
       flightClass: { name: flightClassName },
-      flight: { name: flightName, 
-        company: { name:companyName }
-       },
+      flight: {
+        name: flightName,
+        company: { name: companyName, logoImageData },
+      },
       availableSeats,
     },
     price,
@@ -34,8 +37,6 @@ const FlightCard = ({
       },
     },
   } = flight;
-
-  console.log("FlightCard flight: ", flight);
 
   const handleAddToCart = () => {
     addToShoppingCart(flight);
@@ -65,21 +66,19 @@ const FlightCard = ({
 
   return (
     <div className="flight-card">
-
       <div className="flight-card-header">
-        {flight.flightClassId.flight.company.logoImageData && (
-              <img
-                src={`data:image/jpeg;base64,${flight.flightClassId.flight.company.logoImageData}`}
-                alt={`${companyName} logo`}
-                className="flight-card-company-logo"
-              />
-            )}
-
-          <div className="flight-card-title">
-            <h2>{companyName} - {flightName}</h2>
-          </div>
+        {logoImageData && (
+          <img
+            src={`data:image/jpeg;base64,${logoImageData}`}
+            alt={`${companyName} logo`}
+            className="flight-card-company-logo"
+          />
+        )}
+        <div className="flight-card-title">
+          <h2>{companyName} - {flightName}</h2>
+        </div>
       </div>
-    
+
       <p className="flight-card-class-name">Class: {flightClassName}</p>
 
       <div className="flight-card-flight-details">
@@ -96,7 +95,9 @@ const FlightCard = ({
       <p className="flight-card-date">Departure Date: {date}</p>
 
       {purchaseDate && (
-        <p className="flight-card-purchase-date">Purchased on: {new Date(purchaseDate).toLocaleDateString()}</p>
+        <p className="flight-card-purchase-date">
+          Purchased on: {new Date(purchaseDate).toLocaleDateString()}
+        </p>
       )}
 
       {purchasable && (
@@ -105,7 +106,9 @@ const FlightCard = ({
 
       <div className="flight-card-price-section">
         <p className="flight-card-price">${price} {priceCode}</p>
-        {discount > 0 && <p className="flight-card-discount">Discount: {discount}%</p>}
+        {discount > 0 && (
+          <p className="flight-card-discount">Discount: {discount}%</p>
+        )}
       </div>
 
       <button
@@ -125,6 +128,13 @@ const FlightCard = ({
           Add to cart
         </button>
       )}
+
+      <button
+        className="flight-card-book-button"
+        onClick={() => onFavoriteToggle?.(flight.id, isFavorite)}
+      >
+        {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+      </button>
 
       <p className="flight-card-provider">Provider: {provider}</p>
 

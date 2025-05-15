@@ -29,6 +29,12 @@ public class FavoriteFlightController {
     @Autowired
     private UserRepository userRepository;
 
+    // DTO class to map JSON request body
+    public static class FavoriteRequest {
+        public int userId;
+        public int priceId;
+    }
+
     // Fetch all favorite prices for a specific user
     @GetMapping("/{userId}")
     public List<FavoriteFlight> getFavoritesForUser(@PathVariable int userId) {
@@ -37,11 +43,11 @@ public class FavoriteFlightController {
                 .collect(Collectors.toList());
     }
 
-    // Add a favorite price
+    // Add a favorite price (accept JSON body now)
     @PostMapping("/")
-    public FavoriteFlight addFavoritePrice(@RequestParam int userId, @RequestParam int priceId) {
-        Optional<User> userOpt = userRepository.findById(userId);
-        Optional<Price> priceOpt = priceRepository.findById(priceId);
+    public FavoriteFlight addFavoritePrice(@RequestBody FavoriteRequest request) {
+        Optional<User> userOpt = userRepository.findById(request.userId);
+        Optional<Price> priceOpt = priceRepository.findById(request.priceId);
 
         if (userOpt.isPresent() && priceOpt.isPresent()) {
             User user = userOpt.get();
@@ -49,7 +55,7 @@ public class FavoriteFlightController {
 
             // Prevent duplicate
             boolean exists = StreamSupport.stream(favoriteFlightRepository.findAll().spliterator(), false)
-                    .anyMatch(fav -> fav.getUser().getId() == userId && fav.getPrice().getId() == priceId);
+                    .anyMatch(fav -> fav.getUser().getId() == request.userId && fav.getPrice().getId() == request.priceId);
 
             if (exists) {
                 throw new IllegalStateException("Price is already in user's favorites.");

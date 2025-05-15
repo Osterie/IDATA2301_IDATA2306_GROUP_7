@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from "react";
 import styles from "./favoriteFlights.module.css";
-import { fetchFavoriteFlights } from "../../../library/favoritesAPI.js"; // Import fetchFavoriteFlights
+import { fetchFavoriteFlights } from "../../../library/favoritesAPI.js";
+import FlightCard from "../../cards/searched-flights/FlightCard.jsx";
 
-const FavoriteFlights = ({user}) => {
+const FavoriteFlights = ({ user }) => {
   const [favorites, setFavorites] = useState([]);
   const [error, setError] = useState(null);
 
   const userId = user.id;
 
-  // Fetch the favorite flights from the API
   useEffect(() => {
-    // Use fetchFavoriteFlights function from favoritesAPI.js
-    fetchFavoriteFlights(userId, 
+    fetchFavoriteFlights(
+      userId,
       (response) => {
-        setFavorites(response); // Handle successful response
+        setFavorites(response);
       },
       (errorMessage) => {
-        setError(errorMessage); // Handle error response
+        setError(errorMessage);
       }
     );
   }, [userId]);
+
+  const handleFavoriteToggle = (flightId, currentlyFavorite) => {
+    // TODO: Implement removing from favorites
+  };
 
   return (
     <div className={styles.favoriteFlights}>
@@ -31,11 +35,14 @@ const FavoriteFlights = ({user}) => {
       <div className={styles.flightList}>
         {favorites.length > 0 ? (
           favorites.map((favorite) => (
-            <div key={favorite.id} className={styles.flightItem}>
-              <h3>{favorite.price.scheduledFlight.flightName}</h3>
-              <p>Price: {favorite.price.price} {favorite.price.currencyCode}</p>
-              <p>Class: {favorite.price.flightClassId.className}</p>
-            </div>
+            <FlightCard
+              key={favorite.id}
+              flight={favorite.price}
+              userIsAdmin={false}
+              purchasable={false}
+              isFavorite={true}
+              onFavoriteToggle={handleFavoriteToggle}
+            />
           ))
         ) : (
           <p>No favorite flights found.</p>
