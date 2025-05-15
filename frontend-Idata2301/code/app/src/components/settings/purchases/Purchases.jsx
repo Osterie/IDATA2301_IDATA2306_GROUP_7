@@ -59,7 +59,7 @@ const PurchasedFlights = ({user}) => {
             />
           ))
       ) : (
-        <p>No flights found fitting given criteria.</p>
+        <p>No flights found.</p>
       )}
       </div>
     </div>
