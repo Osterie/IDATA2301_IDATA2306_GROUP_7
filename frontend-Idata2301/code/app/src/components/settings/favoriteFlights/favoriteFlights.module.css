@@ -15,7 +15,7 @@ p {
 
 .flightList {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr; /* One column */
   gap: 20px;
 }
 
