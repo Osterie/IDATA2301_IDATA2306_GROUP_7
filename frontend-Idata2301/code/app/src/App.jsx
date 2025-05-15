@@ -125,7 +125,7 @@ function App() {
       <CookieConsent
         location="bottom"
         buttonText="Accept"
-        cookieName="userConsent"
+        cookieName="user_consent"
         style={{ background: "#2B373B" }}
         buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
         expires={30}

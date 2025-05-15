@@ -2,36 +2,36 @@ import Cookies from "js-cookie";
 
 // === Consent ===
 export const setConsent = () => {
-  Cookies.set("userConsent", "true", { expires: 30 });
+  Cookies.set("user_consent", "true", { expires: 30 });
 };
 
 export const hasConsent = () => {
-  return Cookies.get("userConsent") === "true";
+  return Cookies.get("user_consent") === "true";
 };
 
 // === Preferences ===
 export const setPreferredCurrency = (currency) => {
-  Cookies.set("preferredCurrency", currency, { expires: 30 });
+  Cookies.set("preferred_currency", currency, { expires: 30 });
 };
 
 export const getPreferredCurrency = () => {
-  return Cookies.get("preferredCurrency") || "USD";
+  return Cookies.get("preferred_currency") || "USD";
 };
 
 export const setDepartureAirport = (code) => {
-  Cookies.set("departureAirport", code, { expires: 30 });
+  Cookies.set("departure_airport", code, { expires: 30 });
 };
 
 export const getDepartureAirport = () => {
-  return Cookies.get("departureAirport");
+  return Cookies.get("departure_airport");
 };
 
 export const setLastSearch = (searchData) => {
-  Cookies.set("lastSearch", JSON.stringify(searchData), { expires: 7 });
+  Cookies.set("last_search", JSON.stringify(searchData), { expires: 7 });
 };
 
 export const getLastSearch = () => {
-  const val = Cookies.get("lastSearch");
+  const val = Cookies.get("last_search");
   return val ? JSON.parse(val) : null;
 };
 

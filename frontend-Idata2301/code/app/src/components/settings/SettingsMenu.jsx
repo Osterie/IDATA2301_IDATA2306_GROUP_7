@@ -22,7 +22,7 @@ const SettingsMenu = ({user}) => {
   };
 
   return (
-    <div className={styles.settingsMenu}>
+    <section className={styles.settingsMenu}>
       <div className={styles.sidebar}>
         <button
           className={`${styles.tabButton} ${
@@ -57,7 +57,7 @@ const SettingsMenu = ({user}) => {
         )}
       </div>
       <div className={styles.tabContent}>{renderTabContent()}</div>
-    </div>
+    </section>
   );
 };
 
