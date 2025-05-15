@@ -47,6 +47,16 @@
 
 .autocomplete-wrapper {
     position: relative;
+    flex: 1 1 200px;
+    max-width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    font-size: var(--text-desktop-font-size);
+}
+
+.autocomplete-wrapper input {
+    width: 100%;
 }
 
 .autocomplete-suggestions {
