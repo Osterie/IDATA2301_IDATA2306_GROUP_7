@@ -17,6 +17,19 @@ function getUniqueCompanies(flights) {
   return [...new Set(companies)]; // Remove duplicates
 }
 
+const filterFlights = (flightsToFilter, min, max, companies) => {
+  const updatedFlights = flightsToFilter.map((flight) => {
+    const flightCompany = flight.scheduledFlight.flight.company.name;
+    const isPriceInRange =
+      flight.price >= min && flight.price <= max;
+    const isCompanySelected = companies[flightCompany];
+
+    const isFilteredOut = !(isPriceInRange && isCompanySelected);
+    return { ...flight, isFilteredOut };
+  });
+  return updatedFlights;
+};
+
 const sortFlights = (flightsToSort, option) => {
   const sorted = [...flightsToSort];
 
@@ -65,36 +78,6 @@ const FilterSidebar = ({ flights, setFlights }) => {
     max: findMaxPrice(flights),
   });
 
-  // useEffect(() => {
-  //   if (flights.length > 0) {
-  //     const sorted = sortFlights(flights, "cheap");
-  //     setFlights(sorted);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   if (!flights || flights.length === 0) return;
-
-  //   // Update price range bounds
-  //   const min = findMinPrice(flights);
-  //   const max = findMaxPrice(flights);
-  //   setPriceRange({ min, max });
-
-  //   // Update selected companies (optional - only if your data source changes)
-  //   const newCompanies = getUniqueCompanies(flights);
-  //   setSelectedCompanies({
-  //     all: true,
-  //     ...newCompanies.reduce((acc, company) => {
-  //       acc[company] = true;
-  //       return acc;
-  //     }, {}),
-  //   });
-
-  //   // Sort and update flights on initial data load
-  //   const sorted = sortFlights(flights, sortOption);
-  //   setFlights(sorted);
-  // }, [flights]); // <-- watches for external updates
-
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
@@ -103,7 +86,6 @@ const FilterSidebar = ({ flights, setFlights }) => {
     const min = findMinPrice(flights);
     const max = findMaxPrice(flights);
     setPriceRange({ min, max });
-
     const newCompanies = getUniqueCompanies(flights);
     setSelectedCompanies({
       all: true,
@@ -145,31 +127,17 @@ const FilterSidebar = ({ flights, setFlights }) => {
     const minPrice = priceRange.min;
     const maxPrice = priceRange.max;
 
-    const updatedFlights = flights.map((flight) => {
-      const flightCompany = flight.scheduledFlight.flight.company.name;
-      const isPriceInRange =
-        flight.price >= minPrice && flight.price <= maxPrice;
-      const isCompanySelected = updatedCompanies[flightCompany];
-
-      const isFilteredOut = !(isPriceInRange && isCompanySelected);
-      return { ...flight, isFilteredOut };
-    });
+    const updatedFlights = filterFlights(flights, minPrice, maxPrice, updatedCompanies);
 
     setFlights(updatedFlights);
   };
 
+
+
   const handlePriceRangeChange = (min, max) => {
     setPriceRange({ min, max }); // Save the values for later use
 
-    let updatedFlights = flights.map((flight) => {
-      const flightCompany = flight.scheduledFlight.flight.company.name;
-      const isPriceInRange = flight.price >= min && flight.price <= max;
-      const isCompanySelected = selectedCompanies[flightCompany];
-
-      const isFilteredOut = !(isPriceInRange && isCompanySelected);
-
-      return { ...flight, isFilteredOut };
-    });
+    let updatedFlights = filterFlights(flights, min, max, selectedCompanies);
 
     updatedFlights = sortFlights(updatedFlights, sortOption);
 
