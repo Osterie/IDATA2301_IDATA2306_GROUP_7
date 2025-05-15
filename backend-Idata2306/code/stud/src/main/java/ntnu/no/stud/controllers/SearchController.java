@@ -1,9 +1,13 @@
 package ntnu.no.stud.controllers;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import ntnu.no.stud.entities.Airport;
 import ntnu.no.stud.entities.Price;
+import ntnu.no.stud.models.Passenger;
 import ntnu.no.stud.models.SearchedFlight;
 import ntnu.no.stud.repositories.AirportRepository;
 import ntnu.no.stud.repositories.PriceRepository;
@@ -37,33 +41,33 @@ public class SearchController {
     String arrival = searchedFlight.getArrival();
     LocalDate fromDate = searchedFlight.getFromDate();
     LocalDate toDate = searchedFlight.getToDate();
+    List<Passenger> passengers = searchedFlight.getPassengers();
 
-    return priceRepository.searchForFlights(departure, arrival, fromDate, toDate);
+    // return priceRepository.searchForFlights(departure, arrival, fromDate,
+    // toDate);
+    // Flights matching departure, arrival, and date
+    List<Price> allMatchingPrices = priceRepository.searchForFlights(departure, arrival, fromDate, toDate);
+
+    // Required seats per class name
+    Map<String, Integer> requiredSeatsPerClass = new HashMap<>();
+    for (Passenger passenger : passengers) {
+      String className = passenger.getClassType().getName();
+      int amount = passenger.getAmount();
+      requiredSeatsPerClass.merge(className, amount, Integer::sum);
+    }
+
+    return allMatchingPrices.stream()
+        .filter(price -> {
+          String className = price.getFlightClassId().getFlightClass().getName();
+          int availableSeats = price.getFlightClassId().getAvailableSeats();
+          Integer required = requiredSeatsPerClass.get(className);
+          return required != null && availableSeats >= required && required > 0 ;
+        })
+        .toList();
   }
-
 
   @GetMapping("/api/getSearchTerms")
   public Iterable<Airport> getAirports() {
-    return airportRepository.findAll(); 
+    return airportRepository.findAll();
   }
-
-
-
-  /**
-   * Adds a flight to the flight table
-   */
-  // @GetMapping("/searchForFlightsGet")
-  // public List<Price> searchForFlightsGet() {
-  //   Route route = new Route(new Airport("JFK", "New york"), new Airport("SIN", "Singapore"));
-  //   LocalDate date = LocalDate.parse("2025-04-02");
-    
-    
-  //   LocalDate fromDate = LocalDate.parse("2025-04-02");
-  //   LocalDate toDate = LocalDate.parse("2025-04-20");
-  //   // List<Passenger> passengers = new ArrayList<>();
-    
-  //   ScheduledFlights scheduledFlight = new ScheduledFlights(new Flight("Delta Flight 425", "Delta Air Lines"), route, date);
-
-  //   // return priceRepository.searchForFlights(scheduledFlight, fromDate, toDate);
-  // }
 }

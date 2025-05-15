@@ -1,22 +1,28 @@
 import CustomInputField from "./CustomInputField";
 import "./passengerAmountField.css";
 
-const PassengerAmountField = () => {
-    return (
-        <div className="dropdown-window">
-            <select name="Classes" required>
-                <option value="0">Economy class</option>
-                <option value="1">Business class</option>
-                <option value="2">First class</option>
-            </select>
+const PassengerAmountField = ({ passengers, setPassengers }) => {
 
-            <label htmlFor="adults">Passengers 18+:</label>
-            <CustomInputField />
-
-            <label htmlFor="children">Passengers 0-17:</label>
-            <CustomInputField />
-        </div>
+  // Handler to update passenger amount by class name
+  const handleAmountChange = (className, newAmount) => {
+    const updatedPassengers = passengers.map((p) =>
+      p.classType.name === className ? { ...p, amount: newAmount } : p
     );
-};
+    setPassengers(updatedPassengers);
+  };
 
+  return (
+    <div className="dropdown-window">
+      {passengers.map(({ classType, amount }) => (
+        <div key={classType.name}>
+          <label htmlFor={classType.name}>{classType.name}</label>
+          <CustomInputField
+            amount={amount}
+            onAmountChange={(newAmount) => handleAmountChange(classType.name, newAmount)}
+          />
+        </div>
+      ))}
+    </div>
+  );
+};
 export default PassengerAmountField;

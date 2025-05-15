@@ -14,6 +14,22 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
     const [fromSuggestions, setFromSuggestions] = useState([]);
     const [toSuggestions, setToSuggestions] = useState([]);
     const [focusedInput, setFocusedInput] = useState(null);
+    
+    
+    const passengers = (searchParams.passengers) || [
+    { classType: { name: "Economy" }, amount: 1 },
+    { classType: { name: "Business" }, amount: 1 },
+    { classType: { name: "First" }, amount: 1 }
+    ];
+
+
+
+    const setPassengers = (newPassengers) => {
+    setSearchParams({
+      ...searchParams,
+      passengers: newPassengers
+    });
+  };
 
 
     // Fetch search terms when the component mounts
@@ -179,7 +195,12 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
                 Select Passengers
             </button>
 
-            {showDropdown && <PassengerAmountField />}
+            {showDropdown && (
+            <PassengerAmountField
+                passengers={passengers}
+                setPassengers={setPassengers}
+            />
+            )}
 
             <button className="call-to-action" type="submit">Search For Flights</button>
         </form>

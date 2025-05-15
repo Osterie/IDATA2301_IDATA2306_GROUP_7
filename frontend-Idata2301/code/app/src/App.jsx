@@ -27,16 +27,17 @@ import {
 import FlightDetailPage from "./components/flightDetailPage/FlightDetailPage";
 
 function App() {
+  // TODO REMOVE THIS. ONLY TESTING!
   const [searchParams, setSearchParams] = useState({
     departure: "JFK",
     arrival: "SIN",
     fromDate: "2020-01-01",
     toDate: "2030-01-01",
-    // passengers: {
-    //   adults: 1,
-    //   children: 0,
-    //   infants: 0,
-    // },
+    passengers: [
+      { classType: { name: "Economy" }, amount: 1 },
+      { classType: { name: "Business" }, amount: 0 },
+      { classType: { name: "First" }, amount: 0 }
+    ]
   });
   const [activePage, setActivePage] = useState("home");
   const [flights, setFlights] = useState([]);  // Store flight data

@@ -1,8 +1,5 @@
 package ntnu.no.stud.models;
 
-import ntnu.no.stud.entities.ScheduledFlights;
-import ntnu.no.stud.entities.ScheduledFlights;
-
 import java.time.LocalDate;
 import java.util.List;
 
