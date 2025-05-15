@@ -49,13 +49,9 @@ Sprint stenographer: Daniel
 | Display final price after discount                                          | Daniel   | Not completed | [2]          |                                              |
 | Profile page (username, Email, currency)                                    | Tobias   | Not completed | [5]          |                                              |
 | Put footer at the bottom                                                    | Adrian   | Not completed | [3]          |                                              |
-<<<<<<< HEAD
-| Remove unnecessary components from filter, add ascending/descending sorting | Adrian   | Not completed | [3]          |                                              |
-=======
 | Invisible background                                                        | Tobias   | Not completed | [2]          |                                              |
 | Remove unnecessary components from filter, add ascending/descending sorting | Adrian   | Completed     | [4]          |                                              |
 | Fix searching from deals page                                               | Adrian   | Completed     | [4]          |                                              |
->>>>>>> 10d488d4170926cc5a4da334b5b4d104ee6250e3
 | View hidden flights in admin panel                                          | Daniel   | Not completed | [3]          |                                              |
 | Add purchasing date to purchase                                             | Adrian   | Not completed | [2]          | Low priority                                 |
 
