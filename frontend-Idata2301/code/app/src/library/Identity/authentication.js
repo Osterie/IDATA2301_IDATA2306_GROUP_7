@@ -87,7 +87,7 @@ export async function sendAuthenticationRequest(username, password, successCallb
         setCookie("current_user_roles", userData.roles.join(","));
         setCookie("current_email", userData.email);
       }
-      // successCallback();
+      successCallback();
     },
     postData,
     function (responseText) {
