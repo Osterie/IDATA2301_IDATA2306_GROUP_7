@@ -29,7 +29,7 @@ public class ClassInitializer {
                          "  VALUES" +
                          "  ('Economy')," +
                          "  ('First')," +
-                         "  ('Business'),";
+                         "  ('Business')";
     
             // Execute the SQL
             jdbcTemplate.execute(sql);

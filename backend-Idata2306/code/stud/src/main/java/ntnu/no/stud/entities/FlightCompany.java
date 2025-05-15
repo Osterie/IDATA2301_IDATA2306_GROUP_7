@@ -61,9 +61,7 @@ public class FlightCompany {
     /**
      * Raw logo image data for the company, stored as binary.
      */
-    @JsonIgnore
     @Lob
-    @Basic(fetch = FetchType.LAZY)
     @Column(name = "logo_image_data", columnDefinition = "MEDIUMBLOB")
     private byte[] logoImageData;
 

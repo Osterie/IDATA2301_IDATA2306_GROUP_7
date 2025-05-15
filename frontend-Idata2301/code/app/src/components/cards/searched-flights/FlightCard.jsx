@@ -42,14 +42,14 @@ const FlightCard = ({
   const handleToggleVisibility = async () => {
     const formData = {
       priceId: id,
-      doHide: !isHidden,
+      doHide: !flight.isHidden,
     };
 
     await sendApiRequest(
       "POST",
       "/setFlightProductVisibility",
       (result) => {
-        const updatedFlight = { ...flight, isHidden: !isHidden };
+        const updatedFlight = { ...flight, isHidden: !flight.isHidden };
         if (typeof onVisibilityChange === "function") {
           onVisibilityChange(updatedFlight);
         }
