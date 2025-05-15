@@ -26,13 +26,13 @@ const FavoriteFlights = ({ user }) => {
   };
 
   return (
-    <div className={styles.favoriteFlights}>
+    <div className={styles["favorite-flights"]}>
       <h2>Favorite Flights</h2>
       <p>Here are the flights you've marked as favorites.</p>
 
       {error && <p className="error">{error}</p>}
 
-      <div className={styles.flightList}>
+      <div className={styles["flight-list"]}>
         {favorites.length > 0 ? (
           favorites.map((favorite) => (
             <FlightCard
