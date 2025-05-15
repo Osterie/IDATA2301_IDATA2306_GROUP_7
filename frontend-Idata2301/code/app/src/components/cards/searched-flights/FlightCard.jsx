@@ -35,6 +35,8 @@ const FlightCard = ({
     },
   } = flight;
 
+  console.log("FlightCard flight: ", flight);
+
   const handleAddToCart = () => {
     addToShoppingCart(flight);
   };
@@ -42,14 +44,14 @@ const FlightCard = ({
   const handleToggleVisibility = async () => {
     const formData = {
       priceId: id,
-      doHide: !flight.isHidden,
+      doHide: !isHidden,
     };
 
     await sendApiRequest(
       "POST",
       "/setFlightProductVisibility",
       (result) => {
-        const updatedFlight = { ...flight, isHidden: !flight.isHidden };
+        const updatedFlight = { ...flight, isHidden: !isHidden };
         if (typeof onVisibilityChange === "function") {
           onVisibilityChange(updatedFlight);
         }
@@ -63,7 +65,21 @@ const FlightCard = ({
 
   return (
     <div className="flight-card">
-      <h2>{companyName} - {flightName}</h2>
+
+      <div className="flight-card-header">
+        {flight.flightClassId.flight.company.logoImageData && (
+              <img
+                src={`data:image/jpeg;base64,${flight.flightClassId.flight.company.logoImageData}`}
+                alt={`${companyName} logo`}
+                className="flight-card-company-logo"
+              />
+            )}
+
+          <div className="flight-card-title">
+            <h2>{companyName} - {flightName}</h2>
+          </div>
+      </div>
+    
       <p className="flight-card-class-name">Class: {flightClassName}</p>
 
       <div className="flight-card-flight-details">

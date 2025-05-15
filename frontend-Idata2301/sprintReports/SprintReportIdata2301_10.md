@@ -43,7 +43,7 @@ Sprint stenographer: Daniel
 | Product detail page                                                   | Tobias   | 90% Completed | [6]          | Works, but needs better styling              |
 | Add images to product detail page                                     | Tobias   |               | [3]          |                                              |
 | Rotuing to pages                                                      | Tobias   |               | [7]          |                                              |
-| Add company logos to product cards                                    | Adrian   |               | [4]          |                                              |
+| Add company logos to product cards                                    | Adrian   | Completed     | [4]          |                                              |
 | Currency convertion                                                   | Daniel   | Not completed | [4]          |                                              |
 | Display final price after discount                                    | Daniel   | Not completed | [2]          |                                              |
 | Profile page (username, Email, currency)                              | Tobias   | In progress   | [5]          |                                              |

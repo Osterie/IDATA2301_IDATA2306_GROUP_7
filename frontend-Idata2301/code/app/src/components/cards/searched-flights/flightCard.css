@@ -92,3 +92,28 @@
 .flight-card-toggle-visibility-button:hover {
   background-color: #d35400;
 }
+
+.flight-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.flight-card-company-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 4px;
+  position: absolute;
+  left: 0;
+}
+
+.flight-card-title {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-left: 60px; /* offset to avoid overlap with image */
+}
