@@ -60,7 +60,7 @@
     width: 90px;
     /* height: 30px; */
     font-size: var(--text-desktop-font-size);
-    border-radius: 5px;
+    border-radius: var(--button-border-radius);
 }
 
 .dual-range-slider-number-input::-webkit-inner-spin-button, 

@@ -9,7 +9,7 @@
   background-color: var(--box-color);
   color: var(--primary-text-color);
   padding: 20px;
-  border-radius: 12px;
+  border-radius: var(--box-border-radius);
   transition: transform 0.3s ease-in-out;
   z-index: 1000;
   display: flex;
@@ -32,7 +32,7 @@
   padding: 10px;
   font-size: var(--text-desktop-font-size);
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: var(--button-border-radius);
   text-align: left;
 }
 
@@ -43,7 +43,7 @@
   gap: 5px;
   padding: 10px;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
+  border-radius: var(--button-border-radius);
 }
 
 /* Checkboxes */
@@ -61,7 +61,7 @@ input[type="checkbox"] {
   cursor: pointer;
   text-align: center;
   font-size: var(--button-text-mobile-font-size);
-  border-radius: 5px;
+  border-radius: var(--button-border-radius);
   position: absolute;
   top: 20px;
   right: 20px;
@@ -80,7 +80,7 @@ input[type="checkbox"] {
   border: none;
   cursor: pointer;
   font-size: var(--button-text-mobile-font-size);
-  border-radius: 5px;
+  border-radius: var(--button-border-radius);
   margin: 10px;
 }
 

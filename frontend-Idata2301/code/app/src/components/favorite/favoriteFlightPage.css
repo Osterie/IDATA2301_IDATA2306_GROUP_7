@@ -4,7 +4,7 @@
     margin: 40px auto;
     padding: 20px;
     background: #f9f9f9;
-    border-radius: 10px;
+    border-radius: var(--box-border-radius);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
@@ -23,7 +23,7 @@ h2 {
     background: white;
     margin: 10px 0;
     padding: 15px;
-    border-radius: 8px;
+    border-radius: var(--box-border-radius);
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
@@ -40,7 +40,7 @@ h2 {
     color: var(--contrast-text-color);
     border: none;
     padding: 8px 12px;
-    border-radius: 5px;
+    border-radius: var(--button-border-radius);
     cursor: pointer;
     transition: 0.3s;
 }

@@ -17,7 +17,7 @@
 .search-form input {
     padding: 12px;
     border: 1px solid #bbb;
-    border-radius: 5px;
+    border-radius: var(--button-border-radius);
     font-size: var(--text-desktop-font-size);
 }
 
@@ -27,7 +27,7 @@
     background-color: var(--call-to-action-color);
     color: var(--text-color);
     font-size: var(--text-desktop-font-size);
-    border-radius: 5px;
+    border-radius: var(--button-border-radius);
     cursor: pointer;
 }
 
@@ -41,7 +41,7 @@
     background-color: var(--secondary-color);
     color: var(--contrast-text-color);
     font-size: var(--button-text-desktop-font-size);
-    border-radius: 5px;
+    border-radius: var(--button-border-radius);
     cursor: pointer;
 }
 
@@ -51,7 +51,7 @@
     max-width: 100%;
     box-sizing: border-box;
     border: 1px solid #bbb;
-    border-radius: 5px;
+    border-radius: var(--button-border-radius);
     font-size: var(--text-desktop-font-size);
 }
 

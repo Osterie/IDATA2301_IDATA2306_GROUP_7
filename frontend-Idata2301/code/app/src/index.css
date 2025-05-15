@@ -59,4 +59,9 @@ code {
 
   --button-text-desktop-font-size: 1rem;
   --button-text-mobile-font-size: 1.25rem;
+
+  /* Border radius */
+  --box-border-radius: 0.5rem;
+  --button-border-radius: 0.25rem;
+  
 }

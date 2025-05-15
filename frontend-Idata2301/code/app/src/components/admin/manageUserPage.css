@@ -7,7 +7,7 @@
 
 .user-card{
     border: 1px solid #ccc;
-    border-radius: 12px;
+    border-radius: var(--box-border-radius);
     padding: 1rem;
     width: 250px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -18,9 +18,10 @@
     color: white;
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 6px;
+    border-radius: var(--button-border-radius);
     cursor: pointer;
     margin-top: 1rem;
+    margin-right: 1rem;
 }
 
 .add-role-button{
@@ -28,7 +29,7 @@
     color: white;
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 6px;
+    border-radius: var(--button-border-radius);
     cursor: pointer;
     margin-top: 1rem;
 }
@@ -41,7 +42,7 @@
   .role-card {
     background-color: #f0f0f0;
     padding: 3px 5px;
-    border-radius: 4px;
+    border-radius: var(--box-border-radius);
     display: flex;
     align-items: center;
     gap: 5px;

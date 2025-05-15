@@ -1,7 +1,7 @@
 select {
     padding: 10px;
     border: 1px solid #bbb;
-    border-radius: 5px;
+    border-radius: var(--box-border-radius);
     font-size: var(--text-desktop-font-size);
     background-color: white;
     cursor: pointer;
@@ -19,7 +19,7 @@ select {
     transform: translateX(-50%);
     background: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    border-radius: var(--box-border-radius);
     padding: 15px;
     display: flex;
     flex-direction: column;

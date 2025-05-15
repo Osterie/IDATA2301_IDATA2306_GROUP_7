@@ -116,11 +116,11 @@
 
 | Element         | Font     | Size (px) | Weight | Style        |
 |-----------------|----------|-----------|--------|--------------|
-| **Base Text**   | Arial    | 16px      | Regular| Sans-Serif   |
-| **H1**          | Arial    | 32px      | Bold   |              |
-| **H2**          | Arial    | 24px      | Bold   |              |
-| **H3**          | Arial    | 20px      | Bold   |              |
-| **Button Text** | Arial    | 16px      | Bold   | All caps     |
+| **Base Text**   | Arial    | 1rem      | Regular| Sans-Serif   |
+| **H1**          | Arial    | 2rem      | Bold   |              |
+| **H2**          | Arial    | 1.5rem    | Bold   |              |
+| **H3**          | Arial    | 1.25rem   | Bold   |              |
+| **Button Text** | Arial    | 1rem      | Bold   | All caps     |
 
 - Font is dyslexia-friendly and web-safe.
 - Line height: `1.5`
@@ -131,7 +131,8 @@
 ## Border rounding:
 - We have decided that we will be going with a middle ground. Not to round, not to sharp. Sharp edges might take the viewers attention to much while round edges are too playfull. Therefore we are using a middle ground for a comfortable, yet professional look. TODO: What roundness do we use.
 
-- **Box Radius:** `6px` (balanced—neither too sharp nor too round)  
+- **Box Radius:** `8px/0.5rem` (balanced—neither too sharp nor too round)  
+- **Button Radius:** `4px/0.25rem` (very sharp)  
 - **Border Colors:** `#000000` (dark), `#FFFFFF` (light)  
 
 ---

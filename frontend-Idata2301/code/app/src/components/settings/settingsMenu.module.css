@@ -22,7 +22,7 @@
   font-size: var(--button-text-desktop-font-size);
   color: var(--text-color);
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: var(--button-border-radius);
   transition: background 0.2s ease;
 }
 
