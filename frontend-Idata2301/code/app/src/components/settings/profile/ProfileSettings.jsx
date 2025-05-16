@@ -39,7 +39,7 @@ const ProfileSettings = ({ user }) => {
                 </tr>
                 <tr>
                   <th scope="row">Email</th>
-                  <td>{user.email || "N/A"}</td>
+                  <td>{user.email || profilePrefs?.current_email || "N/A"}</td>
                 </tr>
                 <tr>
                   <th scope="row">User ID</th>
@@ -47,7 +47,7 @@ const ProfileSettings = ({ user }) => {
                 </tr>
                 <tr>
                   <th scope="row">Roles</th>
-                  <td>{user.roles?.join(", ") || "N/A"}</td>
+                  <td>{user.roles?.join(", ") || "USER"}</td>
                 </tr>
               </tbody>
             </table>
