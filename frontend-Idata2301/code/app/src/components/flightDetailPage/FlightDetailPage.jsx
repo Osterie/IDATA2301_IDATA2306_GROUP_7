@@ -1,7 +1,7 @@
 import React from "react";
 import "./flightDetailPage.css";
 import { addToShoppingCart } from "../../utils/shoppingCartUtils";
-import flightHeroImage from "../../resources/images/avel-chuklanov-Ou1eqo29Ums-unsplash.jpg"; 
+import flightHeroImage from "../../resources/images/avel-chuklanov-Ou1eqo29Ums-unsplash.jpg";
 
 const FlightDetailPage = ({ flight, onAddToCart, onBuyNow }) => {
   const {
@@ -24,49 +24,64 @@ const FlightDetailPage = ({ flight, onAddToCart, onBuyNow }) => {
   } = flight;
 
   const handleAddToCart = () => {
-    const result = addToShoppingCart(flight);
+    addToShoppingCart(flight);
   };
 
   return (
-    <div>
-      <div className="flight-hero-image">
-        <img src={flightHeroImage} alt="Flight" />
-      </div>
-      <div className="flight-detail-page">
-    
-        <h1>{company} - {flightName}</h1>
-        <p className="class-name">Flight Class: <strong>{flightClassName}</strong></p>
+    <main>
+      <header className="flight-hero-image">
+        <img src={flightHeroImage} alt="Scenic airplane flight" />
+      </header>
 
-        <div className="flight-route">
+      <article className="flight-detail-page">
+        <header className="flight-info-header">
+          {company?.logoImageData && (
+            <img
+              src={`data:image/jpeg;base64,${company.logoImageData}`}
+              alt={`${company.name} logo`}
+              className="company-logo"
+            />
+          )}
+          <h1>{company?.name ?? "Unknown Company"} – {flightName}</h1>
+        </header>
+
+        <section className="class-name">
+          <p>Flight Class: <strong>{flightClassName}</strong></p>
+        </section>
+
+        <section className="flight-route">
           <div>
-            <h3>Departure</h3>
+            <h2>Departure</h2>
             <p>{departureCity} ({departureCode})</p>
           </div>
           <div>
-            <h3>Arrival</h3>
+            <h2>Arrival</h2>
             <p>{arrivalCity} ({arrivalCode})</p>
           </div>
-        </div>
+        </section>
 
-        <p className="flight-date">Date: <strong>{date}</strong></p>
-        <p className="seats-info">Available Seats: <strong>{availableSeats}</strong></p>
+        <section className="flight-date">
+          <p>Date: <strong>{date}</strong></p>
+        </section>
 
-        <div className="pricing-info">
-          <p className="price">
-            Price: <strong>${price} {priceCode}</strong>
-          </p>
+        <section className="seats-info">
+          <p>Available Seats: <strong>{availableSeats}</strong></p>
+        </section>
+
+        <section className="pricing-info">
+          <p className="price">Price: <strong>${price} {priceCode}</strong></p>
           {discount > 0 && (
             <p className="discount">Discount: <strong>{discount}% off</strong></p>
           )}
           <p className="provider">Provider: <strong>{provider}</strong></p>
-        </div>
+        </section>
 
-        <div className="action-buttons">
+        <footer className="action-buttons">
           <button className="btn add-to-cart" onClick={handleAddToCart}>Add to cart</button>
           <button className="btn buy-now" onClick={() => onBuyNow(flight)}>Buy Now</button>
-        </div>
-      </div>
-    </div>
+        </footer>
+      </article>
+    </main>
   );
 };
 
