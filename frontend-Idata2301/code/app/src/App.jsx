@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import FilterSidebar from "./components/searchfilter/filter";
-import ProductCardContainer from "./components/cards/deals/ProductCardContainer";
-import ProductCardHeader from "./components/cards/deals/ProductCardHeader";
-import FlightsContainer from "./components/cards/searched-flights/FlightsContainer";
-import MainPageHero from "./components/hero/mainPageHero/MainPageHero";
-import DealsPageHero from "./components/hero/dealsPageHero/DealsPageHero";
+
+// Pages
+import HomePage from "./pages/HomePage";
+import DealsPage from "./pages/DealsPage";
+import AboutUsPage from "./pages/AboutUsPage";
+import ProfilePage from "./pages/ProfilePage";
+
 import LogInPageHero from "./components/hero/account/logInPageHero/LogInPageHero";
 import PurchaseHero from "./components/hero/purchaseHero/PurchaseHero";
 import ShoppingCartHero from "./components/hero/shoppingCartPageHero/shoppingCartHero";
 import CreateAccount from "./components/hero/account/createAccountHero/createAccountHero";
 import Footer from "./components/footer/Footer";
 import Navbar from "./components/header/Navbar";
-import AboutUs from "./components/about/AboutUs";
 import AdminPage from "./components/admin/AdminPage";
 import ManageUserPage from "./components/admin/ManageUserPage";
-import { getAuthenticatedUser, checkJwtOnLoad } from "./library/Identity/authentication"; // adjust path as needed
-import CookieConsent from "react-cookie-consent";
-import SettingsMenu from "./components/settings/SettingsMenu";
+import { getAuthenticatedUser} from "./library/Identity/authentication"; // adjust path as needed
+import FlightDetailPage from "./components/flightDetailPage/FlightDetailPage";
+
+// Cookies
 import {
   hasConsent,
   setLastSearch,
   getLastSearch,
   setCountryFromIP,
 } from "./utils/cookieUtils";
-import FlightDetailPage from "./components/flightDetailPage/FlightDetailPage";
+import CookieConsent from "react-cookie-consent";
 
 function App() {
   // TODO REMOVE THIS. ONLY TESTING!
@@ -83,38 +84,38 @@ function App() {
       </header>
 
       <main>
+        {/* Landing page */}
         {activePage === "home" && (
           <>
-            <MainPageHero setFlights={setFlights} setActivePage={setActivePage} searchParams={searchParams} setSearchParams={setSearchParams} />
-            <ProductCardHeader />
-            <ProductCardContainer setFlights={setFlights} setActivePage={setActivePage}/>
+            <HomePage setFlights={setFlights} setActivePage={setActivePage} searchParams={searchParams} setSearchParams={setSearchParams} />
           </>
         )}
+        {/* Searched flights and deals Page */}
         {activePage === "deals" && (
           <>
-            <DealsPageHero setFlights={setFlights} setActivePage={setActivePage} searchParams={searchParams} setSearchParams={setSearchParams} />
-            <section className="search-section">
-              <FilterSidebar flights={flights} setFlights={setFlights} />
-              <FlightsContainer
-                flights={flights}
-                user={user}
-                setSelectedFlight={setSelectedFlight}
-                setActivePage={setActivePage}
-              />
-            </section>
+            <DealsPage setFlights={setFlights} setActivePage={setActivePage} searchParams={searchParams} setSearchParams={setSearchParams} flights={flights} user={user} setSelectedFlight={setSelectedFlight}/>
           </>
         )}
+        {/* Details page */}
         {activePage === "flight-details" && selectedFlight && (
           <FlightDetailPage flight={selectedFlight} />
         )}
-
-        {activePage === "about" && <AboutUs />}
+        {/* About us information page */}
+        {activePage === "about" && (
+          <>
+            <AboutUsPage />
+          </>
+        )}
+        {/* Profile settings and other personal information */}
+        {activePage === "settings" && (
+          <>
+            <ProfilePage user={user} />
+          </>
+        )}
         {activePage === "login" && <LogInPageHero onNavClick={handleNavClick} />}
         {activePage === "admin" && <AdminPage setActivePage={setActivePage} />}
         {activePage === "manage-users" && <ManageUserPage />}
         {activePage === "create-account" && <CreateAccount />}
-        {activePage === "settings" && <SettingsMenu user={user} />
-        }
         {activePage === "shoppingCart" && (<ShoppingCartHero onNavClick={handleNavClick} />)}
         {activePage === "purchase" && <PurchaseHero />}
       </main>
