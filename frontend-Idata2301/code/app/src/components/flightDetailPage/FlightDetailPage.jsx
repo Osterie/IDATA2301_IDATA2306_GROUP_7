@@ -81,6 +81,12 @@ const FlightDetailPage = ({ flight, onAddToCart, onBuyNow }) => {
           <button className="btn buy-now" onClick={() => onBuyNow(flight)}>Buy Now</button>
         </footer>
       </article>
+
+      <article className="provider-alternative-parent">
+          <h1>
+            Provider alternatives
+          </h1>
+      </article>
     </main>
   );
 };

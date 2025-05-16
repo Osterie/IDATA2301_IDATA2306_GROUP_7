@@ -15,9 +15,9 @@
   width: 99vw;
   margin: 10px auto;
   padding: 2rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--contrast-border-color);
   border-radius: var(--box-border-radius);
-  background-color: #fdfdfd;
+  background-color: var(--box-color);
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
   font-family: sans-serif;
 }
@@ -35,9 +35,9 @@
   width: auto;
   object-fit: contain;
   border-radius: 4px;
-  background-color: white;
+  background-color: var(--box-color);
   padding: 0.25rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--contrast-border-color);
 }
 
 h1 {
@@ -97,11 +97,23 @@ h1 {
 
 .buy-now {
   background-color: var(--call-to-action-color);
-  color: white;
+  color: var(--contrast-text-color);
 }
 
 .buy-now:hover {
   background-color: var(--call-to-action-highlight-color);
+}
+
+.provider-alternative-parent {
+  position: relative;
+  width: 99vw;
+  margin: 10px auto;
+  padding: 2rem;
+  border: 1px solid var(--contrast-border-color);
+  border-radius: var(--box-border-radius);
+  background-color: var(--box-color);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  font-family: sans-serif;
 }
 
 @media (max-width: 900px) {
