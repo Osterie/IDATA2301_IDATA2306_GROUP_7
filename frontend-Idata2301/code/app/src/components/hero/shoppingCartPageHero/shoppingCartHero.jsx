@@ -1,24 +1,85 @@
 import React, { useState, useEffect } from "react";
-import { getShoppingCart, removeFromShoppingCart } from "../../../utils/shoppingCartUtils";
+import { getShoppingCart, removeFromShoppingCart, clearShoppingCart } from "../../../utils/shoppingCartUtils";
+import { getCookie } from "../../../library/tools";
+import { sendApiRequest } from "../../../library/requests";
+
+
 import "./shoppingCartHero.css";
 
-const ShoppingCartHero = ({onNavClick}) => {
-  const [cart, setCart] = useState([]);
+const ShoppingCartHero = ({user}, {onNavClick}) => {
+  const [flights, setFlights] = useState([]);
+
+
+  const userId = parseInt(user.id, 10);
   
   
   useEffect(() => {
-    setCart(getShoppingCart());
+    const cartFromStorage = getShoppingCart();
+    fetchFlights(cartFromStorage);
   }, []);
-
-  const handleRemoveFromCart = (flightId) => {
-    const updatedCart = removeFromShoppingCart(flightId);
-    setCart(updatedCart); 
+  
+  const handleRemoveFromCart = async (flightId) => {
+    removeFromShoppingCart(flightId);
+    
+    // Small delay ensures sync update completes (safety measure)
+    await new Promise((resolve) => setTimeout(resolve, 0));
+  
+    const updatedCart = getShoppingCart();
+    console.log("Updated cart:", updatedCart);
+    await fetchFlights(updatedCart);
   };
+  
+
+  const fetchFlights = async (cartIds = []) => {
+    if (!Array.isArray(cartIds) || cartIds.length === 0) {
+      setFlights([]);
+      return;
+    }
+  
+    await sendApiRequest(
+      "POST",
+      "/flights/getFlightByIds",
+      (response) => {
+        setFlights(response);
+      },
+      JSON.stringify(cartIds),
+      (errorResponse) => {
+        console.log("Error: " + errorResponse);
+      }
+    );
+  };
+  
 
   
-  const onPurchaseClick = () => {
-    onNavClick("purchase", { }); 
-  };
+  const [isPurchasing, setIsPurchasing] = useState(false);
+
+const handlePurchase = async () => {
+  setIsPurchasing(true);
+  try {
+    const data = flights.map((flight) => ({
+      userId: userId,
+      priceId: flight.id
+    }));
+    console.log("Purchase data:", data);
+    
+
+    await sendApiRequest(
+      "POST",
+      "/purchaseFlights",
+      (response) => {
+        console.log("Purchase successful:", response);
+        clearShoppingCart();
+        setFlights([]);
+      },
+      JSON.stringify(data),
+      (errorResponse) => {
+        console.log("Error: " + errorResponse);
+      }
+    );
+  } finally {
+    setIsPurchasing(false);
+  }
+};
 
   const calculateDiscountedPrice = (price, discount) => {
     return discount > 0 ? (price - (price * discount) / 100).toFixed(2) : price;
@@ -31,10 +92,10 @@ const ShoppingCartHero = ({onNavClick}) => {
 
         {/* Shopping Cart */}
         <div className="cart">
-          {cart.length > 0 ? (
+          {flights.length > 0 ? (
             <>
               <ul>
-                {cart.map((flight) => {
+                {flights.map((flight) => {
                   const discountedPrice = calculateDiscountedPrice(flight.price, flight.discount);
                   return (
                     <li key={flight.id}>
@@ -50,12 +111,16 @@ const ShoppingCartHero = ({onNavClick}) => {
                   </li>
                 )})}
               </ul>
-              <button
-                className="purchase-button"
-                onClick={onPurchaseClick}
-                >
-                Proceed to Purchase
+              {flights.length > 0 && (
+                <button
+                  className="purchase-button"
+                  onClick={handlePurchase}
+                  disabled={isPurchasing}
+                  >
+                  {isPurchasing ? "Processing..." : "Purchase Now"}
               </button>
+
+            )}
             </>
           ) : (
             <p>Your shopping cart is empty.</p>

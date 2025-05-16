@@ -53,4 +53,10 @@ public class PriceController {
     public List<Price> getHighestDiscountedFlight() {
         return priceRepository.findHighestDiscountFlight();
     }
+
+    // Endpoint to fetch flights based on a list of IDs
+    @PostMapping("/getFlightByIds")
+    public List<Price> getFlightByIds(@RequestBody List<Integer> ids) {
+        return priceRepository.findPricesByIds(ids);
+    }
 }

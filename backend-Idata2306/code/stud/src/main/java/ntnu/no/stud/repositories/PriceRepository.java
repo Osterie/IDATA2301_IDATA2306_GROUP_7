@@ -54,4 +54,8 @@ public interface PriceRepository extends CrudRepository<Price, Integer> {
                  @Query("SELECT p FROM Price p " +
                         "ORDER BY p.discount DESC LIMIT 1")
                  List<Price> findHighestDiscountFlight();
+
+
+                 @Query("SELECT p FROM Price p WHERE p.id IN :ids")
+                 List<Price> findPricesByIds(@Param("ids") List<Integer> ids);
 }

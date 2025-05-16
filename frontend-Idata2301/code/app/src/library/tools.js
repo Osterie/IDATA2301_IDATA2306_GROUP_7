@@ -34,6 +34,8 @@ export function setCookie(cname, cvalue, exMilliseconds) {
   d.setTime((exMilliseconds));
   let expires = "expires=" + d.toUTCString();
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  console.log("Cookie set: " + cname + "=" + cvalue);
+  console.log("Cookie expires: " + expires);
 }
 
 /**

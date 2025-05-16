@@ -116,7 +116,7 @@ function App() {
         {activePage === "admin" && <AdminPage setActivePage={setActivePage} />}
         {activePage === "manage-users" && <ManageUserPage />}
         {activePage === "create-account" && <CreateAccount />}
-        {activePage === "shoppingCart" && (<ShoppingCartHero onNavClick={handleNavClick} />)}
+        {activePage === "shoppingCart" && (<ShoppingCartHero user={user} onNavClick={handleNavClick} />)}
         {activePage === "purchase" && <PurchaseHero />}
       </main>
 

@@ -39,7 +39,7 @@ const FlightCard = ({
   } = flight;
 
   const handleAddToCart = () => {
-    addToShoppingCart(flight);
+    addToShoppingCart(id);
   };
 
   const handleToggleVisibility = async () => {
