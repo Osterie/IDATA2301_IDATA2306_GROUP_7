@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
+
 
 import './slider.css';
 
 
 
-const DualRangeSlider = ({ label, min, max, step = 0.1, callback }) => {
+const DualRangeSlider = forwardRef(({ label, min, max, step = 0.1, callback }, ref) => {
   const [minValue, setMinValue] = useState(min);
   const [maxValue, setMaxValue] = useState(max);
 
@@ -12,6 +13,19 @@ const DualRangeSlider = ({ label, min, max, step = 0.1, callback }) => {
   const toSliderRef = useRef(null);
   const fromInputRef = useRef(null);
   const toInputRef = useRef(null);
+
+  // expose imperative methods to parent
+  useImperativeHandle(ref, () => ({
+    updateMinValue(newMin) {
+      setMinValue(newMin);
+      // update slider input element as well (optional)
+      if (fromSliderRef.current) fromSliderRef.current.value = newMin;
+    },
+    updateMaxValue(newMax) {
+      setMaxValue(newMax);
+      if (toSliderRef.current) toSliderRef.current.value = newMax;
+    }
+  }));
 
   useEffect(() => {
     // Initial gradient background update
@@ -170,7 +184,8 @@ const DualRangeSlider = ({ label, min, max, step = 0.1, callback }) => {
       </div>
     </div>
   );
-};
+});
+
 
 export default DualRangeSlider;
 

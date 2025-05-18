@@ -69,7 +69,6 @@ public class UserController {
     if (sessionUser != null && sessionUser.getUsername().equals(username)) {
       if (profileData != null) {
         if (userService.updateProfile(sessionUser, profileData)) {
-          simulateLongOperation();
           logger.info("Successfully updated profile for username: {}", username);
           response = new ResponseEntity<>("", HttpStatus.OK);
         } else {
@@ -128,15 +127,6 @@ public class UserController {
     } else {
       logger.warn("Forbidden access attempt to delete user with ID: {}", id);
       return new ResponseEntity<>("Access to delete users is only for authenticated admins", HttpStatus.FORBIDDEN);
-    }
-  }
-
-
-  private static void simulateLongOperation() {
-    try {
-      Thread.sleep(2000);  // Simulating a long operation, e.g., a database transaction
-    } catch (InterruptedException e) {
-      throw new RuntimeException(e);
     }
   }
 }
