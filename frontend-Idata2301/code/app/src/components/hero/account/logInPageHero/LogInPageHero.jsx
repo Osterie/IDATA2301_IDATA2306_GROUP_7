@@ -57,10 +57,10 @@ const LoginPageHero = ({ onNavClick }) => {
             />
           </div>
 
-          <div className="form-links">
+          {/* <div className="form-links">
             <a href="#">Create new password?</a>
             <a href="#">Log in with SMS</a>
-          </div>
+          </div> */}
 
           {message && <p id="result-message">{message}</p>}
 
