@@ -107,7 +107,7 @@ public class UserController {
     }
   }
 
-  @DeleteMapping("/api/deleteUser/{id}")
+  @DeleteMapping("/api/deleteUser")
   public ResponseEntity<?> deleteUser(@PathVariable int id) {
 
     logger.info("Request received to delete user with ID: {}", id);
