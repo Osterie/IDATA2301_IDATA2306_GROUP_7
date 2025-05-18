@@ -2,8 +2,11 @@ package ntnu.no.stud.repositories;
 
 import ntnu.no.stud.entities.FlightClasses;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -15,6 +18,8 @@ public interface FlightClassesRepository extends CrudRepository<FlightClasses, I
     @Query(value = "SELECT * FROM flight_classes WHERE flight_id = :flightId", nativeQuery = true)
     List<FlightClasses> findByFlightId(int flightId);
 
-    @Query(value = "UPDATE flight_classes SET available_seats - 1 WHERE flight_id = :flightId", nativeQuery = true)
-    Void removeAvaliableSeat(int flightId);
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE flight_classes SET available_seats = available_seats - 1 WHERE flight_id = :flightId", nativeQuery = true)
+    void removeAvaliableSeat(int flightId);
 }
