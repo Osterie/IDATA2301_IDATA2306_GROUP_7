@@ -66,6 +66,11 @@ public class SearchController {
         .toList();
   }
 
+  // @PostMapping("/api/getPricesFromProviders")
+  // public List<Price> getPricesFromProviders() {
+  //   return priceRepository.findAll();
+  // }
+
   @GetMapping("/api/getSearchTerms")
   public Iterable<Airport> getAirports() {
     return airportRepository.findAll();

@@ -46,6 +46,7 @@ const ManageUserPage = () => {
   const handleConfirmRole = async (userId) => {
     try {
       console.log(`Assigning role "${newRole}" to user ID ${userId}`);
+      setNewRole(newRole.trim().toUpperCase()); // Ensure the role is in uppercase
       await assignRoleToUser(userId, newRole); // <- call your API
 
       setUsers((prevUsers) =>

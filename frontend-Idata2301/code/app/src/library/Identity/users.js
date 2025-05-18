@@ -56,7 +56,7 @@ export async function assignRoleToUser(userId, role) {
   return new Promise((resolve, reject) => {
     const postData = {
       id: userId,
-      roleName: role
+      roleName: role.toUpperCase()
     };
 
     sendApiRequest(
