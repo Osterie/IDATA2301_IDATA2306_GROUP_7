@@ -64,6 +64,12 @@ const FlightCard = ({
     );
   };
 
+  const calculateDiscountedPrice = (price, discount) => {
+    return discount > 0 ? (price - (price * discount) / 100).toFixed(2) : price;
+  };
+
+  const discountedPrice = calculateDiscountedPrice(price, discount);
+
   return (
     <div className="flight-card">
       <div className="flight-card-header">
@@ -105,7 +111,7 @@ const FlightCard = ({
       )}
 
       <div className="flight-card-price-section">
-        <p className="flight-card-price">${price} {priceCode}</p>
+        <p className="flight-card-price">${discountedPrice} {priceCode}</p>
         {discount > 0 && (
           <p className="flight-card-discount">Discount: {discount}%</p>
         )}
