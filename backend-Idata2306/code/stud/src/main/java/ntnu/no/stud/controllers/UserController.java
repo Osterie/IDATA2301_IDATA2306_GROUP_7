@@ -130,7 +130,7 @@ public class UserController {
     }
   }
 
-  @DeleteMapping("/api/deleteUser/{id}")
+  @DeleteMapping("/api/deleteSelf/{id}")
   public ResponseEntity<?> deleteSelf(@PathVariable int id) {
 
     logger.info("Request received to delete user with ID: {}", id);
