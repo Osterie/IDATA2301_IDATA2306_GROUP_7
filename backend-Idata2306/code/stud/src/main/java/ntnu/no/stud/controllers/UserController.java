@@ -69,7 +69,6 @@ public class UserController {
     if (sessionUser != null && sessionUser.getUsername().equals(username)) {
       if (profileData != null) {
         if (userService.updateProfile(sessionUser, profileData)) {
-          simulateLongOperation();
           logger.info("Successfully updated profile for username: {}", username);
           response = new ResponseEntity<>("", HttpStatus.OK);
         } else {

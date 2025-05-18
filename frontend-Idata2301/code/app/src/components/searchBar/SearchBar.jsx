@@ -14,7 +14,7 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
     const [fromSuggestions, setFromSuggestions] = useState([]);
     const [toSuggestions, setToSuggestions] = useState([]);
     const [focusedInput, setFocusedInput] = useState(null);
-    
+
     
     const passengers = (searchParams.passengers) || [
     { classType: { name: "Economy" }, amount: 1 },
@@ -82,6 +82,7 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
                 function (fetchedData) {
                     // const fetchedData = response.json();
                     console.log('Flight search results:', fetchedData);
+                    fetchedData.isNewSearch = true; // Add the isNewSearch property to the fetched data
                     setFlights(fetchedData);  // Store flights in state
                     setActivePage("deals");  // ✅ Navigate to the Deals page
                 },

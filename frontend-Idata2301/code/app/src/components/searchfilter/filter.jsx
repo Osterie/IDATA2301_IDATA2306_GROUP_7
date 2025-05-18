@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./filter.css";
 import DualRangeSlider from "./slider";
 
@@ -32,8 +32,6 @@ const filterFlights = (flightsToFilter, min, max, companies) => {
 
 const sortFlights = (flightsToSort, option) => {
   const sorted = [...flightsToSort];
-
-  console.log(sorted);
 
   switch (option) {
     case "cheap":
@@ -77,15 +75,35 @@ const FilterSidebar = ({ flights, setFlights }) => {
     min: findMinPrice(flights),
     max: findMaxPrice(flights),
   });
+  const [fullPriceRange, setFullPriceRange] = useState({
+    min: findMinPrice(flights),
+    max: findMaxPrice(flights),
+  });
+  const [forceUpdate, setForceUpdate] = useState(0);
 
-    const [initialized, setInitialized] = useState(false);
+  const sliderRef = useRef(null);
+  
+    // Whenever min or max values update, call the exposed methods:
+  useEffect(() => {
+    if (sliderRef.current) {
+      sliderRef.current.updateMinValue(fullPriceRange.min);
+      sliderRef.current.updateMaxValue(fullPriceRange.max);
+    }
+  }, [fullPriceRange.min, fullPriceRange.max, forceUpdate]);
+
 
   useEffect(() => {
-    if (!flights || flights.length === 0 || initialized) return;
+    if (!flights.isNewSearch) return;
 
     const min = findMinPrice(flights);
     const max = findMaxPrice(flights);
     setPriceRange({ min, max });
+    setFullPriceRange({
+      min: findMinPrice(flights),
+      max: findMaxPrice(flights),
+    });
+    setForceUpdate((f) => f + 1);
+
     const newCompanies = getUniqueCompanies(flights);
     setSelectedCompanies({
       all: true,
@@ -97,9 +115,9 @@ const FilterSidebar = ({ flights, setFlights }) => {
 
     const sorted = sortFlights(flights, sortOption);
     setFlights(sorted);
-
-    setInitialized(true); // <-- Prevent re-initialization
+    flights.isNewSearch = false; // Reset the flag after processing
   }, [flights]);
+
 
   const handleCompanyChange = (company) => {
     let updatedCompanies;
@@ -141,9 +159,9 @@ const FilterSidebar = ({ flights, setFlights }) => {
 
     updatedFlights = sortFlights(updatedFlights, sortOption);
 
-    console.log(updatedFlights);
     setFlights(updatedFlights);
   };
+  
 
   return (
     <div className="sidebar-mother">
@@ -186,10 +204,12 @@ const FilterSidebar = ({ flights, setFlights }) => {
         {/* Price Range */}
         <div className="filter-section">
           <DualRangeSlider
-            key={`${findMinPrice(flights)}-${findMaxPrice(flights)}`} // 👈 key changes when min/max change
+              ref={sliderRef}
+
+            // key={`${findMinPrice(flights)}-${findMaxPrice(flights)}`} // 👈 key changes when min/max change
             label="Price Range"
-            min={findMinPrice(flights)}
-            max={findMaxPrice(flights)}
+            min={fullPriceRange.min}
+            max={fullPriceRange.max}
             callback={handlePriceRangeChange}
           />
         </div>

@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react";
 import { getShoppingCart, removeFromShoppingCart, clearShoppingCart } from "../../../utils/shoppingCartUtils";
 import { getCookie } from "../../../library/tools";
 import { sendApiRequest } from "../../../library/requests";
+import Cookies from "js-cookie";
 
 
 import "./shoppingCartHero.css";
 
-const ShoppingCartHero = ({user}, {onNavClick}) => {
+const ShoppingCartHero = ( {onNavClick} ) => {
   const [flights, setFlights] = useState([]);
 
 
-  const userId = parseInt(user.id, 10);
-  
+  const userId = getCookie("current_user_id");
+
   
   useEffect(() => {
     const cartFromStorage = getShoppingCart();
@@ -60,8 +61,6 @@ const handlePurchase = async () => {
       userId: userId,
       priceId: flight.id
     }));
-    console.log("Purchase data:", data);
-    
 
     await sendApiRequest(
       "POST",

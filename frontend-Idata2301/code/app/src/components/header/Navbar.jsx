@@ -13,8 +13,6 @@ const Navbar = ({ onNavClick, user }) => {
 
   const showAdmin = user && isAdmin(user);
 
-  console.log(user);
-
   return (
     <nav>
       <div className="hamburger-menu" onClick={toggleMenu}>

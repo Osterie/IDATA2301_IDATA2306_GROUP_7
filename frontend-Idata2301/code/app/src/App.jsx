@@ -8,7 +8,6 @@ import AboutUsPage from "./pages/AboutUsPage";
 import ProfilePage from "./pages/ProfilePage";
 
 import LogInPageHero from "./components/hero/account/logInPageHero/LogInPageHero";
-import PurchaseHero from "./components/hero/purchaseHero/PurchaseHero";
 import ShoppingCartHero from "./components/hero/shoppingCartPageHero/shoppingCartHero";
 import CreateAccount from "./components/hero/account/createAccountHero/createAccountHero";
 import Footer from "./components/footer/Footer";
@@ -116,8 +115,7 @@ function App() {
         {activePage === "admin" && <AdminPage setActivePage={setActivePage} />}
         {activePage === "manage-users" && <ManageUserPage />}
         {activePage === "create-account" && <CreateAccount />}
-        {activePage === "shoppingCart" && (<ShoppingCartHero user={user} onNavClick={handleNavClick} />)}
-        {activePage === "purchase" && <PurchaseHero />}
+        {activePage === "shoppingCart" && (<ShoppingCartHero onNavClick={handleNavClick} />)}
       </main>
 
       <Footer />

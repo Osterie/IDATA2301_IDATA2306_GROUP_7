@@ -16,7 +16,6 @@ const ManageUserPage = () => {
     const fetchUsers = async () => {
       try {
         const response = await getAllUsers();
-        console.log(response);
         setUsers(response); // Assuming the response is an array of user objects
       } catch (error) {
         console.error("Error fetching users:", error);
