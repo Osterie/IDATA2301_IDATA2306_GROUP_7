@@ -53,6 +53,7 @@ Sprint stenographer: Daniel
 | Design guidelines                                                     | Tobias   | Completed     | [3]          |                                              |
 | Semantic elements used (div and span are last resort).                | Everyone | Not completed | [5]          |                                              |
 | Lighthouse tests                                                      | ?        | Not completed | []           |                                              |
-| fix companies/price filter applying incorrectly on multiple searches. | Adrian   |               | [3]          |                                              |
+| fix companies/price filter applying incorrectly on multiple searches. | Adrian   |               | [3]          |                                              | 
+| Product price for the different providers on same date and route      | ?        |               | [5]          |                                              |
 
 ---

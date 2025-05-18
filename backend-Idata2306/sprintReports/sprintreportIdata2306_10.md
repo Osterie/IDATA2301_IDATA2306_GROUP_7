@@ -38,5 +38,6 @@ Sprint stenographer: Adrian
 | Comment                            | Everyone | Not completed | [8]          |          |
 | Further error loggers              | Everyone | Not completed | [6]          |          |
 | README                             | Everyone | Not completed | [5]          |          |
+| Endpoint for provider alternatives | Everyone | Not completed | [5]          |          |
 
 ---
