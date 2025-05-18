@@ -44,7 +44,7 @@ public class FavoriteFlightController {
     }
 
     // Add a favorite price (accept JSON body now)
-    @PostMapping("/")
+    @PostMapping("/addFavoritePrice")
     public FavoriteFlight addFavoritePrice(@RequestBody FavoriteRequest request) {
         Optional<User> userOpt = userRepository.findById(request.userId);
         Optional<Price> priceOpt = priceRepository.findById(request.priceId);
@@ -69,8 +69,12 @@ public class FavoriteFlightController {
     }
 
     // Delete a favorite price
-    @DeleteMapping("/")
-    public void removeFavoritePrice(@RequestParam int userId, @RequestParam int priceId) {
+    @DeleteMapping("/removeFavoritePrice")
+    public void removeFavoritePrice(@RequestBody FavoriteRequest request) {
+
+        int userId = request.userId;
+        int priceId = request.priceId;
+
         List<FavoriteFlight> favorites = StreamSupport.stream(favoriteFlightRepository.findAll().spliterator(), false)
                 .filter(fav -> fav.getUser().getId() == userId && fav.getPrice().getId() == priceId)
                 .collect(Collectors.toList());

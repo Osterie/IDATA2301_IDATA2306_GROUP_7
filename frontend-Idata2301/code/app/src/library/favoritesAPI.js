@@ -13,7 +13,7 @@ export function fetchFavoriteFlights(userId, onSuccess, onError) {
 export function addFavoriteFlight(userId, priceId, onSuccess, onError) {
   sendApiRequest(
     "POST",
-    "/favorites",
+    "/favorites/addFavoritePrice",
     onSuccess,
     JSON.stringify({ userId, priceId }),
     onError || ((err) => console.error("Add favorite failed:", err))
@@ -23,7 +23,7 @@ export function addFavoriteFlight(userId, priceId, onSuccess, onError) {
 export function removeFavoriteFlight(userId, priceId, onSuccess, onError) {
   sendApiRequest(
     "DELETE",
-    "/favorites",
+    "/favorites/removeFavoritePrice",
     onSuccess,
     JSON.stringify({ userId, priceId }),
     onError || ((err) => console.error("Remove favorite failed:", err))

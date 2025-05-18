@@ -78,7 +78,7 @@ const FilterSidebar = ({ flights, setFlights }) => {
     max: findMaxPrice(flights),
   });
 
-  const [initialized, setInitialized] = useState(false);
+    const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
     if (!flights || flights.length === 0 || initialized) return;
