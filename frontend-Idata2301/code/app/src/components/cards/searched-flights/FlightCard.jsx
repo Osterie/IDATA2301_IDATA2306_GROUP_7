@@ -2,6 +2,8 @@ import React from "react";
 import "./flightCard.css";
 import { sendApiRequest } from "../../../library/requests";
 import { addToShoppingCart } from "../../../utils/shoppingCartUtils";
+import favActivePicture from "../../../resources/images/favactive.png";
+import favInactivePicture from "../../../resources/images/favinactive.png";
 
 const FlightCard = ({
   flight,
@@ -118,7 +120,7 @@ const FlightCard = ({
       </div>
 
       <button
-        className="flight-card-book-button"
+        className="flight-detail-button"
         onClick={() => {
           if (setSelectedFlight && setActivePage) {
             setSelectedFlight(flight);
@@ -130,17 +132,28 @@ const FlightCard = ({
       </button>
 
       {purchasable && (
-        <button className="flight-card-book-button" onClick={handleAddToCart}>
+        <button className="flight-cart-button" onClick={handleAddToCart}>
           Add to cart
         </button>
       )}
 
-      <button
-        className="flight-card-book-button"
+      <div
+        className="flight-card-favorite-button"
         onClick={() => onFavoriteToggle?.(flight.id, isFavorite)}
       >
-        {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
-      </button>
+        <div className="favorite-content">
+          <img
+            src={isFavorite ? favActivePicture : favInactivePicture}
+            alt={isFavorite ? "Flight is favorited" : "Flight is not favorited"}
+            className="favorite-icon"
+          />
+          <div className="favorite-text">
+            {isFavorite ? "Favorited" : "Not Favorited"}
+          </div>
+        </div>
+      </div>
+
+
 
       <p className="flight-card-provider">Provider: {provider}</p>
 

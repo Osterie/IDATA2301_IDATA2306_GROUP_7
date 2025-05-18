@@ -74,24 +74,6 @@
   font-weight: bold
 }
 
-/* Add this for the admin button */
-.flight-card-toggle-visibility-button {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background-color: #f39c12;
-  border: none;
-  color: white;
-  padding: 6px 12px;
-  font-size: var(--text-desktop-font-size);
-  border-radius: var(--button-border-radius);
-  cursor: pointer;
-}
-
-.flight-card-toggle-visibility-button:hover {
-  background-color: #d35400;
-}
-
 .flight-card-header {
   display: flex;
   align-items: center;
@@ -109,10 +91,77 @@
   left: 0;
 }
 
+.flight-card-favorite-button {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0.5rem;
+  border: 3px solid var(--serious-button-color);
+  border-radius: var(--button-border-radius);
+  background-color: var(--serious-button-color);
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.favorite-content {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.favorite-icon {
+  height: 100%;
+  object-fit: contain;
+  aspect-ratio: 1 / 1;
+}
+
+.favorite-text {
+  font-size: var(--text-desktop-font-size);
+  background-color: white;
+  padding: 4px;
+}
+
+.flight-card-favorite-button:hover {
+  height: 26px;
+  margin-top: 0.65rem;
+}
+
+
 .flight-card-title {
   width: 100%;
   text-align: center;
   font-size: 1.2rem;
   font-weight: bold;
   padding-left: 60px; /* offset to avoid overlap with image */
+}
+
+.flight-detail-button, .flight-cart-button, .flight-card-toggle-visibility-button {
+  margin: 0.5rem;
+  border: none;
+  color: var(--contrast-text-color);
+  padding: 6px 12px;
+  font-size: var(--text-desktop-font-size);
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+}
+.flight-detail-button {
+  background-color: var(--call-to-action-color);
+}
+
+.flight-cart-button {
+  background-color: var(--button-color);
+}
+
+/* Add this for the admin button */
+.flight-card-toggle-visibility-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: var(--serious-button-color);
+}
+
+.flight-card-toggle-visibility-button:hover {
+  background-color: red;
 }
