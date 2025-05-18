@@ -131,6 +131,29 @@ public class UserController {
     }
   }
 
+  @DeleteMapping("/api/deleteUser/{id}")
+  public ResponseEntity<?> deleteSelf(@PathVariable int id) {
+
+    logger.info("Request received to delete user with ID: {}", id);
+    
+    User sessionUser = userService.getSessionUser();
+    if (sessionUser != null && sessionUser.getId() == id) {
+      if (userService.deleteUser(id)) {
+        logger.info("Successfully deleted self with ID: {}", id);
+        return new ResponseEntity<>("Self deleted successfully", HttpStatus.OK);
+      } else {
+        logger.error("Failed to delete self with ID: {}", id);
+        return new ResponseEntity<>("Failed to delete self", HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+    } else if (sessionUser == null) {
+      logger.warn("Unauthorized access attempt to delete self with ID: {}", id);
+      return new ResponseEntity<>("Access to delete self is only for authenticated one self", HttpStatus.UNAUTHORIZED);
+    } else {
+      logger.warn("Forbidden access attempt to delete self with ID: {}", id);
+      return new ResponseEntity<>("Access to delete self is only for authenticated one self", HttpStatus.FORBIDDEN);
+    }
+  }
+
 
   private static void simulateLongOperation() {
     try {

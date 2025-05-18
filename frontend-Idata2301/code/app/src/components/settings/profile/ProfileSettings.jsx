@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./profileSettings.module.css";
 import { getProfileCookies } from "../../../utils/profileUtils";
+import { deleteSelf } from "../../../library/Identity/users";
 
 const ProfileSettings = ({ user }) => {
   const [profilePrefs, setProfilePrefs] = useState(null);
@@ -9,6 +10,15 @@ const ProfileSettings = ({ user }) => {
     const prefs = getProfileCookies();
     setProfilePrefs(prefs);
   }, []);
+
+  const handleDeleteSelf = async () => {
+    try {
+      await deleteSelf(user.id);
+      console.log(`User with ID ${user.id} deleted`);
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
 
   return (
     <section className={styles["profile-settings"]}>
@@ -22,10 +32,8 @@ const ProfileSettings = ({ user }) => {
         <br />
       </header>
 
-      {/* Only show this if logged in */}
       {user && (
         <>
-          {/* Profile Info Section */}
           <section
             aria-labelledby="profile-info-heading"
             className={styles.section}
@@ -55,7 +63,6 @@ const ProfileSettings = ({ user }) => {
         </>
       )}
 
-      {/* Always show preferences */}
       <section
         aria-labelledby="location-pref-heading"
         className={styles.section}
@@ -77,7 +84,6 @@ const ProfileSettings = ({ user }) => {
         </dl>
       </section>
 
-      {/* Only show this if logged in */}
       {user && (
         <section
           aria-labelledby="danger-zone-heading"
@@ -87,7 +93,11 @@ const ProfileSettings = ({ user }) => {
           <p>
             Deleting your account is irreversible. Please proceed with caution.
           </p>
-          <button type="button" className={styles["delete-button"]}>
+          <button
+            type="button"
+            className={styles["delete-button"]}
+            onClick={handleDeleteSelf}
+          >
             Delete Account
           </button>
         </section>

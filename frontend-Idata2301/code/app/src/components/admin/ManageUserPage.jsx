@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { getAllUsers } from "../../library/Identity/users.js";
-import { deleteUser } from "../../library/Identity/users.js"; // You'll implement this
-import { assignRoleToUser } from "../../library/Identity/users.js"; // You'll implement this
-import { removeRoleFromUser } from "../../library/Identity/users.js"; // You'll implement this
+import { deleteUser } from "../../library/Identity/users.js";
+import { assignRoleToUser } from "../../library/Identity/users.js";
+import { removeRoleFromUser } from "../../library/Identity/users.js";
 import "./manageUserPage.css";
 
 const ManageUserPage = () => {

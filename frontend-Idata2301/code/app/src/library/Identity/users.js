@@ -35,6 +35,23 @@ export async function deleteUser(userId) {
   });
 }
 
+export async function deleteSelf(userId) {
+  return new Promise((resolve, reject) => {
+    sendApiRequest(
+      "DELETE",
+      `/deleteSelf/${userId}`,
+      function (userResponse) {
+        console.log("Success:", userResponse);
+        resolve(userResponse);
+      },
+      function (errorText) {
+        console.error("Error:", errorText);
+        reject(errorText);
+      }
+    );
+  });
+}
+
 export async function assignRoleToUser(userId, role) {
   return new Promise((resolve, reject) => {
     const postData = {
