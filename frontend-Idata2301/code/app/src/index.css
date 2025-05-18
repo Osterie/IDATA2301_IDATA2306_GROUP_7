@@ -28,7 +28,8 @@ code {
   --serious-box-color: #ffe6e6;
   --bottom-color: #101520;
   --serious-button-color: #c82333;
-  --button-color: #50C878;
+  --button-color:#27ae60;
+  --button-hover-color: #50C878;
 
   /* Contrast colors */
   --primary-contrast: #FDA300;
