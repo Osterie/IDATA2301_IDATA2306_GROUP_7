@@ -77,11 +77,8 @@ public class PurchaseController {
             Purchase savedPurchase = purchaseRepository.save(purchase);
             
             flightClassesRepository.removeAvaliableSeat(savedPurchase.getPrice().getFlightClassId().getId());
-            flightClassesRepository.update()
-
-
         }
 
     return ResponseEntity.ok("Purchases created successfully.");
-}
+    }
 }
