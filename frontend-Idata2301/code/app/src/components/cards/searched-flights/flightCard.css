@@ -79,6 +79,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #14aaf5;
   gap: 10px;
   margin-top: 10px;
   flex-wrap: wrap;
@@ -168,7 +169,7 @@
   padding-left: 60px;
 }
 
-.flight-detail-button, .flight-cart-button, .flight-card-toggle-visibility-button {
+.flight-detail-button, .flight-cart-button, .flight-card-toggle-visibility-button, .flight-card-actions-button {
   margin: 0.5rem;
   border: none;
   color: var(--contrast-text-color);
@@ -191,6 +192,14 @@
 }
 
 .flight-cart-button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.flight-card-actions-button {
+  background-color: var(--serious-button-color);
+}
+
+.flight-card-actions-button:hover {
   background-color: var(--button-hover-color);
 }
 

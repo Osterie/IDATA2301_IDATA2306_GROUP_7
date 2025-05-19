@@ -106,7 +106,6 @@ const handlePurchase = async () => {
                       purchasable={false}
                       actionButton={
                       <button
-                        className="remove-cart-button"
                         onClick={() => handleRemoveFromCart(flight.id)}
                         >
                         Remove

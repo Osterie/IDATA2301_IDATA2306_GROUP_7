@@ -155,7 +155,18 @@ const FlightCard = ({
         </div>
       </div>
 
-      {actionButton && actionButton}
+
+{actionButton && (
+  <button
+    className="flight-card-actions-button"
+    onClick={actionButton.props.onClick}
+  >
+    {actionButton.props.children}
+  </button>
+)}
+
+
+
 
 
       <p className="flight-card-provider">Provider: {provider}</p>
