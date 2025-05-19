@@ -7,25 +7,24 @@ const HiddenProductsPage = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Function to fetch purchased flights from the backend
+  // Function to fetch hidden flights from the backend
   const getAllHiddenProducts = async () => {
     await sendApiRequest(
       "GET",
       `/getHiddenProducts`,
       (response) => {
-        console.log("Purchased flights:", response);
         // Handle the response as needed
         if (response && response.length > 0) {
           console.log(response);
           setLoading(false);
           setHiddenProducts(response);
         } else {
-          console.log("No purchased flights found for this user.");
+          console.log("No hidden flights found.");
         }
       },
       null, // No request body for GET
       (error) => {
-        console.error("Error fetching purchased flights:", error);
+        console.error("Error fetching hidden flights:", error);
         setError("The server is currently down. Please try again later.");
       }
     );
