@@ -54,7 +54,7 @@ const ManageUserPage = () => {
           user.id === userId
             ? {
                 ...user,
-                roles: [...user.roles, { role: newRole }] // Add new role to the user's roles
+                roles: [...user.roles, { role: newRole.trim().toUpperCase() }] // Add new role to the user's roles
               }
             : user
         )
