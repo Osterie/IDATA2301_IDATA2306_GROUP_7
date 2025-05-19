@@ -45,3 +45,51 @@ export const formatCurrency = (amount, currencyCode, locale = 'en-US') => {
     currency: currencyCode,
   }).format(amount);
 };
+
+export const convertAndFormatCurrency = async (amount, currencyCode, locale = 'en-US') => {
+  try {
+    if (localStorage.getItem("currencys") === null) {
+      localStorage.setItem("currencys", JSON.stringify([]));
+      
+
+    }
+  } catch (error) {
+    console.error('Error converting and formatting currency:', error);
+    return formatCurrency(amount, 'USD', locale); // Fallback to original amount
+  }
+
+  preferredCurrency = getCookie("preferred_currency");
+
+  fetch(
+    "https://openexchangerates.org/api/latest.json?app_id=2339143d97cf4826a4e3fa0d38d291de"
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      const rate = data.conversion_rates[currencyCode];
+      const convertedAmount = amount * rate;
+      return formatCurrency(convertedAmount, currencyCode, locale);
+    })
+    .catch((error) => {
+      console.error('Error fetching exchange rates:', error);
+    });
+  )
+  "https://openexchangerates.org/api/latest.json?app_id=2339143d97cf4826a4e3fa0d38d291de"
+
+};
+
+export const addCurrencyToLocalStorage = (currency) => {
+  fetch("https://openexchangerates.org/api/latest.json?app_id=2339143d97cf4826a4e3fa0d38d291de")
+    .then((response) => response.json())
+    .then((data) => {
+      const rate = data.conversion_rates[currency];
+      const convertedAmount = amount * rate;
+      return formatCurrency(convertedAmount, currency, locale);
+    })
+    .catch((error) => {
+      console.error('Error fetching exchange rates:', error);
+    });
+  const currencies = JSON.parse(localStorage.getItem("currencys"));
+
+  
+
+}
