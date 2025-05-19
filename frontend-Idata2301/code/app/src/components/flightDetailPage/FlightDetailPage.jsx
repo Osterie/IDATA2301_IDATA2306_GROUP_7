@@ -20,12 +20,16 @@ const FlightDetailPage = ({ searchParams, flight, onAddToCart, onBuyNow }) => {
             const imageUrl = URL.createObjectURL(imageBlob);
             setCompanyImageUrl(imageUrl);
           } else {
-            console.warn("Fetched image is not a valid Blob:", imageBlob);
+            console.warn("Fetched image is not a valid Blob:", 
+              // imageBlob
+            );
             setCompanyImageUrl(null);
           }
         })
         .catch((error) => {
-          console.error("Error loading company image:", error);
+          console.error("Error loading company image:", 
+            // error
+          );
           setCompanyImageUrl(null);
         });
     } else {
