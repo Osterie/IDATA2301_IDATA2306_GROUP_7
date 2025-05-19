@@ -4,6 +4,8 @@ import { sendApiRequest } from "../../../library/requests";
 import { addToShoppingCart } from "../../../utils/shoppingCartUtils";
 import favActivePicture from "../../../resources/images/favactive.png";
 import favInactivePicture from "../../../resources/images/favinactive.png";
+import { convertCurrency } from "../../../utils/currencyUtils";
+import { getPreferredCurrency } from "../../../utils/cookieUtils";
 
 const FlightCard = ({
   flight,
@@ -28,7 +30,7 @@ const FlightCard = ({
       availableSeats,
     },
     price,
-    priceCode,
+    currencyCode,
     isHidden,
     provider,
     discount,
@@ -126,16 +128,16 @@ const FlightCard = ({
               className="flight-card-original-price"
               style={{ textDecoration: "line-through", color: "#888", margin: 0 }}
             >
-              ${price} {priceCode}
+              {convertCurrency(price, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
             </p>
             <p className="flight-card-price" style={{ fontWeight: "bold", color: "#d32f2f" }}>
-              ${discountedPrice} {priceCode}
+              {convertCurrency(discountedPrice, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
             </p>
             <p className="flight-card-discount">Discount: {discount}%</p>
           </>
         ) : (
           <p className="flight-card-price">
-            ${price} {priceCode}
+            {convertCurrency(discountedPrice, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
           </p>
         )}
       </div>

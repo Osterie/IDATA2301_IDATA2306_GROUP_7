@@ -32,7 +32,7 @@ Sprint stenographer: Adrian
 | Story/Task                         | Assignee | Status        | Story Points | Comments |
 | ---------------------------------- | -------- | ------------- | ------------ | -------- |
 | Endpoints for purchasing           | Daniel   | In progress   | [5]          |          |
-| Endpoint for getting hidden flight | Daniel   | Not completed | [4]          |          |
+| Endpoint for getting hidden flight | Adrian   | Completed     | [4]          |          |
 | Try using docker                   | Everyone | Not Completed | [3]          |          |
 | Https connection                   | Everyone | Not completed | [6]          |          |
 | Comment                            | Everyone | Not completed | [8]          |          |
