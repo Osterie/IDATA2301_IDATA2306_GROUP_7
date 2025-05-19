@@ -24,7 +24,7 @@ select {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    z-index: 10;
+    z-index: 3;
     width: 20%;
     height: 100vh;
 }

@@ -1,86 +1,85 @@
 .role-picture {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 16px;
-    background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: var(--box-border-radius);
-    width: 30%;
-    text-align: center;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: var(--box-border-radius);
+  text-align: center;
+}
+
+.profile-image {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+}
+
+figcaption {
+  margin-top: 12px;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 8px 0 4px;
+}
+
+.name {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.role {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .role-picture {
+    padding: 12px;
   }
-  
+
   .profile-image {
-    width: 96px;
-    height: 96px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid #d1d5db;
+    width: 80px;
+    height: 80px;
   }
-  
+
   .title {
-    margin-top: 16px;
-    font-size: 1.125rem;
-    font-weight: 600;
+    font-size: 1rem;
   }
-  
+
   .name {
-    color: #6b7280;
+    font-size: 0.75rem;
+  }
+
+  .role {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .role-picture {
+    padding: 10px;
+  }
+
+  .profile-image {
+    width: 72px;
+    height: 72px;
+  }
+
+  .title {
     font-size: 0.875rem;
   }
-  
+
+  .name {
+    font-size: 0.7rem;
+  }
+
   .role {
-    font-size: 0.75rem;
-    color: #9ca3af;
+    font-size: 0.6rem;
   }
-  
-  /* Responsive styles */
-  @media (max-width: 768px) {
-    .role-picture {
-      width: 100%; /* Smaller width on smaller screens */
-      padding: 12px;
-    }
-  
-    .profile-image {
-      width: 80px; /* Smaller profile image on small screens */
-      height: 80px;
-    }
-  
-    .title {
-      font-size: 1rem; /* Slightly smaller title font */
-    }
-  
-    .name {
-      font-size: 0.75rem; /* Smaller name font */
-    }
-  
-    .role {
-      font-size: 0.65rem; /* Smaller role font */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .role-picture {
-      width: 180px; /* Even smaller width for very small screens */
-      padding: 10px;
-    }
-  
-    .profile-image {
-      width: 72px; /* Smaller profile image for very small screens */
-      height: 72px;
-    }
-  
-    .title {
-      font-size: 0.875rem; /* Adjust title font size */
-    }
-  
-    .name {
-      font-size: 0.7rem; /* Adjust name font size */
-    }
-  
-    .role {
-      font-size: 0.6rem; /* Adjust role font size */
-    }
-  }
-  
+}

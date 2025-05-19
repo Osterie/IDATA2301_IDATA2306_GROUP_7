@@ -12,7 +12,7 @@ nav {
   height: 80px;
   width: 100%;
   padding: 0 20px;
-  z-index: 3;
+  z-index: 10;
 }
 
 /* Adjust the .logo div to use Flexbox */
@@ -103,7 +103,7 @@ nav ul li a:hover {
   nav ul {
     position: absolute;
     width: 100%;
-    height: 100vh;
+    height: 120vh;
     background: var(--secondary-color);
     top: 80px;
     left: -100%;
