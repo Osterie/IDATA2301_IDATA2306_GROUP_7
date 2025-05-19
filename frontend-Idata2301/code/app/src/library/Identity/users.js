@@ -1,4 +1,5 @@
 import { sendApiRequest } from "../requests.js";
+import { doLogout } from "./authentication.js";
 
 export async function getAllUsers() {
   return new Promise((resolve, reject) => {
@@ -42,6 +43,7 @@ export async function deleteSelf(userId) {
       `/deleteSelf/${userId}`,
       function (userResponse) {
         console.log("Success:", userResponse);
+        doLogout();
         resolve(userResponse);
       },
       function (errorText) {

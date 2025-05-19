@@ -68,7 +68,7 @@ const FlightCard = ({
   };
 
   const calculateDiscountedPrice = (price, discount) => {
-    return discount > 0 ? (price - (price * discount) / 100).toFixed(2) : price;
+    return discount > 0 ? (price - (price * discount) / 100).toFixed(0) : price;
   };
 
   const discountedPrice = calculateDiscountedPrice(price, discount);
@@ -84,7 +84,9 @@ const FlightCard = ({
           />
         )}
         <div className="flight-card-title">
-          <h2>{companyName} - {flightName}</h2>
+          <h2>
+            {companyName} - {flightName}
+          </h2>
         </div>
       </div>
 
@@ -93,11 +95,15 @@ const FlightCard = ({
       <div className="flight-card-flight-details">
         <div className="flight-card-departure">
           <p className="flight-card-location-label">Departure</p>
-          <p>{departureCity} ({departureCode})</p>
+          <p>
+            {departureCity} ({departureCode})
+          </p>
         </div>
         <div className="flight-card-arrival">
           <p className="flight-card-location-label">Arrival</p>
-          <p>{arrivalCity} ({arrivalCode})</p>
+          <p>
+            {arrivalCity} ({arrivalCode})
+          </p>
         </div>
       </div>
 
@@ -114,13 +120,27 @@ const FlightCard = ({
       )}
 
       <div className="flight-card-price-section">
-        <p className="flight-card-price">${discountedPrice} {priceCode}</p>
-        {discount > 0 && (
-          <p className="flight-card-discount">Discount: {discount}%</p>
+        {discount > 0 ? (
+          <>
+            <p
+              className="flight-card-original-price"
+              style={{ textDecoration: "line-through", color: "#888", margin: 0 }}
+            >
+              ${price} {priceCode}
+            </p>
+            <p className="flight-card-price" style={{ fontWeight: "bold", color: "#d32f2f" }}>
+              ${discountedPrice} {priceCode}
+            </p>
+            <p className="flight-card-discount">Discount: {discount}%</p>
+          </>
+        ) : (
+          <p className="flight-card-price">
+            ${price} {priceCode}
+          </p>
         )}
       </div>
-      
-      
+
+
       <button
         className="flight-detail-button"
         onClick={() => {
@@ -132,7 +152,7 @@ const FlightCard = ({
       >
         Details
       </button>
-    
+
       {purchasable && (
         <button className="flight-cart-button" onClick={handleAddToCart}>
           Add to cart
@@ -140,7 +160,9 @@ const FlightCard = ({
       )}
 
       <div
-        className={`flight-card-favorite-button ${isFavorite ? "favorited" : ""}`}
+        className={`flight-card-favorite-button ${
+          isFavorite ? "favorited" : ""
+        }`}
         onClick={() => onFavoriteToggle?.(flight.id, isFavorite)}
       >
         <div className="favorite-content">
@@ -149,25 +171,20 @@ const FlightCard = ({
             alt={isFavorite ? "Flight is favorited" : "Flight is not favorited"}
             className="favorite-icon"
           />
-          <div className="favorite-text">
+          {/* <div className="favorite-text">
             {isFavorite ? "Favorited" : "Not Favorited"}
-          </div>
+          </div> */}
         </div>
       </div>
 
-
-{actionButton && (
-  <button
-    className="flight-card-actions-button"
-    onClick={actionButton.props.onClick}
-  >
-    {actionButton.props.children}
-  </button>
-)}
-
-
-
-
+      {actionButton && (
+        <button
+          className="flight-card-actions-button"
+          onClick={actionButton.props.onClick}
+        >
+          {actionButton.props.children}
+        </button>
+      )}
 
       <p className="flight-card-provider">Provider: {provider}</p>
 
@@ -178,10 +195,7 @@ const FlightCard = ({
         >
           {isHidden ? "Show" : "Hide"}
         </button>
-
-        
       )}
-
     </div>
   );
 };

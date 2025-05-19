@@ -2,38 +2,30 @@ import React, { useEffect, useState } from "react";
 import "./flightDetailPage.css";
 import FlightDetailPageCard from "./FlightDetailPageCard";
 import { getCompanyImage } from "../../library/imageRequests";
+import { sendApiRequest } from "../../library/requests";
 import flightHeroImage from "../../resources/images/avel-chuklanov-Ou1eqo29Ums-unsplash.jpg";
 
-const FlightDetailPage = ({ flight, onAddToCart, onBuyNow }) => {
+const FlightDetailPage = ({ searchParams, flight, onAddToCart, onBuyNow }) => {
   const [companyImageUrl, setCompanyImageUrl] = useState(null);
+  const [providerAlternatives, setProviderAlternatives] = useState([]);
 
+  // Fetch company image
   useEffect(() => {
     const companyId = flight?.flightClassId?.flight?.company?.id;
 
     if (companyId) {
       getCompanyImage(companyId)
         .then((imageBlob) => {
-          console.log("Fetched image blob:", 
-            // imageBlob
-          );
-
-          if (imageBlob && imageBlob instanceof Blob) {
+          if (imageBlob instanceof Blob) {
             const imageUrl = URL.createObjectURL(imageBlob);
-            console.log("Generated image URL:", 
-              // imageUrl
-            );
             setCompanyImageUrl(imageUrl);
           } else {
-            console.warn("Fetched image is not a valid Blob:", 
-              // imageBlob
-            );
+            console.warn("Fetched image is not a valid Blob:", imageBlob);
             setCompanyImageUrl(null);
           }
         })
         .catch((error) => {
-          console.error("Error loading company image:", 
-            // error
-          );
+          console.error("Error loading company image:", error);
           setCompanyImageUrl(null);
         });
     } else {
@@ -41,7 +33,39 @@ const FlightDetailPage = ({ flight, onAddToCart, onBuyNow }) => {
     }
   }, [flight]);
 
+  // Fetch provider alternatives
+  useEffect(() => {
+    const getProviderAlternatives = async () => {
+      try {
+        const finalSearchParams = {
+          ...searchParams,
+          fromDate: flight?.scheduledFlight?.date,
+          toDate: flight?.scheduledFlight?.date,
+        };
 
+        await sendApiRequest(
+          "POST",
+          "/searchForFlights",
+          (fetchedData) => {
+            const filteredData = fetchedData.filter(
+              (newflight) => newflight.id !== flight.id
+            );
+            setProviderAlternatives(filteredData);
+          },
+          JSON.stringify(finalSearchParams),
+          (errorResponse) => {
+            console.error("Error: " + errorResponse);
+          }
+        );
+      } catch (error) {
+        console.error("Error searching for flights:", error);
+      }
+    };
+
+    if (flight) {
+      getProviderAlternatives();
+    }
+  }, [flight, searchParams]);
 
   return (
     <section>
@@ -60,6 +84,16 @@ const FlightDetailPage = ({ flight, onAddToCart, onBuyNow }) => {
 
       <article className="provider-alternative-parent">
         <h1>Provider alternatives</h1>
+        <div className="provider-alternative-container">
+          {providerAlternatives.map((flight) => (
+            <FlightDetailPageCard
+              key={flight.id}
+              flight={flight}
+              onAddToCart={onAddToCart}
+              onBuyNow={onBuyNow}
+            />
+          ))}
+        </div>
       </article>
     </section>
   );

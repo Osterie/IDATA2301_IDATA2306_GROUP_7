@@ -12,7 +12,7 @@
 
 .flight-detail-page {
   position: relative;
-  width: 99vw;
+  /* width: 99vw; */
   margin: 10px auto;
   padding: 2rem;
   border: 1px solid var(--contrast-border-color);
@@ -114,6 +114,10 @@ h1 {
   background-color: var(--box-color);
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
   font-family: sans-serif;
+}
+
+.provider-alternative-container{
+  overflow-y: scroll;
 }
 
 @media (max-width: 900px) {
