@@ -7,14 +7,15 @@ import favInactivePicture from "../../../resources/images/favinactive.png";
 
 const FlightCard = ({
   flight,
-  userIsAdmin,
-  onVisibilityChange,
+  userIsAdmin = false,
+  onVisibilityChange = null,
   purchasable = true,
-  purchaseDate,
-  setSelectedFlight,
-  setActivePage,
+  purchaseDate = null,
+  setSelectedFlight = null,
+  setActivePage = null,
   isFavorite,
-  onFavoriteToggle,
+  onFavoriteToggle = null,
+  actionButton = null,
 }) => {
   const {
     id,
@@ -118,7 +119,8 @@ const FlightCard = ({
           <p className="flight-card-discount">Discount: {discount}%</p>
         )}
       </div>
-
+      
+      
       <button
         className="flight-detail-button"
         onClick={() => {
@@ -130,7 +132,7 @@ const FlightCard = ({
       >
         Details
       </button>
-
+    
       {purchasable && (
         <button className="flight-cart-button" onClick={handleAddToCart}>
           Add to cart
@@ -153,7 +155,7 @@ const FlightCard = ({
         </div>
       </div>
 
-
+      {actionButton && actionButton}
 
 
       <p className="flight-card-provider">Provider: {provider}</p>
@@ -165,7 +167,10 @@ const FlightCard = ({
         >
           {isHidden ? "Show" : "Hide"}
         </button>
+
+        
       )}
+
     </div>
   );
 };

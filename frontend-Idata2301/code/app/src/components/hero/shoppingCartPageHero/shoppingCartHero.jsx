@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getShoppingCart, removeFromShoppingCart, clearShoppingCart } from "../../../utils/shoppingCartUtils";
+import FlightCard from "../../cards/searched-flights/FlightCard.jsx";
 import { getCookie } from "../../../library/tools";
 import { sendApiRequest } from "../../../library/requests";
-import Cookies from "js-cookie";
 
 
 import "./shoppingCartHero.css";
@@ -16,6 +16,7 @@ const ShoppingCartHero = ( {onNavClick} ) => {
   
   useEffect(() => {
     const cartFromStorage = getShoppingCart();
+    console.log("Cart from storage:", cartFromStorage);
     fetchFlights(cartFromStorage);
   }, []);
   
@@ -94,19 +95,25 @@ const handlePurchase = async () => {
           {flights.length > 0 ? (
             <>
               <ul>
+
                 {flights.map((flight) => {
                   const discountedPrice = calculateDiscountedPrice(flight.price, flight.discount);
                   return (
                     <li key={flight.id}>
-                      <strong>{flight.flightClassId.flight.name}</strong> <br />
-                      Departure: {flight.scheduledFlight.route.departureAirport.city} ({flight.scheduledFlight.route.departureAirport.airportCode}) <br />
-                      Arrival: {flight.scheduledFlight.route.arrivalAirport.city} ({flight.scheduledFlight.route.arrivalAirport.airportCode}) <br />
-                      Date: {flight.scheduledFlight.date} <br />
-                      Available Seats: {flight.flightClassId.availableSeats} <br />
-                      Price: {discountedPrice} {flight.currencyCode} {flight.discount > 0 && `(Discount: ${flight.discount}%)`}<br />
-                    <button onClick={() => handleRemoveFromCart(flight.id)}>
-                      Remove from Cart
-                    </button>
+                    <FlightCard
+                      key={flight.id}
+                      flight={flight}
+                      purchasable={false}
+                      actionButton={
+                      <button
+                        className="remove-cart-button"
+                        onClick={() => handleRemoveFromCart(flight.id)}
+                        >
+                        Remove
+                      </button>
+                      }
+                    />
+
                   </li>
                 )})}
               </ul>

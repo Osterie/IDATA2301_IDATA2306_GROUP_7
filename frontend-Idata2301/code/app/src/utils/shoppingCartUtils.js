@@ -8,7 +8,7 @@ export const getShoppingCart = () => {
   const flightIds = [];
 
   for (const key in localStorage) {
-    if (key.startsWith("flight_")) {
+    if (key.startsWith("flight_cart_") && key !== "flight_counter") {
       flightIds.push(localStorage.getItem(key));
     }
   }
@@ -16,13 +16,13 @@ export const getShoppingCart = () => {
   return flightIds;
 };
 
-// Adds a flight to the shopping cart
 export const addToShoppingCart = (flightId) => {
   const counterKey = "flight_counter";
   let counter = parseInt(localStorage.getItem(counterKey)) || 0;
 
-  // Store the flight ID
-  localStorage.setItem(`flight_${counter}`, flightId);
+  localStorage.setItem(`flight_cart_${counter}`, flightId);
+
+  localStorage.setItem(counterKey, counter + 1);
 };
 
 
@@ -33,7 +33,7 @@ export const removeFromShoppingCart = (flightId) => {
   // and find keys that match the flight ID
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
-    if (key.startsWith("flight_")) {
+    if (key.startsWith("flight_cart_")) {
       // Check if the stored value matches the flight ID
       const storedValue = localStorage.getItem(key);
       if (String(storedValue) === String(flightId)) {
@@ -53,7 +53,7 @@ export const clearShoppingCart = () => {
 
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
-    if (key.startsWith("flight_")) {
+    if (key.startsWith("flight_cart_")) {
       keysToRemove.push(key);
     }
   }

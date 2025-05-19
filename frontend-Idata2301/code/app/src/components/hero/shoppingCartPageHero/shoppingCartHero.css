@@ -1,10 +1,8 @@
 .shopping-cart-container {
-  color: rgb(0, 0, 0.5);
-  max-width: 90%;
-  margin: 0 auto;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 2rem;
-  border-radius: var(--box-border-radius);
+
+    border-radius: var(--box-border-radius);
+    padding: 20px;
+  
 }
 
 .shopping-cart-container ul {
