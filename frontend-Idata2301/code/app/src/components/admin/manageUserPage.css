@@ -1,9 +1,9 @@
+/* Box to display users */
 .user-card-container{ 
     display: flex; 
     flex-wrap: wrap; 
     gap: 1rem; 
 }
-
 
 .user-card{
     border: 1px solid #ccc;

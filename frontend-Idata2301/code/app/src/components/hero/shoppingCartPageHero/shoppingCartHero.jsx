@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getShoppingCart, removeFromShoppingCart, clearShoppingCart } from "../../../utils/shoppingCartUtils";
-import FlightCard from "../../cards/searched-flights/FlightCard.jsx";
+import FlightCard from "../../cards/searchedFlights/FlightCard.jsx";
 import { getCookie } from "../../../library/tools";
 import { sendApiRequest } from "../../../library/requests";
 

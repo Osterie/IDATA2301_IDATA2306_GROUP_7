@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./favoriteFlights.module.css";
 import { fetchFavoriteFlights } from "../../../library/favoritesAPI.js";
-import FlightCard from "../../cards/searched-flights/FlightCard.jsx";
+import FlightCard from "../../cards/searchedFlights/FlightCard.jsx";
 
 const FavoriteFlights = ({ user }) => {
   const [favorites, setFavorites] = useState([]);

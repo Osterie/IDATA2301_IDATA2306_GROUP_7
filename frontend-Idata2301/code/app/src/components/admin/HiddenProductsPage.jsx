@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { sendApiRequest } from "../../library/requests";
-import FlightCard from "../cards/searched-flights/FlightCard";
+import FlightCard from "../cards/searchedFlights/FlightCard";
 
 const HiddenProductsPage = () => {
   const [hiddenProducts, setHiddenProducts] = useState([]);

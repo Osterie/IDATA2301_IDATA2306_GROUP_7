@@ -1,3 +1,4 @@
+/* Admin page visible for only logged in admins */
 .admin-page {
   display: flex;
   justify-content: center;
@@ -51,6 +52,7 @@
   background-color: var(--call-to-action-highlight-color);
 }
 
+/* Resposive styling */
 @media (max-width: 900px) {
   .admin-card {
     padding: 2rem;

@@ -1,3 +1,4 @@
+/* Picture box for employees */
 .role-picture {
   display: flex;
   flex-direction: column;
@@ -21,6 +22,7 @@ figcaption {
   margin-top: 12px;
 }
 
+/* Image title */
 .title {
   font-size: 1.125rem;
   font-weight: 600;

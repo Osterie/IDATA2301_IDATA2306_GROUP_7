@@ -1,5 +1,5 @@
 import FilterSidebar from "../components/searchfilter/filter";
-import FlightsContainer from "../components/cards/searched-flights/FlightsContainer";
+import FlightsContainer from "../components/cards/searchedFlights/FlightsContainer";
 import DealsPageHero from "../components/hero/dealsPageHero/DealsPageHero";
 
 function DealsPage({setFlights, setActivePage, searchParams, setSearchParams, flights, user, setSelectedFlight}) {

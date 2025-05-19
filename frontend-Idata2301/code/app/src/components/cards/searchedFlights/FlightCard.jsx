@@ -87,7 +87,7 @@ const FlightCard = ({
         )}
         <div className="flight-card-title">
           <h2>
-            {companyName} - {flightName}
+            {companyName} - <abbr>{flightName}</abbr>
           </h2>
         </div>
       </div>

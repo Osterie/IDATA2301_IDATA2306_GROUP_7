@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import styles from "./purchases.module.css";
 import { sendApiRequest } from "../../../library/requests.js";
-import FlightCard from "../../cards/searched-flights/FlightCard.jsx";
+import FlightCard from "../../cards/searchedFlights/FlightCard.jsx";
 
 
 
