@@ -1,62 +1,47 @@
-import Cookies from "js-cookie";
-import { getCookie, setCookie } from "../library/tools";
+const STORAGE_KEY = "shopping_cart";
 
-const COOKIE_NAME = "shoppingCart";
-
-// Get the shopping cart from local storage
+// Get the shopping cart object from localStorage
 export const getShoppingCart = () => {
-  const flightIds = [];
-
-  for (const key in localStorage) {
-    if (key.startsWith("flight_cart_") && key !== "flight_counter") {
-      flightIds.push(localStorage.getItem(key));
-    }
-  }
-
-  return flightIds;
+  const raw = localStorage.getItem(STORAGE_KEY);
+  return raw ? JSON.parse(raw) : {};
 };
 
+// Get cart as an array of flight IDs
+export const getShoppingCartAsArray = () => {
+  const cart = getShoppingCart();
+  return Object.entries(cart).flatMap(([flightId, count]) =>
+    Array(count).fill(flightId)
+  );
+};
+
+// Add a flight to the shopping cart (increment quantity)
 export const addToShoppingCart = (flightId) => {
-  const counterKey = "flight_counter";
-  let counter = parseInt(localStorage.getItem(counterKey)) || 0;
-
-  localStorage.setItem(`flight_cart_${counter}`, flightId);
-
-  localStorage.setItem(counterKey, counter + 1);
+  const cart = getShoppingCart();
+  cart[flightId] = (cart[flightId] || 0) + 1;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
 };
 
-
+// Remove one instance of a flight from the cart
 export const removeFromShoppingCart = (flightId) => {
-  const keysToRemove = [];
+  const cart = getShoppingCart();
 
-  // Iterate through localStorage keys
-  // and find keys that match the flight ID
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (key.startsWith("flight_cart_")) {
-      // Check if the stored value matches the flight ID
-      const storedValue = localStorage.getItem(key);
-      if (String(storedValue) === String(flightId)) {
-        // If it matches, add the key to the keysToRemove array
-        keysToRemove.push(key);
-      }
+  if (cart[flightId]) {
+    cart[flightId] -= 1;
+    if (cart[flightId] <= 0) {
+      delete cart[flightId];
     }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
   }
-  // Remove the matching keys from localStorage
-  keysToRemove.forEach((key) => {
-    localStorage.removeItem(key);
-  });
 };
 
-export const clearShoppingCart = () => {
-  const keysToRemove = [];
+// Fully remove a flight from the cart
+export const deleteFlightFromShoppingCart = (flightId) => {
+  const cart = getShoppingCart();
+  delete cart[flightId];
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+};
 
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (key.startsWith("flight_cart_")) {
-      keysToRemove.push(key);
-    }
-  }
-  keysToRemove.forEach((key) => localStorage.removeItem(key));
-  localStorage.removeItem("flight_counter");
+// Clear all cart data
+export const clearShoppingCart = () => {
+  localStorage.removeItem(STORAGE_KEY);
 };

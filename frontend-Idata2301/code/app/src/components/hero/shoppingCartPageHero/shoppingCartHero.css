@@ -1,16 +1,24 @@
 /* shoppingCart.css */
 
 .shopping-cart-container {
-  max-width: 900px;
-  margin: 0 auto;
+  display: inline-block; /* Shrinks to fit content */
   padding: 40px 20px;
   background-color: #fdfdfd;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+/* Optional: if you're worried about overflowing on small screens */
+@media (max-width: 768px) {
+  .shopping-cart-container {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 .cart {
-  max-height: 70vh;         /* Scroll if too many flights */
+  max-height: 70vh;
   overflow-y: auto;
   padding-right: 10px;
 }
@@ -23,6 +31,9 @@
 
 .cart li {
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* Specific style for the purchase button only */
@@ -47,4 +58,57 @@
 .purchase-button:disabled {
   background-color: #bdc3c7;
   cursor: not-allowed;
+}
+
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quantity-controls button {
+  padding: 4px 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.quantity-controls-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #c62828;
+  color: white;
+  border-radius: 8px;
+}
+
+.quantity-controls-wrapper button {
+  background: white;
+  color: black;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 0.25rem 0;
+  border-radius: 4px;
+}
+
+.quantity-controls-wrapper span {
+  font-weight: bold;
+  margin: 0.25rem 0;
+}
+
+.total-price {
+  margin-top: 20px;
+  font-size: 18px;
+  text-align: center;
 }

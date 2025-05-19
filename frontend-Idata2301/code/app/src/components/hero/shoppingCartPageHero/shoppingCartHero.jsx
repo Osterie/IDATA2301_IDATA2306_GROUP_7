@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getShoppingCart, removeFromShoppingCart, clearShoppingCart } from "../../../utils/shoppingCartUtils";
+import { removeFromShoppingCart, clearShoppingCart, addToShoppingCart, getShoppingCartAsArray } from "../../../utils/shoppingCartUtils";
 import FlightCard from "../../cards/searchedFlights/FlightCard.jsx";
 import { getCookie } from "../../../library/tools";
 import { sendApiRequest } from "../../../library/requests";
+import { getPreferredCurrency } from "../../../utils/cookieUtils";
+import { convertCurrency } from "../../../utils/currencyUtils";
 
 
 import "./shoppingCartHero.css";
@@ -15,7 +17,7 @@ const ShoppingCartHero = ( {onNavClick} ) => {
 
   
   useEffect(() => {
-    const cartFromStorage = getShoppingCart();
+    const cartFromStorage = getShoppingCartAsArray();
     console.log("Cart from storage:", cartFromStorage);
     fetchFlights(cartFromStorage);
   }, []);
@@ -26,41 +28,55 @@ const ShoppingCartHero = ( {onNavClick} ) => {
     // Small delay ensures sync update completes (safety measure)
     await new Promise((resolve) => setTimeout(resolve, 0));
   
-    const updatedCart = getShoppingCart();
+    const updatedCart = getShoppingCartAsArray();
     console.log("Updated cart:", updatedCart);
     await fetchFlights(updatedCart);
   };
   
 
   const fetchFlights = async (cartIds = []) => {
-    if (!Array.isArray(cartIds) || cartIds.length === 0) {
-      setFlights([]);
-      return;
-    }
-  
-    await sendApiRequest(
-      "POST",
-      "/flights/getFlightByIds",
-      (response) => {
-        setFlights(response);
-      },
-      JSON.stringify(cartIds),
-      (errorResponse) => {
-        console.log("Error: " + errorResponse);
-      }
-    );
-  };
-  
+  if (!Array.isArray(cartIds) || cartIds.length === 0) {
+    setFlights([]);
+    return;
+  }
 
-  
+  // Count how many times each ID appears
+  const idCountMap = cartIds.reduce((map, id) => {
+    map[id] = (map[id] || 0) + 1;
+    return map;
+  }, {});
+
+  const uniqueIds = Object.keys(idCountMap);
+  console.log("Fetching flights for IDs:", uniqueIds);
+
+  await sendApiRequest(
+    "POST",
+    "/flights/getFlightByIds",
+    (response) => {
+      const enriched = response.map((flight) => ({
+        ...flight,
+        quantity: idCountMap[flight.id] || 1,
+      }));
+
+      setFlights(enriched);
+    },
+    JSON.stringify(uniqueIds),
+    (errorResponse) => {
+      console.log("Error: " + errorResponse);
+    }
+  );
+};
+
+
   const [isPurchasing, setIsPurchasing] = useState(false);
 
 const handlePurchase = async () => {
   setIsPurchasing(true);
   try {
-    const data = flights.map((flight) => ({
+    const cartIds = getShoppingCartAsArray();
+    const data = cartIds.map((flightId) => ({
       userId: userId,
-      priceId: flight.id
+      priceId: flightId
     }));
 
     await sendApiRequest(
@@ -81,6 +97,26 @@ const handlePurchase = async () => {
   }
 };
 
+const incrementFlight = (flightId) => {
+  addToShoppingCart(flightId);
+  fetchFlights(getShoppingCartAsArray());
+};
+
+const decrementFlight = (flightId) => {
+  removeFromShoppingCart(flightId);
+  fetchFlights(getShoppingCartAsArray());
+};
+
+const getTotalPrice = () => {
+  return flights.reduce((sum, flight) => {
+    const quantity = flight.quantity || 1;
+    const convertedPrice = convertCurrency(flight.price, flight.currencyCode, getPreferredCurrency())
+    const discountedPrice = calculateDiscountedPrice(convertedPrice, flight.discount);
+    return sum + quantity * parseFloat(discountedPrice);
+  }, 0).toFixed(2);
+};
+
+
   const calculateDiscountedPrice = (price, discount) => {
     return discount > 0 ? (price - (price * discount) / 100).toFixed(2) : price;
   };
@@ -95,27 +131,35 @@ const handlePurchase = async () => {
           {flights.length > 0 ? (
             <>
               <ul>
+  {flights.map((flight) => {
+    return (
+      <li key={flight.id} className="cart">
+        {/* Flight Card on the left */}
+        <FlightCard
+          key={flight.id}
+          flight={flight}
+          purchasable={false}
+          actionButton={
+            <button onClick={() => handleRemoveFromCart(flight.id)}>
+              Remove
+            </button>
+          }
+        />
 
-                {flights.map((flight) => {
-                  const discountedPrice = calculateDiscountedPrice(flight.price, flight.discount);
-                  return (
-                    <li key={flight.id}>
-                    <FlightCard
-                      key={flight.id}
-                      flight={flight}
-                      purchasable={false}
-                      actionButton={
-                      <button
-                        onClick={() => handleRemoveFromCart(flight.id)}
-                        >
-                        Remove
-                      </button>
-                      }
-                    />
+        {/* Quantity controls on the right */}
+        <div className="quantity-controls-wrapper">
+          <button onClick={() => incrementFlight(flight.id)}>+</button>
+          <span>{flight.quantity}</span>
+          <button onClick={() => decrementFlight(flight.id)}>-</button>
+        </div>
+      </li>
+    );
+  })}
+</ul>
+<div className="total-price">
+  <strong>Total:</strong> {getTotalPrice()} {getPreferredCurrency()}
+</div>
 
-                  </li>
-                )})}
-              </ul>
               {flights.length > 0 && (
                 <button
                   className="purchase-button"
