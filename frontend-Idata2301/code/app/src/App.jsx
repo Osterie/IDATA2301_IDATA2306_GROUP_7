@@ -17,6 +17,7 @@ import ManageUserPage from "./components/admin/ManageUserPage";
 import HiddenProductsPage from "./components/admin/HiddenProductsPage";
 import { getAuthenticatedUser} from "./library/Identity/authentication"; // adjust path as needed
 import FlightDetailPage from "./components/flightDetailPage/FlightDetailPage";
+import { saveConvertionTableToLocalStorage } from "./utils/currencyUtils";
 
 // Cookies
 import {
@@ -48,6 +49,7 @@ function App() {
   useEffect(() => {
     const loggedInUser = getAuthenticatedUser();
     setUser(loggedInUser);
+    saveConvertionTableToLocalStorage();
   }, []);
 
   // // Check JWT on load
