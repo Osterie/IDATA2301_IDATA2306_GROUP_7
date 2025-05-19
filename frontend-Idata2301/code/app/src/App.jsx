@@ -14,6 +14,7 @@ import Footer from "./components/footer/Footer";
 import Navbar from "./components/header/Navbar";
 import AdminPage from "./components/admin/AdminPage";
 import ManageUserPage from "./components/admin/ManageUserPage";
+import HiddenProductsPage from "./components/admin/HiddenProductsPage";
 import { getAuthenticatedUser} from "./library/Identity/authentication"; // adjust path as needed
 import FlightDetailPage from "./components/flightDetailPage/FlightDetailPage";
 
@@ -114,6 +115,7 @@ function App() {
         {activePage === "login" && <LogInPageHero onNavClick={handleNavClick} />}
         {activePage === "admin" && <AdminPage setActivePage={setActivePage} />}
         {activePage === "manage-users" && <ManageUserPage />}
+        {activePage === "hidden-products" && <HiddenProductsPage />}
         {activePage === "create-account" && <CreateAccount />}
         {activePage === "shoppingCart" && (<ShoppingCartHero onNavClick={handleNavClick} />)}
       </main>

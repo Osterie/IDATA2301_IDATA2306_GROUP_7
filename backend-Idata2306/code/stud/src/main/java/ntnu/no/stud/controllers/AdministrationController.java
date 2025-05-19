@@ -28,6 +28,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -158,5 +159,12 @@ public class AdministrationController {
         priceRepository.save(price); // Save the product
 
         return ResponseEntity.ok("Product visibility updated successfully: " + model.getPriceId());
+    }
+
+    @GetMapping("/api/getHiddenProducts")
+    public ResponseEntity<List<Price>> GetHiddenProducts() {
+        // Fetch all hidden products from the database
+        List<Price> hiddenProducts = priceRepository.findByIsHidden(true);
+        return ResponseEntity.ok(hiddenProducts);
     }
 }

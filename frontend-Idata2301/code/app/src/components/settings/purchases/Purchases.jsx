@@ -43,7 +43,7 @@ const PurchasedFlights = ({user}) => {
   }, []);
 
   return (
-    <div className={styles.purchasedFlights}>
+    <div className={styles.purchasedFlights}> // TODO change
       <h2>Purchased Flights</h2>
       <p>Here is a list of flights you have purchased.</p>
         

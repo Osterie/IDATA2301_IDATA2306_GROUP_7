@@ -46,10 +46,6 @@ public class PurchaseController {
     public ResponseEntity<?> getUserPurchases(@RequestParam Long userId) {
         logger.info("Fetching purchases for user with ID: {}", userId);
         List<Purchase> purchases = purchaseRepository.findAllByUserId(userId);
-        
-        if (purchases == null || purchases.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No purchases found for user " + userId);
-        }
     
         return ResponseEntity.ok(purchases);
     }

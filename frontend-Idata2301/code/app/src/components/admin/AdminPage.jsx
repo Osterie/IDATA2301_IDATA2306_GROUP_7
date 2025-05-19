@@ -23,9 +23,11 @@ const AdminPage = ({ setActivePage }) => {
   return (
     <main>
       <h1>Admin Page</h1>
-      <p>This is the admin page. Only accessible to users with admin rights.</p>
       <button onClick={() => setActivePage("manage-users")}>
         Manage Users
+      </button>
+      <button onClick={() => setActivePage("hidden-products")}>
+        View hidden products
       </button>
     </main>
   );

@@ -162,7 +162,6 @@ const ProductContainer = ({
 <section className="product-container">
     {products.map((product, index) => (
       <ProductCard
-        key={index}
         description={product.description || "No description available"}
         img={flightHeroImage}
         date={product.date || "No date available"}
