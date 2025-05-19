@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./filter.css";
 import DualRangeSlider from "./slider";
+import { convertCurrency } from "../../utils/currencyUtils";
+import { getPreferredCurrency } from "../../utils/cookieUtils";
 
 function findMinPrice(flights) {
   return Math.min(...flights.map((flight) => flight.price));
@@ -30,15 +32,24 @@ const filterFlights = (flightsToFilter, min, max, companies) => {
   return updatedFlights;
 };
 
+const calculateDiscountedPrice = (price, discount) => {
+  return discount > 0 ? (price - (price * discount) / 100).toFixed(0) : price;
+};
+
+const calculateFinalPriceInUserCurrency = (price, discount, currencyCode) => {
+  const discountedPrice = calculateDiscountedPrice(price, discount);
+  return convertCurrency(discountedPrice, currencyCode, getPreferredCurrency());
+};
+
 const sortFlights = (flightsToSort, option) => {
   const sorted = [...flightsToSort];
 
   switch (option) {
     case "cheap":
-      sorted.sort((a, b) => a.price - b.price);
+      sorted.sort((a, b) => calculateFinalPriceInUserCurrency(a.price, a.discount, a.currencyCode) - calculateFinalPriceInUserCurrency(b.price, b.discount, b.currencyCode));
       break;
     case "expensive":
-      sorted.sort((a, b) => b.price - a.price);
+      sorted.sort((a, b) => calculateFinalPriceInUserCurrency(b.price, b.discount, b.currencyCode) - calculateFinalPriceInUserCurrency(a.price, a.discount, a.currencyCode));
       break;
     case "soon":
       sorted.sort(
