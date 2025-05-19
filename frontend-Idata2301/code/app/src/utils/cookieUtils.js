@@ -36,7 +36,7 @@ export const getLastSearch = () => {
 };
 
 // === Location (IP-based) ===
-export const setCountryFromIP = async () => {
+export const setUserInformationFromIp = async () => {
 
   if (Cookies.get("country")) return; // Country already set
 

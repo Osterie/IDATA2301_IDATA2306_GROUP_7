@@ -24,7 +24,7 @@ import {
   hasConsent,
   setLastSearch,
   getLastSearch,
-  setCountryFromIP,
+  setUserInformationFromIp,
 } from "./utils/cookieUtils";
 import CookieConsent from "react-cookie-consent";
 
@@ -65,7 +65,7 @@ function App() {
   // If no consent: Ask
   useEffect(() => {
     if (hasConsent()) {
-      setCountryFromIP(); // Automatically sets country, airport, currency
+      setUserInformationFromIp(); // Automatically sets country, airport, currency
       const last = getLastSearch();
       if (last) console.log("Restoring search:", last);
     }
@@ -132,6 +132,9 @@ function App() {
         style={{ background: "#2B373B" }}
         buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
         expires={30}
+        onAccept={() => {
+          setUserInformationFromIp();
+        }}
       >
         We use cookies to improve your experience and remember your preferences. By using this site, you agree to our use of cookies.
       </CookieConsent>
