@@ -17,12 +17,17 @@ Sprint stenographer: Adrian
 
 ## **Sprint Summary**
 
-- **Total Planned Work:**
-
 - **Completed Work:**
-
+- Endpoints for purchasing
+- Endpoint for getting hidden flight
+- Endpoint for provider alternatives
 
 - **Not Completed:**
+- Try using docker
+- Https connection
+- Comment
+- Further error loggers
+- README
 
 
 ---
@@ -31,13 +36,16 @@ Sprint stenographer: Adrian
 
 | Story/Task                         | Assignee | Status        | Story Points | Comments |
 | ---------------------------------- | -------- | ------------- | ------------ | -------- |
-| Endpoints for purchasing           | Daniel   | In progress   | [5]          |          |
+| Endpoints for purchasing           | Daniel   | Completed     | [5]          |          |
 | Endpoint for getting hidden flight | Adrian   | Completed     | [4]          |          |
+| Endpoint for provider alternatives | Adrian   | Completed     | [5]          |          |
 | Try using docker                   | Everyone | Not Completed | [3]          |          |
 | Https connection                   | Everyone | Not completed | [6]          |          |
 | Comment                            | Everyone | Not completed | [8]          |          |
 | Further error loggers              | Everyone | Not completed | [6]          |          |
 | README                             | Everyone | Not completed | [5]          |          |
-| Endpoint for provider alternatives | Everyone | Not completed | [5]          |          |
 
 ---
+
+## **Retrospective**
+Completed all necessary functionality for the sprint. Now focusing on final touches.
