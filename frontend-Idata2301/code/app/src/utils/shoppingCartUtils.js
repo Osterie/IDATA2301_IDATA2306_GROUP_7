@@ -35,7 +35,7 @@ export const removeFromShoppingCart = (flightId) => {
 };
 
 // Fully remove a flight from the cart
-export const deleteFlightFromShoppingCart = (flightId) => {
+export const deleteFromShoppingCart = (flightId) => {
   const cart = getShoppingCart();
   delete cart[flightId];
   localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));

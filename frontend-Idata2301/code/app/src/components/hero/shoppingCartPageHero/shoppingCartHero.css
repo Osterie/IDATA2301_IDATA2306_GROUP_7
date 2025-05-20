@@ -1,6 +1,7 @@
 /* shoppingCart.css */
 
 .shopping-cart-container {
+  width: 100vh;
   display: inline-block; /* Shrinks to fit content */
   padding: 40px 20px;
   background-color: #fdfdfd;
@@ -12,7 +13,7 @@
 /* Optional: if you're worried about overflowing on small screens */
 @media (max-width: 768px) {
   .shopping-cart-container {
-    width: 100%;
+    width: 100vh;;
     box-sizing: border-box;
   }
 }
