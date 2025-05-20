@@ -133,7 +133,6 @@ const ManageUserPage = ({ setActivePage }) => {
 
   return (
     <main style={{ padding: "2rem" }}>
-      <button onClick={() => setActivePage("admin")} className="back-button">← Back to admin page</button>
       <h1 className="manage-user-header">Manage Users</h1>
       <p>This is the user management page for admins.</p>
 

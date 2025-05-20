@@ -63,3 +63,29 @@ body {
 main {
   min-height: 100vh;
 }
+
+/* Back button */
+.back-button {
+  position: absolute;
+  top: calc(var(--navbar-height) + 1rem); /* Adds spacing below navbar */
+  left: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--call-to-action-color);
+  border: none;
+  border-radius: var(--button-border-radius);
+  color: var(--text-color);
+  font-size: var(--text-desktop-font-size);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.back-button:hover {
+  background-color: var(--call-to-action-highlight-color);
+  transform: translateY(-1px);
+}

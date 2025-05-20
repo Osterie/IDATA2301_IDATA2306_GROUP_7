@@ -100,7 +100,7 @@ function App() {
         )}
         {/* Details page */}
         {activePage === "flight-details" && selectedFlight && (
-          <FlightDetailPage searchParams={searchParams} flight={selectedFlight} />
+          <FlightDetailPage searchParams={searchParams} flight={selectedFlight} setActivePage={setActivePage} />
         )}
         {/* About us information page */}
         {activePage === "about" && (
