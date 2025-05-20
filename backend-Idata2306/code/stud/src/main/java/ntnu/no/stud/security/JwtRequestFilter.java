@@ -41,9 +41,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
       throws ServletException, IOException {
   
     String jwtToken = getJwtToken(request);
-    if (jwtToken == null) {
-      logger.warn("No JWT token found in Authorization header");
-    }
   
     String username = jwtToken != null ? getUsernameFrom(jwtToken) : null;
   

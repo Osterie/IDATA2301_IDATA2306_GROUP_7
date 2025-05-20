@@ -76,6 +76,8 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
     const handleSubmit = async (e) => {
         e.preventDefault();
         
+        document.body.style.cursor = 'wait'; // Show wait cursor
+
         try {
             await sendApiRequest(
                 "POST", "/searchForFlights",
@@ -94,6 +96,9 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
 
         } catch (error) {
             console.error('Error searching for flights:', error);
+        }
+        finally {
+            document.body.style.cursor = 'default'; // Reset cursor
         }
     };
 

@@ -12,7 +12,6 @@ export function getAuthenticatedUser() {
   let user = null;
 
   if (!checkJwtOnLoad()) {
-    console.log("JWT expired, user not authenticated");
     return null;
   }
 
@@ -30,7 +29,6 @@ export function getAuthenticatedUser() {
 
   if (!user) {
     console.log("User not authenticated");
-    console.log(username)
     console.log(commaSeparatedRoles)
   }
   return user;
@@ -159,7 +157,6 @@ export function deleteAuthorizationCookies() {
   deleteCookie("current_username");
   deleteCookie("current_user_roles");
   deleteCookie("current_email");
-  console.log("Deleted authorization cookies");
 }
 
 function isJwtExpired(jwt) {
