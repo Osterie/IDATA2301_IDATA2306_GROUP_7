@@ -1,6 +1,6 @@
 import MainPageHero from "../components/hero/mainPageHero/MainPageHero";
 import ProductCardContainer from "../components/cards/frontPageCards/ProductCardContainer";
-import ProductCardHeader from "../components/cards/frontPageCards/ProductCard";
+import ProductCardHeader from "../components/cards/frontPageCards/ProductCardHeader";
 
 function HomePage({setFlights, setActivePage, searchParams, setSearchParams}) {
 
