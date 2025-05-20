@@ -3,7 +3,8 @@ package ntnu.no.stud.entities;
 import jakarta.persistence.*;
 
 /**
- * Represents a flight with basic identifying information such as name and company.
+ * Represents a flight with basic identifying information such as name and
+ * company.
  * This entity maps to the "flight" table in the database.
  */
 @Entity
@@ -32,12 +33,13 @@ public class Flight {
     @JoinColumn(name = "company_id", referencedColumnName = "id")
     private FlightCompany company;
 
-    public Flight() { }
+    public Flight() {
+    }
 
     /**
      * Constructs a Flight with the specified name and company.
      *
-     * @param name the name of the flight.
+     * @param name    the name of the flight.
      * @param company the company operating the flight.
      */
     public Flight(String name, FlightCompany company) {

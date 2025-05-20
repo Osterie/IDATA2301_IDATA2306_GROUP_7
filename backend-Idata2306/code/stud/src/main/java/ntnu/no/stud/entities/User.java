@@ -71,7 +71,7 @@ public class User {
      *
      * @param username the user's username
      * @param password the user's password
-     * @param email the user's email
+     * @param email    the user's email
      */
     public User(String username, String password, String email) {
         this.username = username;
@@ -79,43 +79,95 @@ public class User {
         this.email = email;
     }
 
-    // Getters and Setters
+    /**
+     * Constructs a new User with the given username, password, email, and roles.
+     *
+     * @param username the user's username
+     * @param password the user's password
+     * @param email    the user's email
+     * @param roles    the user's roles
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets the unique ID of the user.
+     *
+     * @param id the user ID to set
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Returns the username of the user.
+     *
+     * @return the user's username
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Sets the username of the user.
+     *
+     * @param username the username to set
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Returns the password of the user.
+     *
+     * @return the user's password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Sets the password of the user.
+     *
+     * @param password the password to set
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * Returns the email address of the user.
+     *
+     * @return the user's email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Sets the email address of the user.
+     *
+     * @param email the email to set
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Returns the roles assigned to the user.
+     *
+     * @return a set of {@link UserRole} entities
+     */
     public Set<UserRole> getRoles() {
         return roles;
     }
 
+    /**
+     * Sets the roles assigned to the user.
+     *
+     * @param roles a set of {@link UserRole} entities
+     */
     public void setRoles(Set<UserRole> roles) {
         this.roles = roles;
     }
@@ -140,10 +192,20 @@ public class User {
         role.setUser(null); // Remove the user from the UserRole object
     }
 
+    /**
+     * Returns whether the user is active.
+     *
+     * @return true if the user is active, false otherwise
+     */
     public boolean isActive() {
         return active;
     }
 
+    /**
+     * Sets the active status of the user.
+     *
+     * @param active true to set the user as active, false otherwise
+     */
     public void setActive(boolean active) {
         this.active = active;
     }

@@ -10,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
 /**
  * Contains authentication information, needed by UserDetailsService.
  */
@@ -36,6 +35,11 @@ public class AccessUserDetails implements UserDetails {
     this.convertRoles(user.getRoles());
   }
 
+  /**
+   * Convert roles to authorities.
+   * 
+   * @param roles The roles to convert to authorities
+   */
   private void convertRoles(Set<UserRole> roles) {
     authorities.clear();
     for (UserRole role : roles) {
@@ -43,44 +47,89 @@ public class AccessUserDetails implements UserDetails {
     }
   }
 
+  /**
+   * Get the authorities of the user.
+   * 
+   * @return The authorities of the user
+   */
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return authorities;
   }
 
+  /**
+   * Get the ID of the user.
+   * 
+   * @return The ID of the user
+   */
   public int getId() {
     return id;
   }
 
+  /**
+   * Get the password of the user.
+   * 
+   * @return The password of the user
+   */
   @Override
   public String getPassword() {
     return password;
   }
 
+  /**
+   * Get the username of the user.
+   * 
+   * @return The username of the user
+   */
   @Override
   public String getUsername() {
     return username;
   }
 
+  /**
+   * Get the email of the user.
+   * 
+   * @return The email of the user
+   */
   public String getEmail() {
     return email;
   }
 
+  /**
+   * Get the active status of the user.
+   * 
+   * @return The active status of the user
+   */
   @Override
   public boolean isAccountNonExpired() {
     return isActive;
   }
 
+  /**
+   * Get the active status of the user.
+   * 
+   * @return The active status of the user
+   */
   @Override
   public boolean isAccountNonLocked() {
     return isActive;
   }
 
+  /**
+   * Get the active status of the user.
+   * 
+   * @return The active status of the user
+   */
   @Override
   public boolean isCredentialsNonExpired() {
     return isActive;
   }
 
+  /**
+   * Get the active status of the user.
+   * 
+   * @return The active status of the user
+   */
   @Override
   public boolean isEnabled() {
     return true;

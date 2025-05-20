@@ -19,7 +19,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 /**
  * Creates AuthenticationManager - set up authentication type.
- * The @EnableMethodSecurity is needed so that each endpoint can specify which role it requires
+ * The @EnableMethodSecurity is needed so that each endpoint can specify which
+ * role it requires
  */
 @Configuration
 @EnableMethodSecurity
@@ -33,7 +34,8 @@ public class SecurityConfiguration {
   private JwtRequestFilter jwtRequestFilter;
 
   /**
-   * This method will be called automatically by the framework to find the authentication to use.
+   * This method will be called automatically by the framework to find the
+   * authentication to use.
    * Here we tell that we want to load users from a database
    *
    * @param auth Authentication builder
@@ -45,7 +47,8 @@ public class SecurityConfiguration {
   }
 
   /**
-   * This method will be called automatically by the framework to find the authentication to use.
+   * This method will be called automatically by the framework to find the
+   * authentication to use.
    *
    * @param http HttpSecurity setting builder
    * @throws Exception When security configuration fails
@@ -55,28 +58,29 @@ public class SecurityConfiguration {
     // Set up the authorization requests, starting from most restrictive at the top,
     // to least restrictive on the bottom
     http
-        // Disable CSRF and CORS checks. Without this it will be hard to make automated tests.
+        // Disable CSRF and CORS checks. Without this it will be hard to make automated
+        // tests.
         .csrf(AbstractHttpConfigurer::disable)
         .cors(AbstractHttpConfigurer::disable)
         // Allow access to Swagger UI and related endpoints
         .authorizeHttpRequests((auth) -> auth
-        .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll())  // Allow Swagger UI and docs
-        
+            .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()) // Allow Swagger UI
+                                                                                                   // and docs
+
         // Authentication and signup is accessible for everyone
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/authenticate").permitAll())
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/signup").permitAll())
         // searchForFlights are also available to everyone
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/searchForFlights").permitAll())
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/getSearchTerms").permitAll())
-        //flight methods are also available to everyone
+        // flight methods are also available to everyone
         .authorizeHttpRequests((auth) -> auth.requestMatchers("/api/flights/**").permitAll())
         // Allow HTTP OPTIONS requests - CORS pre-flight requests
         .authorizeHttpRequests((auth) -> auth.requestMatchers(HttpMethod.OPTIONS).permitAll())
         // Any other request will be authenticated with a stateless policy
         .authorizeHttpRequests((auth) -> auth.anyRequest().authenticated())
         // Enable stateless session policy
-        .sessionManagement((session) ->
-            session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         // Enable our JWT authentication filter
         .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 

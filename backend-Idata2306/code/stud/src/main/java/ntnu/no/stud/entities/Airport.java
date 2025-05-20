@@ -9,7 +9,8 @@ import jakarta.persistence.Table;
 
 /**
  * Represents an airport entity in the database.
- * Each airport has a unique ID, a 3-letter airport code, and an associated city.
+ * Each airport has a unique ID, a 3-letter airport code, and an associated
+ * city.
  */
 @Entity
 @Table(name = "airport")
@@ -35,13 +36,14 @@ public class Airport {
     @Column(name = "city", nullable = false)
     private String city;
 
-    public Airport() { }
+    public Airport() {
+    }
 
     /**
      * Constructs an Airport with the given code and city.
      *
      * @param airportCode The 3-letter airport code.
-     * @param city The city where the airport is located.
+     * @param city        The city where the airport is located.
      */
     public Airport(String airportCode, String city) {
         this.airportCode = airportCode;

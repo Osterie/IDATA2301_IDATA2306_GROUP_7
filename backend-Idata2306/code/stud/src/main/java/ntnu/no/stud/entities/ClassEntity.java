@@ -33,7 +33,8 @@ public class ClassEntity {
     /**
      * Default constructor required by JPA.
      */
-    public ClassEntity() { }
+    public ClassEntity() {
+    }
 
     /**
      * Constructs a new ClassEntity with the specified name.
@@ -80,4 +81,3 @@ public class ClassEntity {
         this.name = name;
     }
 }
-

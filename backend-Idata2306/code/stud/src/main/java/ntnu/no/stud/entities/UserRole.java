@@ -13,7 +13,8 @@ import jakarta.persistence.Table;
 
 /**
  * Represents a role assigned to a user.
- * Each role links a user to a role name (e.g., "ADMIN", "USER") and is stored in the "user_roles" table.
+ * Each role links a user to a role name (e.g., "ADMIN", "USER") and is stored
+ * in the "user_roles" table.
  */
 @Entity
 @Table(name = "user_roles")
@@ -59,9 +60,6 @@ public class UserRole {
         this.user = user;
         this.role = role;
     }
-
-    
-    // Getters and setters
 
     /**
      * Returns the unique ID of this user role entry.
