@@ -6,36 +6,10 @@ import { sendApiRequest } from "../../library/requests";
 import flightHeroImage from "../../resources/images/avel-chuklanov-Ou1eqo29Ums-unsplash.jpg";
 
 const FlightDetailPage = ({ searchParams, flight, setActivePage}) => {
-  const [companyImageUrl, setCompanyImageUrl] = useState(null);
   const [providerAlternatives, setProviderAlternatives] = useState([]);
 
-  // Fetch company image
-  useEffect(() => {
-    const companyId = flight?.flightClassId?.flight?.company?.id;
+  const companyImageUrl = flight.scheduledFlight.flight.company.imageUrl;
 
-    if (companyId) {
-      getCompanyImage(companyId)
-        .then((imageBlob) => {
-          if (imageBlob instanceof Blob) {
-            const imageUrl = URL.createObjectURL(imageBlob);
-            setCompanyImageUrl(imageUrl);
-          } else {
-            console.warn("Fetched image is not a valid Blob:", 
-              // imageBlob
-            );
-            setCompanyImageUrl(null);
-          }
-        })
-        .catch((error) => {
-          console.error("Error loading company image:", 
-            // error
-          );
-          setCompanyImageUrl(null);
-        });
-    } else {
-      console.warn("No company ID available to fetch image.");
-    }
-  }, [flight]);
 
   // Fetch provider alternatives
   useEffect(() => {
