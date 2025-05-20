@@ -1,26 +1,32 @@
+.manage-user-header {
+  font-size: var(--h1-desktop-font-size);
+  margin-top: 3rem;
+}
+
+/* Box to display users */
 .user-card-container{ 
     display: flex; 
     flex-wrap: wrap; 
     gap: 1rem; 
 }
 
-
 .user-card{
     border: 1px solid #ccc;
-    border-radius: 12px;
+    border-radius: var(--box-border-radius);
     padding: 1rem;
     width: 250px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .delete-user-button {
-    background-color: #c82333;
+    background-color: var(--serious-button-color);
     color: white;
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 6px;
+    border-radius: var(--button-border-radius);
     cursor: pointer;
     margin-top: 1rem;
+    margin-right: 1rem;
 }
 
 .add-role-button{
@@ -28,7 +34,7 @@
     color: white;
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 6px;
+    border-radius: var(--button-border-radius);
     cursor: pointer;
     margin-top: 1rem;
 }
@@ -41,7 +47,7 @@
   .role-card {
     background-color: #f0f0f0;
     padding: 3px 5px;
-    border-radius: 4px;
+    border-radius: var(--box-border-radius);
     display: flex;
     align-items: center;
     gap: 5px;
@@ -54,7 +60,7 @@
     padding: 3px 7px;
     border-radius: 100%;
     cursor: pointer;
-    font-size: 12px;
+    font-size: var(--text-desktop-font-size);
   }
   
   .remove-role-button:hover {

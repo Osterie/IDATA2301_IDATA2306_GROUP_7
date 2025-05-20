@@ -1,0 +1,22 @@
+.flights-section {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding-left: 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  max-height: 100vh;
+  padding-right: 10px;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .flights-section {
+    width: 100%;
+  }
+
+  .flights-container {
+    width: 100%;
+  }
+}

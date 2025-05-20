@@ -1,16 +1,16 @@
 .login-hero-container {
   background: #fff;
   padding: 40px;
-  border-radius: 12px;
+  border-radius: var(--box-border-radius);
   max-width: 400px;
   width: 100%;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   text-align: left;
-  z-index: 10;
+  z-index: 3;
 }
 
 .login-hero-container h1 {
-  font-size: 2rem;
+  font-size: var(--h1-desktop-font-size);
   font-weight: 700;
   color: #000;
   margin-bottom: 5px;
@@ -18,7 +18,7 @@
 }
 
 .login-hero-container p {
-  font-size: 1rem;
+  font-size: var(--text-desktop-font-size);
   margin-bottom: 25px;
   color: black;
 }
@@ -44,14 +44,14 @@
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
+  border-radius: var(--button-border-radius);
+  font-size: var(--text-desktop-font-size);
 }
 
 .form-links {
   display: flex;
   justify-content: space-between;
-  font-size: 0.95rem;
+  font-size: var(--text-desktop-font-size);
   margin-bottom: 20px;
 }
 
@@ -60,10 +60,10 @@
   background-color: var(--call-to-action-color);
   border: none;
   color: #000;
-  font-size: 1rem;
+  font-size: var(--button-text-desktop-font-size);
   font-weight: 600;
   padding: 12px;
-  border-radius: 8px;
+  border-radius: var(--button-border-radius);
   cursor: pointer;
   margin-bottom: 20px;
 }
@@ -77,7 +77,7 @@
   align-items: center;
   gap: 10px;
   color: #666;
-  font-size: 0.9rem;
+  font-size: var(--text-desktop-font-size);
   margin-bottom: 20px;
 }
 
@@ -85,4 +85,8 @@
   flex-grow: 1;
   border: none;
   border-top: 1px solid #ccc;
+}
+
+#result-message{
+  color:red;
 }

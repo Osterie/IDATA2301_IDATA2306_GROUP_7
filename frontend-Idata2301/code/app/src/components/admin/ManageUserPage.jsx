@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { getAllUsers } from "../../library/Identity/users.js";
-import { deleteUser } from "../../library/Identity/users.js"; // You'll implement this
-import { assignRoleToUser } from "../../library/Identity/users.js"; // You'll implement this
-import { removeRoleFromUser } from "../../library/Identity/users.js"; // You'll implement this
+import { deleteUser } from "../../library/Identity/users.js";
+import { assignRoleToUser } from "../../library/Identity/users.js";
+import { removeRoleFromUser } from "../../library/Identity/users.js";
 import "./manageUserPage.css";
+import { getCookie, setCookie } from "../../library/tools.js";
 
-const ManageUserPage = () => {
+const ManageUserPage = ({ handleGoBack }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,7 +17,6 @@ const ManageUserPage = () => {
     const fetchUsers = async () => {
       try {
         const response = await getAllUsers();
-        console.log(response);
         setUsers(response); // Assuming the response is an array of user objects
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -47,6 +47,7 @@ const ManageUserPage = () => {
   const handleConfirmRole = async (userId) => {
     try {
       console.log(`Assigning role "${newRole}" to user ID ${userId}`);
+      setNewRole(newRole.trim().toUpperCase()); // Ensure the role is in uppercase
       await assignRoleToUser(userId, newRole); // <- call your API
 
       setUsers((prevUsers) =>
@@ -54,11 +55,32 @@ const ManageUserPage = () => {
           user.id === userId
             ? {
                 ...user,
-                roles: [...user.roles, { role: newRole }] // Add new role to the user's roles
+                roles: [...user.roles, { role: newRole.trim().toUpperCase() }], // Add new role to the user's roles
               }
             : user
         )
       );
+
+      if (userId == getCookie("current_user_id")) {
+        let allUserRoles = getCookie("current_user_roles");
+        let newRoleFormatted = newRole.trim().toUpperCase();
+
+        // Convert to array, filter out empty strings
+        let rolesArray = allUserRoles
+          ? allUserRoles
+              .split(",")
+              .map((r) => r.trim().toUpperCase())
+              .filter((r) => r)
+          : [];
+
+        // Add new role if it's not already in the list
+        if (!rolesArray.includes(newRoleFormatted)) {
+          rolesArray.push(newRoleFormatted);
+        }
+
+        // Save updated roles back to cookie
+        setCookie("current_user_roles", rolesArray.join(","));
+      }
 
       setEditingUserId(null);
       setNewRole("");
@@ -80,11 +102,30 @@ const ManageUserPage = () => {
           user.id === userId
             ? {
                 ...user,
-                roles: user.roles.filter((r) => r.role !== role) // Remove the role from the user
+                roles: user.roles.filter((r) => r.role !== role), // Remove the role from the user
               }
             : user
         )
       );
+
+      if (userId == getCookie("current_user_id")) {
+        let allUserRoles = getCookie("current_user_roles");
+        let roleToRemove = role.trim().toUpperCase();
+
+        // Convert to array, filter out empty strings
+        let rolesArray = allUserRoles
+          ? allUserRoles
+              .split(",")
+              .map((r) => r.trim().toUpperCase())
+              .filter((r) => r)
+          : [];
+
+        // Remove the role if it exists in the list
+        rolesArray = rolesArray.filter((r) => r !== roleToRemove);
+
+        // Save updated roles back to cookie
+        setCookie("current_user_roles", rolesArray.join(","));
+      }
     } catch (error) {
       console.error("Error removing role:", error);
     }
@@ -92,7 +133,11 @@ const ManageUserPage = () => {
 
   return (
     <main style={{ padding: "2rem" }}>
-      <h1>Manage Users</h1>
+      <button onClick={handleGoBack} className="back-button">
+        ← Go Back
+      </button>
+
+      <h1 className="manage-user-header">Manage Users</h1>
       <p>This is the user management page for admins.</p>
 
       {loading ? (
@@ -115,7 +160,7 @@ const ManageUserPage = () => {
                       <button
                         onClick={() => handleRemoveRole(user.id, r.role)}
                         className="remove-role-button"
-                        >
+                      >
                         x
                       </button>
                       <span>{r.role}</span>

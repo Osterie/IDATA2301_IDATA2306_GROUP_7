@@ -13,8 +13,6 @@ const Navbar = ({ onNavClick, user }) => {
 
   const showAdmin = user && isAdmin(user);
 
-  console.log(user);
-
   return (
     <nav>
       <div className="hamburger-menu" onClick={toggleMenu}>
@@ -49,8 +47,8 @@ const Navbar = ({ onNavClick, user }) => {
           <li><a href="#" onClick={() => onNavClick("admin")}>Admin</a></li>
         )}
 
-        <li><a href="#" onClick={() => onNavClick("settings")}>⚙️</a></li>
-        <li><a href="#" onClick={() => onNavClick("shoppingCart")}>🛒</a></li>
+        <li><a className="nav-bar-icon" href="#" onClick={() => onNavClick("profile")}>🙍</a></li>
+        <li><a className="nav-bar-icon" href="#" onClick={() => onNavClick("shoppingCart")}>🛒</a></li>
 
       </ul>
     </nav>

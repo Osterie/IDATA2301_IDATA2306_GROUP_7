@@ -3,7 +3,7 @@ package ntnu.no.stud;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import ntnu.no.stud.dto.UserProfileDto;
+import ntnu.no.stud.dto.UserProfileModel;
 import ntnu.no.stud.entities.User;
 import ntnu.no.stud.repositories.UserRepository;
 import ntnu.no.stud.security.AccessUserDetails;
@@ -26,6 +26,13 @@ public class AccessUserService implements UserDetailsService {
   @Autowired
   UserRepository userRepository;
 
+  /**
+   * Load user by username.
+   *
+   * @param username Username of the user to load
+   * @return UserDetails object containing user information
+   * @throws UsernameNotFoundException if user is not found
+   */
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     Optional<User> user = userRepository.findByUsername(username);
@@ -48,6 +55,11 @@ public class AccessUserService implements UserDetailsService {
     return userRepository.findByUsername(username).orElse(null);
   }
 
+  /**
+   * Gets all users in the database.
+   * 
+   * @return All users in the database
+   */
   public Iterable<User> getAllUsers() {
     return userRepository.findAll();
   }
@@ -154,7 +166,7 @@ public class AccessUserService implements UserDetailsService {
    * @param profileData Profile data to set for the user
    * @return True on success, false otherwise
    */
-  public boolean updateProfile(User user, UserProfileDto profileData) {
+  public boolean updateProfile(User user, UserProfileModel profileData) {
     user.setEmail(profileData.getEmail());
     userRepository.save(user);
     return true;

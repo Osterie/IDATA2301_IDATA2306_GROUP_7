@@ -19,57 +19,24 @@ public class RouteInitializer {
     private final RouteRepository routeRepository;
     private final AirportRepository airportRepository;
 
-    @Autowired
     public RouteInitializer(RouteRepository routeRepository, AirportRepository airportRepository) {
         this.routeRepository = routeRepository;
         this.airportRepository = airportRepository;
     }
 
-    public void generateRandomRoutes(int numberOfRoutes) {
+    public void generateRoutes() {
         try {
-        for (int i = 0; i < numberOfRoutes; i++) {
-            // Fetch a random departure airport
-            Airport departure = airportRepository.findRandomAirport();
-            if (departure == null) {
-                System.err.println("Cannot generate routes: No airports available.");
-                return;
+            // Fetch all airports from the database
+            Iterable<Airport> airports = airportRepository.findAll();
+            for (Airport departure : airports) {
+                for (Airport destination : airports) {
+                    if (!departure.equals(destination)) { // Ensure departure and destination are different
+                        // Create and save the route
+                        Route route = new Route(departure, destination);
+                        routeRepository.save(route);
+                    }
+                }
             }
-
-            // Fetch a random destination airport
-            Airport destination;
-            do {
-                destination = airportRepository.findRandomAirport();
-            } while (destination == null || departure.equals(destination)); // Ensure departure and destination are different
-
-            // Create and save the route
-            Route route = new Route(departure, destination);
-            routeRepository.save(route);
-        }
-
-        logger.info("Random routes generated: " + numberOfRoutes + " routes created.");
-        } catch (Exception e) {
-            logger.error("Error generating routes: " + e.getMessage());
-        }
-    }
-
-    public void generateRandomRoutes() {
-        try {
-            // Fetch a random departure airport
-            Airport departure = airportRepository.findRandomAirport();
-            if (departure == null) {
-                logger.error("Cannot generate routes: No airports available.");
-                return;
-            }
-
-            // Fetch a random destination airport
-            Airport destination;
-            do {
-                destination = airportRepository.findRandomAirport();
-            } while (destination == null || departure.equals(destination)); // Ensure departure and destination are different
-
-            // Create and save the route
-            Route route = new Route(departure, destination);
-            routeRepository.save(route);
 
         } catch (Exception e) {
             logger.error("Error generating routes: " + e.getMessage());

@@ -1,27 +1,52 @@
 import { useState } from "react";
 import "./customInputField.css";
 
-const CustomInputField = () => {
-    const [amount, setAmount] = useState(1);
+const CustomInputField = ({ amount, onAmountChange }) => {
+  const addValue = () => {
+    onAmountChange(amount + 1);
+  };
 
-    const addValue = () => {
-        setAmount((prev) => prev + 1);
-    };
+  const subtractValue = () => {
+    onAmountChange(Math.max(0, amount - 1));
+  };
 
-    const subtractValue = () => {
-        setAmount((prev) => prev - 1);
-    };
+  const handleChange = (e) => {
+    const value = e.target.value;
 
-    return (
+    if (value === "") {
+      onAmountChange("");
+      return;
+    }
 
-        <div className="input-number">
-            <input type="number" value={amount} readOnly />
-            <div className="input-number-actions">
-                <button onClick={addValue}>+</button>
-                <button onClick={subtractValue}>−</button>
-            </div>
-        </div>
-    );
+    const number = parseInt(value, 10);
+    if (!isNaN(number) && number >= 0) {
+      onAmountChange(number);
+    }
+  };
+
+  return (
+    <div className="input-number">
+      <input
+        type="number"
+        value={amount}
+        onChange={handleChange}
+        min={0}
+      />
+      <div className="input-number-actions">
+        <button
+          type="button"
+          onClick={subtractValue}
+          disabled={amount <= 0 || amount === ""}
+        >
+          −
+        </button>
+        <button type="button" onClick={addValue}>
+          +
+        </button>
+      </div>
+    </div>
+  );
 };
+
 
 export default CustomInputField;

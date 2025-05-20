@@ -9,10 +9,10 @@ nav {
   align-items: center;
   justify-content: space-between;
   background: var(--primary-color);
-  height: 80px;
+  height: var(--navbar-height);
   width: 100%;
   padding: 0 20px;
-  z-index: 3;
+  z-index: 10;
 }
 
 /* Adjust the .logo div to use Flexbox */
@@ -35,7 +35,7 @@ nav .logo img {
 nav .logo h1 {
   margin: 0; /* Removes any default margin around the text */
   color: var(--contrast-text-color); /* Adjusts the text color */
-  font-size: 24px; /* Adjust text size as needed */
+  font-size: var(--h1-desktop-text-color);
 }
 
 
@@ -52,9 +52,9 @@ nav ul li {
 
 nav ul li a {
   color: var(--contrast-text-color);
-  font-size: 17px;
+  font-size: var(--button-text-desktop-font-size);
   padding: 7px 13px;
-  border-radius: 3px;
+  border-radius: var(--button-border-radius);
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -103,9 +103,9 @@ nav ul li a:hover {
   nav ul {
     position: absolute;
     width: 100%;
-    height: 100vh;
+    height: 120vh;
     background: var(--secondary-color);
-    top: 80px;
+    top: var(--navbar-height);
     left: -100%;
     text-align: center;
     flex-direction: column;
@@ -115,7 +115,7 @@ nav ul li a:hover {
     margin: 50px 0;
   }
   nav ul li a {
-    font-size: 20px;
+    font-size: var(--button-text-mobile-font-size);
   }
   nav ul.active {
     left: 0;
@@ -126,5 +126,9 @@ nav ul li a:hover {
 }
 
 .log-out-button{
-  background-color: #c82333;
+  background-color: var(--serious-button-color);
+}
+
+.nav-bar-icon{
+  font-size: 1.25rem;
 }

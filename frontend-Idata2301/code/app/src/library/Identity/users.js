@@ -1,4 +1,5 @@
 import { sendApiRequest } from "../requests.js";
+import { doLogout } from "./authentication.js";
 
 export async function getAllUsers() {
   return new Promise((resolve, reject) => {
@@ -35,11 +36,29 @@ export async function deleteUser(userId) {
   });
 }
 
+export async function deleteSelf(userId) {
+  return new Promise((resolve, reject) => {
+    sendApiRequest(
+      "DELETE",
+      `/deleteSelf/${userId}`,
+      function (userResponse) {
+        console.log("Success:", userResponse);
+        doLogout();
+        resolve(userResponse);
+      },
+      function (errorText) {
+        console.error("Error:", errorText);
+        reject(errorText);
+      }
+    );
+  });
+}
+
 export async function assignRoleToUser(userId, role) {
   return new Promise((resolve, reject) => {
     const postData = {
       id: userId,
-      roleName: role
+      roleName: role.toUpperCase()
     };
 
     sendApiRequest(

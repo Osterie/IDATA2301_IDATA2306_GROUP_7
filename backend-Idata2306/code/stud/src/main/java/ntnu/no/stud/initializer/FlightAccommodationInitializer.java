@@ -7,7 +7,6 @@ import ntnu.no.stud.repositories.ExtraFeatureRepository;
 import ntnu.no.stud.repositories.FlightAccommodationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,7 +17,6 @@ public class FlightAccommodationInitializer {
     private final FlightAccommodationRepository flightAccommodationRepository;
     private final ExtraFeatureRepository extraFeatureRepository;
 
-    @Autowired
     public FlightAccommodationInitializer(FlightAccommodationRepository flightAccommodationRepository,
                                           ExtraFeatureRepository extraFeatureRepository) {
         this.flightAccommodationRepository = flightAccommodationRepository;

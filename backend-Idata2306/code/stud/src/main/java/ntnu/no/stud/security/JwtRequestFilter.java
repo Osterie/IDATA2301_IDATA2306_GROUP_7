@@ -19,9 +19,9 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-
 /**
- * A filter that is applied to all HTTP requests and checks for a valid JWT token in
+ * A filter that is applied to all HTTP requests and checks for a valid JWT
+ * token in
  * the `Authorization: Bearer ...` header.
  */
 @Component
@@ -35,34 +35,44 @@ public class JwtRequestFilter extends OncePerRequestFilter {
   @Autowired
   private JwtUtil jwtUtil;
 
+  /**
+   * Filter the request and check for a valid JWT token.
+   *
+   * @param request     The HTTP request
+   * @param response    The HTTP response
+   * @param filterChain The filter chain
+   * @throws ServletException If an error occurs during filtering
+   * @throws IOException      If an I/O error occurs
+   */
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-                                  FilterChain filterChain)
+      FilterChain filterChain)
       throws ServletException, IOException {
-  
+
     String jwtToken = getJwtToken(request);
-    if (jwtToken == null) {
-      logger.warn("No JWT token found in Authorization header");
-    }
-  
+
     String username = jwtToken != null ? getUsernameFrom(jwtToken) : null;
-  
+
     if (username != null && notAuthenticatedYet()) {
       UserDetails userDetails = getUserDetailsFromDatabase(username);
       if (userDetails == null) {
         logger.warn("User details not found for username: " + username);
       } else if (jwtUtil.validateToken(jwtToken, userDetails)) {
         registerUserAsAuthenticated(request, userDetails);
-        logger.info("JWT validated. User '{}' authenticated.", username);
       } else {
         logger.warn("JWT token is invalid for user: " + username);
       }
     }
-  
+
     filterChain.doFilter(request, response);
   }
-  
 
+  /**
+   * Get the user details from the database.
+   *
+   * @param username The username of the user
+   * @return The user details
+   */
   private UserDetails getUserDetailsFromDatabase(String username) {
     UserDetails userDetails = null;
     try {
@@ -73,6 +83,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     return userDetails;
   }
 
+  /**
+   * Get the JWT token from the request.
+   *
+   * @param request The HTTP request
+   * @return The JWT token
+   */
   private String getJwtToken(HttpServletRequest request) {
     final String authorizationHeader = request.getHeader("Authorization");
     String jwt = null;
@@ -93,6 +109,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     return authorizationHeaderValue.substring(numberOfCharsToStrip);
   }
 
+  /**
+   * Get the username from the JWT token.
+   *
+   * @param jwtToken The JWT token
+   * @return The username
+   */
   private String getUsernameFrom(String jwtToken) {
     String username = null;
     try {
@@ -105,12 +127,23 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     return username;
   }
 
+  /**
+   * Check if the user is not authenticated yet.
+   *
+   * @return true if the user is not authenticated, false otherwise
+   */
   private static boolean notAuthenticatedYet() {
     return SecurityContextHolder.getContext().getAuthentication() == null;
   }
 
+  /**
+   * Register the user as authenticated.
+   *
+   * @param request      The HTTP request
+   * @param userDetails  The user details
+   */
   private static void registerUserAsAuthenticated(HttpServletRequest request,
-                                                  UserDetails userDetails) {
+      UserDetails userDetails) {
     final UsernamePasswordAuthenticationToken upat = new UsernamePasswordAuthenticationToken(
         userDetails, null, userDetails.getAuthorities());
     upat.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

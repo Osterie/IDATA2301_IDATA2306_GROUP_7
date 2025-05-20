@@ -1,111 +1,128 @@
 package ntnu.no.stud.controllers;
 
-import java.io.IOException;
 import java.util.List;
 
-import ntnu.no.stud.AccessUserService;
-import ntnu.no.stud.dto.AuthenticationRequest;
-import ntnu.no.stud.dto.AuthenticationResponse;
-import ntnu.no.stud.dto.SignupDto;
+import ntnu.no.stud.dto.EditRoleModel;
+import ntnu.no.stud.dto.EditUsersInRoleModel;
+import ntnu.no.stud.dto.SetProductVisibilityModel;
 import ntnu.no.stud.entities.Price;
 import ntnu.no.stud.entities.User;
 import ntnu.no.stud.entities.UserRole;
-import ntnu.no.stud.models.EditRoleModel;
-import ntnu.no.stud.models.EditUsersInRoleModel;
-import ntnu.no.stud.models.SetProductVisibilityModel;
 import ntnu.no.stud.repositories.PriceRepository;
-import ntnu.no.stud.repositories.RoleRepository;
 import ntnu.no.stud.repositories.UserRepository;
-import ntnu.no.stud.security.JwtUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * Controller responsible for administration.
  */
 @RestController
 @CrossOrigin(origins = "*") // Allow frontend access
+@Tag(name = "Administration Controller", description = "APIs for user role management and product visibility")
 public class AdministrationController {
 
     @Autowired
-    private UserRepository userRepository; // Inject the repository
-    @Autowired
-    private RoleRepository roleRepository; // Inject the repository
+    private UserRepository userRepository;
 
     @Autowired
-    private PriceRepository priceRepository; // Inject the repository
+    private PriceRepository priceRepository;
 
-    public AdministrationController(UserRepository userRepository, RoleRepository roleRepository, PriceRepository priceRepository) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.priceRepository = priceRepository;
-    }
-
+    @Operation(summary = "Add role to user", description = "Adds a specified role to the user identified by the user ID.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Role added successfully"),
+        @ApiResponse(responseCode = "400", description = "User already has role"),
+        @ApiResponse(responseCode = "404", description = "User not found")
+    })
     @PostMapping("api/addRole")
-    public ResponseEntity<String> AddRole(@RequestBody EditRoleModel model){
+    public ResponseEntity<String> addRole(
+        @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            description = "Model containing user ID and role to add",
+            required = true,
+            content = @Content(schema = @Schema(implementation = EditRoleModel.class))
+        )
+        @RequestBody EditRoleModel model) {
 
-        // Check if the user exists in the database
         User user = userRepository.findById(model.getId()).orElse(null);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found: " + model.getId());
         }
 
-        // Check if user already has role.
         boolean hasRole = user.hasRole(model.getRoleName());
         if (hasRole) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User already has role: " + model.getRoleName());
         }
 
-        // Create a new role and add it to the user
         UserRole role = new UserRole(user, model.getRoleName());
-
         user.addRole(role);
-        userRepository.save(user); // Save the user, which will cascade to the role if CascadeType.ALL is set
+        userRepository.save(user);
 
         return ResponseEntity.ok("Role added successfully to user: " + model.getId());
     }
 
+    @Operation(summary = "Remove role from user", description = "Removes a specified role from the user identified by the user ID.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Role removed successfully"),
+        @ApiResponse(responseCode = "400", description = "User does not have the role"),
+        @ApiResponse(responseCode = "404", description = "User not found")
+    })
     @PostMapping("api/removeRole")
-    public ResponseEntity<String> RemoveRole(@RequestBody EditRoleModel model){
+    public ResponseEntity<String> removeRole(
+        @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            description = "Model containing user ID and role to remove",
+            required = true,
+            content = @Content(schema = @Schema(implementation = EditRoleModel.class))
+        )
+        @RequestBody EditRoleModel model) {
 
-        // Check if the user exists in the database
         User user = userRepository.findById(model.getId()).orElse(null);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found: " + model.getId());
         }
 
-        // Check if user already has role.
         boolean hasRole = user.hasRole(model.getRoleName());
-
         if (!hasRole) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User does not have role: " + model.getRoleName());
         }
 
-        // Remove the role from the user
         UserRole role = new UserRole(user, model.getRoleName());
         user.removeRole(role);
-        userRepository.save(user); // Save the user, which will cascade to the role if CascadeType.ALL is set
+        userRepository.save(user);
 
         return ResponseEntity.ok("Role removed successfully from user: " + model.getId());
     }
 
-    
+    @Operation(summary = "Edit users in role", description = "Updates roles assigned to multiple users.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Users updated successfully"),
+        @ApiResponse(responseCode = "400", description = "Role or users are missing"),
+        @ApiResponse(responseCode = "404", description = "One or more users not found")
+    })
     @PostMapping("/api/editUsersInRole")
-    public ResponseEntity<String> EditUsersInRole(@RequestBody EditUsersInRoleModel model) {
-        List<User> users = model.getUsers();
+    public ResponseEntity<String> editUsersInRole(
+        @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            description = "Model containing list of users and the role to update",
+            required = true,
+            content = @Content(schema = @Schema(implementation = EditUsersInRoleModel.class))
+        )
+        @RequestBody EditUsersInRoleModel model) {
 
+        List<User> users = model.getUsers();
         UserRole role = model.getRole();
+
         if (role == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Role is required.");
         }
@@ -113,23 +130,15 @@ public class AdministrationController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Users are required.");
         }
 
-        // Iterate through the list of users and update their roles
         for (User user : users) {
-            // Check if the user exists in the database
             User existingUser = userRepository.findById(user.getId()).orElse(null);
             if (existingUser != null) {
-
-                // Check if the user already has the role
                 boolean hasRole = existingUser.hasRole(role.getRole());
-
                 if (!hasRole) {
-                    // If the user is selected and doesn't have the role, add the role
                     existingUser.addRole(role);
                 } else if (hasRole) {
-                    // If the user is not selected and has the role, remove the role
                     existingUser.removeRole(role);
                 } else {
-                    // If the user's selection state matches their current role, do nothing
                     continue;
                 }
             } else {
@@ -137,26 +146,47 @@ public class AdministrationController {
             }
         }
 
-        return ResponseEntity.ok("Users updated successfully.");        
+        return ResponseEntity.ok("Users updated successfully.");
     }
-    
+
+    @Operation(summary = "Set flight product visibility", description = "Sets the visibility of a flight product by hiding or showing it.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Product visibility updated successfully"),
+        @ApiResponse(responseCode = "400", description = "Invalid priceId"),
+        @ApiResponse(responseCode = "404", description = "Product not found")
+    })
     @PostMapping("/api/setFlightProductVisibility")
-    public ResponseEntity<String> SetFlightProductVisibility(@RequestBody SetProductVisibilityModel model) {
-        // Check if the priceId is valid
+    public ResponseEntity<String> setFlightProductVisibility(
+        @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            description = "Model containing priceId and visibility status",
+            required = true,
+            content = @Content(schema = @Schema(implementation = SetProductVisibilityModel.class))
+        )
+        @RequestBody SetProductVisibilityModel model) {
+
         if (model.getPriceId() <= 0) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid priceId: " + model.getPriceId());
         }
 
-        // Check if the product exists in the database
         Price price = priceRepository.findById(model.getPriceId()).orElse(null);
         if (price == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found: " + model.getPriceId());
         }
 
-        // Set the visibility of the product
         price.setIsHidden(model.doHide());
-        priceRepository.save(price); // Save the product
+        priceRepository.save(price);
 
         return ResponseEntity.ok("Product visibility updated successfully: " + model.getPriceId());
+    }
+
+    @Operation(summary = "Get hidden products", description = "Returns all products currently marked as hidden.")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "List of hidden products retrieved",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Price.class)))
+    })
+    @GetMapping("/api/getHiddenProducts")
+    public ResponseEntity<List<Price>> getHiddenProducts() {
+        List<Price> hiddenProducts = priceRepository.findByIsHidden(true);
+        return ResponseEntity.ok(hiddenProducts);
     }
 }

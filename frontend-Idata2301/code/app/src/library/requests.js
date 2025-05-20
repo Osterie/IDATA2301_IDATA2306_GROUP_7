@@ -3,6 +3,7 @@ import { getCookie } from "./tools.js";
 // All code for sending requests to backend is stored in this file
 
 // The base path where the API is running
+// TODO get the host and port from envirotment variable!!
 const API_BASE_URL = "http://localhost:8080/api";
 
 /**

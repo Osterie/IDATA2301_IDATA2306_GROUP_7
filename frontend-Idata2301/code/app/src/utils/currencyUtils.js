@@ -1,47 +1,33 @@
-// currencyUtils.js
+export const saveConvertionTableToLocalStorage = () => {
+  fetch("https://openexchangerates.org/api/latest.json?app_id=2339143d97cf4826a4e3fa0d38d291de")
+    .then((response) => response.json())
+    .then((data) => {
+      data.saved = new Date();
+      if (localStorage.getItem("currency_convertion_table") === null) {
+        localStorage.setItem(`currency_convertion_table`, JSON.stringify(data));
+      }
+      const convertionTable = JSON.parse(localStorage.getItem("currency_convertion_table"));
+      // If the conversion table is older than 2 days, update it
+      const savedDate = new Date(convertionTable.saved);
+      const currentDate = new Date();
+      const diffTime = Math.abs(currentDate - savedDate);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      if (diffDays > 2) {
+        localStorage.setItem(`currency_convertion_table`, JSON.stringify(data));
+      }
+    })
+    .catch((error) => {
+      console.error('Error setting currency exchange table:', error);
+    });
+}
 
-const API_KEY = process.env.REACT_APP_EXCHANGE_RATE_API_KEY;
-const BASE_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}`;
-
-/**
- * Converts an amount from one currency to another using live exchange rates.
- * @param {number} amount - The amount to convert.
- * @param {string} fromCurrency - ISO currency code of the source currency.
- * @param {string} toCurrency - ISO currency code of the target currency.
- * @returns {Promise<number>} - The converted amount.
- */
-export const convertCurrencyLive = async (amount, fromCurrency, toCurrency) => {
-  try {
-    const res = await fetch(`${BASE_URL}/latest/${fromCurrency}`);
-    const data = await res.json();
-
-    if (data.result !== 'success') {
-      throw new Error('Failed to fetch exchange rate');
-    }
-
-    const rate = data.conversion_rates[toCurrency];
-
-    if (!rate) {
-      throw new Error(`Exchange rate for ${toCurrency} not found`);
-    }
-
-    return amount * rate;
-  } catch (error) {
-    console.error('Currency conversion error:', error);
-    throw error;
+export const convertCurrency = (amount, fromCurrency, toCurrency) => {
+  const conversionTable = JSON.parse(localStorage.getItem("currency_convertion_table"));
+  if (!conversionTable) {
+    console.error("Conversion table not found in local storage.");
+    return amount; // Return the original amount if conversion table is not available
   }
-};
 
-/**
- * Format a number as a currency string.
- * @param {number} amount - Amount to format.
- * @param {string} currencyCode - ISO currency code (e.g., 'USD').
- * @param {string} [locale='en-US'] - Locale code for formatting.
- * @returns {string}
- */
-export const formatCurrency = (amount, currencyCode, locale = 'en-US') => {
-  return new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency: currencyCode,
-  }).format(amount);
-};
+  const rate = conversionTable.rates[toCurrency] / conversionTable.rates[fromCurrency];
+  return (amount * rate).toFixed(0);
+}

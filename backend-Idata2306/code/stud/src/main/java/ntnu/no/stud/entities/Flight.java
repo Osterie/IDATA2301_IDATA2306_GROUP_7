@@ -1,14 +1,10 @@
 package ntnu.no.stud.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 /**
- * Represents a flight with basic identifying information such as name and company.
+ * Represents a flight with basic identifying information such as name and
+ * company.
  * This entity maps to the "flight" table in the database.
  */
 @Entity
@@ -33,49 +29,85 @@ public class Flight {
     /**
      * The airline company operating the flight.
      */
-    @Column(name = "company", nullable = false)
-    private String company;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    private FlightCompany company;
 
-    public Flight() { }
+    public Flight() {
+    }
 
     /**
      * Constructs a Flight with the specified name and company.
      *
-     * @param name the name of the flight.
+     * @param name    the name of the flight.
      * @param company the company operating the flight.
      */
-    public Flight(String name, String company) {
+    public Flight(String name, FlightCompany company) {
         this.name = name;
         this.company = company;
     }
 
-    // Getters and Setters
+    /**
+     * Returns the unique identifier of the flight.
+     *
+     * @return the flight ID
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets the unique identifier of the flight.
+     *
+     * @param id the ID to assign
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Returns the name of the flight.
+     *
+     * @return the flight name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name of the flight.
+     *
+     * @param name the flight name to assign
+     */
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getCompany() {
+    /**
+     * Returns the airline company operating the flight.
+     *
+     * @return the operating {@link FlightCompany}
+     */
+    public FlightCompany getCompany() {
         return company;
     }
 
-    public void setCompany(String company) {
+    /**
+     * Sets the airline company operating the flight.
+     *
+     * @param company the {@link FlightCompany} to associate
+     */
+    public void setCompany(FlightCompany company) {
         this.company = company;
     }
 
+    /**
+     * Returns a string representation of the flight.
+     *
+     * @return a string describing the flight
+     */
     @Override
     public String toString() {
-        return "Flight{id=" + id + ", name='" + name + "', company='" + company + "'}";
+        return "Flight{id=" + id + ", name='" + name + "', company='" + company.getName() + "'}";
     }
 }

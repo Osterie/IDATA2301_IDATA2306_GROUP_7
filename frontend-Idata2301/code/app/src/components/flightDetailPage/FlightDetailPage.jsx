@@ -1,72 +1,79 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./flightDetailPage.css";
-import { addToShoppingCart } from "../../utils/shoppingCartUtils";
-import flightHeroImage from "../../resources/images/avel-chuklanov-Ou1eqo29Ums-unsplash.jpg"; 
+import FlightDetailPageCard from "./FlightDetailPageCard";
+import { getCompanyImage } from "../../library/imageRequests";
+import { sendApiRequest } from "../../library/requests";
+import flightHeroImage from "../../resources/images/avel-chuklanov-Ou1eqo29Ums-unsplash.jpg";
 
-const FlightDetailPage = ({ flight, onAddToCart, onBuyNow }) => {
-  const {
-    flightClassId: {
-      flightClass: { name: flightClassName },
-      flight: { name: flightName, company },
-      availableSeats,
-    },
-    price,
-    priceCode,
-    provider,
-    discount,
-    scheduledFlight: {
-      date,
-      route: {
-        departureAirport: { airportCode: departureCode, city: departureCity },
-        arrivalAirport: { airportCode: arrivalCode, city: arrivalCity },
-      },
-    },
-  } = flight;
 
-  const handleAddToCart = () => {
-    const result = addToShoppingCart(flight);
-  };
+const FlightDetailPage = ({ searchParams, flight, setActivePage, handleGoBack}) => {
+  const [providerAlternatives, setProviderAlternatives] = useState([]);
+
+  const companyImageUrl = flight.scheduledFlight.flight.company.imageUrl;
+
+
+  // Fetch provider alternatives
+  useEffect(() => {
+    const getProviderAlternatives = async () => {
+      try {
+        const finalSearchParams = {
+          ...searchParams,
+          fromDate: flight?.scheduledFlight?.date,
+          toDate: flight?.scheduledFlight?.date,
+        };
+
+        await sendApiRequest(
+          "POST",
+          "/searchForFlights",
+          (fetchedData) => {
+            const filteredData = fetchedData.filter(
+              (newflight) => newflight.id !== flight.id
+            );
+            setProviderAlternatives(filteredData);
+          },
+          JSON.stringify(finalSearchParams),
+          (errorResponse) => {
+            console.error("Error: " + errorResponse);
+          }
+        );
+      } catch (error) {
+        console.error("Error searching for flights:", error);
+      }
+    };
+
+    if (flight) {
+      getProviderAlternatives();
+    }
+  }, [flight, searchParams]);
 
   return (
-    <div>
-      <div className="flight-hero-image">
-        <img src={flightHeroImage} alt="Flight" />
-      </div>
-      <div className="flight-detail-page">
-    
-        <h1>{company} - {flightName}</h1>
-        <p className="class-name">Flight Class: <strong>{flightClassName}</strong></p>
+    <section>
+      <header className="flight-hero-image">
+        <button onClick={handleGoBack} className="back-button">
+          ← Go Back
+        </button>
+        <img
+          src={companyImageUrl || flightHeroImage}
+          alt="Company or default flight image"
+        />
+      </header>
 
-        <div className="flight-route">
-          <div>
-            <h3>Departure</h3>
-            <p>{departureCity} ({departureCode})</p>
-          </div>
-          <div>
-            <h3>Arrival</h3>
-            <p>{arrivalCity} ({arrivalCode})</p>
-          </div>
+      <FlightDetailPageCard
+        flight={flight}
+      />
+
+      <article className="provider-alternative-parent">
+        <h1>Provider alternatives</h1>
+        <div className="provider-alternative-container">
+          {providerAlternatives.map((flight) => (
+            <FlightDetailPageCard
+              key={flight.id}
+              flight={flight}
+            />
+          ))}
         </div>
-
-        <p className="flight-date">Date: <strong>{date}</strong></p>
-        <p className="seats-info">Available Seats: <strong>{availableSeats}</strong></p>
-
-        <div className="pricing-info">
-          <p className="price">
-            Price: <strong>${price} {priceCode}</strong>
-          </p>
-          {discount > 0 && (
-            <p className="discount">Discount: <strong>{discount}% off</strong></p>
-          )}
-          <p className="provider">Provider: <strong>{provider}</strong></p>
-        </div>
-
-        <div className="action-buttons">
-          <button className="btn add-to-cart" onClick={handleAddToCart}>Add to cart</button>
-          <button className="btn buy-now" onClick={() => onBuyNow(flight)}>Buy Now</button>
-        </div>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 };
 

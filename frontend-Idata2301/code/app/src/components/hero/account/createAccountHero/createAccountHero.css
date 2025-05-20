@@ -2,16 +2,16 @@
 .create-account-container {
     background-color: #fff;
     padding: 40px;
-    border-radius: 12px;
+    border-radius: var(--box-border-radius);
     max-width: 400px;
     width: 100%;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     text-align: left;
-    z-index: 10;
+    z-index: 3;
   }
   
   .create-account-container h1 {
-    font-size: 2rem;
+    font-size: var(--h1-desktop-font-size);
     font-weight: 700;
     color: #000;
     margin-bottom: 5px;
@@ -19,7 +19,7 @@
 
   }
   .create-account-container p {
-    font-size: 1rem;
+    font-size: var(--text-desktop-font-size);
     margin-bottom: 25px;
     color: black;
   }
@@ -39,8 +39,8 @@
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
+    border-radius: var(--button-border-radius);
+    font-size: var(--text-desktop-font-size);
   }
   
   .create-account-button {
@@ -48,10 +48,10 @@
     background-color: var(--call-to-action-color);
     border: none;
     color: #000;
-    font-size: 1rem;
+    font-size: var(--button-text-desktop-font-size);
     font-weight: 600;
     padding: 12px;
-    border-radius: 8px;
+    border-radius: var(--button-border-radius);
     cursor: pointer;
     margin-top: 10px;
   }
@@ -60,3 +60,6 @@
     background-color: var(--call-to-action-highlight-color);
   }
   
+#result-message{
+  color:red;
+}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { isAdmin, getAuthenticatedUser } from "../../library/Identity/authentication.js";
+import "./adminPage.css";
 
 const AdminPage = ({ setActivePage }) => {
   const [isAuthorized, setIsAuthorized] = useState(null);
@@ -10,23 +11,30 @@ const AdminPage = ({ setActivePage }) => {
   }, []);
 
   if (isAuthorized === null || !isAuthorized) {
-    console.log("User is not authorized to view this page.");
     return (
       <main>
-        <h1>Access Denied</h1>
-        <p>You do not have permission to view this page.</p>
+        <div className="admin-card">
+          <h1>Access Denied</h1>
+          <p>You do not have permission to view this page.</p>
+        </div>
       </main>
     );
   }
 
-  console.log("User is authorized to view this page.");
   return (
-    <main>
-      <h1>Admin Page</h1>
-      <p>This is the admin page. Only accessible to users with admin rights.</p>
-      <button onClick={() => setActivePage("manage-users")}>
-        Manage Users
-      </button>
+    <main className="admin-page">
+      <section className="admin-card">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome, admin. Please choose an action below:</p>
+        <div className="admin-actions">
+          <button onClick={() => setActivePage("manage-users")}>
+            Manage Users
+          </button>
+          <button onClick={() => setActivePage("hidden-products")}>
+            View Hidden Products
+          </button>
+        </div>
+      </section>
     </main>
   );
 };

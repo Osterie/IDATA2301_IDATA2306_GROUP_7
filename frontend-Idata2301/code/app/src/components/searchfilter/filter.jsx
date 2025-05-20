@@ -1,46 +1,66 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./filter.css";
 import DualRangeSlider from "./slider";
+import { convertCurrency } from "../../utils/currencyUtils";
+import { getPreferredCurrency } from "../../utils/cookieUtils";
 
 function findMinPrice(flights) {
-  return Math.min(...flights.map((flight) => flight.price));
+  return Math.min(...flights.map((flight) => calculateFinalPriceInUserCurrency(flight.price, flight.discount, flight.currencyCode)));
 }
 function findMaxPrice(flights) {
-  return Math.max(...flights.map((flight) => flight.price));
+  return Math.max(...flights.map((flight) => calculateFinalPriceInUserCurrency(flight.price, flight.discount, flight.currencyCode)));
 }
 
 // Dynamically extract unique companies from the flights array
 function getUniqueCompanies(flights) {
   const companies = flights.map(
-    (flight) => flight.scheduledFlight.flight.company
+    (flight) => flight.scheduledFlight.flight.company.name
   );
   return [...new Set(companies)]; // Remove duplicates
 }
 
+const filterFlights = (flightsToFilter, min, max, companies) => {
+  const updatedFlights = flightsToFilter.map((flight) => {
+    const flightCompany = flight.scheduledFlight.flight.company.name;
+    const isPriceInRange =
+      flight.price >= min && flight.price <= max;
+    const isCompanySelected = companies[flightCompany];
+
+    const isFilteredOut = !(isPriceInRange && isCompanySelected);
+    return { ...flight, isFilteredOut };
+  });
+  return updatedFlights;
+};
+
+const calculateDiscountedPrice = (price, discount) => {
+  return discount > 0 ? (price - (price * discount) / 100).toFixed(0) : price;
+};
+
+const calculateFinalPriceInUserCurrency = (price, discount, currencyCode) => {
+  const discountedPrice = calculateDiscountedPrice(price, discount);
+  return convertCurrency(discountedPrice, currencyCode, getPreferredCurrency());
+};
+
 const sortFlights = (flightsToSort, option) => {
   const sorted = [...flightsToSort];
 
-  console.log(sorted);
-
   switch (option) {
     case "cheap":
-      sorted.sort((a, b) => a.price - b.price);
+      sorted.sort((a, b) => calculateFinalPriceInUserCurrency(a.price, a.discount, a.currencyCode) - calculateFinalPriceInUserCurrency(b.price, b.discount, b.currencyCode));
       break;
     case "expensive":
-      sorted.sort((a, b) => b.price - a.price);
+      sorted.sort((a, b) => calculateFinalPriceInUserCurrency(b.price, b.discount, b.currencyCode) - calculateFinalPriceInUserCurrency(a.price, a.discount, a.currencyCode));
       break;
     case "soon":
       sorted.sort(
         (a, b) =>
-          new Date(a.scheduledFlight.date) -
-          new Date(b.scheduledFlight.date)
+          new Date(a.scheduledFlight.date) - new Date(b.scheduledFlight.date)
       );
       break;
     case "late":
       sorted.sort(
         (a, b) =>
-          new Date(b.scheduledFlight.date) -
-          new Date(a.scheduledFlight.date)
+          new Date(b.scheduledFlight.date) - new Date(a.scheduledFlight.date)
       );
       break;
     default:
@@ -66,14 +86,49 @@ const FilterSidebar = ({ flights, setFlights }) => {
     min: findMinPrice(flights),
     max: findMaxPrice(flights),
   });
+  const [fullPriceRange, setFullPriceRange] = useState({
+    min: findMinPrice(flights),
+    max: findMaxPrice(flights),
+  });
+  const [forceUpdate, setForceUpdate] = useState(0);
+
+  const sliderRef = useRef(null);
+  
+    // Whenever min or max values update, call the exposed methods:
+  useEffect(() => {
+    if (sliderRef.current) {
+      sliderRef.current.updateMinValue(fullPriceRange.min);
+      sliderRef.current.updateMaxValue(fullPriceRange.max);
+    }
+  }, [fullPriceRange.min, fullPriceRange.max, forceUpdate]);
 
 
   useEffect(() => {
-    if (flights.length > 0) {
-      const sorted = sortFlights(flights, "cheap");
-      setFlights(sorted);
-    }
-  }, []);
+    if (!flights.isNewSearch) return;
+
+    const min = findMinPrice(flights);
+    const max = findMaxPrice(flights);
+    setPriceRange({ min, max });
+    setFullPriceRange({
+      min: findMinPrice(flights),
+      max: findMaxPrice(flights),
+    });
+    setForceUpdate((f) => f + 1);
+
+    const newCompanies = getUniqueCompanies(flights);
+    setSelectedCompanies({
+      all: true,
+      ...newCompanies.reduce((acc, company) => {
+        acc[company] = true;
+        return acc;
+      }, {}),
+    });
+
+    const sorted = sortFlights(flights, sortOption);
+    setFlights(sorted);
+    flights.isNewSearch = false; // Reset the flag after processing
+  }, [flights]);
+
 
   const handleCompanyChange = (company) => {
     let updatedCompanies;
@@ -85,7 +140,7 @@ const FilterSidebar = ({ flights, setFlights }) => {
         ...companies.reduce((acc, company) => {
           acc[company] = newState;
           return acc;
-        }, {})
+        }, {}),
       };
     } else {
       updatedCompanies = {
@@ -100,35 +155,24 @@ const FilterSidebar = ({ flights, setFlights }) => {
     // Re-filter flights using current price range and updated companies
     const minPrice = priceRange.min;
     const maxPrice = priceRange.max;
-  
-    const updatedFlights = flights.map(flight => {
-      const flightCompany = flight.scheduledFlight.flight.company;
-      const isPriceInRange = flight.price >= minPrice && flight.price <= maxPrice;
-      const isCompanySelected = updatedCompanies[flightCompany];
-  
-      const isHidden = !(isPriceInRange && isCompanySelected);
-      return { ...flight, isHidden };
-    });
-  
+
+    const updatedFlights = filterFlights(flights, minPrice, maxPrice, updatedCompanies);
+
     setFlights(updatedFlights);
   };
+
+
 
   const handlePriceRangeChange = (min, max) => {
-
     setPriceRange({ min, max }); // Save the values for later use
 
-    let updatedFlights = flights.map((flight) => {
-      const flightCompany = flight.scheduledFlight.flight.company;
-      const isPriceInRange = flight.price >= min && flight.price <= max;
-      const isCompanySelected = selectedCompanies[flightCompany];
-
-      const isHidden = !(isPriceInRange && isCompanySelected);
-      return { ...flight, isHidden };
-    });
+    let updatedFlights = filterFlights(flights, min, max, selectedCompanies);
 
     updatedFlights = sortFlights(updatedFlights, sortOption);
+
     setFlights(updatedFlights);
   };
+  
 
   return (
     <div className="sidebar-mother">
@@ -171,9 +215,12 @@ const FilterSidebar = ({ flights, setFlights }) => {
         {/* Price Range */}
         <div className="filter-section">
           <DualRangeSlider
+              ref={sliderRef}
+
+            // key={`${findMinPrice(flights)}-${findMaxPrice(flights)}`} // 👈 key changes when min/max change
             label="Price Range"
-            min={findMinPrice(flights)}
-            max={findMaxPrice(flights)}
+            min={fullPriceRange.min}
+            max={fullPriceRange.max}
             callback={handlePriceRangeChange}
           />
         </div>

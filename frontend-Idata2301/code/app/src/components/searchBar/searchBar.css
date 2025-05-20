@@ -17,8 +17,8 @@
 .search-form input {
     padding: 12px;
     border: 1px solid #bbb;
-    border-radius: 5px;
-    font-size: 1rem;
+    border-radius: var(--button-border-radius);
+    font-size: var(--text-desktop-font-size);
 }
 
 .call-to-action {
@@ -26,8 +26,8 @@
     border: none;
     background-color: var(--call-to-action-color);
     color: var(--text-color);
-    font-size: 1rem;
-    border-radius: 5px;
+    font-size: var(--text-desktop-font-size);
+    border-radius: var(--button-border-radius);
     cursor: pointer;
 }
 
@@ -40,7 +40,43 @@
     border: none;
     background-color: var(--secondary-color);
     color: var(--contrast-text-color);
-    font-size: 1rem;
-    border-radius: 5px;
+    font-size: var(--button-text-desktop-font-size);
+    border-radius: var(--button-border-radius);
     cursor: pointer;
+}
+
+.autocomplete-wrapper {
+    position: relative;
+    flex: 1 1 200px;
+    max-width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #bbb;
+    border-radius: var(--button-border-radius);
+    font-size: var(--text-desktop-font-size);
+}
+
+.autocomplete-wrapper input {
+    width: 100%;
+}
+
+.autocomplete-suggestions {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 10;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.autocomplete-suggestions li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.autocomplete-suggestions li:hover {
+    background-color: #f0f0f0;
 }

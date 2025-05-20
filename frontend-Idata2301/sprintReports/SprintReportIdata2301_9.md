@@ -25,36 +25,56 @@ Sprint stenographer: Daniel
 
 - **Completed Work:**
 
-
+History of purchases
+Implement reccomended cards
+Favorite page
+Better searching
+Put fotter at the bottom
+Fix invisible background
+Remove unnecessary components from filter, add ascending/descending sorting
+Fix searching from deals page  
+Add purchasing date to purchase   
 
 - **Not Completed:**
-
+Search by passanger amount and class   
+Purchasing a product
+Favoriting a product    
+Try using docker    
+Product detail page   
+Display final price after discount   
+Currency convertion    
+Profile page (username, Email, currency)   
+View hidden flights in admin panel    
 
 ---
 
 ## **Sprint Progress**
 
-| Story/Task                                | Assignee | Status         | Story Points | Comments                                     |
-| ----------------------------------------- | -------- | -------------- | ------------ | -------------------------------------------- |
-| Search by passanger amount and class      | Adrian   | Not completed  | [4]          | Needs to be filtered by class and passengers |
-| History of purchases                      | Adrian   | In progress    | [5]          | Not started                                  |
-| Purchasing a product                      | Daniel   | In progress    | [4]          |                                              |
-| Implement recommended cards               | Daniel   | In progress    | [4]          |                                              |
-| Favoriting a product                      | Tobias   | Paused         | [4]          |                                              |
-| Favorite page                             | Tobias   | Paused         | [5]          |                                              |
-| Try using docker                          | Everyone | Not completed  | [5]          |                                              |
-| Product detail page                       | Tobias   | Completed      | [6]          | Works, but needs better styling              |
-| Better searching                          | Adrian   | Not completed  | [7]          |                                              |
-| Currency convertion                       | Daniel   | Not completed  | [4]          |                                              |
-| Display final price after discount        | Daniel   | Not completed  | [2]          |                                              |
-| Profile page (username, Email, currency)  | Tobias   | Not completed  | [5]          |                                              |
-| Put footer at the bottom                  | Adrian   | Not completed  | [3]          |                                              |
-| Invisible background                      | Tobias   | Not completed  | [2]          |                                              |
-| Remove unnecessary components from filter | Adrian   | Not completed  | [2]          |                                              |
-| View hidden flights in admin panel        | Daniel   | Not completed  | [3]          |                                              |
-| Add purchasing date to purchase           | Adrian   | Not completed  | [2]          | Low priority                                 |
+| Story/Task                                                                  | Assignee | Status        | Story Points | Comments                                     |
+| --------------------------------------------------------------------------- | -------- | ------------- | ------------ | -------------------------------------------- |
+| Search by passanger amount and class                                        | Adrian   | BLOCKED       | [4]          | Needs to be filtered by class and passengers |
+| History of purchases                                                        | Adrian   | Completed     | [5]          |                                              |
+| Purchasing a product                                                        | Daniel   | In progress   | [4]          |                                              |
+| Implement recommended cards                                                 | Daniel   | Completed     | [4]          |                                              |
+| Favoriting a product                                                        | Tobias   | In progress   | [4]          |                                              |
+| Favorite page                                                               | Tobias   | Completed     | [5]          |                                              |
+| Try using docker                                                            | Everyone | Not completed | [5]          |                                              |
+| Product detail page                                                         | Tobias   | 90% Completed     | [6]          | Works, but needs better styling              |
+| Better searching                                                            | Adrian   | Completed     | [7]          |                                              |
+| Currency convertion                                                         | Daniel   | Not completed | [4]          |                                              |
+| Display final price after discount                                          | Daniel   | Not completed | [2]          |                                              |
+| Profile page (username, Email, currency)                                    | Tobias   | In progress   | [5]          |                                              |
+| Put footer at the bottom                                                    | Adrian   | Completed     | [3]          |                                              |
+| Fix invisible background                                                    | Tobias   | Completed     | [2]          |                                              |
+| Remove unnecessary components from filter, add ascending/descending sorting | Adrian   | Completed     | [4]          |                                              |
+| Fix searching from deals page                                               | Adrian   | Completed     | [4]          |                                              |
+| View hidden flights in admin panel                                          | Daniel   | Not completed | [3]          |                                              |
+| Add purchasing date to purchase                                             | Adrian   | Completed     | [2]          | Low priority                                 |
 
 ---
+## **Retrospective**
+We added more tasks then we excpected to be able to complete in this sprint which resulted in us not completing every task, but resulted in us completing more tasks then in our other sprints.
+
 
 ## Comments
 - Product detail page (Product image, Product description, Product price for the different providers)

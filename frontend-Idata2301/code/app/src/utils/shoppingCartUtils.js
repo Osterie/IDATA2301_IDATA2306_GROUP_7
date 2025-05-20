@@ -1,32 +1,47 @@
-import Cookies from "js-cookie";
+const STORAGE_KEY = "shopping_cart";
 
-const COOKIE_NAME = "shoppingCart";
-
-// Get the shopping cart from cookies
+// Get the shopping cart object from localStorage
 export const getShoppingCart = () => {
-  const savedCart = Cookies.get(COOKIE_NAME);
-  return savedCart ? JSON.parse(savedCart) : [];
+  const raw = localStorage.getItem(STORAGE_KEY);
+  return raw ? JSON.parse(raw) : {};
 };
 
-// Add a flight to the shopping cart
-export const addToShoppingCart = (flight) => {
+// Get cart as an array of flight IDs
+export const getShoppingCartAsArray = () => {
   const cart = getShoppingCart();
-  if (!cart.some((item) => item.id === flight.id)) {
-    const updatedCart = [...cart, flight];
-    Cookies.set(COOKIE_NAME, JSON.stringify(updatedCart), { expires: 7 }); // Save to cookies (expires in 7 days)
-    return { success: true, message: "Flight added to the shopping cart!" };
-  }
-  return { success: false, message: "This flight is already in your shopping cart!" };
+  return Object.entries(cart).flatMap(([flightId, count]) =>
+    Array(count).fill(flightId)
+  );
 };
 
-// Remove a flight from the shopping cart
+// Add a flight to the shopping cart (increment quantity)
+export const addToShoppingCart = (flightId) => {
+  const cart = getShoppingCart();
+  cart[flightId] = (cart[flightId] || 0) + 1;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+};
+
+// Remove one instance of a flight from the cart
 export const removeFromShoppingCart = (flightId) => {
   const cart = getShoppingCart();
-  const updatedCart = cart.filter((item) => item.id !== flightId);
-  Cookies.set(COOKIE_NAME, JSON.stringify(updatedCart), { expires: 7 }); // Update cookies
-  return updatedCart;
+
+  if (cart[flightId]) {
+    cart[flightId] -= 1;
+    if (cart[flightId] <= 0) {
+      delete cart[flightId];
+    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+  }
 };
 
+// Fully remove a flight from the cart
+export const deleteFromShoppingCart = (flightId) => {
+  const cart = getShoppingCart();
+  delete cart[flightId];
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+};
+
+// Clear all cart data
 export const clearShoppingCart = () => {
-  Cookies.remove(COOKIE_NAME); // Clear the shopping cart from cookies
-}
+  localStorage.removeItem(STORAGE_KEY);
+};

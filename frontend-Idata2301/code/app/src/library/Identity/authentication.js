@@ -12,7 +12,6 @@ export function getAuthenticatedUser() {
   let user = null;
 
   if (!checkJwtOnLoad()) {
-    console.log("JWT expired, user not authenticated");
     return null;
   }
 
@@ -30,7 +29,6 @@ export function getAuthenticatedUser() {
 
   if (!user) {
     console.log("User not authenticated");
-    console.log(username)
     console.log(commaSeparatedRoles)
   }
   return user;
@@ -57,7 +55,6 @@ export function isAdmin(user) {
   
   for (let i = 0; i < roles.length; i++) {
     if (roles[i].toUpperCase() === "ADMIN") {
-      console.log("User is admin");
       return true;
     }
   }
@@ -133,6 +130,7 @@ export function parseJwtUser(jwtString) {
     user = {
       "id" : jwtObject.id,
       "username": jwtObject.sub,
+      "email": jwtObject.email,
       "roles": jwtObject.roles.map(r => r.authority),
       "exp": jwtObject.exp,
     }
@@ -158,16 +156,13 @@ export function deleteAuthorizationCookies() {
   deleteCookie("current_user_id");
   deleteCookie("current_username");
   deleteCookie("current_user_roles");
-  console.log("Deleted authorization cookies");
+  deleteCookie("current_email");
 }
 
 function isJwtExpired(jwt) {
   const payload = parseJwtUser(jwt);
   if (!payload || !payload.exp) return true;
   const now = Math.floor(Date.now() / 1000);
-  console.log("JWT expires at:", new Date(payload.exp * 1000).toUTCString());
-  console.log("Current time is:", new Date(now * 1000).toUTCString());
-
   return payload.exp < now;
 }
 

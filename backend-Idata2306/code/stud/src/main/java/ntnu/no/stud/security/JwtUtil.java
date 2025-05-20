@@ -34,6 +34,11 @@ public class JwtUtil {
   private static final String ID_KEY = "id";
 
   /**
+   * Key inside JWT token where email is stored.
+   */
+  private static final String EMAIL_KEY = "email";
+
+  /**
    * Generate a JWT token for an authenticated user.
    *
    * @param userDetails Object containing user details
@@ -45,21 +50,29 @@ public class JwtUtil {
     final long sevendDaysFromNow = timeNow + millisecondsInSevenDays;
 
     int userId = -1;
+    String email = null;
 
     if (userDetails instanceof AccessUserDetails) {
       userId = ((AccessUserDetails) userDetails).getId();
+      email = ((AccessUserDetails) userDetails).getEmail();
     }
 
     return Jwts.builder()
         .subject(userDetails.getUsername())
         .claim(ID_KEY, userId)
         .claim(ROLE_KEY, userDetails.getAuthorities())
+        .claim(EMAIL_KEY, email)
         .issuedAt(new Date(timeNow))
         .expiration(new Date(sevendDaysFromNow))
         .signWith(getSigningKey())
         .compact();
   }
 
+  /**
+   * Get the signing key for JWT token.
+   *
+   * @return SecretKey
+   */
   private SecretKey getSigningKey() {
     byte[] keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
     return new SecretKeySpec(keyBytes, 0, keyBytes.length, "HmacSHA256");
@@ -89,20 +102,45 @@ public class JwtUtil {
         && !isTokenExpired(token);
   }
 
-
+  /**
+   * Gets the expiration date from a JWT token.
+   * 
+   * @param token JWT token
+   * @return Expiration date
+   */
   private Date extractExpiration(String token) {
     return extractClaim(token, Claims::getExpiration);
   }
 
+  /**
+   * Extracts a claim from the JWT token.
+   * 
+   * @param <T>            The type of the claim
+   * @param token          JWT token
+   * @param claimsResolver Function to resolve the claim
+   * @return The extracted claim
+   */
   private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
     final Claims claims = extractAllClaims(token);
     return claimsResolver.apply(claims);
   }
 
+  /**
+   * Extracts all claims from the JWT token.
+   * 
+   * @param token JWT token
+   * @return All claims
+   */
   private Claims extractAllClaims(String token) {
     return Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token).getPayload();
   }
 
+  /**
+   * Checks if the token is expired.
+   * 
+   * @param token JWT token
+   * @return True if the token is expired, false otherwise
+   */
   private Boolean isTokenExpired(String token) {
     return extractExpiration(token).before(new Date());
   }

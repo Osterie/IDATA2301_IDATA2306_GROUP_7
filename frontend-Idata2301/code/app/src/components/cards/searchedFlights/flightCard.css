@@ -1,0 +1,216 @@
+.flight-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: var(--box-border-radius);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;              /* Full width of container */
+  max-width: none;          /* Remove restriction */
+  height: auto;             /* Automatically fit content */
+  max-height: 300px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.flight-card h2 {
+  font-size: var(--h2-desktop-font-size);
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.flight-card-class-name {
+  font-size: var(--text-desktop-font-size);
+  font-weight: bold;
+  color: #16a085;
+}
+
+.flight-card-flight-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.flight-card-location-label {
+  font-size: var(--text-desktop-font-size);
+  color: #7f8c8d;
+}
+
+.flight-card-date, .flight-card-seats {
+  font-size: var(--text-desktop-font-size);
+  font-weight: bold;
+  color: #34495e;
+}
+
+.flight-card-price-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.flight-card-price {
+  font-size: var(--text-desktop-font-size);
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+.flight-card-discount {
+  font-size: var(--text-desktop-font-size);
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.flight-card-provider {
+  font-size: var(--text-desktop-font-size);
+  color: #7f8c8d;
+  margin-top: 5px;
+}
+
+.flight-card-purchase-date {
+  color: #4caf50; /* soft green, or choose any accent color */
+  margin-top: -6px;
+  margin-bottom: 8px;
+  font-weight: bold
+}
+
+
+.flight-card-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #14aaf5;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.flight-card-actions:hover {
+  background-color: #c0392b;
+}
+
+.flight-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.flight-card-company-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: var(--box-border-radius);
+  position: absolute;
+  left: 0;
+}
+
+.flight-card-favorite-button {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0.5rem;
+  border: 3px solid var(--serious-button-color);
+  border-radius: var(--button-border-radius);
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+  height: 30px;
+}
+
+.flight-card-favorite-button:hover {
+  background-color: var(--serious-button-color);
+}
+
+.flight-card-favorite-button.favorited {
+  background-color: var(--serious-button-color);
+}
+
+.favorite-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+}
+
+.favorite-icon {
+  height: 100%;
+  width: auto;
+  max-height: 100%;
+  object-fit: contain;
+  aspect-ratio: 1 / 1;
+}
+
+.favorite-text {
+  font-size: 14px;
+  color: inherit;
+  padding-right: 5px;
+}
+
+.flight-card-favorite-button.favorited .favorite-text {
+  color: white;
+}
+
+/* @media (max-width: 900px) {
+  .favorite-text {
+    display: none;
+  }
+} */
+
+
+.flight-card-title {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-left: 60px;
+}
+
+.flight-detail-button, .flight-cart-button, .flight-card-toggle-visibility-button, .flight-card-actions-button {
+  margin: 0.5rem;
+  border: none;
+  color: var(--contrast-text-color);
+  padding: 6px 12px;
+  font-size: var(--text-desktop-font-size);
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+}
+
+.flight-detail-button {
+  background-color: var(--call-to-action-color);
+}
+
+.flight-detail-button:hover {
+  background-color: var(--call-to-action-highlight-color);
+}
+
+.flight-cart-button {
+  background-color: var(--button-color);
+}
+
+.flight-cart-button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.flight-card-actions-button {
+  background-color: var(--serious-button-color);
+}
+
+.flight-card-actions-button:hover {
+  background-color: var(--button-hover-color);
+}
+
+/* Add this for the admin button */
+.flight-card-toggle-visibility-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: var(--serious-button-color);
+}
+
+.flight-card-toggle-visibility-button:hover {
+  background-color: red;
+}

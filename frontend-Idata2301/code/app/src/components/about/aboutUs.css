@@ -7,18 +7,17 @@
     margin: 0 auto;
     max-width: 900px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
   }
   
   .about-us-section h1 {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: var(--h1-desktop-font-size);
     color: var(--primary-color);
     margin-bottom: 1.5rem;
   }
   
   .about-us-section h2 {
-    font-size: 1.5rem;
+    font-size: var(--h2-desktop-font-size);
     color: var(--text-color);
     margin-top: 1.5rem;
     border-bottom: 2px solid var(--text-color);
@@ -26,7 +25,7 @@
   }
   
   .about-us-section p {
-    font-size: 1rem;
+    font-size: var(--text-desktop-font-size);
     line-height: 1.8;
     margin-bottom: 1rem;
   }
@@ -44,21 +43,23 @@
     margin-bottom: 1rem;
   }
   
+  /* Responsive styling */
   @media (max-width: 768px) {
     .about-us-section {
       padding: 1.5rem;
+      font-size: var(--text-mobile-font-size);
     }
   
     .about-us-section h1 {
-      font-size: 2rem;
+      font-size: var(--h1-mobile-font-size);
     }
   
     .about-us-section h2 {
-      font-size: 1.3rem;
+      font-size: var(--h2-mobile-font-size);
     }
   
     .about-us-section p {
-      font-size: 0.9rem;
+      font-size: var(--h3-mobile-font-size);
     }
   }
   

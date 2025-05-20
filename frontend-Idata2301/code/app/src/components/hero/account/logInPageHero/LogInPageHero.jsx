@@ -14,7 +14,7 @@ const LoginPageHero = ({ onNavClick }) => {
 
     sendAuthenticationRequest(username, password,
       () => {
-        setMessage('Login successful! Redirecting...');
+        // setMessage('Login successful! Redirecting...');
         // Redirect to the main page or perform any other action
         window.location.href = '/index.html'; // Adjust the URL as needed
       },
@@ -57,10 +57,10 @@ const LoginPageHero = ({ onNavClick }) => {
             />
           </div>
 
-          <div className="form-links">
+          {/* <div className="form-links">
             <a href="#">Create new password?</a>
             <a href="#">Log in with SMS</a>
-          </div>
+          </div> */}
 
           {message && <p id="result-message">{message}</p>}
 

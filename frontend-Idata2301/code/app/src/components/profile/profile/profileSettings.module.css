@@ -1,0 +1,58 @@
+.profile-settings {
+  background-color: var(--box-color);
+  border-radius: var(--box-border-radius);
+  padding: 1rem;
+}
+
+.profile-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.profile-table th,
+.profile-table td {
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  text-align: left;
+}
+
+.definition-list > div {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.definition-list dt {
+  font-weight: 600;
+}
+
+.definition-list dd {
+  margin: 0;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.danger-zone {
+  border: 1px solid var(--serious-button-color);
+  background-color: var(--serious-box-color);
+  padding: 1rem;
+  border-radius: var(--box-border-radius);
+}
+
+.delete-button {
+  background-color: var(--serious-button-color);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: red;
+}
