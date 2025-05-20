@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * REST API controller to serve image data related to flight companies.
- */
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @CrossOrigin(origins = "*") // Allow frontend access
+@Tag(name = "Flight Company Images", description = "Endpoints to fetch images and logos of flight companies")
 public class ImageController {
 
   private static final Logger logger = LoggerFactory.getLogger(ImageController.class);
@@ -27,6 +30,12 @@ public class ImageController {
    * @param id The ID of the flight company
    * @return The image as byte[] in response entity or error message
    */
+  @Operation(summary = "Get company banner image",
+             description = "Returns the banner image (JPEG) for the flight company with the specified ID.")
+  @ApiResponses({
+    @ApiResponse(responseCode = "200", description = "Image found and returned", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "image/jpeg")),
+    @ApiResponse(responseCode = "404", description = "Image not found")
+  })
   @GetMapping("/api/company/{id}/image")
   public ResponseEntity<?> getCompanyImage(@PathVariable int id) {
     logger.info("Request received to fetch company image for ID: {}", id);
@@ -50,6 +59,12 @@ public class ImageController {
    * @param id The ID of the flight company
    * @return The logo image as byte[] in response entity or error message
    */
+  @Operation(summary = "Get company logo image",
+             description = "Returns the logo image (PNG) for the flight company with the specified ID.")
+  @ApiResponses({
+    @ApiResponse(responseCode = "200", description = "Logo image found and returned", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "image/png")),
+    @ApiResponse(responseCode = "404", description = "Logo image not found")
+  })
   @GetMapping("/api/company/{id}/logo")
   public ResponseEntity<?> getCompanyLogo(@PathVariable int id) {
     logger.info("Request received to fetch company logo for ID: {}", id);

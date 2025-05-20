@@ -10,51 +10,80 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDate;
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/api/flights")
-@CrossOrigin(origins = "*") 
+@CrossOrigin(origins = "*")
+@Tag(name = "Flight Prices", description = "Endpoints for fetching flight price information")
 public class PriceController {
 
-    private static final Logger logger = LoggerFactory.getLogger(PriceController.class);  // Logger instance
+    private static final Logger logger = LoggerFactory.getLogger(PriceController.class);
 
     @Autowired
     private PriceRepository priceRepository;
 
-    // Endpoint to fetch the cheapest flight
+    @Operation(summary = "Get the cheapest flight",
+               description = "Returns the single cheapest flight available.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Cheapest flight retrieved successfully")
+    })
     @GetMapping("/cheapest")
     public Price getCheapestFlight() {
         return priceRepository.findCheapestFlight();
-
     }
 
-    // Endpoint to fetch flights departing today
+    @Operation(summary = "Get flights departing today",
+               description = "Returns a list of flights departing on the current date.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Flights departing today retrieved successfully")
+    })
     @GetMapping("/today")
     public List<Price> getFlightsToday() {
         LocalDate today = LocalDate.now();
         return priceRepository.findRandomFlightByDate(today);
     }
 
-    // Endpoint to fetch flights departing tomorrow
+    @Operation(summary = "Get flights departing tomorrow",
+               description = "Returns a list of flights departing on the next day.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Flights departing tomorrow retrieved successfully")
+    })
     @GetMapping("/tomorrow")
     public List<Price> getFlightsTomorrow() {
         LocalDate tomorrow = LocalDate.now().plusDays(1);
         return priceRepository.findRandomFlightByDate(tomorrow);
     }
 
-    // Endpoint to fetch random flights
+    @Operation(summary = "Get random flights",
+               description = "Returns a list of randomly selected flights.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Random flights retrieved successfully")
+    })
     @GetMapping("/random")
     public List<Price> getRandomFlights() {
         return priceRepository.findRandomFlight();
     }
 
-    // Endpoint to fetch highest discounted flight
+    @Operation(summary = "Get flights with the highest discount",
+               description = "Returns a list of flights offering the highest discount.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Flights with highest discount retrieved successfully")
+    })
     @GetMapping("/highest-discount")
     public List<Price> getHighestDiscountedFlight() {
         return priceRepository.findHighestDiscountFlight();
     }
 
-    // Endpoint to fetch flights based on a list of IDs
+    @Operation(summary = "Get flights by a list of IDs",
+               description = "Returns a list of flights matching the provided IDs.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Flights retrieved successfully"),
+        @ApiResponse(responseCode = "400", description = "Invalid request data")
+    })
     @PostMapping("/getFlightByIds")
     public List<Price> getFlightByIds(@RequestBody List<Integer> ids) {
         return priceRepository.findPricesByIds(ids);
