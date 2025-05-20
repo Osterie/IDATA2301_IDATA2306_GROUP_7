@@ -26,6 +26,13 @@ public class AccessUserService implements UserDetailsService {
   @Autowired
   UserRepository userRepository;
 
+  /**
+   * Load user by username.
+   *
+   * @param username Username of the user to load
+   * @return UserDetails object containing user information
+   * @throws UsernameNotFoundException if user is not found
+   */
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     Optional<User> user = userRepository.findByUsername(username);
@@ -48,6 +55,11 @@ public class AccessUserService implements UserDetailsService {
     return userRepository.findByUsername(username).orElse(null);
   }
 
+  /**
+   * Gets all users in the database.
+   * 
+   * @return All users in the database
+   */
   public Iterable<User> getAllUsers() {
     return userRepository.findAll();
   }
