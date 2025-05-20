@@ -11,6 +11,9 @@ import "./shoppingCartHero.css";
 
 const ShoppingCartHero = ( {setActivePage, setSelectedFlight} ) => {
   const [flights, setFlights] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+
+
   const userId = getCookie("current_user_id");
 
   
@@ -97,7 +100,14 @@ const handlePurchase = async () => {
       }
     );
   } finally {
+    setShowPopup(true);   
+
     setIsPurchasing(false);
+
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);// 3 seconds
+    setActivePage("profile");
   }
 };
 
@@ -141,6 +151,12 @@ const getTotalPrice = () => {
 
   return (
     <section className="hero">
+            
+          {showPopup && (
+              <div className="cart-popup-message">
+              Thank you for the purcahse!
+            </div>
+          )}
       <div className="shopping-cart-container">
         <h1>Shopping Cart</h1>
 
@@ -213,10 +229,15 @@ const getTotalPrice = () => {
             </>
           ) : (
             <p>Your shopping cart is empty.</p>
+
+
+            
           )}
+
         </div>
       </div>
     </section>
+    
   );
 };
 

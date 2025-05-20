@@ -214,3 +214,16 @@
 .flight-card-toggle-visibility-button:hover {
   background-color: red;
 }
+
+.flight-popup-message {
+  opacity: 0.9;
+  position: absolute;
+  bottom: 3.7em;
+  right: 1em;
+    background: var(--primary-color);
+    color: var(--primary-contrast);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: wrap;
+}

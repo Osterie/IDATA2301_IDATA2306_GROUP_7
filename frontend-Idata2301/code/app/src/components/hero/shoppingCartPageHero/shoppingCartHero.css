@@ -113,3 +113,17 @@
   font-size: 18px;
   text-align: center;
 }
+
+.cart-popup-message {
+
+  z-index: 10;
+  height: 40vh;
+  width: 60vh;
+  position: absolute;
+  background: #333;
+  color: green;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 4rem;
+  white-space: wrap;
+}

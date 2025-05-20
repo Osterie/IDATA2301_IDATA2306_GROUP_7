@@ -43,8 +43,15 @@ const FlightCard = ({
     },
   } = flight;
 
+  const [showPopup, setShowPopup] = React.useState(false);
+
   const handleAddToCart = () => {
+    setShowPopup(true);
     addToShoppingCart(id);
+
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 5000);// 5 seconds
   };
 
   const handleToggleVisibility = async () => {
@@ -154,30 +161,40 @@ const FlightCard = ({
       >
         Details
       </button>
-
       {purchasable && (
+        
+        
         <button className="flight-cart-button" onClick={handleAddToCart}>
-          Add to cart
-        </button>
-      )}
+            Add to cart
+          </button>
 
-      <div
+          )}
+            
+        <div>
+          {showPopup && (
+            <div className="flight-popup-message">
+              ✅ Added to cart!
+            </div>
+          )}
+
+        </div>
+        <div
         className={`flight-card-favorite-button ${
           isFavorite ? "favorited" : ""
         }`}
-        onClick={() => onFavoriteToggle?.(flight.id, isFavorite)}
-      >
-        <div className="favorite-content">
-          <img
-            src={isFavorite ? favActivePicture : favInactivePicture}
-            alt={isFavorite ? "Flight is favorited" : "Flight is not favorited"}
+          onClick={() => onFavoriteToggle?.(flight.id, isFavorite)}
+        >
+            <div className="favorite-content">
+              <img
+                src={isFavorite ? favActivePicture : favInactivePicture}
+                alt={isFavorite ? "Flight is favorited" : "Flight is not favorited"}
             className="favorite-icon"
           />
-          {/* <div className="favorite-text">
-            {isFavorite ? "Favorited" : "Not Favorited"}
-          </div> */}
-        </div>
-      </div>
+              {/* <div className="favorite-text">
+      {isFavorite ? "Favorited" : "Not Favorited"}
+    </div> */}
+            </div>
+          </div>
 
       {actionButton && (
         <button
