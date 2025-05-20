@@ -45,7 +45,7 @@ public class PriceController {
     // Endpoint to fetch random flights
     @GetMapping("/random")
     public List<Price> getRandomFlights() {
-        return priceRepository.findRandomFlights();
+        return priceRepository.findRandomFlight();
     }
 
     // Endpoint to fetch highest discounted flight

@@ -41,9 +41,9 @@ public interface PriceRepository extends CrudRepository<Price, Integer> {
        List<Price> searchForFlights(@Param("departure") String departure, @Param("arrival") String arrival,
                      @Param("fromDate") LocalDate fromDate, @Param("toDate") LocalDate toDate);
 
-       @Query("SELECT p FROM Price p " +
-                     "ORDER BY FUNCTION('RAND') LIMIT 1")
-       List<Price> findRandomFlights();
+       @Query("SELECT p FROM Price p WHERE p.isHidden = FALSE " +
+                     "ORDER BY RAND() LIMIT 1")
+       List<Price> findRandomFlight();
 
        @Query("SELECT p FROM Price p " +
                      "ORDER BY p.price ASC LIMIT 1")
@@ -51,10 +51,11 @@ public interface PriceRepository extends CrudRepository<Price, Integer> {
 
        @Query("SELECT p FROM Price p " +
                      "WHERE p.scheduledFlight.date = :date " +
-                     "ORDER BY FUNCTION('RAND') LIMIT 1")
+                     "AND p.isHidden = FALSE " +
+                     "ORDER BY RAND() LIMIT 1")
        List<Price> findRandomFlightByDate(@Param("date") LocalDate date);
 
-       @Query("SELECT p FROM Price p " +
+       @Query("SELECT p FROM Price p WHERE p.isHidden = FALSE " +
                      "ORDER BY p.discount DESC LIMIT 1")
        List<Price> findHighestDiscountFlight();
 
