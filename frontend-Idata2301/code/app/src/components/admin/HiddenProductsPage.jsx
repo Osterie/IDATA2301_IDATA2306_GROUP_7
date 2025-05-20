@@ -21,6 +21,7 @@ const HiddenProductsPage = ({ handleGoBack }) => {
           setHiddenProducts(response);
         } else {
           console.log("No hidden flights found.");
+          setLoading(false);
         }
       },
       null, // No request body for GET
