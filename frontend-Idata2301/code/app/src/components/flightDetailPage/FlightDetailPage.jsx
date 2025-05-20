@@ -4,6 +4,7 @@ import FlightDetailPageCard from "./FlightDetailPageCard";
 import { getCompanyImage } from "../../library/imageRequests";
 import { sendApiRequest } from "../../library/requests";
 import flightHeroImage from "../../resources/images/avel-chuklanov-Ou1eqo29Ums-unsplash.jpg";
+import { getFlightAccommodations } from "../../library/accommodations";
 
 
 const FlightDetailPage = ({ searchParams, flight, setActivePage, handleGoBack}) => {
@@ -45,6 +46,19 @@ const FlightDetailPage = ({ searchParams, flight, setActivePage, handleGoBack}) 
       getProviderAlternatives();
     }
   }, [flight, searchParams]);
+
+  /* TODO: This one is made to test flight accommodations request */
+  useEffect(() => {
+    if (flight && flight.id) {
+      getFlightAccommodations(flight.id)
+        .then((accommodations) => {
+          console.log("Accommodations for flight:", accommodations);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch accommodations:", error);
+        });
+    }
+  }, [flight]);
 
   return (
     <section>
