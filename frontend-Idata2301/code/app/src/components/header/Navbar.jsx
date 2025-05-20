@@ -4,7 +4,7 @@ import "./nav.css";
 import logo from "./images/logo3.png";
 import { isAdmin } from "../../library/Identity/authentication"; // adjust path
 
-const Navbar = ({ onNavClick, user }) => {
+const Navbar = ({ setActivePage, user }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -30,9 +30,9 @@ const Navbar = ({ onNavClick, user }) => {
       </a>
 
       <ul className={isMenuOpen ? "active" : ""}>
-        <li><a href="#" onClick={() => onNavClick("home")}>Home</a></li>
-        <li><a href="#" onClick={() => onNavClick("deals")}>Deals</a></li>
-        <li><a href="#" onClick={() => onNavClick("about")}>About</a></li>
+        <li><a href="#" onClick={() => setActivePage("home")}>Home</a></li>
+        <li><a href="#" onClick={() => setActivePage("deals")}>Deals</a></li>
+        <li><a href="#" onClick={() => setActivePage("about")}>About</a></li>
           
         {/* Conditionally show Log In or Log Out */}
           {user ? (
@@ -40,15 +40,15 @@ const Navbar = ({ onNavClick, user }) => {
             <li><a href="#" className="log-out-button" onClick={doLogout}>Log Out</a></li>
           </>
         ) : (
-          <li><a href="#" onClick={() => onNavClick("login")}>Log In</a></li>
+          <li><a href="#" onClick={() => setActivePage("login")}>Log In</a></li>
         )}
 
         {showAdmin && (
-          <li><a href="#" onClick={() => onNavClick("admin")}>Admin</a></li>
+          <li><a href="#" onClick={() => setActivePage("admin")}>Admin</a></li>
         )}
 
-        <li><a className="nav-bar-icon" href="#" onClick={() => onNavClick("profile")}>🙍</a></li>
-        <li><a className="nav-bar-icon" href="#" onClick={() => onNavClick("shoppingCart")}>🛒</a></li>
+        <li><a className="nav-bar-icon" href="#" onClick={() => setActivePage("profile")}>🙍</a></li>
+        <li><a className="nav-bar-icon" href="#" onClick={() => setActivePage("shoppingCart")}>🛒</a></li>
 
       </ul>
     </nav>

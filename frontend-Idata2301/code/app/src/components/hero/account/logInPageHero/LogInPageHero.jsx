@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './logInPageHero.css';
 import { sendAuthenticationRequest } from '../../../../library/Identity/authentication'; // Adjust the import path as needed
 
-const LoginPageHero = ({ onNavClick }) => {
+const LoginPageHero = ({ setActivePage }) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -71,7 +71,7 @@ const LoginPageHero = ({ onNavClick }) => {
           </div>
         </form>
         
-        <a id="create-account-link" href="#" onClick={() => onNavClick("create-account")}>If you dont have one, create one!</a>
+        <a id="create-account-link" href="#" onClick={() => setActivePage("create-account")}>If you dont have one, create one!</a>
 
       </div>
 

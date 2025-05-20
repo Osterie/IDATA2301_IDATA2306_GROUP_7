@@ -97,7 +97,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Navbar onNavClick={navigateTo} user={user} />
+        <Navbar setActivePage={navigateTo} user={user} />
       </header>
 
       <main>
@@ -135,13 +135,13 @@ function App() {
             <ProfilePage user={user} setSelectedFlight={setSelectedFlight} setActivePage={navigateTo} />
           </>
         )}
-        {activePage === "login" && <LogInPageHero onNavClick={navigateTo} />}
+        {activePage === "login" && <LogInPageHero setActivePage={navigateTo} />}
         {activePage === "admin" && <AdminPage setActivePage={navigateTo} />}
         {activePage === "manage-users" && <ManageUserPage handleGoBack={handleGoBack} />}
         {activePage === "hidden-products" && <HiddenProductsPage handleGoBack={handleGoBack} />}
         {activePage === "create-account" && <CreateAccount />} {/* no navigation prop, so no change */}
         {activePage === "shoppingCart" && (
-          <ShoppingCartHero onNavClick={navigateTo} setSelectedFlight={setSelectedFlight} />
+          <ShoppingCartHero setActivePage={navigateTo} setSelectedFlight={setSelectedFlight} />
         )}
       </main>
 
