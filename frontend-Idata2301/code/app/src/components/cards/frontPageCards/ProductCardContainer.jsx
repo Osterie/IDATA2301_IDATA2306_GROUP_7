@@ -100,7 +100,6 @@ const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
 
       <div className="product-container">
         {products.map((product, index) => (
-          console.log(product),
           <ProductCard
             key={index}
             flight={product}
