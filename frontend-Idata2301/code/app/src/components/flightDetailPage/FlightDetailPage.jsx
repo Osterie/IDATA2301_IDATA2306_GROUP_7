@@ -5,7 +5,7 @@ import { getCompanyImage } from "../../library/imageRequests";
 import { sendApiRequest } from "../../library/requests";
 import flightHeroImage from "../../resources/images/avel-chuklanov-Ou1eqo29Ums-unsplash.jpg";
 
-const FlightDetailPage = ({ searchParams, flight, setActivePage}) => {
+const FlightDetailPage = ({ searchParams, flight, setActivePage, handleGoBack}) => {
   const [companyImageUrl, setCompanyImageUrl] = useState(null);
   const [providerAlternatives, setProviderAlternatives] = useState([]);
 
@@ -74,7 +74,9 @@ const FlightDetailPage = ({ searchParams, flight, setActivePage}) => {
   return (
     <section>
       <header className="flight-hero-image">
-        <button onClick={() => setActivePage("deals")} className="back-button">← Back to admin page</button>
+        <button onClick={handleGoBack} className="back-button">
+          ← Go Back
+        </button>
         <img
           src={companyImageUrl || flightHeroImage}
           alt="Company or default flight image"
