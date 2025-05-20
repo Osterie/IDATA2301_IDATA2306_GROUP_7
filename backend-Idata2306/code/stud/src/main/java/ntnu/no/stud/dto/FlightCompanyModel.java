@@ -1,7 +1,9 @@
 package ntnu.no.stud.dto;
 
-
-public class FlightCompanyDTO {
+/**
+ * Data that the user will send in the request to add a product to their favorites.
+ */
+public class FlightCompanyModel {
 
     private int id;
 
@@ -12,7 +14,7 @@ public class FlightCompanyDTO {
     /**
      * Default constructor required by JPA.
      */
-    public FlightCompanyDTO() {
+    public FlightCompanyModel() {
     }
 
     /**
@@ -21,7 +23,7 @@ public class FlightCompanyDTO {
      * @param name          the full name of the company
      * @param abbreviation  the unique abbreviation for the company
      */
-    public FlightCompanyDTO(String name,  String abbreviation) {
+    public FlightCompanyModel(String name,  String abbreviation) {
         this.name = name;
         this.abbreviation = abbreviation;
     }

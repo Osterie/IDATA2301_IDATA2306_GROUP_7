@@ -1,10 +1,10 @@
 package ntnu.no.stud.controllers;
 
 import ntnu.no.stud.entities.Purchase;
-import ntnu.no.stud.models.PurchaseRequest;
 import ntnu.no.stud.repositories.PurchaseRepository;
 import ntnu.no.stud.repositories.FlightClassesRepository;
 import ntnu.no.stud.repositories.PriceRepository;
+import ntnu.no.stud.dto.PurchaseRequest;
 import ntnu.no.stud.entities.Price;
 import ntnu.no.stud.entities.User;
 import ntnu.no.stud.repositories.UserRepository;

@@ -1,6 +1,6 @@
 package ntnu.no.stud.controllers;
 
-import ntnu.no.stud.dto.UserProfileDto;
+import ntnu.no.stud.dto.UserProfileModel;
 import ntnu.no.stud.entities.User;
 import ntnu.no.stud.AccessUserService;
 import org.slf4j.Logger;
@@ -41,7 +41,7 @@ public class UserController {
     logger.info("Request received to fetch profile for username: {}", username);
     User sessionUser = userService.getSessionUser();
     if (sessionUser != null && sessionUser.getUsername().equals(username)) {
-      UserProfileDto profile = new UserProfileDto(sessionUser.getEmail());
+      UserProfileModel profile = new UserProfileModel(sessionUser.getEmail());
       logger.info("Successfully fetched profile for username: {}", username);
       return new ResponseEntity<>(profile, HttpStatus.OK);
     } else if (sessionUser == null) {
@@ -64,7 +64,7 @@ public class UserController {
     @ApiResponse(responseCode = "500", description = "Server error when updating profile")
   })
   @PutMapping("/api/users/{username}")
-  public ResponseEntity<String> updateProfile(@PathVariable String username, @RequestBody UserProfileDto profileData) {
+  public ResponseEntity<String> updateProfile(@PathVariable String username, @RequestBody UserProfileModel profileData) {
     logger.info("Request received to update profile for username: {}", username);
     User sessionUser = userService.getSessionUser();
 

@@ -4,7 +4,7 @@ import java.io.IOException;
 import ntnu.no.stud.AccessUserService;
 import ntnu.no.stud.dto.AuthenticationRequest;
 import ntnu.no.stud.dto.AuthenticationResponse;
-import ntnu.no.stud.dto.SignupDto;
+import ntnu.no.stud.dto.SignupModel;
 import ntnu.no.stud.security.JwtUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,9 +93,9 @@ public class AuthenticationController {
     @io.swagger.v3.oas.annotations.parameters.RequestBody(
       description = "Sign-up data including username, password and email",
       required = true,
-      content = @Content(schema = @Schema(implementation = SignupDto.class))
+      content = @Content(schema = @Schema(implementation = SignupModel.class))
     )
-    @RequestBody SignupDto signupData) {
+    @RequestBody SignupModel signupData) {
     
     logger.info("Sign-up attempt for username: {}", signupData.getUsername());
 

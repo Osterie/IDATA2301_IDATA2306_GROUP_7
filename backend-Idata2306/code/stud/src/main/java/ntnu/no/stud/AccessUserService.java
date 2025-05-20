@@ -3,7 +3,7 @@ package ntnu.no.stud;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import ntnu.no.stud.dto.UserProfileDto;
+import ntnu.no.stud.dto.UserProfileModel;
 import ntnu.no.stud.entities.User;
 import ntnu.no.stud.repositories.UserRepository;
 import ntnu.no.stud.security.AccessUserDetails;
@@ -154,7 +154,7 @@ public class AccessUserService implements UserDetailsService {
    * @param profileData Profile data to set for the user
    * @return True on success, false otherwise
    */
-  public boolean updateProfile(User user, UserProfileDto profileData) {
+  public boolean updateProfile(User user, UserProfileModel profileData) {
     user.setEmail(profileData.getEmail());
     userRepository.save(user);
     return true;

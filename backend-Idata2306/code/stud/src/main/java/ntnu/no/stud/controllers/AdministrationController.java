@@ -2,12 +2,12 @@ package ntnu.no.stud.controllers;
 
 import java.util.List;
 
+import ntnu.no.stud.dto.EditRoleModel;
+import ntnu.no.stud.dto.EditUsersInRoleModel;
+import ntnu.no.stud.dto.SetProductVisibilityModel;
 import ntnu.no.stud.entities.Price;
 import ntnu.no.stud.entities.User;
 import ntnu.no.stud.entities.UserRole;
-import ntnu.no.stud.models.EditRoleModel;
-import ntnu.no.stud.models.EditUsersInRoleModel;
-import ntnu.no.stud.models.SetProductVisibilityModel;
 import ntnu.no.stud.repositories.PriceRepository;
 import ntnu.no.stud.repositories.UserRepository;
 

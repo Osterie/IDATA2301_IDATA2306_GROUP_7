@@ -6,10 +6,20 @@ package ntnu.no.stud.dto;
 public class AuthenticationResponse {
   private final String jwt;
 
+  /**
+   * Constructor for AuthenticationResponse.
+   *
+   * @param jwt the JWT token
+   */
   public AuthenticationResponse(String jwt) {
     this.jwt = jwt;
   }
 
+  /**
+   * Gets the JWT token.
+   * 
+   * @return the JWT token
+   */
   public String getJwt() {
     return jwt;
   }

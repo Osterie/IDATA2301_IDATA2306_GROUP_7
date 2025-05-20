@@ -1,11 +1,11 @@
 package ntnu.no.stud.repositories;
 
+import ntnu.no.stud.dto.Passenger;
+import ntnu.no.stud.dto.SearchedFlight;
 import ntnu.no.stud.entities.Airport;
 import ntnu.no.stud.entities.ClassEntity;
 import ntnu.no.stud.entities.Flight;
 import ntnu.no.stud.entities.Route;
-import ntnu.no.stud.models.Passenger;
-import ntnu.no.stud.models.SearchedFlight;
 
 import java.time.LocalDate;
 import java.util.List;
