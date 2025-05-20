@@ -119,7 +119,7 @@ function App() {
         {activePage === "manage-users" && <ManageUserPage />}
         {activePage === "hidden-products" && <HiddenProductsPage />}
         {activePage === "create-account" && <CreateAccount />}
-        {activePage === "shoppingCart" && (<ShoppingCartHero onNavClick={handleNavClick} />)}
+        {activePage === "shoppingCart" && (<ShoppingCartHero onNavClick={handleNavClick} setSelectedFlight={setSelectedFlight} />)}
       </main>
 
       <Footer />

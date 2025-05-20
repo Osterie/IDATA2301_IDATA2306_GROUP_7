@@ -9,10 +9,8 @@ import { convertCurrency } from "../../../utils/currencyUtils";
 
 import "./shoppingCartHero.css";
 
-const ShoppingCartHero = ( {onNavClick} ) => {
+const ShoppingCartHero = ( {onNavClick, setSelectedFlight} ) => {
   const [flights, setFlights] = useState([]);
-
-
   const userId = getCookie("current_user_id");
 
   
@@ -71,6 +69,12 @@ const ShoppingCartHero = ( {onNavClick} ) => {
   const [isPurchasing, setIsPurchasing] = useState(false);
 
 const handlePurchase = async () => {
+
+  if (!userId) {
+    onNavClick("login");
+    return;
+  }
+
   setIsPurchasing(true);
   try {
     const cartIds = getShoppingCartAsArray();
@@ -138,6 +142,8 @@ const getTotalPrice = () => {
         <FlightCard
           key={flight.id}
           flight={flight}
+          setSelectedFlight = {setSelectedFlight}
+          setActivePage={onNavClick}
           purchasable={false}
           actionButton={
             <button onClick={() => handleRemoveFromCart(flight.id)}>
