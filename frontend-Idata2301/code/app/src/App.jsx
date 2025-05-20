@@ -137,8 +137,8 @@ function App() {
         )}
         {activePage === "login" && <LogInPageHero onNavClick={navigateTo} />}
         {activePage === "admin" && <AdminPage setActivePage={navigateTo} />}
-        {activePage === "manage-users" && <ManageUserPage setActivePage={navigateTo} />}
-        {activePage === "hidden-products" && <HiddenProductsPage setActivePage={navigateTo} />}
+        {activePage === "manage-users" && <ManageUserPage handleGoBack={handleGoBack} />}
+        {activePage === "hidden-products" && <HiddenProductsPage handleGoBack={handleGoBack} />}
         {activePage === "create-account" && <CreateAccount />} {/* no navigation prop, so no change */}
         {activePage === "shoppingCart" && (
           <ShoppingCartHero onNavClick={navigateTo} setSelectedFlight={setSelectedFlight} />
