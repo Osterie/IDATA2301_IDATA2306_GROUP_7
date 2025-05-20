@@ -116,8 +116,8 @@ function App() {
         )}
         {activePage === "login" && <LogInPageHero onNavClick={handleNavClick} />}
         {activePage === "admin" && <AdminPage setActivePage={setActivePage} />}
-        {activePage === "manage-users" && <ManageUserPage />}
-        {activePage === "hidden-products" && <HiddenProductsPage />}
+        {activePage === "manage-users" && <ManageUserPage setActivePage={setActivePage} />}
+        {activePage === "hidden-products" && <HiddenProductsPage setActivePage={setActivePage} />}
         {activePage === "create-account" && <CreateAccount />}
         {activePage === "shoppingCart" && (<ShoppingCartHero onNavClick={handleNavClick} setSelectedFlight={setSelectedFlight} />)}
       </main>
