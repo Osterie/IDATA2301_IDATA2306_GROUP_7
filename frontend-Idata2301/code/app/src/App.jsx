@@ -48,15 +48,11 @@ function App() {
   const [selectedFlight, setSelectedFlight] = useState(null);
 
   const handleGoBack = () => {
-    console.log("hello outside: " + pageHistory);
-
     if (pageHistory.length === 0) return;
 
-    console.log(pageHistory);
     const previousPage = pageHistory[pageHistory.length - 1];
     setPageHistory(prev => prev.slice(0, -1));
     setActivePage(previousPage);
-    console.log("hello inside");
   };
 
 
@@ -71,11 +67,13 @@ function App() {
   //   checkJwtOnLoad();
   // }, []);
 
-  const handleNavClick = (page) => {
-    setPageHistory([...pageHistory, activePage]); // Add current page to history
-    setActivePage(page); // Change to the new page
-    console.log("changed page");
+  const navigateTo = (page) => {
+    if (page !== activePage) {
+      setPageHistory(prev => [...prev, activePage]);
+      setActivePage(page);
+    }
   };
+
 
 
   // Checks if user has already consented to cookies
@@ -99,20 +97,20 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Navbar onNavClick={handleNavClick} user={user} />
+        <Navbar onNavClick={navigateTo} user={user} />
       </header>
 
       <main>
         {/* Landing page */}
         {activePage === "home" && (
           <>
-            <HomePage setFlights={setFlights} setSelectedFlight={setSelectedFlight} setActivePage={setActivePage} searchParams={searchParams} setSearchParams={setSearchParams} />
+            <HomePage setFlights={setFlights} setSelectedFlight={setSelectedFlight} setActivePage={navigateTo} searchParams={searchParams} setSearchParams={setSearchParams} />
           </>
         )}
         {/* Searched flights and deals Page */}
         {activePage === "deals" && (
           <>
-            <DealsPage setFlights={setFlights} setActivePage={setActivePage} searchParams={searchParams} setSearchParams={setSearchParams} flights={flights} user={user} setSelectedFlight={setSelectedFlight}/>
+            <DealsPage setFlights={setFlights} setActivePage={navigateTo} searchParams={searchParams} setSearchParams={setSearchParams} flights={flights} user={user} setSelectedFlight={setSelectedFlight}/>
           </>
         )}
         {/* Details page */}
@@ -120,8 +118,8 @@ function App() {
           <FlightDetailPage
             searchParams={searchParams}
             flight={selectedFlight}
-            setActivePage={setActivePage}
-            handleGoBack={handleGoBack} // ✅ make sure this is passed
+            setActivePage={navigateTo}
+            handleGoBack={handleGoBack}
           />
         )}
 
@@ -134,15 +132,17 @@ function App() {
         {/* Profile settings and other personal information */}
         {activePage === "profile" && (
           <>
-            <ProfilePage user={user} setSelectedFlight={setSelectedFlight} setActivePage={setActivePage} />
+            <ProfilePage user={user} setSelectedFlight={setSelectedFlight} setActivePage={navigateTo} />
           </>
         )}
-        {activePage === "login" && <LogInPageHero onNavClick={handleNavClick} />}
-        {activePage === "admin" && <AdminPage setActivePage={setActivePage} />}
-        {activePage === "manage-users" && <ManageUserPage setActivePage={setActivePage} />}
-        {activePage === "hidden-products" && <HiddenProductsPage setActivePage={setActivePage} />}
-        {activePage === "create-account" && <CreateAccount />}
-        {activePage === "shoppingCart" && (<ShoppingCartHero onNavClick={handleNavClick} setSelectedFlight={setSelectedFlight} />)}
+        {activePage === "login" && <LogInPageHero onNavClick={navigateTo} />}
+        {activePage === "admin" && <AdminPage setActivePage={navigateTo} />}
+        {activePage === "manage-users" && <ManageUserPage setActivePage={navigateTo} />}
+        {activePage === "hidden-products" && <HiddenProductsPage setActivePage={navigateTo} />}
+        {activePage === "create-account" && <CreateAccount />} {/* no navigation prop, so no change */}
+        {activePage === "shoppingCart" && (
+          <ShoppingCartHero onNavClick={navigateTo} setSelectedFlight={setSelectedFlight} />
+        )}
       </main>
 
       <Footer />

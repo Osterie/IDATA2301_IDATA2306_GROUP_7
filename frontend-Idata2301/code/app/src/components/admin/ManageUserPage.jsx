@@ -6,7 +6,7 @@ import { removeRoleFromUser } from "../../library/Identity/users.js";
 import "./manageUserPage.css";
 import { getCookie, setCookie } from "../../library/tools.js";
 
-const ManageUserPage = ({ setActivePage }) => {
+const ManageUserPage = ({ handleGoBack }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -133,6 +133,10 @@ const ManageUserPage = ({ setActivePage }) => {
 
   return (
     <main style={{ padding: "2rem" }}>
+      <button onClick={handleGoBack} className="back-button">
+        ← Go Back
+      </button>
+
       <h1 className="manage-user-header">Manage Users</h1>
       <p>This is the user management page for admins.</p>
 

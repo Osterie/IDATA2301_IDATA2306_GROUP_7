@@ -3,7 +3,7 @@ import { sendApiRequest } from "../../library/requests";
 import FlightCard from "../cards/searchedFlights/FlightCard";
 import "./hiddenProductsPage.css";
 
-const HiddenProductsPage = ({ setActivePage }) => {
+const HiddenProductsPage = ({ handleGoBack }) => {
   const [hiddenProducts, setHiddenProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -45,7 +45,9 @@ const HiddenProductsPage = ({ setActivePage }) => {
 
   return (
     <div>
-      <button onClick={() => setActivePage("admin")} className="back-button">← Back to admin page</button>
+      <button onClick={handleGoBack} className="back-button">
+        ← Go Back
+      </button>
       <h1 className="hidden-page-title">Hidden products</h1>
 
       {loading ? (
