@@ -107,7 +107,7 @@ const handlePurchase = async () => {
     setTimeout(() => {
       setShowPopup(false);
     }, 3000);// 3 seconds
-    setActivePage("profile");
+
   }
 };
 
@@ -154,7 +154,7 @@ const getTotalPrice = () => {
             
           {showPopup && (
               <div className="cart-popup-message">
-              Thank you for the purcahse!
+              Thank you for the purchase!
             </div>
           )}
       <div className="shopping-cart-container">
@@ -177,9 +177,9 @@ const getTotalPrice = () => {
           setActivePage={setActivePage}
           purchasable={false}
           actionButton={
-            <button onClick={() => handleRemoveFromCart(flight.id)}>
-              Remove
-            </button>
+          <button onClick={() => handleRemoveFromCart(flight.id)}>
+            Remove
+          </button>
           }
         />
 

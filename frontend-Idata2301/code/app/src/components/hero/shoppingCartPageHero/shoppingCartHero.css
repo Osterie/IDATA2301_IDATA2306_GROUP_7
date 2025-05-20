@@ -1,7 +1,7 @@
 /* shoppingCart.css */
 
 .shopping-cart-container {
-  width: 100vh;
+  width: 100vw;
   display: inline-block; /* Shrinks to fit content */
   padding: 40px 20px;
   background-color: #fdfdfd;
@@ -118,7 +118,7 @@
 
   z-index: 10;
   height: 40vh;
-  width: 60vh;
+  width: 60vw;
   position: absolute;
   background: #333;
   color: green;

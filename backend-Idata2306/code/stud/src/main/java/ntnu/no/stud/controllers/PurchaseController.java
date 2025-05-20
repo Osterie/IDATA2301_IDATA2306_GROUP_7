@@ -80,8 +80,9 @@ public class PurchaseController {
             Price price = priceRepository.findById(purchaseRequest.getPriceId()).orElse(null);
 
             Purchase purchase = new Purchase(user, price, LocalDate.now());
-            Purchase savedPurchase = purchaseRepository.save(purchase);
-            flightClassesRepository.removeAvaliableSeat(savedPurchase.getPrice().getFlightClassId().getId());
+            
+            flightClassesRepository.removeAvaliableSeat(purchase.getPrice().getFlightClassId().getId());
+            purchaseRepository.save(purchase);
         }
 
         return ResponseEntity.ok("Purchases created successfully.");

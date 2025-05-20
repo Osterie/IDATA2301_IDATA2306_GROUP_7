@@ -51,7 +51,7 @@ const FlightCard = ({
 
     setTimeout(() => {
       setShowPopup(false);
-    }, 5000);// 5 seconds
+    }, 3000);// 5 seconds
   };
 
   const handleToggleVisibility = async () => {
@@ -161,23 +161,7 @@ const FlightCard = ({
       >
         Details
       </button>
-      {purchasable && (
-        
-        
-        <button className="flight-cart-button" onClick={handleAddToCart}>
-            Add to cart
-          </button>
 
-          )}
-            
-        <div>
-          {showPopup && (
-            <div className="flight-popup-message">
-              ✅ Added to cart!
-            </div>
-          )}
-
-        </div>
         <div
         className={`flight-card-favorite-button ${
           isFavorite ? "favorited" : ""
@@ -204,6 +188,24 @@ const FlightCard = ({
           {actionButton.props.children}
         </button>
       )}
+
+            {purchasable && (
+        
+        
+        <button className="flight-cart-button" onClick={handleAddToCart}>
+            Add to cart
+          </button>
+
+          )}
+            
+        <div>
+          {showPopup && (
+            <div className="flight-popup-message">
+              ✅ Added to cart!
+            </div>
+          )}
+
+        </div>
 
       <p className="flight-card-provider">Provider: {provider}</p>
 

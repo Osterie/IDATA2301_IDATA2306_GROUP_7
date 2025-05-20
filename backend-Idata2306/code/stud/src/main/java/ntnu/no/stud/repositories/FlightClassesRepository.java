@@ -20,6 +20,17 @@ public interface FlightClassesRepository extends CrudRepository<FlightClasses, I
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE flight_classes SET available_seats = available_seats - 1 WHERE flight_id = :flightId", nativeQuery = true)
-    void removeAvaliableSeat(int flightId);
+    @Query(value = "UPDATE flight_classes SET available_seats = available_seats - 1 WHERE id = :flightClassId", nativeQuery = true)
+    void removeAvaliableSeat(int flightClassId);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE flight_classes SET available_seats = available_seats - 1 WHERE id = :flightClassId", nativeQuery = true)
+    void removeAvailableSeatByClassId(int flightClassId);
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE flight_classes SET available_seats = available_seats - numberOfSeets WHERE flight_id = :flightId", nativeQuery = true)
+    void removeAvaliableSeats(int flightId, int numberOfSeats);
 }
