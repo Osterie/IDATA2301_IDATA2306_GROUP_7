@@ -2,9 +2,11 @@ import React from "react";
 import "./flightDetailPage.css";
 import { getPreferredCurrency } from "../../utils/cookieUtils";
 import { convertCurrency } from "../../utils/currencyUtils";
+import { addToShoppingCart } from "../../utils/shoppingCartUtils";
 
-const FlightDetailPageCard = ({ flight, onAddToCart, onBuyNow }) => {
+const FlightDetailPageCard = ({ flight }) => {
   const {
+    id,
     flightClassId: {
       flightClass: { name: flightClassName },
       flight: { name: flightName, company },
@@ -24,10 +26,9 @@ const FlightDetailPageCard = ({ flight, onAddToCart, onBuyNow }) => {
   } = flight;
 
   const handleAddToCart = () => {
-    if (onAddToCart) {
-      onAddToCart(flight);
-    }
+    addToShoppingCart(id);
   };
+
 
   const calculateDiscountedPrice = (price, discount) => {
     return discount > 0 ? (price - (price * discount) / 100).toFixed(0) : price;
@@ -91,11 +92,12 @@ const FlightDetailPageCard = ({ flight, onAddToCart, onBuyNow }) => {
             {convertCurrency(discountedPrice, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
           </p>
         )}
+
       </div>
+      <p className="flight-card-provider">Provider: {provider}</p>
 
       <footer className="action-buttons">
         <button className="btn add-to-cart" onClick={handleAddToCart}>Add to cart</button>
-        <button className="btn buy-now" onClick={() => onBuyNow(flight)}>Buy Now</button>
       </footer>
     </article>
   );

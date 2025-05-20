@@ -5,7 +5,7 @@ import { getCompanyImage } from "../../library/imageRequests";
 import { sendApiRequest } from "../../library/requests";
 import flightHeroImage from "../../resources/images/avel-chuklanov-Ou1eqo29Ums-unsplash.jpg";
 
-const FlightDetailPage = ({ searchParams, flight, onAddToCart, onBuyNow }) => {
+const FlightDetailPage = ({ searchParams, flight }) => {
   const [companyImageUrl, setCompanyImageUrl] = useState(null);
   const [providerAlternatives, setProviderAlternatives] = useState([]);
 
@@ -82,8 +82,6 @@ const FlightDetailPage = ({ searchParams, flight, onAddToCart, onBuyNow }) => {
 
       <FlightDetailPageCard
         flight={flight}
-        onAddToCart={onAddToCart}
-        onBuyNow={onBuyNow}
       />
 
       <article className="provider-alternative-parent">
@@ -93,8 +91,6 @@ const FlightDetailPage = ({ searchParams, flight, onAddToCart, onBuyNow }) => {
             <FlightDetailPageCard
               key={flight.id}
               flight={flight}
-              onAddToCart={onAddToCart}
-              onBuyNow={onBuyNow}
             />
           ))}
         </div>
