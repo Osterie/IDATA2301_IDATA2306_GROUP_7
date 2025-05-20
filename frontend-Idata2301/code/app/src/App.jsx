@@ -42,9 +42,23 @@ function App() {
     ]
   });
   const [activePage, setActivePage] = useState("home");
+  const [pageHistory, setPageHistory] = useState([]);
   const [flights, setFlights] = useState([]);  // Store flight data
   const [user, setUser] = useState(null);
   const [selectedFlight, setSelectedFlight] = useState(null);
+
+  const handleGoBack = () => {
+    console.log("hello outside: " + pageHistory);
+
+    if (pageHistory.length === 0) return;
+
+    console.log(pageHistory);
+    const previousPage = pageHistory[pageHistory.length - 1];
+    setPageHistory(prev => prev.slice(0, -1));
+    setActivePage(previousPage);
+    console.log("hello inside");
+  };
+
 
   useEffect(() => {
     const loggedInUser = getAuthenticatedUser();
@@ -58,8 +72,11 @@ function App() {
   // }, []);
 
   const handleNavClick = (page) => {
-    setActivePage(page);
+    setPageHistory([...pageHistory, activePage]); // Add current page to history
+    setActivePage(page); // Change to the new page
+    console.log("changed page");
   };
+
 
   // Checks if user has already consented to cookies
   // If no consent: Ask
@@ -100,8 +117,14 @@ function App() {
         )}
         {/* Details page */}
         {activePage === "flight-details" && selectedFlight && (
-          <FlightDetailPage searchParams={searchParams} flight={selectedFlight} setActivePage={setActivePage} />
+          <FlightDetailPage
+            searchParams={searchParams}
+            flight={selectedFlight}
+            setActivePage={setActivePage}
+            handleGoBack={handleGoBack} // ✅ make sure this is passed
+          />
         )}
+
         {/* About us information page */}
         {activePage === "about" && (
           <>
