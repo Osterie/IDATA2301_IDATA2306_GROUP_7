@@ -5,7 +5,6 @@ import ntnu.no.stud.entities.FlightCompany;
 import ntnu.no.stud.entities.Route;
 import ntnu.no.stud.repositories.FlightCompanyRepository;
 import ntnu.no.stud.repositories.FlightRepository;
-import ntnu.no.stud.repositories.RouteRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Component
@@ -30,9 +27,6 @@ public class FlightInitializer {
 
     @Autowired
     private FlightAccommodationInitializer flightAccommodationInitializer;
-
-    @Autowired
-    private FlightCompanyInitializer flightCompanyInitializer;
 
     @Autowired
     private final FlightRepository flightRepository;
@@ -58,40 +52,27 @@ public class FlightInitializer {
         generateRandomFlights(numberOfFlights, date, null);
     }
 
-    public void generateRandomFlights(int numberOfFlights, LocalDate date, Route route) {
-        try {
-            // Define a mapping between airlines and their prefixes
+public void generateRandomFlights(int numberOfFlights, LocalDate date, Route route) {
+    try {
+        // Creates and saves all flights
+        for (int i = 0; i < numberOfFlights; i++) {
+            int airlineId = flightCompanyRepository.getRandomCompanyId();
+            String airlinePrefix = flightCompanyRepository.findAbriviationById(airlineId);
 
+            Flight flight = createAndSaveFlight(airlineId, airlinePrefix);
 
-            for (int i = 0; i < numberOfFlights; i++) {
-
-
-                // Randomly select an airline
-                int airlineId = flightCompanyRepository.getRandomCompanyId();
-
-
-                String airlinePrefix = flightCompanyRepository.findAbriviationById(airlineId);
-
-                // Generate and save the flight
-                Flight flight = createAndSaveFlight(airlineId, airlinePrefix);
-
-                // Add accommodations and flight classes
-                for (int j = 0; j < 3; j++) {
-                    flightAccommodationInitializer.addRandomAccommodationToFlight(flight);
-                    flightClassInitializer.generateFlightClassesForFlight(flight);
-                }
-
-                // Generate scheduled flights
-                if (date != null) {
-                    scheduledFlightsInitializer.generateRandomScheduledFlightForFlight(flight, date);
-                } else if ((route != null)) {
-                    scheduledFlightsInitializer.generateRandomScheduledFlightForFlight(flight, route);
-                } else {
-                    scheduledFlightsInitializer.generateRandomScheduledFlightForFlight(flight);
-                }
+            // Adds accommodations and flight classes
+            for (int j = 0; j < 3; j++) {
+                flightAccommodationInitializer.addRandomAccommodationToFlight(flight);
+                flightClassInitializer.generateFlightClassesForFlight(flight);
             }
+        }
 
-            logger.info(numberOfFlights + " random flights generated successfully.");
+        // Generate scheduled flights for all created flights
+        scheduledFlightsInitializer.generateScheduledFlights();
+
+        logger.info(numberOfFlights + " random flights generated successfully.");
+
         } catch (Exception e) {
             logger.error("Error generating flight: " + e.getMessage());
         }
