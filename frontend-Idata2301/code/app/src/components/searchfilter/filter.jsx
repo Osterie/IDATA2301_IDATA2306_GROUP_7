@@ -5,10 +5,10 @@ import { convertCurrency } from "../../utils/currencyUtils";
 import { getPreferredCurrency } from "../../utils/cookieUtils";
 
 function findMinPrice(flights) {
-  return Math.min(...flights.map((flight) => flight.price));
+  return Math.min(...flights.map((flight) => calculateFinalPriceInUserCurrency(flight.price, flight.discount, flight.currencyCode)));
 }
 function findMaxPrice(flights) {
-  return Math.max(...flights.map((flight) => flight.price));
+  return Math.max(...flights.map((flight) => calculateFinalPriceInUserCurrency(flight.price, flight.discount, flight.currencyCode)));
 }
 
 // Dynamically extract unique companies from the flights array
