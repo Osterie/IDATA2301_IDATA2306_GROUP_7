@@ -9,7 +9,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   background: var(--primary-color);
-  height: 80px;
+  height: var(--navbar-height);
   width: 100%;
   padding: 0 20px;
   z-index: 10;
@@ -105,7 +105,7 @@ nav ul li a:hover {
     width: 100%;
     height: 120vh;
     background: var(--secondary-color);
-    top: 80px;
+    top: var(--navbar-height);
     left: -100%;
     text-align: center;
     flex-direction: column;

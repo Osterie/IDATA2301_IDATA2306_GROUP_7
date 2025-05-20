@@ -8,7 +8,7 @@ html, body {
 /* Hero Section */
 .hero {
   position: relative;
-  height: calc(100vh - 80px); /* Adjust this if navbar height changes */
+  height: calc(100vh - var(--navbar-height)); /* Adjust this if navbar height changes */
   display: flex;
   justify-content: center;
   align-items: center;
