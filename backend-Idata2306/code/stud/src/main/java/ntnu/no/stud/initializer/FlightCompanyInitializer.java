@@ -1,15 +1,12 @@
 package ntnu.no.stud.initializer;
 
-import jakarta.annotation.PostConstruct;
 import ntnu.no.stud.entities.FlightCompany;
 import ntnu.no.stud.repositories.FlightCompanyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +16,6 @@ public class FlightCompanyInitializer {
     private final FlightCompanyRepository flightCompanyRepository;
     private final Map<String, FlightCompany> companyMap = new HashMap<>();
 
-    @Autowired
     public FlightCompanyInitializer(FlightCompanyRepository flightCompanyRepository) {
         this.flightCompanyRepository = flightCompanyRepository;
     }

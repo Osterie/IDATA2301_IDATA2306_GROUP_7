@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +16,6 @@ public class ExtraFeatureInitializer {
 
     private final JdbcTemplate jdbcTemplate;
 
-    @Autowired
     public ExtraFeatureInitializer(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -25,7 +23,6 @@ public class ExtraFeatureInitializer {
     /**
      * Loads extra features into the database.
      */
-
     public void loadExtraFeatures() {
         try {
             // SQL to insert extra feature data

@@ -12,10 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 import java.time.LocalDate;
 import java.util.concurrent.ThreadLocalRandom;
-
 
 @Component
 public class ScheduledFlightsInitializer {
@@ -31,56 +29,40 @@ public class ScheduledFlightsInitializer {
 
     @Autowired
     public ScheduledFlightsInitializer(ScheduledFlightsRepository scheduledFlightsRepository,
-                                       PriceInitializer priceInitializer,
-                                       RouteRepository routeRepository) {
+            PriceInitializer priceInitializer,
+            RouteRepository routeRepository) {
         this.scheduledFlightsRepository = scheduledFlightsRepository;
         this.priceInitializer = priceInitializer;
         this.routeRepository = routeRepository;
     }
 
-    // public void generateRandomScheduledFlightForFlights() {
-    //     // Generate a random date within the next 365 days
-    //     LocalDate randomDate = LocalDate.now().plusDays(ThreadLocalRandom.current().nextInt(1, 365));
-    //     generateScheduledFlight(flight, randomDate, null);
-    // }
+    public void generateScheduledFlights() {
+        try {
+            Iterable<Flight> allFlights = flightRepository.findAll();
 
-    // public void generateRandomScheduledFlightForFlight(Flight flight, Route route) {
-    //     // Generate a random date within the next 365 days
-    //     LocalDate randomDate = LocalDate.now().plusDays(ThreadLocalRandom.current().nextInt(1, 365));
-    //     generateScheduledFlight(flight, randomDate, route);
-    // }
+            for (Flight flight : allFlights) {
+                try {
+                    // Generate a random date within the next 90 days
+                    LocalDate randomDate = LocalDate.now().plusDays(ThreadLocalRandom.current().nextInt(1, 91));
 
-    // public void generateRandomScheduledFlightForFlight(Flight flight, LocalDate date) {
-    //     generateScheduledFlight(flight, date, null);
-    // }
+                    // Fetch a random route
+                    Route route = routeRepository.findRandomRoute();
+                    if (route == null) {
+                        logger.error("Cannot generate scheduled flight: No routes available.");
+                        continue;
+                    }
 
-public void generateScheduledFlights() {
-    try {
-        Iterable<Flight> allFlights = flightRepository.findAll();
-        
-        for (Flight flight : allFlights) {
-            try {
-            // Generate a random date within the next 90 days
-            LocalDate randomDate = LocalDate.now().plusDays(ThreadLocalRandom.current().nextInt(1, 91));
-
-            // Fetch a random route
-            Route route = routeRepository.findRandomRoute();
-            if (route == null) {
-                logger.error("Cannot generate scheduled flight: No routes available.");
-                continue;
+                    // Create and save the scheduled flight
+                    ScheduledFlights scheduledFlights = new ScheduledFlights(flight, route, randomDate);
+                    scheduledFlightsRepository.save(scheduledFlights);
+                } catch (Exception e) {
+                    logger.error("Error generating scheduled flight for a flight", e);
+                    throw new RuntimeException("Scheduled flight generation failed: " + e.getMessage(), e);
+                }
             }
 
-            // Create and save the scheduled flight
-            ScheduledFlights scheduledFlights = new ScheduledFlights(flight, route, randomDate);
-            scheduledFlightsRepository.save(scheduledFlights);
-            } catch (Exception e) {
-                logger.error("Error generating scheduled flight for a flight", e);
-                throw new RuntimeException("Scheduled flight generation failed: " + e.getMessage(), e);
-            }
-        }
-
-        // Generate price for the scheduled flight
-        priceInitializer.generatePrices();
+            // Generate price for the scheduled flight
+            priceInitializer.generatePrices();
 
         } catch (Exception e) {
             logger.error("Error generating scheduled flights", e);

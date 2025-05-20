@@ -19,7 +19,6 @@ public class RouteInitializer {
     private final RouteRepository routeRepository;
     private final AirportRepository airportRepository;
 
-    @Autowired
     public RouteInitializer(RouteRepository routeRepository, AirportRepository airportRepository) {
         this.routeRepository = routeRepository;
         this.airportRepository = airportRepository;

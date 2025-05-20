@@ -7,7 +7,6 @@ import ntnu.no.stud.repositories.FlightClassesRepository;
 import ntnu.no.stud.repositories.ClassRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -20,7 +19,6 @@ public class FlightClassesInitializer {
     private final FlightClassesRepository flightClassesRepository;
     private final ClassRepository classRepository;
 
-    @Autowired
     public FlightClassesInitializer(FlightClassesRepository flightClassesRepository, ClassRepository classRepository) {
         this.flightClassesRepository = flightClassesRepository;
         this.classRepository = classRepository;

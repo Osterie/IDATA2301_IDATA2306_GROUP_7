@@ -52,26 +52,26 @@ public class FlightInitializer {
         generateRandomFlights(numberOfFlights, date, null);
     }
 
-public void generateRandomFlights(int numberOfFlights, LocalDate date, Route route) {
-    try {
-        // Creates and saves all flights
-        for (int i = 0; i < numberOfFlights; i++) {
-            int airlineId = flightCompanyRepository.getRandomCompanyId();
-            String airlinePrefix = flightCompanyRepository.findAbriviationById(airlineId);
+    public void generateRandomFlights(int numberOfFlights, LocalDate date, Route route) {
+        try {
+            // Creates and saves all flights
+            for (int i = 0; i < numberOfFlights; i++) {
+                int airlineId = flightCompanyRepository.getRandomCompanyId();
+                String airlinePrefix = flightCompanyRepository.findAbriviationById(airlineId);
 
-            Flight flight = createAndSaveFlight(airlineId, airlinePrefix);
+                Flight flight = createAndSaveFlight(airlineId, airlinePrefix);
 
-            // Adds accommodations and flight classes
-            for (int j = 0; j < 3; j++) {
-                flightAccommodationInitializer.addRandomAccommodationToFlight(flight);
-                flightClassInitializer.generateFlightClassesForFlight(flight);
+                // Adds accommodations and flight classes
+                for (int j = 0; j < 3; j++) {
+                    flightAccommodationInitializer.addRandomAccommodationToFlight(flight);
+                    flightClassInitializer.generateFlightClassesForFlight(flight);
+                }
             }
-        }
 
-        // Generate scheduled flights for all created flights
-        scheduledFlightsInitializer.generateScheduledFlights();
+            // Generate scheduled flights for all created flights
+            scheduledFlightsInitializer.generateScheduledFlights();
 
-        logger.info(numberOfFlights + " random flights generated successfully.");
+            logger.info(numberOfFlights + " random flights generated successfully.");
 
         } catch (Exception e) {
             logger.error("Error generating flight: " + e.getMessage());
