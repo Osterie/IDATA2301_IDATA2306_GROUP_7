@@ -60,7 +60,7 @@ const HiddenProductsPage = ({ handleGoBack }) => {
           <p>Here is a list of all the hidden flight products.</p>
 
           <section className="hidden-page-container">
-            <div className="flights-container flights-grid">
+            <div className="flights-container">
               {hiddenProducts.length > 0 ? (
                 (console.log(hiddenProducts),
                 hiddenProducts.map(
