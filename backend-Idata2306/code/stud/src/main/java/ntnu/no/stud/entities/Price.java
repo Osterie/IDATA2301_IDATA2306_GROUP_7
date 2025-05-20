@@ -1,8 +1,5 @@
 package ntnu.no.stud.entities;
 
-import ntnu.no.stud.entities.FlightClasses;
-import ntnu.no.stud.entities.ScheduledFlights;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;

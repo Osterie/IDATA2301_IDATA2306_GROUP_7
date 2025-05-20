@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -130,7 +129,7 @@ public class UserController {
     }
   }
 
-  @DeleteMapping("/api/deleteSelf/{id}")
+  @DeleteMapping("/api/deleteSelf")
   public ResponseEntity<?> deleteSelf() {
 
     logger.info("Request received to delete self.");
@@ -147,15 +146,6 @@ public class UserController {
     } else {
       logger.warn("Unauthorized access attempt to delete self with ID: {}", sessionUser.getId());
       return new ResponseEntity<>("Access to delete self is only for authenticated one self", HttpStatus.UNAUTHORIZED);
-    }
-  }
-
-
-  private static void simulateLongOperation() {
-    try {
-      Thread.sleep(2000);  // Simulating a long operation, e.g., a database transaction
-    } catch (InterruptedException e) {
-      throw new RuntimeException(e);
     }
   }
 }

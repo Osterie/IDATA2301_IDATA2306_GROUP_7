@@ -1,12 +1,7 @@
 package ntnu.no.stud.controllers;
 
-import java.io.IOException;
 import java.util.List;
 
-import ntnu.no.stud.AccessUserService;
-import ntnu.no.stud.dto.AuthenticationRequest;
-import ntnu.no.stud.dto.AuthenticationResponse;
-import ntnu.no.stud.dto.SignupDto;
 import ntnu.no.stud.entities.Price;
 import ntnu.no.stud.entities.User;
 import ntnu.no.stud.entities.UserRole;
@@ -14,18 +9,11 @@ import ntnu.no.stud.models.EditRoleModel;
 import ntnu.no.stud.models.EditUsersInRoleModel;
 import ntnu.no.stud.models.SetProductVisibilityModel;
 import ntnu.no.stud.repositories.PriceRepository;
-import ntnu.no.stud.repositories.RoleRepository;
 import ntnu.no.stud.repositories.UserRepository;
-import ntnu.no.stud.security.JwtUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,20 +29,12 @@ public class AdministrationController {
 
     @Autowired
     private UserRepository userRepository; // Inject the repository
-    @Autowired
-    private RoleRepository roleRepository; // Inject the repository
 
     @Autowired
     private PriceRepository priceRepository; // Inject the repository
 
-    public AdministrationController(UserRepository userRepository, RoleRepository roleRepository, PriceRepository priceRepository) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.priceRepository = priceRepository;
-    }
-
     @PostMapping("api/addRole")
-    public ResponseEntity<String> AddRole(@RequestBody EditRoleModel model){
+    public ResponseEntity<String> addRole(@RequestBody EditRoleModel model){
 
         // Check if the user exists in the database
         User user = userRepository.findById(model.getId()).orElse(null);
@@ -78,7 +58,7 @@ public class AdministrationController {
     }
 
     @PostMapping("api/removeRole")
-    public ResponseEntity<String> RemoveRole(@RequestBody EditRoleModel model){
+    public ResponseEntity<String> removeRole(@RequestBody EditRoleModel model){
 
         // Check if the user exists in the database
         User user = userRepository.findById(model.getId()).orElse(null);
@@ -103,7 +83,7 @@ public class AdministrationController {
 
     
     @PostMapping("/api/editUsersInRole")
-    public ResponseEntity<String> EditUsersInRole(@RequestBody EditUsersInRoleModel model) {
+    public ResponseEntity<String> editUsersInRole(@RequestBody EditUsersInRoleModel model) {
         List<User> users = model.getUsers();
 
         UserRole role = model.getRole();
@@ -142,7 +122,7 @@ public class AdministrationController {
     }
     
     @PostMapping("/api/setFlightProductVisibility")
-    public ResponseEntity<String> SetFlightProductVisibility(@RequestBody SetProductVisibilityModel model) {
+    public ResponseEntity<String> setFlightProductVisibility(@RequestBody SetProductVisibilityModel model) {
         // Check if the priceId is valid
         if (model.getPriceId() <= 0) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid priceId: " + model.getPriceId());
@@ -162,7 +142,7 @@ public class AdministrationController {
     }
 
     @GetMapping("/api/getHiddenProducts")
-    public ResponseEntity<List<Price>> GetHiddenProducts() {
+    public ResponseEntity<List<Price>> getHiddenProducts() {
         // Fetch all hidden products from the database
         List<Price> hiddenProducts = priceRepository.findByIsHidden(true);
         return ResponseEntity.ok(hiddenProducts);

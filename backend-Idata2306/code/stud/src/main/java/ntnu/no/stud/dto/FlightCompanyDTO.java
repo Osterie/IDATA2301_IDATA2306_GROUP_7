@@ -1,7 +1,5 @@
 package ntnu.no.stud.dto;
 
-import jakarta.persistence.*;
-
 
 public class FlightCompanyDTO {
 

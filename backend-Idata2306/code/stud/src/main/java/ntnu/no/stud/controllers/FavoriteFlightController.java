@@ -1,5 +1,6 @@
 package ntnu.no.stud.controllers;
 
+import ntnu.no.stud.dto.FavoriteRequest;
 import ntnu.no.stud.entities.FavoriteFlight;
 import ntnu.no.stud.entities.Price;
 import ntnu.no.stud.entities.User;
@@ -29,12 +30,6 @@ public class FavoriteFlightController {
     @Autowired
     private UserRepository userRepository;
 
-    // DTO class to map JSON request body
-    public static class FavoriteRequest {
-        public int userId;
-        public int priceId;
-    }
-
     // Fetch all favorite prices for a specific user
     @GetMapping("/{userId}")
     public List<FavoriteFlight> getFavoritesForUser(@PathVariable int userId) {
@@ -46,8 +41,8 @@ public class FavoriteFlightController {
     // Add a favorite price (accept JSON body now)
     @PostMapping("/addFavoritePrice")
     public FavoriteFlight addFavoritePrice(@RequestBody FavoriteRequest request) {
-        Optional<User> userOpt = userRepository.findById(request.userId);
-        Optional<Price> priceOpt = priceRepository.findById(request.priceId);
+        Optional<User> userOpt = userRepository.findById(request.getUserId());
+        Optional<Price> priceOpt = priceRepository.findById(request.getPriceId());
 
         if (userOpt.isPresent() && priceOpt.isPresent()) {
             User user = userOpt.get();
@@ -55,7 +50,7 @@ public class FavoriteFlightController {
 
             // Prevent duplicate
             boolean exists = StreamSupport.stream(favoriteFlightRepository.findAll().spliterator(), false)
-                    .anyMatch(fav -> fav.getUser().getId() == request.userId && fav.getPrice().getId() == request.priceId);
+                    .anyMatch(fav -> fav.getUser().getId() == request.getUserId() && fav.getPrice().getId() == request.getPriceId());
 
             if (exists) {
                 throw new IllegalStateException("Price is already in user's favorites.");
@@ -72,8 +67,8 @@ public class FavoriteFlightController {
     @DeleteMapping("/removeFavoritePrice")
     public void removeFavoritePrice(@RequestBody FavoriteRequest request) {
 
-        int userId = request.userId;
-        int priceId = request.priceId;
+        int userId = request.getUserId();
+        int priceId = request.getPriceId();
 
         List<FavoriteFlight> favorites = StreamSupport.stream(favoriteFlightRepository.findAll().spliterator(), false)
                 .filter(fav -> fav.getUser().getId() == userId && fav.getPrice().getId() == priceId)

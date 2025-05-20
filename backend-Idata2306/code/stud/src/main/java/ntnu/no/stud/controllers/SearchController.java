@@ -35,17 +35,12 @@ public class SearchController {
   @PostMapping("/api/searchForFlights")
   public List<Price> searchForFlights(@RequestBody SearchedFlight searchedFlight) {
 
-    // ScheduledFlights scheduledFlight = searchedFlight.getScheduledFlights();
-
     String departure = searchedFlight.getDeparture();
     String arrival = searchedFlight.getArrival();
     LocalDate fromDate = searchedFlight.getFromDate();
     LocalDate toDate = searchedFlight.getToDate();
     List<Passenger> passengers = searchedFlight.getPassengers();
 
-    // return priceRepository.searchForFlights(departure, arrival, fromDate,
-    // toDate);
-    // Flights matching departure, arrival, and date
     List<Price> allMatchingPrices = priceRepository.searchForFlights(departure, arrival, fromDate, toDate);
 
     // Required seats per class name
