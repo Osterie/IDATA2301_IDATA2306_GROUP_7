@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./profileSettings.module.css";
 import { getProfileCookies } from "../../../utils/profileUtils";
 import { deleteSelf } from "../../../library/Identity/users";
@@ -55,7 +55,8 @@ const ProfileSettings = ({ user }) => {
                 </tr>
                 <tr>
                   <th scope="row">Roles</th>
-                  <td>{user.roles?.join(", ") || "USER"}</td>
+                  <td>{console.log(user)} 
+                  {user.roles?.join(", ") || "USER"}</td>
                 </tr>
               </tbody>
             </table>

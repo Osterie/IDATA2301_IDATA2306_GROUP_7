@@ -4,6 +4,7 @@ import { deleteUser } from "../../library/Identity/users.js";
 import { assignRoleToUser } from "../../library/Identity/users.js";
 import { removeRoleFromUser } from "../../library/Identity/users.js";
 import "./manageUserPage.css";
+import { getCookie, setCookie } from "../../library/tools.js";
 
 const ManageUserPage = () => {
   const [users, setUsers] = useState([]);
@@ -54,11 +55,32 @@ const ManageUserPage = () => {
           user.id === userId
             ? {
                 ...user,
-                roles: [...user.roles, { role: newRole.trim().toUpperCase() }] // Add new role to the user's roles
+                roles: [...user.roles, { role: newRole.trim().toUpperCase() }], // Add new role to the user's roles
               }
             : user
         )
       );
+
+      if (userId == getCookie("current_user_id")) {
+        let allUserRoles = getCookie("current_user_roles");
+        let newRoleFormatted = newRole.trim().toUpperCase();
+
+        // Convert to array, filter out empty strings
+        let rolesArray = allUserRoles
+          ? allUserRoles
+              .split(",")
+              .map((r) => r.trim().toUpperCase())
+              .filter((r) => r)
+          : [];
+
+        // Add new role if it's not already in the list
+        if (!rolesArray.includes(newRoleFormatted)) {
+          rolesArray.push(newRoleFormatted);
+        }
+
+        // Save updated roles back to cookie
+        setCookie("current_user_roles", rolesArray.join(","));
+      }
 
       setEditingUserId(null);
       setNewRole("");
@@ -80,11 +102,30 @@ const ManageUserPage = () => {
           user.id === userId
             ? {
                 ...user,
-                roles: user.roles.filter((r) => r.role !== role) // Remove the role from the user
+                roles: user.roles.filter((r) => r.role !== role), // Remove the role from the user
               }
             : user
         )
       );
+
+      if (userId == getCookie("current_user_id")) {
+        let allUserRoles = getCookie("current_user_roles");
+        let roleToRemove = role.trim().toUpperCase();
+
+        // Convert to array, filter out empty strings
+        let rolesArray = allUserRoles
+          ? allUserRoles
+              .split(",")
+              .map((r) => r.trim().toUpperCase())
+              .filter((r) => r)
+          : [];
+
+        // Remove the role if it exists in the list
+        rolesArray = rolesArray.filter((r) => r !== roleToRemove);
+
+        // Save updated roles back to cookie
+        setCookie("current_user_roles", rolesArray.join(","));
+      }
     } catch (error) {
       console.error("Error removing role:", error);
     }
@@ -115,7 +156,7 @@ const ManageUserPage = () => {
                       <button
                         onClick={() => handleRemoveRole(user.id, r.role)}
                         className="remove-role-button"
-                        >
+                      >
                         x
                       </button>
                       <span>{r.role}</span>

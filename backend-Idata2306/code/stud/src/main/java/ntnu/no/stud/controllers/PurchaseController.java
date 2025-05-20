@@ -44,7 +44,6 @@ public class PurchaseController {
 
     @GetMapping("/purchases")
     public ResponseEntity<?> getUserPurchases(@RequestParam Long userId) {
-        logger.info("Fetching purchases for user with ID: {}", userId);
         List<Purchase> purchases = purchaseRepository.findAllByUserId(userId);
     
         return ResponseEntity.ok(purchases);
