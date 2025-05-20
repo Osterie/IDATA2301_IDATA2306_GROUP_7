@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { removeFromShoppingCart, clearShoppingCart, addToShoppingCart, getShoppingCartAsArray } from "../../../utils/shoppingCartUtils";
+import { removeFromShoppingCart, clearShoppingCart, addToShoppingCart, getShoppingCartAsArray, deleteFromShoppingCart } from "../../../utils/shoppingCartUtils";
 import FlightCard from "../../cards/searchedFlights/FlightCard.jsx";
 import { getCookie } from "../../../library/tools";
 import { sendApiRequest } from "../../../library/requests";
@@ -23,7 +23,7 @@ const ShoppingCartHero = ( {onNavClick} ) => {
   }, []);
   
   const handleRemoveFromCart = async (flightId) => {
-    removeFromShoppingCart(flightId);
+    deleteFromShoppingCart(flightId);
     
     // Small delay ensures sync update completes (safety measure)
     await new Promise((resolve) => setTimeout(resolve, 0));
