@@ -4,7 +4,6 @@ import org.springframework.dao.DataAccessException;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +15,9 @@ public class AirportInitializer {
 
     private final JdbcTemplate jdbcTemplate;
 
-    @Autowired
     public AirportInitializer(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
-
 
     public void loadAirports() {
         try {

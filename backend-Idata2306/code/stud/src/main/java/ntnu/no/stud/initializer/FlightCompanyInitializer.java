@@ -1,15 +1,12 @@
 package ntnu.no.stud.initializer;
 
-import jakarta.annotation.PostConstruct;
 import ntnu.no.stud.entities.FlightCompany;
 import ntnu.no.stud.repositories.FlightCompanyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +16,6 @@ public class FlightCompanyInitializer {
     private final FlightCompanyRepository flightCompanyRepository;
     private final Map<String, FlightCompany> companyMap = new HashMap<>();
 
-    @Autowired
     public FlightCompanyInitializer(FlightCompanyRepository flightCompanyRepository) {
         this.flightCompanyRepository = flightCompanyRepository;
     }
@@ -31,7 +27,7 @@ public class FlightCompanyInitializer {
         createCompany("Emirates", "https://emirates.com", "https://content.presspage.com/uploads/2431/1920_1tw-2.jpg?10000", "EK", "Emirates_airline.jpg", "Emirates_logo.jpg");
         createCompany("Qatar Airways", "https://qatarairways.com", "https://d21buns5ku92am.cloudfront.net/69647/images/490377-WRAP%20UP-a3afe8-large-1687769659.jpg", "QR", "Qatar_airline.jpg", "Qatar_logo.jpg");
         createCompany("Singapore Airlines", "https://singaporeair.com", "https://www.singaporeair.com/saar5/images/navigation/flying-withus/our-fleet/boeing-787-10.jpg", "SQ", "Singapore_airline.jpg", "Singapore_logo.jpg");
-        createCompany("Air France", "https://airfrance.com", "https://img.static-af.com/transform/acc76ee2-6c9e-4596-8514-afef78916eb8/?io=transform:fill,width:960,height:480&consumerid=bwp", "AF", "air_france_airplane.jpg", "Air_france_logo.jpg");
+        createCompany("Air France", "https://airfrance.com", "https://img.static-af.com/transform/acc76ee2-6c9e-4596-8514-afef78916eb8/?io=transform:fill,width:960,height:480&consumerid=bwp", "AF", "air_france_airline.jpg", "Air_france_logo.jpg");
         createCompany("KLM Royal Dutch Airlines", "https://klm.com", "https://www.cdbaviation.aero/wp-content/uploads/2023/08/CDB-Aviation-KLM-A321neo.jpg", "KLM", "KLM_airline.jpg", "KLM_logo.jpg");
         createCompany("Norwegian Air Shuttle", "https://norwegian.com", "https://img.static-af.com/transform/acc76ee2-6c9e-4596-8514-afef78916eb8/?io=transform:fill,width:960,height:480&consumerid=bwp", "Norwegian", "Norwegian_airline.jpg", "Norwegian_logo.jpg");
         createCompany("Alitalia", "https://alitalia.com", "https://www.politico.eu/cdn-cgi/image/width=1024,quality=80,onerror=redirect,format=auto/wp-content/uploads/2020/05/GettyImages-1147144160-scaled.jpg", "Alitalia", "Alitalia_airline.jpg", "Alitalia_logo.jpg");

@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ntnu.no.stud.dto.Passenger;
+import ntnu.no.stud.dto.SearchedFlight;
 import ntnu.no.stud.entities.Airport;
 import ntnu.no.stud.entities.Price;
-import ntnu.no.stud.models.Passenger;
-import ntnu.no.stud.models.SearchedFlight;
 import ntnu.no.stud.repositories.AirportRepository;
 import ntnu.no.stud.repositories.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,34 +18,40 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 /**
- * 
  * A REST API controller which responds to HTTP requests.
  */
 @RestController
 @CrossOrigin(origins = "*") // Allow frontend access
+@Tag(name = "Flight Search", description = "Endpoints to search flights and get airports")
 public class SearchController {
 
   @Autowired
-  private PriceRepository priceRepository; // Inject the repository
+  private PriceRepository priceRepository;
 
   @Autowired
-  private AirportRepository airportRepository; // Inject the repository
+  private AirportRepository airportRepository;
 
+  @Operation(
+      summary = "Search for flights",
+      description = "Search flights based on departure, arrival, date range, and passengers details."
+  )
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", description = "List of matching flights returned")
+  })
   @PostMapping("/api/searchForFlights")
   public List<Price> searchForFlights(@RequestBody SearchedFlight searchedFlight) {
-
-    // ScheduledFlights scheduledFlight = searchedFlight.getScheduledFlights();
-
     String departure = searchedFlight.getDeparture();
     String arrival = searchedFlight.getArrival();
     LocalDate fromDate = searchedFlight.getFromDate();
     LocalDate toDate = searchedFlight.getToDate();
     List<Passenger> passengers = searchedFlight.getPassengers();
 
-    // return priceRepository.searchForFlights(departure, arrival, fromDate,
-    // toDate);
-    // Flights matching departure, arrival, and date
     List<Price> allMatchingPrices = priceRepository.searchForFlights(departure, arrival, fromDate, toDate);
 
     // Required seats per class name
@@ -61,11 +67,18 @@ public class SearchController {
           String className = price.getFlightClassId().getFlightClass().getName();
           int availableSeats = price.getFlightClassId().getAvailableSeats();
           Integer required = requiredSeatsPerClass.get(className);
-          return required != null && availableSeats >= required && required > 0 ;
+          return required != null && availableSeats >= required && required > 0;
         })
         .toList();
   }
 
+  @Operation(
+      summary = "Get list of airports",
+      description = "Retrieve all airports used in flight searches."
+  )
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", description = "List of airports returned")
+  })
   @GetMapping("/api/getSearchTerms")
   public Iterable<Airport> getAirports() {
     return airportRepository.findAll();

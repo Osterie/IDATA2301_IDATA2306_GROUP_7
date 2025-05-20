@@ -1,4 +1,4 @@
-package ntnu.no.stud.models;
+package ntnu.no.stud.dto;
 
 import java.util.List;
 
