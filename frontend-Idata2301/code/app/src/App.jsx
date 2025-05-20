@@ -89,7 +89,7 @@ function App() {
         {/* Landing page */}
         {activePage === "home" && (
           <>
-            <HomePage setFlights={setFlights} setActivePage={setActivePage} searchParams={searchParams} setSearchParams={setSearchParams} />
+            <HomePage setFlights={setFlights} setSelectedFlight={setSelectedFlight} setActivePage={setActivePage} searchParams={searchParams} setSearchParams={setSearchParams} />
           </>
         )}
         {/* Searched flights and deals Page */}
