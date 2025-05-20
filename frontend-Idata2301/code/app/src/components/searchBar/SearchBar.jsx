@@ -81,7 +81,6 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
                 "POST", "/searchForFlights",
                 function (fetchedData) {
                     // const fetchedData = response.json();
-                    console.log('Flight search results:', fetchedData);
                     fetchedData.isNewSearch = true; // Add the isNewSearch property to the fetched data
                     setFlights(fetchedData);  // Store flights in state
                     setActivePage("deals");  // ✅ Navigate to the Deals page

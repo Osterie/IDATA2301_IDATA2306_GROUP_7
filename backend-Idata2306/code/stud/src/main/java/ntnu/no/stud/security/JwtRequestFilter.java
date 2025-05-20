@@ -53,7 +53,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         logger.warn("User details not found for username: " + username);
       } else if (jwtUtil.validateToken(jwtToken, userDetails)) {
         registerUserAsAuthenticated(request, userDetails);
-        logger.info("JWT validated. User '{}' authenticated.", username);
       } else {
         logger.warn("JWT token is invalid for user: " + username);
       }

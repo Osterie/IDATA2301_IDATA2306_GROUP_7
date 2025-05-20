@@ -4,29 +4,16 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Optional;
-import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-
 import ntnu.no.stud.AccessUserService;
-import ntnu.no.stud.entities.Route;
 import ntnu.no.stud.entities.User;
 import ntnu.no.stud.entities.UserRole;
 import ntnu.no.stud.repositories.AirportRepository;
@@ -40,10 +27,6 @@ import ntnu.no.stud.repositories.ClassRepository;
 import ntnu.no.stud.repositories.FlightClassesRepository;
 import ntnu.no.stud.repositories.FlightCompanyRepository;
 import ntnu.no.stud.repositories.UserRepository;
-
-
-
-
 
 @Component
 public class DummyDataInitializer implements ApplicationListener<ApplicationReadyEvent> {
@@ -59,9 +42,6 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     @Autowired
     private ClassRepository classRepository;
 
-    @Autowired 
-    private FlightClassesRepository flightClassesRepository;
-
     @Autowired
     private FlightCompanyRepository flightCompanyRepository;
 
@@ -72,16 +52,7 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     private AirportRepository airportRepository;
 
     @Autowired
-    private PriceRepository priceRepository;
-
-    @Autowired
-    private FlightAccommodationRepository flightAccommodationRepository;
-
-    @Autowired
     private ExtraFeatureRepository extraFeatureRepository;
-
-    @Autowired
-    private ScheduledFlightsRepository scheduledFlightsRepository;
 
     @Autowired
     private FlightCompanyInitializer flightCompanyInitializer;
@@ -99,17 +70,13 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
     private RouteInitializer routeInitializer;
 
     @Autowired
-    ExtraFeatureInitializer extraFeatureInitializer;
+    private ExtraFeatureInitializer extraFeatureInitializer;
 
     @Autowired
-    AirportInitializer airportInitializer;
+    private AirportInitializer airportInitializer;
 
     @Autowired
-    ClassInitializer classInitializer;
-
-    
-
-
+    private ClassInitializer classInitializer;
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
@@ -149,29 +116,33 @@ public class DummyDataInitializer implements ApplicationListener<ApplicationRead
         try {   
         if (airportRepository.count() == 0) {
             airportInitializer.loadAirports();
+            System.out.println("Airports loaded successfully.");
         }
         if (extraFeatureRepository.count() == 0) {
             extraFeatureInitializer.loadExtraFeatures();
+            System.out.println("Extra features loaded successfully.");
         }
         if (flightCompanyRepository.count() == 0) {
             flightCompanyInitializer.flightCompanyInitializer();
+            System.out.println("Flight companies loaded successfully.");
         }
         if (classRepository.count() == 0) {
             classInitializer.loadClasses();
+            System.out.println("Classes loaded successfully.");
         }
         if (routeRepository.count() == 0) {
             routeInitializer.generateRoutes();
+            System.out.println("Routes loaded successfully.");
         }
         if (flightRepository.count() == 0) {
             int numberOfFlights = 1000; 
             flightInitializer.generateRandomFlights(numberOfFlights);
+            System.out.println("Random prices generated successfully.");
         }
         } catch (Exception e) {
             logger.error("Failed to load data from SQL files.", e);
         }
     }
-
-
     
     public void createTables() {
         try {

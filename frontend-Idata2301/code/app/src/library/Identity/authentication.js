@@ -57,7 +57,6 @@ export function isAdmin(user) {
   
   for (let i = 0; i < roles.length; i++) {
     if (roles[i].toUpperCase() === "ADMIN") {
-      console.log("User is admin");
       return true;
     }
   }
@@ -167,9 +166,6 @@ function isJwtExpired(jwt) {
   const payload = parseJwtUser(jwt);
   if (!payload || !payload.exp) return true;
   const now = Math.floor(Date.now() / 1000);
-  console.log("JWT expires at:", new Date(payload.exp * 1000).toUTCString());
-  console.log("Current time is:", new Date(now * 1000).toUTCString());
-
   return payload.exp < now;
 }
 
