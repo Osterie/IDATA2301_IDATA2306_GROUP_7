@@ -1,3 +1,8 @@
+.manage-user-header {
+  font-size: var(--h1-desktop-font-size);
+  margin-top: 3rem;
+}
+
 /* Box to display users */
 .user-card-container{ 
     display: flex; 

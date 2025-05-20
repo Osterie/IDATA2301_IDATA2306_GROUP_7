@@ -89,7 +89,7 @@ function App() {
         {/* Landing page */}
         {activePage === "home" && (
           <>
-            <HomePage setFlights={setFlights} setActivePage={setActivePage} searchParams={searchParams} setSearchParams={setSearchParams} />
+            <HomePage setFlights={setFlights} setSelectedFlight={setSelectedFlight} setActivePage={setActivePage} searchParams={searchParams} setSearchParams={setSearchParams} />
           </>
         )}
         {/* Searched flights and deals Page */}
@@ -100,7 +100,7 @@ function App() {
         )}
         {/* Details page */}
         {activePage === "flight-details" && selectedFlight && (
-          <FlightDetailPage searchParams={searchParams} flight={selectedFlight} />
+          <FlightDetailPage searchParams={searchParams} flight={selectedFlight} setActivePage={setActivePage} />
         )}
         {/* About us information page */}
         {activePage === "about" && (
@@ -116,8 +116,8 @@ function App() {
         )}
         {activePage === "login" && <LogInPageHero onNavClick={handleNavClick} />}
         {activePage === "admin" && <AdminPage setActivePage={setActivePage} />}
-        {activePage === "manage-users" && <ManageUserPage />}
-        {activePage === "hidden-products" && <HiddenProductsPage />}
+        {activePage === "manage-users" && <ManageUserPage setActivePage={setActivePage} />}
+        {activePage === "hidden-products" && <HiddenProductsPage setActivePage={setActivePage} />}
         {activePage === "create-account" && <CreateAccount />}
         {activePage === "shoppingCart" && (<ShoppingCartHero onNavClick={handleNavClick} setSelectedFlight={setSelectedFlight} />)}
       </main>

@@ -6,7 +6,7 @@ import { removeRoleFromUser } from "../../library/Identity/users.js";
 import "./manageUserPage.css";
 import { getCookie, setCookie } from "../../library/tools.js";
 
-const ManageUserPage = () => {
+const ManageUserPage = ({ setActivePage }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -133,7 +133,7 @@ const ManageUserPage = () => {
 
   return (
     <main style={{ padding: "2rem" }}>
-      <h1>Manage Users</h1>
+      <h1 className="manage-user-header">Manage Users</h1>
       <p>This is the user management page for admins.</p>
 
       {loading ? (

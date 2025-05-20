@@ -6,7 +6,7 @@ import { sendApiRequest } from "../../../library/requests";
 
 const API_BASE_URL = "http://localhost:8080/api/flights";
 
-const ProductContainer = ({ setFlight, setActivePage }) => {
+const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,28 +15,6 @@ const ProductContainer = ({ setFlight, setActivePage }) => {
     const fetchProducts = async () => {
       try {
         const allProducts = [];
-
-        // Fetch each category
-        await sendApiRequest("GET", "/flights/cheapest", (cheapestFlight) => {
-          allProducts.push({
-            ...cheapestFlight,
-            highlighted: true,
-            description: "Cheap flight",
-            date: cheapestFlight.scheduledFlight.date,
-            price: cheapestFlight.price,
-            currencyCode: cheapestFlight.currencyCode,
-          });
-        });
-
-        await sendApiRequest("GET", "/flights/today", (flightsToday) => {
-          allProducts.push(...flightsToday.map((flight) => ({
-            ...flight,
-            description: "Fly today",
-            date: flight.scheduledFlight.date,
-            price: flight.price,
-            currencyCode: flight.currencyCode,
-          })));
-        });
 
         await sendApiRequest("GET", "/flights/tomorrow", (flightsTomorrow) => {
           allProducts.push(...flightsTomorrow.map((flight) => ({
@@ -78,6 +56,26 @@ const ProductContainer = ({ setFlight, setActivePage }) => {
           })));
         });
 
+        await sendApiRequest("GET", "/flights/random", (randomFlight) => {
+          allProducts.push(...randomFlight.map((flight) => ({
+            ...flight,
+            description: "You might like this flight",
+            date: flight.scheduledFlight.date,
+            price: flight.price,
+            currencyCode: flight.currencyCode,
+          })));
+        });
+
+        await sendApiRequest("GET", "/flights/random", (randomFlight) => {
+          allProducts.push(...randomFlight.map((flight) => ({
+            ...flight,
+            description: "Our recommendation for you",
+            date: flight.scheduledFlight.date,
+            price: flight.price,
+            currencyCode: flight.currencyCode,
+          })));
+        });
+
         setProducts(allProducts);
         setLoading(false);
       } catch (err) {
@@ -102,15 +100,11 @@ const ProductContainer = ({ setFlight, setActivePage }) => {
 
       <div className="product-container">
         {products.map((product, index) => (
+          console.log(product),
           <ProductCard
             key={index}
-            description={product.description || "No description available"}
-            img={flightHeroImage}
-            date={product.date || "No date available"}
-            price={product.price || "No price available"}
-            currencyCode={product.currencyCode}
-            highlighted={product.highlighted || false}
-            setFlight={setFlight}
+            flight={product}
+            setSelectedFlight={setSelectedFlight}
             setActivePage={setActivePage}
           />
         ))}

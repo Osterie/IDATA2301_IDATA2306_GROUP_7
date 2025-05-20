@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { sendApiRequest } from "../../library/requests";
 import FlightCard from "../cards/searchedFlights/FlightCard";
+import "./hiddenProductsPage.css";
 
-const HiddenProductsPage = () => {
+const HiddenProductsPage = ({ setActivePage }) => {
   const [hiddenProducts, setHiddenProducts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -44,7 +45,8 @@ const HiddenProductsPage = () => {
 
   return (
     <div>
-      <h1>Hidden products</h1>
+      <button onClick={() => setActivePage("admin")} className="back-button">← Back to admin page</button>
+      <h1 className="hidden-page-title">Hidden products</h1>
 
       {loading ? (
         <p>Loading hidden products...</p>
@@ -54,27 +56,29 @@ const HiddenProductsPage = () => {
         <div>
           <p>Here is a list of all the hidden flight products.</p>
 
-          <div className="flights-container flights-grid">
-            {hiddenProducts.length > 0 ? (
-              (console.log(hiddenProducts),
-              hiddenProducts.map(
-                (flight) => (
-                  console.log(flight),
-                  (
-                    <FlightCard
-                      flight={flight}
-                      purchasable={false}
-                      purchaseDate={flight.date}
-                      userIsAdmin={true}
-                      onVisibilityChange={handleVisibilityChange}
-                    />
+          <section className="hidden-page-container">
+            <div className="flights-container flights-grid">
+              {hiddenProducts.length > 0 ? (
+                (console.log(hiddenProducts),
+                hiddenProducts.map(
+                  (flight) => (
+                    console.log(flight),
+                    (
+                      <FlightCard
+                        flight={flight}
+                        purchasable={false}
+                        purchaseDate={flight.date}
+                        userIsAdmin={true}
+                        onVisibilityChange={handleVisibilityChange}
+                      />
+                    )
                   )
-                )
-              ))
-            ) : (
-              <p>No flights found.</p>
-            )}
-          </div>
+                ))
+              ) : (
+                <p>No flights found.</p>
+              )}
+            </div>
+          </section>
         </div>
       )}
     </div>
