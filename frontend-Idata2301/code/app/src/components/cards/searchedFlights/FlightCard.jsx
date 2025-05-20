@@ -113,7 +113,7 @@ const FlightCard = ({
 
       {purchaseDate && (
         <p className="flight-card-purchase-date">
-          Purchased on: {new Date(purchaseDate).toLocaleDateString()}
+          Purchased on: {new Date(purchaseDate).toISOString().slice(0, 10)}
         </p>
       )}
 

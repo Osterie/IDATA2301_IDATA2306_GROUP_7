@@ -109,9 +109,9 @@ function App() {
           </>
         )}
         {/* Profile settings and other personal information */}
-        {activePage === "settings" && (
+        {activePage === "profile" && (
           <>
-            <ProfilePage user={user} />
+            <ProfilePage user={user} setSelectedFlight={setSelectedFlight} setActivePage={setActivePage} />
           </>
         )}
         {activePage === "login" && <LogInPageHero onNavClick={handleNavClick} />}

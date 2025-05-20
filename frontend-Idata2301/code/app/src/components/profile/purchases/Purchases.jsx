@@ -7,11 +7,9 @@ import FlightCard from "../../cards/searchedFlights/FlightCard.jsx";
 
 
 
-const PurchasedFlights = ({user}) => {
+const PurchasedFlights = ({user, setSelectedFlight, setActivePage}) => {
 
   let [flights, setFlights] = useState([]);
-
-  console.log(user);
 
   // Function to fetch purchased flights from the backend
   const fetchPurchasedFlights = async () => {
@@ -19,7 +17,6 @@ const PurchasedFlights = ({user}) => {
       "GET",
       `/purchases?userId=${user.id}`,
       (response) => {
-        console.log("Purchased flights:", response);
         // Handle the response as needed
         if (response && response.length > 0) {
           console.log(response)
@@ -43,7 +40,7 @@ const PurchasedFlights = ({user}) => {
   }, []);
 
   return (
-    <div className={styles.purchasedFlights}> // TODO change
+    <div>
       <h2>Purchased Flights</h2>
       <p>Here is a list of flights you have purchased.</p>
         
@@ -56,6 +53,8 @@ const PurchasedFlights = ({user}) => {
               flight={flight.price}
               purchasable={false}
               purchaseDate ={flight.date}
+              setSelectedFlight={setSelectedFlight} 
+              setActivePage={setActivePage}
             />
           ))
       ) : (

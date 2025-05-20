@@ -3,7 +3,7 @@ import styles from "./favoriteFlights.module.css";
 import { fetchFavoriteFlights } from "../../../library/favoritesAPI.js";
 import FlightCard from "../../cards/searchedFlights/FlightCard.jsx";
 
-const FavoriteFlights = ({ user }) => {
+const FavoriteFlights = ({ user, setSelectedFlight, setActivePage }) => {
   const [favorites, setFavorites] = useState([]);
   const [error, setError] = useState(null);
 
@@ -41,6 +41,8 @@ const FavoriteFlights = ({ user }) => {
               userIsAdmin={false}
               purchasable={false}
               isFavorite={true}
+              setSelectedFlight={setSelectedFlight}
+              setActivePage={setActivePage}
               onFavoriteToggle={handleFavoriteToggle}
             />
           ))

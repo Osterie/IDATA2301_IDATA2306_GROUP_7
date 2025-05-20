@@ -1,4 +1,4 @@
-.settingsMenu {
+.profilePage {
   display: flex;
   min-height: 100vh;
   font-family: sans-serif;
@@ -43,7 +43,7 @@
 
 /* Responsive Styles */
 @media (max-width: 900px) {
-  .settingsMenu {
+  .profilePage {
     flex-direction: column;
   }
 
