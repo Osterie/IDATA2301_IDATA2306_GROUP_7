@@ -38,12 +38,13 @@ public class FavoriteFlight {
     @JoinColumn(name = "price_id", nullable = false)
     private Price price;
 
-    public FavoriteFlight() { }
+    public FavoriteFlight() {
+    }
 
     /**
      * Constructs a FavoriteFlight with the specified user and price.
      *
-     * @param user The user who favorited the price.
+     * @param user  The user who favorited the price.
      * @param price The price that is favorited.
      */
     public FavoriteFlight(User user, Price price) {

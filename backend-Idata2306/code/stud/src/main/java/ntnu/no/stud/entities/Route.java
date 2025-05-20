@@ -9,7 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 /**
- * Represents a flight route between two airports: a departure airport and an arrival airport.
+ * Represents a flight route between two airports: a departure airport and an
+ * arrival airport.
  * This entity maps to the {@code route} table in the database.
  */
 @Entity
@@ -41,10 +42,12 @@ public class Route {
     /**
      * Default constructor required by JPA.
      */
-    public Route() { }
+    public Route() {
+    }
 
     /**
-     * Constructs a new {@code Route} with the specified departure and arrival airports.
+     * Constructs a new {@code Route} with the specified departure and arrival
+     * airports.
      *
      * @param departureAirport the airport from which the flight departs
      * @param arrivalAirport   the airport at which the flight arrives
@@ -106,5 +109,5 @@ public class Route {
      */
     public void setArrivalAirport(Airport arrivalAirport) {
         this.arrivalAirport = arrivalAirport;
-    } 
+    }
 }
