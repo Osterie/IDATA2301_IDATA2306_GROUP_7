@@ -9,7 +9,7 @@ import { convertCurrency } from "../../../utils/currencyUtils";
 
 import "./shoppingCartHero.css";
 
-const ShoppingCartHero = ( {onNavClick, setSelectedFlight} ) => {
+const ShoppingCartHero = ( {setActivePage, setSelectedFlight} ) => {
   const [flights, setFlights] = useState([]);
   const userId = getCookie("current_user_id");
 
@@ -71,7 +71,7 @@ const ShoppingCartHero = ( {onNavClick, setSelectedFlight} ) => {
 const handlePurchase = async () => {
 
   if (!userId) {
-    onNavClick("login");
+    setActivePage("login");
     return;
   }
 
@@ -111,6 +111,20 @@ const decrementFlight = (flightId) => {
   fetchFlights(getShoppingCartAsArray());
 };
 
+const setFlightQuantity = (flightId, quantity) => {
+  // Clear all instances of that flight
+  deleteFromShoppingCart(flightId);
+
+  // Re-add flightId quantity times
+  for (let i = 0; i < quantity; i++) {
+    addToShoppingCart(flightId);
+  }
+
+  // Refresh cart
+  fetchFlights(getShoppingCartAsArray());
+};
+
+
 const getTotalPrice = () => {
   return flights.reduce((sum, flight) => {
     const quantity = flight.quantity || 1;
@@ -137,13 +151,14 @@ const getTotalPrice = () => {
               <ul>
   {flights.map((flight) => {
     return (
+
       <li key={flight.id} className="cart">
         {/* Flight Card on the left */}
         <FlightCard
           key={flight.id}
           flight={flight}
           setSelectedFlight = {setSelectedFlight}
-          setActivePage={onNavClick}
+          setActivePage={setActivePage}
           purchasable={false}
           actionButton={
             <button onClick={() => handleRemoveFromCart(flight.id)}>
@@ -154,8 +169,27 @@ const getTotalPrice = () => {
 
         {/* Quantity controls on the right */}
         <div className="quantity-controls-wrapper">
-          <button onClick={() => incrementFlight(flight.id)}>+</button>
-          <span>{flight.quantity}</span>
+          <button 
+        onClick={() => incrementFlight(flight.id)}
+        disabled={flight.quantity >= flight.flightClassId.availableSeats}
+      >
+        +
+      </button>
+
+          <input
+            type="number"
+            min="1"
+            max={flight.flightClassId.availableSeats}
+            value={flight.quantity}
+            onChange={(e) => {
+              const newQuantity = parseInt(e.target.value, 10);
+              const maxSeats = flight.flightClassId.availableSeats;
+              if (newQuantity > 0 && newQuantity <= maxSeats) {
+                setFlightQuantity(flight.id, newQuantity);
+              }
+            }}
+          />
+
           <button onClick={() => decrementFlight(flight.id)}>-</button>
         </div>
       </li>
