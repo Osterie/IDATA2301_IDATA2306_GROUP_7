@@ -8,7 +8,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,11 +59,11 @@ public class FlightCompanyInitializer {
     }
 
     private byte[] loadImageBytes(String filename) {
-    try {
-        return Files.readAllBytes(new ClassPathResource("images/" + filename).getFile().toPath());
-    } catch (IOException e) {
-        e.printStackTrace();
-        return null;
+        try (InputStream in = new ClassPathResource("images/" + filename).getInputStream()) {
+            return in.readAllBytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-}
 }
