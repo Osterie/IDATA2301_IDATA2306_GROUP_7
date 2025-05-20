@@ -1,5 +1,7 @@
 import React from "react";
 import "./flightDetailPage.css";
+import { getPreferredCurrency } from "../../utils/cookieUtils";
+import { convertCurrency } from "../../utils/currencyUtils";
 
 const FlightDetailPageCard = ({ flight, onAddToCart, onBuyNow }) => {
   const {
@@ -9,7 +11,7 @@ const FlightDetailPageCard = ({ flight, onAddToCart, onBuyNow }) => {
       availableSeats,
     },
     price,
-    priceCode,
+    currencyCode,
     provider,
     discount,
     scheduledFlight: {
@@ -26,6 +28,12 @@ const FlightDetailPageCard = ({ flight, onAddToCart, onBuyNow }) => {
       onAddToCart(flight);
     }
   };
+
+  const calculateDiscountedPrice = (price, discount) => {
+    return discount > 0 ? (price - (price * discount) / 100).toFixed(0) : price;
+  };
+
+  const discountedPrice = calculateDiscountedPrice(price, discount);
 
   return (
     <article className="flight-detail-page">
@@ -63,13 +71,27 @@ const FlightDetailPageCard = ({ flight, onAddToCart, onBuyNow }) => {
         <p>Available Seats: <strong>{availableSeats}</strong></p>
       </section>
 
-      <section className="pricing-info">
-        <p className="price">Price: <strong>${price} {priceCode}</strong></p>
-        {discount > 0 && (
-          <p className="discount">Discount: <strong>{discount}% off</strong></p>
+
+      <div className="flight-card-price-section">
+        {discount > 0 ? (
+          <>
+            <p
+              className="flight-card-original-price"
+              style={{ textDecoration: "line-through", color: "#888", margin: 0 }}
+            >
+             {convertCurrency(price, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
+            </p>
+            <p className="flight-card-price" style={{ fontWeight: "bold", color: "#d32f2f" }}>
+             Price: {convertCurrency(discountedPrice, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
+            </p>
+            <p className="flight-card-discount">Discount: {discount}%</p>
+          </>
+        ) : (
+          <p className="flight-card-price">
+            {convertCurrency(discountedPrice, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
+          </p>
         )}
-        <p className="provider">Provider: <strong>{provider}</strong></p>
-      </section>
+      </div>
 
       <footer className="action-buttons">
         <button className="btn add-to-cart" onClick={handleAddToCart}>Add to cart</button>
