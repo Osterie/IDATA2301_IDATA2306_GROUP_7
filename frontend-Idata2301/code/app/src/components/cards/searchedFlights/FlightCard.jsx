@@ -144,7 +144,7 @@ const FlightCard = ({
       >
         Details
       </button>
-
+        {onFavoriteToggle && (
         <div
         className={`flight-card-favorite-button ${
           isFavorite ? "favorited" : ""
@@ -162,7 +162,7 @@ const FlightCard = ({
     </div> */}
             </div>
           </div>
-
+        )}
       {actionButton && (
         <button
           className="flight-card-actions-button"
