@@ -32,7 +32,7 @@ const FlightDetailPageCard = ({ flight, accommodations = [] }) => {
       setShowPopup(false);
     }, 3000);// 3 seconds
   };
-  
+
   return (
     <article className="flight-detail-page">
       <header className="flight-info-header">
@@ -69,7 +69,6 @@ const FlightDetailPageCard = ({ flight, accommodations = [] }) => {
         <p>Available Seats: <strong>{availableSeats}</strong></p>
       </section>
 
-      {/* ✅ Flight Accommodations go here */}
       {accommodations.length > 0 && (
         <section className="accommodations-section">
           <h3>Flight Features</h3>
@@ -82,6 +81,8 @@ const FlightDetailPageCard = ({ flight, accommodations = [] }) => {
           </ul>
         </section>
       )}
+
+      <br />
 
       <div className="flight-card-price-section">
         {discount > 0 ? (

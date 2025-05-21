@@ -103,13 +103,24 @@ h1 {
   background-color: var(--call-to-action-highlight-color);
 }
 
+
 .provider-alternative-parent {
-  position: relative;
+  margin-top: 2rem;
   width: 80vw;
-  margin: 10px auto;
-  padding: 2rem;
-  border-radius: var(--box-border-radius);
-  font-family: sans-serif;
+  margin-left: 10vw;
+}
+
+.provider-alternative-vertical-scroll {
+  max-height: 550px; /* or however tall a single card is */
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  padding-right: 1rem;
+}
+
+.provider-alternative-item {
+  scroll-snap-align: start;
+  margin-bottom: 1rem;
 }
 
 .provider-alternative-container{

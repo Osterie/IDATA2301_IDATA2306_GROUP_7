@@ -82,9 +82,11 @@ const FlightDetailPage = ({
 
       <article className="provider-alternative-parent">
         <h1>Provider alternatives</h1>
-        <div className="provider-alternative-container">
+        <div className="provider-alternative-vertical-scroll">
           {providerAlternatives.map((flight) => (
-            <FlightDetailPageCard key={flight.id} flight={flight} />
+            <div className="provider-alternative-item" key={flight.id}>
+              <FlightDetailPageCard flight={flight} />
+            </div>
           ))}
         </div>
       </article>
