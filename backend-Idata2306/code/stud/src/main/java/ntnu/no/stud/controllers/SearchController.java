@@ -67,6 +67,9 @@ public class SearchController {
           String className = price.getFlightClassId().getFlightClass().getName();
           int availableSeats = price.getFlightClassId().getAvailableSeats();
           Integer required = requiredSeatsPerClass.get(className);
+          if (availableSeats == 0) {
+            return false; // No available seats
+          }
           return required != null && availableSeats >= required && required > 0;
         })
         .toList();
