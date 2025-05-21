@@ -5,6 +5,7 @@ import { getCookie } from "../../../library/tools";
 import { sendApiRequest } from "../../../library/requests";
 import { getPreferredCurrency } from "../../../utils/cookieUtils";
 import { convertCurrency } from "../../../utils/currencyUtils";
+import { calculateFinalPriceInUserCurrency } from "../../../utils/currencyUtils";
 
 
 import "./shoppingCartHero.css";
@@ -138,16 +139,10 @@ const setFlightQuantity = (flightId, quantity) => {
 const getTotalPrice = () => {
   return flights.reduce((sum, flight) => {
     const quantity = flight.quantity || 1;
-    const convertedPrice = convertCurrency(flight.price, flight.currencyCode, getPreferredCurrency())
-    const discountedPrice = calculateDiscountedPrice(convertedPrice, flight.discount);
+    const discountedPrice = calculateFinalPriceInUserCurrency(flight.price, flight.discount, flight.currencyCode);
     return sum + quantity * parseFloat(discountedPrice);
   }, 0).toFixed(2);
 };
-
-
-  const calculateDiscountedPrice = (price, discount) => {
-    return discount > 0 ? (price - (price * discount) / 100).toFixed(2) : price;
-  };
 
   return (
     <section className="hero">

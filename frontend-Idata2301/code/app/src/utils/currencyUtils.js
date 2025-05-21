@@ -1,3 +1,5 @@
+import { getPreferredCurrency } from "./cookieUtils";
+
 export const saveConvertionTableToLocalStorage = () => {
   fetch("https://openexchangerates.org/api/latest.json?app_id=2339143d97cf4826a4e3fa0d38d291de")
     .then((response) => response.json())
@@ -31,3 +33,12 @@ export const convertCurrency = (amount, fromCurrency, toCurrency) => {
   const rate = conversionTable.rates[toCurrency] / conversionTable.rates[fromCurrency];
   return (amount * rate).toFixed(0);
 }
+
+export const calculateDiscountedPrice = (price, discount) => {
+  return discount > 0 ? (price - (price * discount) / 100).toFixed(0) : price;
+
+};
+export const calculateFinalPriceInUserCurrency = (price, discount, currencyCode) => {
+  const discountedPrice = calculateDiscountedPrice(price, discount);
+  return convertCurrency(discountedPrice, currencyCode, getPreferredCurrency());
+};

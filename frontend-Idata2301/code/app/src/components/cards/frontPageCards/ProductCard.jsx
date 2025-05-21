@@ -1,6 +1,6 @@
 import "./productCard.css";
-import { convertCurrency } from "../../../utils/currencyUtils";
 import { getPreferredCurrency } from "../../../utils/cookieUtils";
+import { calculateFinalPriceInUserCurrency } from "../../../utils/currencyUtils";
 
 const ProductCard = ({
   flight,
@@ -17,12 +17,6 @@ const ProductCard = ({
     setSelectedFlight(flight);
     setActivePage("flight-details");
   };
-
-    const calculateDiscountedPrice = (price, discount) => {
-    return discount > 0 ? (price - (price * discount) / 100).toFixed(0) : price;
-  };
-
-  const discountedPrice = calculateDiscountedPrice(flight.price, flight.discount);
 
   return (
     <article
@@ -43,16 +37,16 @@ const ProductCard = ({
             <p
               style={{ textDecoration: "line-through", color: "#888", margin: 0 }}
             >
-              {convertCurrency(flight.price, flight.currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
+              {calculateFinalPriceInUserCurrency(flight.price, 0, flight.currencyCode)} {getPreferredCurrency()}
             </p>
             <p  style={{ fontWeight: "bold", color: "#d32f2f" }}>
-              {convertCurrency(discountedPrice, flight.currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
+              {calculateFinalPriceInUserCurrency(flight.price, flight.discount, flight.currencyCode)} {getPreferredCurrency()}
             </p>
             <p>Discount: {flight.discount}%</p>
           </>
         ) : (
           <p>
-            {convertCurrency(discountedPrice, flight.currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
+            {calculateFinalPriceInUserCurrency(flight.price, flight.discount, flight.currencyCode)} {getPreferredCurrency()}
           </p>
         )}
           <p>{flight.date}</p>

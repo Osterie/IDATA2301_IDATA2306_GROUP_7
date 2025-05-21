@@ -3,6 +3,7 @@ import "./flightDetailPage.css";
 import { getPreferredCurrency } from "../../utils/cookieUtils";
 import { convertCurrency } from "../../utils/currencyUtils";
 import { addToShoppingCart } from "../../utils/shoppingCartUtils";
+import { calculateFinalPriceInUserCurrency } from "../../utils/currencyUtils";
 
 const FlightDetailPageCard = ({ flight }) => {
   const {
@@ -28,14 +29,7 @@ const FlightDetailPageCard = ({ flight }) => {
   const handleAddToCart = () => {
     addToShoppingCart(id);
   };
-
-
-  const calculateDiscountedPrice = (price, discount) => {
-    return discount > 0 ? (price - (price * discount) / 100).toFixed(0) : price;
-  };
-
-  const discountedPrice = calculateDiscountedPrice(price, discount);
-
+  
   return (
     <article className="flight-detail-page">
       <header className="flight-info-header">
@@ -80,16 +74,16 @@ const FlightDetailPageCard = ({ flight }) => {
               className="flight-card-original-price"
               style={{ textDecoration: "line-through", color: "#888", margin: 0 }}
             >
-             {convertCurrency(price, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
+             {calculateFinalPriceInUserCurrency(price, 0, currencyCode)} {getPreferredCurrency()}
             </p>
             <p className="flight-card-price" style={{ fontWeight: "bold", color: "#d32f2f" }}>
-             Price: {convertCurrency(discountedPrice, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
+             Price: {calculateFinalPriceInUserCurrency(price, discount, currencyCode)} {getPreferredCurrency()}
             </p>
             <p className="flight-card-discount">Discount: {discount}%</p>
           </>
         ) : (
           <p className="flight-card-price">
-            {convertCurrency(discountedPrice, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
+            {calculateFinalPriceInUserCurrency(price, discount, currencyCode)} {getPreferredCurrency()}
           </p>
         )}
 
