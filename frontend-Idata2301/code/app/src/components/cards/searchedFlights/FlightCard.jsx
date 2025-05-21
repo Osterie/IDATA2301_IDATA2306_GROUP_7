@@ -52,7 +52,7 @@ const FlightCard = ({
 
     setTimeout(() => {
       setShowPopup(false);
-    }, 3000);// 5 seconds
+    }, 3000);// 3 seconds
   };
 
   const handleToggleVisibility = async () => {

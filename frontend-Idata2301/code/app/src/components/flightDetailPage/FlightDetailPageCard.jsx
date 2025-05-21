@@ -24,11 +24,15 @@ const FlightDetailPageCard = ({ flight, accommodations = [] }) => {
       },
     },
   } = flight;
-
+  const [showPopup, setShowPopup] = React.useState(false);
   const handleAddToCart = () => {
+    setShowPopup(true);
     addToShoppingCart(id);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);// 3 seconds
   };
-
+  
   return (
     <article className="flight-detail-page">
       <header className="flight-info-header">
@@ -104,6 +108,7 @@ const FlightDetailPageCard = ({ flight, accommodations = [] }) => {
 
       <footer className="action-buttons">
         <button className="btn add-to-cart" onClick={handleAddToCart}>Add to cart</button>
+        <div> {showPopup && ( <div className="detail-popup-message"> ✅ Added to cart! </div> )} </div>
       </footer>
     </article>
   );
