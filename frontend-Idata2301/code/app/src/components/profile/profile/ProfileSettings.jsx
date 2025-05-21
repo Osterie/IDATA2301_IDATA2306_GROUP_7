@@ -13,7 +13,7 @@ const ProfileSettings = ({ user }) => {
 
   const handleDeleteSelf = async () => {
     try {
-      await deleteSelf(user.id);
+      await deleteSelf();
       console.log(`User with ID ${user.id} deleted`);
     } catch (error) {
       console.error("Error deleting user:", error);

@@ -36,16 +36,17 @@ export async function deleteUser(userId) {
   });
 }
 
-export async function deleteSelf(userId) {
+export async function deleteSelf() {
   return new Promise((resolve, reject) => {
     sendApiRequest(
       "DELETE",
-      `/deleteSelf/${userId}`,
+      `/deleteSelf`,
       function (userResponse) {
         console.log("Success:", userResponse);
         doLogout();
         resolve(userResponse);
       },
+      null,
       function (errorText) {
         console.error("Error:", errorText);
         reject(errorText);
