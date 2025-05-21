@@ -119,6 +119,17 @@ h1 {
 .provider-alternative-container{
   overflow-y: scroll;
 }
+  .detail-popup-message {
+    opacity: 0.9;
+    bottom: 3.7em;
+    right: 1em;
+    background: var(--primary-color);
+    color: var(--primary-contrast);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    white-space: wrap;
+  }
 
 @media (max-width: 900px) {
   .flight-detail-page {
