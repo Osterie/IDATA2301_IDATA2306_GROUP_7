@@ -1,27 +1,31 @@
-/* Sidebar Styling */
+/* Sidebar Container */
 .sidebar-mother {
   width: 20%;
 }
 
+.sorting-dropdown {
+  border-radius: var(--button-border-radius);
+}
+
 .filter-sidebar {
-  width: 100%; /* Full width by default */
+  width: 100%;
   height: 100vh;
   background-color: var(--box-color);
   color: var(--primary-text-color);
-  padding: 20px;
+  padding: 24px;
   border-radius: var(--box-border-radius);
   transition: transform 0.3s ease-in-out;
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
-/* Sidebar sections */
+/* Section Layout */
 .filter-section {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 /* Dropdown Button */
@@ -29,62 +33,61 @@
   background: var(--secondary-color);
   color: white;
   border: none;
-  padding: 10px;
+  padding: 12px 16px;
   font-size: var(--text-desktop-font-size);
   cursor: pointer;
   border-radius: var(--button-border-radius);
-  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Dropdown Content */
 .dropdown-content {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: var(--button-border-radius);
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: var(--box-border-radius);
+  font-size: 0.95rem;
 }
 
 /* Checkboxes */
 input[type="checkbox"] {
-  margin-right: 10px;
+  margin-right: 8px;
 }
 
-/* Finish Button (Mobile Only) */
+/* Mobile Finish Button */
 .finish-btn {
   display: none;
-  background: red;
-  color: white;
-  padding: 10px;
+  background: var(--call-to-action-color);
+  color: var(--text-color);
+  padding: 10px 16px;
   border: none;
   cursor: pointer;
-  text-align: center;
-  font-size: var(--button-text-mobile-font-size);
+  font-size: var(--text-mobile-font-size);
   border-radius: var(--button-border-radius);
   position: absolute;
   top: 20px;
   right: 20px;
+  transition: background 0.2s;
 }
 
 .finish-btn:hover {
-  background: darkred;
+  background: var(--call-to-action-highlight-color);
 }
 
-/* Toggle Sidebar Button (Mobile) */
+/* Mobile Toggle Button */
 .toggle-sidebar-btn {
   display: none;
   background: var(--secondary-color);
   color: white;
-  padding: 10px;
+  padding: 12px 20px;
+  font-size: var(--text-desktop-font-size);
   border: none;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: var(--button-text-mobile-font-size);
-  border-radius: var(--button-border-radius);
   margin: 10px;
 }
 
-/* Responsive Design */
 @media (max-width: 900px) {
   .sidebar-mother {
     width: 100%;
@@ -96,33 +99,35 @@ input[type="checkbox"] {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
+    background: var(--box-color);
+    color: var(--text-color);
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
-    padding: 20px;
+    padding: 24px;
+    overflow-y: auto;
+    font-size: var(--text-mobile-font-size);
   }
 
   .filter-sidebar.show {
     transform: translateX(0);
   }
 
-  .finish-btn {
-    display: block;
-  }
-
+  .finish-btn,
   .toggle-sidebar-btn {
     display: block;
+    font-size: var(--text-mobile-font-size);
   }
 
-  /* Dropdown Button */
   .dropdown-btn {
     background: var(--primary-contrast);
     color: var(--text-color);
+    font-size: var(--text-mobile-font-size);
   }
 
-  /* Dropdown Content */
-  .dropdown-content {
-    background: rgba(255, 255, 255, 0.1);
+  .sorting-dropdown {
+    width: 50%;
+    padding: 10px;
+    font-size: var(--text-mobile-font-size);
+    color: var(--text-color);
   }
 }

@@ -133,6 +133,7 @@ const FilterSidebar = ({ flights, setFlights }) => {
 
         {/* Sort By */}
         <select
+          className="sorting-dropdown"
           id="sort"
           value={sortOption}
           onChange={(e) => {
