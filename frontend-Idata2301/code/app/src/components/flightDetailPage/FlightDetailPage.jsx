@@ -13,6 +13,8 @@ const FlightDetailPage = ({
   handleGoBack,
 }) => {
   const [providerAlternatives, setProviderAlternatives] = useState([]);
+  const [flightAccommodations, setFlightAccommodations] = useState([]);
+
 
   const companyImageUrl = flight.scheduledFlight.flight.company.imageUrl;
 
@@ -54,11 +56,12 @@ const FlightDetailPage = ({
     if (flight && flight.scheduledFlight.flight.id) {
       await getFlightAccommodations(flight.scheduledFlight.flight.id, function (response) {
         console.info("Flight accommodations fetched successfully:", response);
+        setFlightAccommodations(response); // Save to state
       });
     }
-  }
+  };
 
-  /* TODO: This one is made to test flight accommodations request */
+
   useEffect(() => {
     doGetFlightAccommodations(flight);
   }, [flight]);
@@ -75,7 +78,7 @@ const FlightDetailPage = ({
         />
       </header>
 
-      <FlightDetailPageCard flight={flight} />
+      <FlightDetailPageCard flight={flight} accommodations={flightAccommodations} />
 
       <article className="provider-alternative-parent">
         <h1>Provider alternatives</h1>

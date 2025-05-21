@@ -1,11 +1,10 @@
 import React from "react";
 import "./flightDetailPage.css";
 import { getPreferredCurrency } from "../../utils/cookieUtils";
-import { convertCurrency } from "../../utils/currencyUtils";
 import { addToShoppingCart } from "../../utils/shoppingCartUtils";
 import { calculateFinalPriceInUserCurrency } from "../../utils/currencyUtils";
 
-const FlightDetailPageCard = ({ flight }) => {
+const FlightDetailPageCard = ({ flight, accommodations = [] }) => {
   const {
     id,
     flightClassId: {
@@ -29,7 +28,7 @@ const FlightDetailPageCard = ({ flight }) => {
   const handleAddToCart = () => {
     addToShoppingCart(id);
   };
-  
+
   return (
     <article className="flight-detail-page">
       <header className="flight-info-header">
@@ -66,6 +65,19 @@ const FlightDetailPageCard = ({ flight }) => {
         <p>Available Seats: <strong>{availableSeats}</strong></p>
       </section>
 
+      {/* ✅ Flight Accommodations go here */}
+      {accommodations.length > 0 && (
+        <section className="accommodations-section">
+          <h3>Flight Features</h3>
+          <ul className="accommodation-list">
+            {accommodations.map((item) => (
+              <li key={item.feature.id} className="accommodation-item">
+                {item.feature.name}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <div className="flight-card-price-section">
         {discount > 0 ? (
@@ -74,10 +86,10 @@ const FlightDetailPageCard = ({ flight }) => {
               className="flight-card-original-price"
               style={{ textDecoration: "line-through", color: "#888", margin: 0 }}
             >
-             {calculateFinalPriceInUserCurrency(price, 0, currencyCode)} {getPreferredCurrency()}
+              {calculateFinalPriceInUserCurrency(price, 0, currencyCode)} {getPreferredCurrency()}
             </p>
             <p className="flight-card-price" style={{ fontWeight: "bold", color: "#d32f2f" }}>
-             Price: {calculateFinalPriceInUserCurrency(price, discount, currencyCode)} {getPreferredCurrency()}
+              Price: {calculateFinalPriceInUserCurrency(price, discount, currencyCode)} {getPreferredCurrency()}
             </p>
             <p className="flight-card-discount">Discount: {discount}%</p>
           </>
@@ -86,8 +98,8 @@ const FlightDetailPageCard = ({ flight }) => {
             {calculateFinalPriceInUserCurrency(price, discount, currencyCode)} {getPreferredCurrency()}
           </p>
         )}
-
       </div>
+
       <p className="flight-card-provider">Provider: {provider}</p>
 
       <footer className="action-buttons">
