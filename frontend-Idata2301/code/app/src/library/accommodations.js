@@ -6,13 +6,13 @@ import { sendApiRequest } from "./requests.js";
  * @returns {Promise} Resolves with an array of extra features on success
  */
 export async function getFlightAccommodations(flightId, callback) {
-    sendApiRequest(
-      "GET",
-      `/flights/accommodations/${flightId}`,
-      callback,
-      null,
-      function (errorText) {
-        console.error("Failed to fetch flight accommodations:", errorText);
-      }
-    );
+  sendApiRequest(
+    "GET",
+    `/flights/accommodations/${flightId}`,
+    callback,
+    null,
+    function (error) {
+      console.error("Failed to fetch flight accommodations:", error);
+    }
+  );
 }

@@ -14,14 +14,17 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
 
+import io.jsonwebtoken.lang.Collections;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+/**
+ * Controller responsible for managing flight accommodations.
+ */
 @RestController
 @CrossOrigin(origins = "*")
 @Tag(name = "Flight Accommodations", description = "Endpoints for fetching extra features for flights")
@@ -32,40 +35,23 @@ public class FlightAccommodationController {
     @Autowired
     private FlightAccommodationRepository flightAccommodationRepository;
 
-    @Autowired
-    private ExtraFeatureRepository extraFeatureRepository;
-
-    // If you have a FlightRepository, you may want to inject it to validate flight
-    // existence.
-    // @Autowired
-    // private FlightRepository flightRepository;
-
+    /**
+     * Fetches extra features (accommodations) for a specific flight.
+     * 
+     * @param flightId The ID of the flight for which to fetch extra features.
+     * @return A ResponseEntity containing a list of FlightAccommodation objects.
+     */
     @Operation(summary = "Get extra features for a flight", description = "Returns all extra features (accommodations) associated with the specified flight ID.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Features retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "Flight or features not found")
     })
     @GetMapping("/api/flights/accommodations/{flightId}")
-    public ResponseEntity<?> getExtraFeaturesForFlight(@PathVariable int flightId) {
+    public ResponseEntity<List<FlightAccommodation>> getExtraFeaturesForFlight(@PathVariable int flightId) {
         logger.info("Request received to fetch extra features for flight ID: {}", flightId);
 
-        // Find all accommodations with the given flight ID
-        List<FlightAccommodation> accommodations = ((List<FlightAccommodation>) flightAccommodationRepository.findAll())
-                .stream()
-                .filter(fa -> fa.getFlight() != null && fa.getFlight().getId() == flightId)
-                .collect(Collectors.toList());
+        List<FlightAccommodation> accommodations = flightAccommodationRepository.findByFlightId(flightId);
 
-        if (accommodations.isEmpty()) {
-            logger.warn("No accommodations found for flight ID: {}", flightId);
-            return new ResponseEntity<>("No accommodations found for this flight", HttpStatus.NOT_FOUND);
-        }
-
-        // Extract extra features from accommodations
-        List<ExtraFeature> features = accommodations.stream()
-                .map(FlightAccommodation::getFeature)
-                .collect(Collectors.toList());
-
-        logger.info("Returning {} features for flight ID: {}", features.size(), flightId);
-        return new ResponseEntity<>(features, HttpStatus.OK);
+        return ResponseEntity.ok(accommodations);
     }
 }
