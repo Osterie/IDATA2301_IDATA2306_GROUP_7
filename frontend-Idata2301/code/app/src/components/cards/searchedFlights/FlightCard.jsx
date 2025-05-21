@@ -157,9 +157,7 @@ const FlightCard = ({
                 alt={isFavorite ? "Flight is favorited" : "Flight is not favorited"}
             className="favorite-icon"
           />
-              {/* <div className="favorite-text">
-      {isFavorite ? "Favorited" : "Not Favorited"}
-    </div> */}
+              
             </div>
           </div>
         )}

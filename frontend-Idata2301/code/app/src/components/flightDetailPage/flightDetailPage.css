@@ -126,17 +126,41 @@ h1 {
 .provider-alternative-container{
   overflow-y: scroll;
 }
-  .detail-popup-message {
-    opacity: 0.9;
-    bottom: 3.7em;
-    right: 1em;
-    background: var(--primary-color);
-    color: var(--primary-contrast);
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 14px;
-    white-space: wrap;
-  }
+
+.detail-popup-message {
+  opacity: 0.9;
+  bottom: 3.7em;
+  right: 1em;
+  background: var(--primary-color);
+  color: var(--primary-contrast);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: wrap;
+}
+
+.detail-favorite-button {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0.5rem;
+  border: 3px solid var(--serious-button-color);
+  border-radius: var(--button-border-radius);
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+  height: 30px;
+}
+
+.detail-favorite-button:hover {
+  background-color: var(--serious-button-color);
+}
+
+.detail-favorite-button.favorited {
+  background-color: var(--serious-button-color);
+}
 
 .accommodations-section {
   margin-top: 1rem;

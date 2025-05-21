@@ -118,6 +118,7 @@ function App() {
           <FlightDetailPage
             searchParams={searchParams}
             flight={selectedFlight}
+            user={user}
             setActivePage={navigateTo}
             handleGoBack={handleGoBack}
           />

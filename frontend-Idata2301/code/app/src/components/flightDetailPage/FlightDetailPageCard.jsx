@@ -3,8 +3,12 @@ import "./flightDetailPage.css";
 import { getPreferredCurrency } from "../../utils/cookieUtils";
 import { addToShoppingCart } from "../../utils/shoppingCartUtils";
 import { calculateFinalPriceInUserCurrency } from "../../utils/currencyUtils";
+import favActivePicture from "../../resources/images/favactive.png";
+import favInactivePicture from "../../resources/images/favinactive.png";
 
-const FlightDetailPageCard = ({ flight, accommodations = [] }) => {
+
+const FlightDetailPageCard = ({ flight, isFavorite, onFavoriteToggle, accommodations = [] }) => {
+
   const {
     id,
     flightClassId: {
@@ -13,6 +17,7 @@ const FlightDetailPageCard = ({ flight, accommodations = [] }) => {
       availableSeats,
     },
     price,
+    user,
     currencyCode,
     provider,
     discount,
@@ -83,6 +88,24 @@ const FlightDetailPageCard = ({ flight, accommodations = [] }) => {
       )}
 
       <br />
+
+      {onFavoriteToggle && (
+        <div
+        className={`detail-favorite-button ${
+          isFavorite ? "favorited" : ""
+        }`}
+          onClick={() => onFavoriteToggle?.(flight.id, isFavorite)}
+        >
+            <div className="favorite-content">
+              <img
+                src={isFavorite ? favActivePicture : favInactivePicture}
+                alt={isFavorite ? "Flight is favorited" : "Flight is not favorited"}
+            className="favorite-icon"
+          />
+              
+            </div>
+          </div>
+        )}
 
       <div className="flight-card-price-section">
         {discount > 0 ? (
