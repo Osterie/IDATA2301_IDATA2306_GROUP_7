@@ -10,8 +10,8 @@ import { calculateFinalPriceInUserCurrency } from "../../../utils/currencyUtils"
 
 import "./shoppingCartHero.css";
 
-const ShoppingCartHero = ( {setActivePage, setSelectedFlight} ) => {
-  const [flights, setFlights] = useState([]);
+const ShoppingCartHero = ( {setActivePage, setSelectedFlight, setFlights, flights} ) => {
+  const [cart, setCart] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
 
 
@@ -20,7 +20,6 @@ const ShoppingCartHero = ( {setActivePage, setSelectedFlight} ) => {
   
   useEffect(() => {
     const cartFromStorage = getShoppingCartAsArray();
-    console.log("Cart from storage:", cartFromStorage);
     fetchFlights(cartFromStorage);
   }, []);
   
@@ -38,7 +37,7 @@ const ShoppingCartHero = ( {setActivePage, setSelectedFlight} ) => {
 
   const fetchFlights = async (cartIds = []) => {
   if (!Array.isArray(cartIds) || cartIds.length === 0) {
-    setFlights([]);
+    setCart([]);
     return;
   }
 
@@ -49,7 +48,6 @@ const ShoppingCartHero = ( {setActivePage, setSelectedFlight} ) => {
   }, {});
 
   const uniqueIds = Object.keys(idCountMap);
-  console.log("Fetching flights for IDs:", uniqueIds);
 
   await sendApiRequest(
     "POST",
@@ -60,7 +58,8 @@ const ShoppingCartHero = ( {setActivePage, setSelectedFlight} ) => {
         quantity: idCountMap[flight.id] || 1,
       }));
 
-      setFlights(enriched);
+      setCart(enriched);
+      console.log("Fetched flights:", enriched);
     },
     JSON.stringify(uniqueIds),
     (errorResponse) => {
@@ -92,8 +91,25 @@ const handlePurchase = async () => {
       "/purchaseFlights",
       (response) => {
         console.log("Purchase successful:", response);
+        setFlights((prevFlights) =>
+          prevFlights.map((flight) => {
+            const cartItem = cart.find((item) => item.id === flight.id);
+            if (cartItem) {
+              return {
+                ...flight,
+                flightClassId: {
+                ...flight.flightClassId,
+                availableSeats: flight.flightClassId.availableSeats - cartItem.quantity,
+              },
+            };
+           }
+          return flight;
+          })
+        );
+
+
         clearShoppingCart();
-        setFlights([]);
+        setCart([]);
       },
       JSON.stringify(data),
       (errorResponse) => {
@@ -137,7 +153,7 @@ const setFlightQuantity = (flightId, quantity) => {
 
 
 const getTotalPrice = () => {
-  return flights.reduce((sum, flight) => {
+  return cart.reduce((sum, flight) => {
     const quantity = flight.quantity || 1;
     const discountedPrice = calculateFinalPriceInUserCurrency(flight.price, flight.discount, flight.currencyCode);
     return sum + quantity * parseFloat(discountedPrice);
@@ -156,14 +172,14 @@ const getTotalPrice = () => {
         <h1>Shopping Cart</h1>
 
         {/* Shopping Cart */}
-        <div className="cart">
-          {flights.length > 0 ? (
+        <div className="cart-container">
+          {cart.length > 0 ? (
             <>
               <ul>
-  {flights.map((flight) => {
+  {cart.map((flight) => {
     return (
 
-      <li key={flight.id} className="cart">
+      <li key={flight.id} className="cart-container">
         {/* Flight Card on the left */}
         <FlightCard
           key={flight.id}
@@ -211,7 +227,7 @@ const getTotalPrice = () => {
   <strong>Total:</strong> {getTotalPrice()} {getPreferredCurrency()}
 </div>
 
-              {flights.length > 0 && (
+              {cart.length > 0 && (
                 <button
                   className="purchase-button"
                   onClick={handlePurchase}

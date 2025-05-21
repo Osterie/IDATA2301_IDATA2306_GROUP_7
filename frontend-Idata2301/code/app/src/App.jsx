@@ -141,7 +141,7 @@ function App() {
         {activePage === "hidden-products" && <HiddenProductsPage handleGoBack={handleGoBack} />}
         {activePage === "create-account" && <CreateAccount />} {/* no navigation prop, so no change */}
         {activePage === "shoppingCart" && (
-          <ShoppingCartHero setActivePage={navigateTo} setSelectedFlight={setSelectedFlight} />
+          <ShoppingCartHero setActivePage={navigateTo} setSelectedFlight={setSelectedFlight} setFlights={setFlights} flights={flights}/>
         )}
       </main>
 
