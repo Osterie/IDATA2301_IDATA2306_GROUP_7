@@ -58,6 +58,24 @@ public class User {
     @JsonManagedReference
     private Set<UserRole> roles = new HashSet<>();
 
+    /**
+     * The favorite flights of the user.
+     * Each favorite flight is a {@link FavoriteFlight} entity linked by a
+     * one-to-many relationship.
+     */
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<FavoriteFlight> favoriteFlights = new HashSet<>();
+
+    /**
+     * The purchases made by the user.
+     * Each purchase is a {@link Purchase} entity linked by a one-to-many
+     * relationship.
+     */
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<Purchase> purchases = new HashSet<>();
+
     private boolean active = true;
 
     /**
@@ -235,5 +253,43 @@ public class User {
             }
         }
         return found;
+    }
+
+    /**
+     * Returns the favorite flights of the user.
+     *
+     * @return a set of {@link FavoriteFlight} entities
+     */
+    public Set<FavoriteFlight> getFavoriteFlights() {
+        return favoriteFlights;
+    }
+
+    /**
+     * Sets the favorite flights for the user.
+     *
+     * @param favoriteFlights a set of {@link FavoriteFlight} entities
+     */
+    public void setFavoriteFlights(Set<FavoriteFlight> favoriteFlights) {
+        this.favoriteFlights = favoriteFlights;
+    }
+
+    /**
+     * Adds a purchase to the user's list of purchases and sets the back-reference.
+     *
+     * @param favoriteFlight the {@link FavoriteFlight} to add
+     */
+    public void addPurchase(Purchase purchase) {
+        purchases.add(purchase);
+        purchase.setUser(this);
+    }
+
+    /**
+     * Returns the purchases made by the user.
+     *
+     * @return a set of {@link Purchase} entities
+     */
+    public void removePurchase(Purchase purchase) {
+        purchases.remove(purchase);
+        purchase.setUser(null);
     }
 }
