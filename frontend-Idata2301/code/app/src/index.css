@@ -24,6 +24,7 @@ code {
   --primary-color: #182833;
   --secondary-color: #183040;
   --background-color: rgb(240,240,250);
+  --background-color-darker: rgb(220, 220, 240);
   --box-color: white;
   --serious-box-color: #ffe6e6;
   --bottom-color: #101520;
