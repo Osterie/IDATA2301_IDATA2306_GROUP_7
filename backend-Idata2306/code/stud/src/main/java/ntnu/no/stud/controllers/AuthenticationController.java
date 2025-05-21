@@ -105,7 +105,7 @@ public class AuthenticationController {
       logger.info("User successfully created: {}", signupData.getUsername());
       response = new ResponseEntity<>(HttpStatus.OK);
     } catch (IOException e) {
-      logger.error("Error creating user: {}", signupData.getUsername(), e);
+      logger.error("Error creating user: {}", signupData.getUsername());
       response = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
     return response;
