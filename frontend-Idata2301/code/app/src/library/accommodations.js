@@ -5,20 +5,14 @@ import { sendApiRequest } from "./requests.js";
  * @param {number} flightId The ID of the flight
  * @returns {Promise} Resolves with an array of extra features on success
  */
-export async function getFlightAccommodations(flightId) {
-  return new Promise((resolve, reject) => {
+export async function getFlightAccommodations(flightId, callback) {
     sendApiRequest(
       "GET",
-      `/flights/${flightId}/accommodations`,
-      function (features) {
-        console.log("Flight accommodations fetched successfully:", features);
-        resolve(features);
-      },
+      `/flights/accommodations/${flightId}`,
+      callback,
       null,
       function (errorText) {
         console.error("Failed to fetch flight accommodations:", errorText);
-        reject(errorText);
       }
     );
-  });
 }

@@ -35,32 +35,25 @@ public class FlightAccommodationController {
     @Autowired
     private ExtraFeatureRepository extraFeatureRepository;
 
-    // If you have a FlightRepository, you may want to inject it to validate flight existence.
+    // If you have a FlightRepository, you may want to inject it to validate flight
+    // existence.
     // @Autowired
     // private FlightRepository flightRepository;
 
-    @Operation(summary = "Get extra features for a flight",
-               description = "Returns all extra features (accommodations) associated with the specified flight ID.")
+    @Operation(summary = "Get extra features for a flight", description = "Returns all extra features (accommodations) associated with the specified flight ID.")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Features retrieved successfully"),
-        @ApiResponse(responseCode = "404", description = "Flight or features not found")
+            @ApiResponse(responseCode = "200", description = "Features retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "Flight or features not found")
     })
-    @GetMapping("/api/flights/{flightId}/extraFeatures")
+    @GetMapping("/api/flights/accommodations/{flightId}")
     public ResponseEntity<?> getExtraFeaturesForFlight(@PathVariable int flightId) {
         logger.info("Request received to fetch extra features for flight ID: {}", flightId);
 
-        // Optionally validate if flight exists using a FlightRepository if you have one
-        // Optional<Flight> flightOpt = flightRepository.findById(flightId);
-        // if (flightOpt.isEmpty()) {
-        //    logger.warn("Flight ID {} not found", flightId);
-        //    return new ResponseEntity<>("Flight not found", HttpStatus.NOT_FOUND);
-        // }
-
         // Find all accommodations with the given flight ID
         List<FlightAccommodation> accommodations = ((List<FlightAccommodation>) flightAccommodationRepository.findAll())
-            .stream()
-            .filter(fa -> fa.getFlight() != null && fa.getFlight().getId() == flightId)
-            .collect(Collectors.toList());
+                .stream()
+                .filter(fa -> fa.getFlight() != null && fa.getFlight().getId() == flightId)
+                .collect(Collectors.toList());
 
         if (accommodations.isEmpty()) {
             logger.warn("No accommodations found for flight ID: {}", flightId);

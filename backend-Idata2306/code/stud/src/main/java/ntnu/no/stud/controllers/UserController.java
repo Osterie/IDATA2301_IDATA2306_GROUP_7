@@ -28,6 +28,13 @@ public class UserController {
   @Autowired
   private AccessUserService userService;
 
+  /**
+   * Endpoint to get the profile of a user by username.
+   * Accessible only to the authenticated user matching the username.
+   *
+   * @param username The username of the user whose profile is to be fetched
+   * @return UserProfileModel containing the user's profile information
+   */
   @Operation(summary = "Get user profile",
              description = "Returns the profile information for the specified username. " +
                            "Only accessible by the authenticated user matching the username.")
@@ -53,6 +60,14 @@ public class UserController {
     }
   }
 
+  /**
+   * Endpoint to update the profile of a user by username.
+   * Accessible only to the authenticated user matching the username.
+   *
+   * @param username The username of the user whose profile is to be updated
+   * @param profileData The new profile data to be updated
+   * @return ResponseEntity indicating success or failure of the update operation
+   */
   @Operation(summary = "Update user profile",
              description = "Updates the profile information for the specified username. " +
                            "Only accessible by the authenticated user matching the username.")
@@ -96,6 +111,13 @@ public class UserController {
     @ApiResponse(responseCode = "401", description = "User not authenticated"),
     @ApiResponse(responseCode = "403", description = "User forbidden from accessing user list")
   })
+
+  /**
+   * Endpoint to get all users.
+   * Accessible only to authenticated admins.
+   *
+   * @return List of all users
+   */
   @GetMapping("/api/getUsers")
   public ResponseEntity<?> getAllUsers() {
     logger.info("Request received to fetch all users.");
@@ -140,6 +162,12 @@ public class UserController {
     }
   }
 
+  /**
+   * Endpoint to delete the authenticated user's own account.
+   * Accessible only to the authenticated user.
+   *
+   * @return ResponseEntity indicating success or failure of the delete operation
+   */
   @Operation(summary = "Delete current user",
              description = "Deletes the authenticated user’s own account.")
   @ApiResponses({

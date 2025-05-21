@@ -6,12 +6,15 @@ import { sendApiRequest } from "../../library/requests";
 import flightHeroImage from "../../resources/images/avel-chuklanov-Ou1eqo29Ums-unsplash.jpg";
 import { getFlightAccommodations } from "../../library/accommodations";
 
-
-const FlightDetailPage = ({ searchParams, flight, setActivePage, handleGoBack}) => {
+const FlightDetailPage = ({
+  searchParams,
+  flight,
+  setActivePage,
+  handleGoBack,
+}) => {
   const [providerAlternatives, setProviderAlternatives] = useState([]);
 
   const companyImageUrl = flight.scheduledFlight.flight.company.imageUrl;
-
 
   // Fetch provider alternatives
   useEffect(() => {
@@ -47,17 +50,17 @@ const FlightDetailPage = ({ searchParams, flight, setActivePage, handleGoBack}) 
     }
   }, [flight, searchParams]);
 
+  const doGetFlightAccommodations = async (flight) => {
+    if (flight && flight.id) {
+      await getFlightAccommodations(flight.id, function (response) {
+        console.log("Flight accommodations fetched successfully:", response);
+      });
+    }
+  }
+
   /* TODO: This one is made to test flight accommodations request */
   useEffect(() => {
-    if (flight && flight.id) {
-      getFlightAccommodations(flight.id)
-        .then((accommodations) => {
-          console.log("Accommodations for flight:", accommodations);
-        })
-        .catch((error) => {
-          console.error("Failed to fetch accommodations:", error);
-        });
-    }
+    doGetFlightAccommodations(flight);
   }, [flight]);
 
   return (
@@ -72,18 +75,13 @@ const FlightDetailPage = ({ searchParams, flight, setActivePage, handleGoBack}) 
         />
       </header>
 
-      <FlightDetailPageCard
-        flight={flight}
-      />
+      <FlightDetailPageCard flight={flight} />
 
       <article className="provider-alternative-parent">
         <h1>Provider alternatives</h1>
         <div className="provider-alternative-container">
           {providerAlternatives.map((flight) => (
-            <FlightDetailPageCard
-              key={flight.id}
-              flight={flight}
-            />
+            <FlightDetailPageCard key={flight.id} flight={flight} />
           ))}
         </div>
       </article>

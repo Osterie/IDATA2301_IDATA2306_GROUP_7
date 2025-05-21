@@ -23,6 +23,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+/**
+ * Controller responsible for managing favorite flight prices.
+ * Provides endpoints to add, remove, and retrieve favorite flight prices for
+ * users.
+ */
 @RestController
 @RequestMapping("/api/favorites")
 @CrossOrigin(origins = "*")
@@ -38,12 +43,16 @@ public class FavoriteFlightController {
     @Autowired
     private UserRepository userRepository;
 
-    @Operation(summary = "Get favorite prices for a user",
-               description = "Returns a list of favorite flight prices for the specified user ID.")
+    /**
+     * Retrieves a list of all the favorite flight prices for a specific user.
+     *
+     * @param userId the ID of the user whose favorite prices are to be retrieved
+     * @return a list of FavoriteFlight objects associated with the user
+     */
+    @Operation(summary = "Get favorite prices for a user", description = "Returns a list of favorite flight prices for the specified user ID.")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "List of favorite flights retrieved",
-            content = @Content(schema = @Schema(implementation = FavoriteFlight.class))),
-        @ApiResponse(responseCode = "404", description = "User not found", content = @Content)
+            @ApiResponse(responseCode = "200", description = "List of favorite flights retrieved", content = @Content(schema = @Schema(implementation = FavoriteFlight.class))),
+            @ApiResponse(responseCode = "404", description = "User not found", content = @Content)
     })
     @GetMapping("/{userId}")
     public List<FavoriteFlight> getFavoritesForUser(@PathVariable int userId) {
@@ -52,22 +61,20 @@ public class FavoriteFlightController {
                 .collect(Collectors.toList());
     }
 
-    @Operation(summary = "Add a favorite price for a user",
-               description = "Adds a flight price to the user's favorites.")
+    /**
+     * Adds a flight price to the user's favorites.
+     *
+     * @param request the request containing userId and priceId
+     * @return the created FavoriteFlight object
+     */
+    @Operation(summary = "Add a favorite price for a user", description = "Adds a flight price to the user's favorites.")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Favorite added successfully",
-            content = @Content(schema = @Schema(implementation = FavoriteFlight.class))),
-        @ApiResponse(responseCode = "400", description = "Invalid user or price ID, or duplicate favorite",
-            content = @Content)
+            @ApiResponse(responseCode = "200", description = "Favorite added successfully", content = @Content(schema = @Schema(implementation = FavoriteFlight.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid user or price ID, or duplicate favorite", content = @Content)
     })
     @PostMapping("/addFavoritePrice")
     public FavoriteFlight addFavoritePrice(
-        @io.swagger.v3.oas.annotations.parameters.RequestBody(
-            description = "Favorite request payload containing userId and priceId",
-            required = true,
-            content = @Content(schema = @Schema(implementation = FavoriteRequest.class))
-        )
-        @RequestBody FavoriteRequest request) {
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Favorite request payload containing userId and priceId", required = true, content = @Content(schema = @Schema(implementation = FavoriteRequest.class))) @RequestBody FavoriteRequest request) {
         Optional<User> userOpt = userRepository.findById(request.getUserId());
         Optional<Price> priceOpt = priceRepository.findById(request.getPriceId());
 
@@ -76,7 +83,8 @@ public class FavoriteFlightController {
             Price price = priceOpt.get();
 
             boolean exists = StreamSupport.stream(favoriteFlightRepository.findAll().spliterator(), false)
-                    .anyMatch(fav -> fav.getUser().getId() == request.getUserId() && fav.getPrice().getId() == request.getPriceId());
+                    .anyMatch(fav -> fav.getUser().getId() == request.getUserId()
+                            && fav.getPrice().getId() == request.getPriceId());
 
             if (exists) {
                 throw new IllegalStateException("Price is already in user's favorites.");
@@ -89,21 +97,19 @@ public class FavoriteFlightController {
         }
     }
 
-    @Operation(summary = "Remove a favorite price for a user",
-               description = "Removes a flight price from the user's favorites.")
+    /**
+     * Removes a flight price from the user's favorites.
+     *
+     * @param request the request containing userId and priceId
+     */
+    @Operation(summary = "Remove a favorite price for a user", description = "Removes a flight price from the user's favorites.")
     @ApiResponses({
-        @ApiResponse(responseCode = "204", description = "Favorite removed successfully"),
-        @ApiResponse(responseCode = "400", description = "Invalid user or price ID",
-            content = @Content)
+            @ApiResponse(responseCode = "204", description = "Favorite removed successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid user or price ID", content = @Content)
     })
     @DeleteMapping("/removeFavoritePrice")
     public void removeFavoritePrice(
-        @io.swagger.v3.oas.annotations.parameters.RequestBody(
-            description = "Favorite request payload containing userId and priceId",
-            required = true,
-            content = @Content(schema = @Schema(implementation = FavoriteRequest.class))
-        )
-        @RequestBody FavoriteRequest request) {
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Favorite request payload containing userId and priceId", required = true, content = @Content(schema = @Schema(implementation = FavoriteRequest.class))) @RequestBody FavoriteRequest request) {
 
         int userId = request.getUserId();
         int priceId = request.getPriceId();

@@ -45,11 +45,16 @@ public class PurchaseController {
     @Autowired
     private PriceRepository priceRepository;
 
-    @Operation(summary = "Get all purchases for a user",
-               description = "Fetch all purchase records associated with the given user ID.")
+    /**
+     * Endpoint to retrieve all purchases for a specific user.
+     *
+     * @param userId the ID of the user whose purchases are to be retrieved
+     * @return a list of Purchase objects associated with the user
+     */
+    @Operation(summary = "Get all purchases for a user", description = "Fetch all purchase records associated with the given user ID.")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Purchases retrieved successfully"),
-        @ApiResponse(responseCode = "400", description = "Invalid user ID supplied")
+            @ApiResponse(responseCode = "200", description = "Purchases retrieved successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid user ID supplied")
     })
     @GetMapping("/purchases")
     public ResponseEntity<?> getUserPurchases(@RequestParam Long userId) {
@@ -57,11 +62,17 @@ public class PurchaseController {
         return ResponseEntity.ok(purchases);
     }
 
-    @Operation(summary = "Create purchases for flights",
-               description = "Create one or more purchase records for the provided purchase requests.")
+    /**
+     * Endpoint to create purchase flights.
+     * 
+     * @param purchaseRequests List of purchase requests containing user ID and
+     *                         price ID
+     * @return ResponseEntity indicating the result of the operation
+     */
+    @Operation(summary = "Purchase flights", description = "Create one or more purchase records for the provided purchase requests.")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Purchases created successfully"),
-        @ApiResponse(responseCode = "400", description = "Invalid purchase data provided")
+            @ApiResponse(responseCode = "200", description = "Purchases created successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid purchase data provided")
     })
     @PostMapping("/purchaseFlights")
     public ResponseEntity<?> purchaseFlights(@RequestBody List<PurchaseRequest> purchaseRequests) {
@@ -71,16 +82,18 @@ public class PurchaseController {
 
         for (PurchaseRequest purchaseRequest : purchaseRequests) {
             if (purchaseRequest.getPriceId() <= 0) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid price ID: " + purchaseRequest.getPriceId());
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Invalid price ID: " + purchaseRequest.getPriceId());
             }
             if (purchaseRequest.getUserId() <= 0) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid user ID: " + purchaseRequest.getUserId());
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Invalid user ID: " + purchaseRequest.getUserId());
             }
             User user = userRepository.findById(purchaseRequest.getUserId()).orElse(null);
             Price price = priceRepository.findById(purchaseRequest.getPriceId()).orElse(null);
 
             Purchase purchase = new Purchase(user, price, LocalDate.now());
-            
+
             flightClassesRepository.removeAvaliableSeat(purchase.getPrice().getFlightClassId().getId());
             purchaseRepository.save(purchase);
         }

@@ -37,10 +37,14 @@ public class SearchController {
   @Autowired
   private AirportRepository airportRepository;
 
-  @Operation(
-      summary = "Search for flights",
-      description = "Search flights based on departure, arrival, date range, and passengers details."
-  )
+  /**
+   * Searches for flights based on the provided search criteria.
+   *
+   * @param searchedFlight The search criteria including departure, arrival, date
+   *                       range, and passengers.
+   * @return A list of matching flight prices.
+   */
+  @Operation(summary = "Search for flights", description = "Search flights based on departure, arrival, date range, and passengers details.")
   @ApiResponses({
       @ApiResponse(responseCode = "200", description = "List of matching flights returned")
   })
@@ -75,10 +79,12 @@ public class SearchController {
         .toList();
   }
 
-  @Operation(
-      summary = "Get list of airports",
-      description = "Retrieve all airports used in flight searches."
-  )
+  /**
+   * Retrieves a list of all airport codes and cities used to search for flights.
+   *
+   * @return An iterable collection of Airport search terms.
+   */
+  @Operation(summary = "Get list of airports", description = "Retrieve all airports used in flight searches.")
   @ApiResponses({
       @ApiResponse(responseCode = "200", description = "List of airports returned")
   })
