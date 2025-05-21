@@ -22,8 +22,9 @@ function getUniqueCompanies(flights) {
 const filterFlights = (flightsToFilter, min, max, companies) => {
   const updatedFlights = flightsToFilter.map((flight) => {
     const flightCompany = flight.scheduledFlight.flight.company.name;
+    const flightPrice = calculateFinalPriceInUserCurrency(flight.price, flight.discount, flight.currencyCode);
     const isPriceInRange =
-      flight.price >= min && flight.price <= max;
+      flightPrice >= min && flightPrice <= max;
     const isCompanySelected = companies[flightCompany];
 
     const isFilteredOut = !(isPriceInRange && isCompanySelected);
