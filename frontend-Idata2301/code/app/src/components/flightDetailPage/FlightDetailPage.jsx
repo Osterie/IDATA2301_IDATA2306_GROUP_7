@@ -51,8 +51,8 @@ const FlightDetailPage = ({
   }, [flight, searchParams]);
 
   const doGetFlightAccommodations = async (flight) => {
-    if (flight && flight.id) {
-      await getFlightAccommodations(flight.id, function (response) {
+    if (flight && flight.scheduledFlight.flight.id) {
+      await getFlightAccommodations(flight.scheduledFlight.flight.id, function (response) {
         console.log("Flight accommodations fetched successfully:", response);
       });
     }
