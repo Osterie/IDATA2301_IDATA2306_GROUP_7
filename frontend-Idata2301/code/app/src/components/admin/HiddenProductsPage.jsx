@@ -16,11 +16,9 @@ const HiddenProductsPage = ({ handleGoBack }) => {
       (response) => {
         // Handle the response as needed
         if (response && response.length > 0) {
-          console.log(response);
           setLoading(false);
           setHiddenProducts(response);
         } else {
-          console.log("No hidden flights found.");
           setLoading(false);
         }
       },
@@ -62,10 +60,8 @@ const HiddenProductsPage = ({ handleGoBack }) => {
           <section className="hidden-page-container">
             <div className="flights-container">
               {hiddenProducts.length > 0 ? (
-                (console.log(hiddenProducts),
-                hiddenProducts.map(
+                (hiddenProducts.map(
                   (flight) => (
-                    console.log(flight),
                     (
                       <FlightCard
                         flight={flight}

@@ -30,7 +30,6 @@ const ShoppingCartHero = ( {setActivePage, setSelectedFlight, setFlights, flight
     await new Promise((resolve) => setTimeout(resolve, 0));
   
     const updatedCart = getShoppingCartAsArray();
-    console.log("Updated cart:", updatedCart);
     await fetchFlights(updatedCart);
   };
   
@@ -59,7 +58,6 @@ const ShoppingCartHero = ( {setActivePage, setSelectedFlight, setFlights, flight
       }));
 
       setCart(enriched);
-      console.log("Fetched flights:", enriched);
     },
     JSON.stringify(uniqueIds),
     (errorResponse) => {
@@ -90,7 +88,6 @@ const handlePurchase = async () => {
       "POST",
       "/purchaseFlights",
       (response) => {
-        console.log("Purchase successful:", response);
         setFlights((prevFlights) =>
           prevFlights.map((flight) => {
             const cartItem = cart.find((item) => item.id === flight.id);

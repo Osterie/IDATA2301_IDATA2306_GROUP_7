@@ -7,7 +7,6 @@ export async function getAllUsers() {
       "GET",
       "/getUsers",
       function (userResponse) {
-        console.log("Success:", userResponse);
         resolve(userResponse);
       },
       null, 
@@ -25,7 +24,6 @@ export async function deleteUser(userId) {
       "DELETE",
       `/deleteUser/${userId}`,
       function (userResponse) {
-        console.log("Success:", userResponse);
         resolve(userResponse);
       },
       function (errorText) {
@@ -42,7 +40,6 @@ export async function deleteSelf() {
       "DELETE",
       `/deleteSelf`,
       function (userResponse) {
-        console.log("Success:", userResponse);
         doLogout();
         resolve(userResponse);
       },
@@ -66,7 +63,6 @@ export async function assignRoleToUser(userId, role) {
       "POST",
       "/addRole", // Assuming the full endpoint is handled as /api/addRole
       function (userResponse) {
-        console.log("Success:", userResponse);
         resolve(userResponse);
       },
       postData,
@@ -89,7 +85,6 @@ export async function removeRoleFromUser(userId, role) {
       "POST",
       "/removeRole", // Assuming the full endpoint is handled as /api/removeRole
       function (userResponse) {
-        console.log("Success:", userResponse);
         resolve(userResponse);
       },
       postData,

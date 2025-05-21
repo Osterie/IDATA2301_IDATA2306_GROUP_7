@@ -13,8 +13,6 @@ const PurchasedFlights = ({ user, setSelectedFlight, setActivePage }) => {
       (response) => {
         if (response && response.length > 0) {
           setFlights(response);
-        } else {
-          console.log("No purchased flights found for this user.");
         }
       },
       null,

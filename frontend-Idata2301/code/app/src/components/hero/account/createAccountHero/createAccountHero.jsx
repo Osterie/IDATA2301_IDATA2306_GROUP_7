@@ -19,7 +19,6 @@ const CreateAccount = () => {
       'POST',
       '/signup',
       async () => {
-        console.log('Successfully created account');
         await sendAuthenticationRequest(
           username,
           password,
@@ -30,7 +29,6 @@ const CreateAccount = () => {
       signupData,
       (error) => {
         setMessage(`Error: ${error}`);
-        console.log('Error creating account: ', error);
       }
     );
   };

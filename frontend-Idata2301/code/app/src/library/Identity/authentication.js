@@ -27,10 +27,6 @@ export function getAuthenticatedUser() {
     }
   }
 
-  if (!user) {
-    console.log("User not authenticated");
-    console.log(commaSeparatedRoles)
-  }
   return user;
 }
 
@@ -42,14 +38,12 @@ export function getAuthenticatedUser() {
 export function isAdmin(user) {
 
   if (!user) {
-    console.log("User is null");
     return false;
   }
 
   
   const roles = user.roles;
   if (!roles) {
-    console.log("User has no roles");
     return false;
   }
   
@@ -77,7 +71,6 @@ export async function sendAuthenticationRequest(username, password, successCallb
     function (jwtResponse) {
       setCookie("jwt", jwtResponse.jwt, getExpirationMilliseconds(jwtResponse.jwt));
       const userData = parseJwtUser(jwtResponse.jwt);
-      console.log(userData)
       if (userData) {
         setCookie("current_user_id", userData.id);
         setCookie("current_username", userData.username);
