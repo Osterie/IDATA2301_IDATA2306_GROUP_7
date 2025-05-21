@@ -89,7 +89,7 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
                 },
                 JSON.stringify(searchParams),
                 function (errorResponse) {
-                    console.log("Error: " + errorResponse);
+                    console.error("Error: " + errorResponse);
                     throw new Error('Network response was not ok');
                 }
             )
@@ -134,7 +134,7 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
                 },
                 null,
                 function (errorResponse) {
-                    console.log("Error: " + errorResponse);
+                    console.error("Error: " + errorResponse);
                     throw new Error('Network response was not ok for fetching search terms');
                 }
             )

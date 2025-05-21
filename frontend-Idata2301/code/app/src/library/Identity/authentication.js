@@ -136,7 +136,7 @@ export function parseJwtUser(jwtString) {
  * Log-out the user
  */
 export function doLogout() {
-  console.log("Logging out...");
+  console.error("Logging out...");
   deleteAuthorizationCookies();
   window.location.href = '/index.html'; // Adjust the URL as needed
 }

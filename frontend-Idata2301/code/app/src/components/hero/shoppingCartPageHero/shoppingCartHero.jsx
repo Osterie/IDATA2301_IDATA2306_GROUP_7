@@ -61,7 +61,7 @@ const ShoppingCartHero = ( {setActivePage, setSelectedFlight, setFlights, flight
     },
     JSON.stringify(uniqueIds),
     (errorResponse) => {
-      console.log("Error: " + errorResponse);
+      console.error("Error: " + errorResponse);
     }
   );
 };
@@ -110,7 +110,7 @@ const handlePurchase = async () => {
       },
       JSON.stringify(data),
       (errorResponse) => {
-        console.log("Error: " + errorResponse);
+        console.error("Error: " + errorResponse);
       }
     );
   } finally {

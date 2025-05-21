@@ -32,7 +32,6 @@ const ManageUserPage = ({ handleGoBack }) => {
   const handleDelete = async (userId) => {
     try {
       await deleteUser(userId);
-      console.log(`User with ID ${userId} deleted`);
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
     } catch (error) {
       console.error("Error deleting user:", error);
@@ -46,7 +45,6 @@ const ManageUserPage = ({ handleGoBack }) => {
 
   const handleConfirmRole = async (userId) => {
     try {
-      console.log(`Assigning role "${newRole}" to user ID ${userId}`);
       setNewRole(newRole.trim().toUpperCase()); // Ensure the role is in uppercase
       await assignRoleToUser(userId, newRole); // <- call your API
 

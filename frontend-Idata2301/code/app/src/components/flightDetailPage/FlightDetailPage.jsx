@@ -53,7 +53,7 @@ const FlightDetailPage = ({
   const doGetFlightAccommodations = async (flight) => {
     if (flight && flight.scheduledFlight.flight.id) {
       await getFlightAccommodations(flight.scheduledFlight.flight.id, function (response) {
-        console.log("Flight accommodations fetched successfully:", response);
+        console.info("Flight accommodations fetched successfully:", response);
       });
     }
   }

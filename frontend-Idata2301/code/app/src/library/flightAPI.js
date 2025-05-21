@@ -12,7 +12,7 @@ export async function updateFlightVisibility(flight, isHidden, onVisibilityChang
     },
     JSON.stringify(formData),
     (errorResponse) => {
-      console.log("Error: " + errorResponse);
+      console.error("Error: " + errorResponse);
     }
   );
 }
