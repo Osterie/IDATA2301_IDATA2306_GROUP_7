@@ -6,6 +6,7 @@ import favActivePicture from "../../../resources/images/favactive.png";
 import favInactivePicture from "../../../resources/images/favinactive.png";
 import { convertCurrency } from "../../../utils/currencyUtils";
 import { getPreferredCurrency } from "../../../utils/cookieUtils";
+import { calculateFinalPriceInUserCurrency } from "../../../utils/currencyUtils";
 
 const FlightCard = ({
   flight,
@@ -63,12 +64,6 @@ const FlightCard = ({
     await updateFlightVisibility(flight, isHidden, onVisibilityChange, formData);
   };
 
-  const calculateDiscountedPrice = (price, discount) => {
-    return discount > 0 ? (price - (price * discount) / 100).toFixed(0) : price;
-  };
-
-  const discountedPrice = calculateDiscountedPrice(price, discount);
-
   return (
     <div className="flight-card">
       <div className="flight-card-header">
@@ -122,16 +117,17 @@ const FlightCard = ({
               className="flight-card-original-price"
               style={{ textDecoration: "line-through", color: "#888", margin: 0 }}
             >
-              {convertCurrency(price, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
+              
+              {calculateFinalPriceInUserCurrency(price, 0, currencyCode)} {getPreferredCurrency()}
             </p>
             <p className="flight-card-price" style={{ fontWeight: "bold", color: "#d32f2f" }}>
-              {convertCurrency(discountedPrice, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
+              {calculateFinalPriceInUserCurrency(price, discount, currencyCode)} {getPreferredCurrency()}
             </p>
             <p className="flight-card-discount">Discount: {discount}%</p>
           </>
         ) : (
           <p className="flight-card-price">
-            {convertCurrency(discountedPrice, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
+            {calculateFinalPriceInUserCurrency(price, discount, currencyCode)} {getPreferredCurrency()}
           </p>
         )}
       </div>
