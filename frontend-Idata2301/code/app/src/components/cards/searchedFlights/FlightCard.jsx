@@ -1,6 +1,6 @@
 import React from "react";
 import "./flightCard.css";
-import { sendApiRequest } from "../../../library/requests";
+import { updateFlightVisibility } from "../../../library/flightAPI";
 import { addToShoppingCart } from "../../../utils/shoppingCartUtils";
 import favActivePicture from "../../../resources/images/favactive.png";
 import favInactivePicture from "../../../resources/images/favinactive.png";
@@ -60,20 +60,7 @@ const FlightCard = ({
       doHide: !isHidden,
     };
 
-    await sendApiRequest(
-      "POST",
-      "/setFlightProductVisibility",
-      (result) => {
-        const updatedFlight = { ...flight, isHidden: !isHidden };
-        if (typeof onVisibilityChange === "function") {
-          onVisibilityChange(updatedFlight);
-        }
-      },
-      JSON.stringify(formData),
-      (errorResponse) => {
-        console.log("Error: " + errorResponse);
-      }
-    );
+    await updateFlightVisibility(flight, isHidden, onVisibilityChange, formData);
   };
 
   const calculateDiscountedPrice = (price, discount) => {
