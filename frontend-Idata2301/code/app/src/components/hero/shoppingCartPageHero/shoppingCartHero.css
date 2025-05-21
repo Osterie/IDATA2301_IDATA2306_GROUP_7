@@ -124,7 +124,8 @@
   color: var(--primary-contrast);
   padding: 6px 12px;
   border-radius: 6px;
-  font-size: 5rem;
+
+  font-size: var(--h1-desktop-font-size);
   white-space: wrap;
     border-radius: 25px
 }
