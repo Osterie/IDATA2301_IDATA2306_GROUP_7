@@ -120,10 +120,11 @@
   height: 40vh;
   width: 60vw;
   position: absolute;
-  background: #333;
-  color: green;
+  background: var(--primary-color);
+  color: var(--primary-contrast);
   padding: 6px 12px;
   border-radius: 6px;
-  font-size: 4rem;
+  font-size: 5rem;
   white-space: wrap;
+    border-radius: 25px
 }
