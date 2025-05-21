@@ -94,6 +94,15 @@ h1 {
   background-color: var(--secondary-color);
 }
 
+.detail-button {
+  background-color: var(--call-to-action-color);
+  color: var(--contrast-text-color);
+}
+
+.detail-button:hover {
+  background-color: var(--call-to-action-highlight-color);
+}
+
 .buy-now {
   background-color: var(--call-to-action-color);
   color: var(--contrast-text-color);

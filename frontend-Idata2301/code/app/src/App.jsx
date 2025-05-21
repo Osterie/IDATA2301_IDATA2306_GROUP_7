@@ -119,6 +119,7 @@ function App() {
             searchParams={searchParams}
             flight={selectedFlight}
             user={user}
+            setSelectedFlight={setSelectedFlight}
             setActivePage={navigateTo}
             handleGoBack={handleGoBack}
           />

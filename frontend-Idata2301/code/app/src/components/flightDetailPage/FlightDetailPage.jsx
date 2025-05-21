@@ -15,6 +15,7 @@ const FlightDetailPage = ({
   searchParams,
   flight,
   user,
+  setSelectedFlight,
   setActivePage,
   handleGoBack,
 }) => {
@@ -128,7 +129,7 @@ const FlightDetailPage = ({
 
             <div className="provider-alternative-item" key={flight.id}>
               <FlightDetailPageCard key={flight.id} flight={flight} isFavorite={favoriteIds.includes(flight.id)}
-              onFavoriteToggle={handleFavoriteToggle}/>
+              onFavoriteToggle={handleFavoriteToggle} setActivePage={setActivePage} setSelectedFlight={setSelectedFlight}/>
             </div>
 
           ))}

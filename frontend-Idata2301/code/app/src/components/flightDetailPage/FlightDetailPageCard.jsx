@@ -7,7 +7,13 @@ import favActivePicture from "../../resources/images/favactive.png";
 import favInactivePicture from "../../resources/images/favinactive.png";
 
 
-const FlightDetailPageCard = ({ flight, isFavorite, onFavoriteToggle, accommodations = [] }) => {
+const FlightDetailPageCard = ({ 
+  flight, 
+  isFavorite, 
+  onFavoriteToggle, 
+  setSelectedFlight,
+  setActivePage,
+  accommodations = [] }) => {
 
   const {
     id,
@@ -131,8 +137,23 @@ const FlightDetailPageCard = ({ flight, isFavorite, onFavoriteToggle, accommodat
       <p className="flight-card-provider">Provider: {provider}</p>
 
       <footer className="action-buttons">
+        {setSelectedFlight && setActivePage && (
+          <button
+            className="btn detail-button"
+            onClick={() => {
+
+              setSelectedFlight(flight);
+              setActivePage("flight-details");
+            
+          }}
+        >
+          Details
+        </button>
+  )}
         <button className="btn add-to-cart" onClick={handleAddToCart}>Add to cart</button>
         <div> {showPopup && ( <div className="detail-popup-message"> ✅ Added to cart! </div> )} </div>
+
+
       </footer>
     </article>
   );
