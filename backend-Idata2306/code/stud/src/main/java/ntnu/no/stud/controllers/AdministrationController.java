@@ -2,6 +2,7 @@ package ntnu.no.stud.controllers;
 
 import java.util.List;
 
+import ntnu.no.stud.AccessUserService;
 import ntnu.no.stud.dto.EditRoleModel;
 import ntnu.no.stud.dto.EditUsersInRoleModel;
 import ntnu.no.stud.dto.SetProductVisibilityModel;
@@ -11,6 +12,8 @@ import ntnu.no.stud.entities.UserRole;
 import ntnu.no.stud.repositories.PriceRepository;
 import ntnu.no.stud.repositories.UserRepository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +38,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Tag(name = "Administration Controller", description = "APIs for user role management and product visibility")
 public class AdministrationController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AdministrationController.class);
+
+    @Autowired
+    private AccessUserService userService;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -56,6 +64,11 @@ public class AdministrationController {
     @PostMapping("api/addRole")
     public ResponseEntity<String> addRole(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Model containing user ID and role to add", required = true, content = @Content(schema = @Schema(implementation = EditRoleModel.class))) @RequestBody EditRoleModel model) {
+
+        ResponseEntity<String> accessCheck = requestIsFromAdmin();
+        if (accessCheck != null) {
+            return accessCheck;
+        }
 
         User user = userRepository.findById(model.getId()).orElse(null);
         if (user == null) {
@@ -90,6 +103,11 @@ public class AdministrationController {
     public ResponseEntity<String> removeRole(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Model containing user ID and role to remove", required = true, content = @Content(schema = @Schema(implementation = EditRoleModel.class))) @RequestBody EditRoleModel model) {
 
+        ResponseEntity<String> accessCheck = requestIsFromAdmin();
+        if (accessCheck != null) {
+            return accessCheck;
+        }
+
         User user = userRepository.findById(model.getId()).orElse(null);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found: " + model.getId());
@@ -123,6 +141,11 @@ public class AdministrationController {
     @PostMapping("/api/editUsersInRole")
     public ResponseEntity<String> editUsersInRole(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Model containing list of users and the role to update", required = true, content = @Content(schema = @Schema(implementation = EditUsersInRoleModel.class))) @RequestBody EditUsersInRoleModel model) {
+
+        ResponseEntity<String> accessCheck = requestIsFromAdmin();
+        if (accessCheck != null) {
+            return accessCheck;
+        }
 
         List<User> users = model.getUsers();
         UserRole role = model.getRole();
@@ -169,6 +192,11 @@ public class AdministrationController {
     public ResponseEntity<String> setFlightProductVisibility(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Model containing priceId and visibility status", required = true, content = @Content(schema = @Schema(implementation = SetProductVisibilityModel.class))) @RequestBody SetProductVisibilityModel model) {
 
+        ResponseEntity<String> accessCheck = requestIsFromAdmin();
+        if (accessCheck != null) {
+            return accessCheck;
+        }
+
         if (model.getPriceId() <= 0) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid priceId: " + model.getPriceId());
         }
@@ -194,8 +222,25 @@ public class AdministrationController {
             @ApiResponse(responseCode = "200", description = "List of hidden products retrieved", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Price.class)))
     })
     @GetMapping("/api/getHiddenProducts")
-    public ResponseEntity<List<Price>> getHiddenProducts() {
+    public ResponseEntity<?> getHiddenProducts() {
+        ResponseEntity<String> accessCheck = requestIsFromAdmin();
+        if (accessCheck != null) {
+            return accessCheck;
+        }
         List<Price> hiddenProducts = priceRepository.findByIsHidden(true);
         return ResponseEntity.ok(hiddenProducts);
+    }
+
+    private ResponseEntity<String> requestIsFromAdmin() {
+        User sessionUser = userService.getSessionUser();
+        if (sessionUser == null) {
+            logger.warn("Unauthorized access attempt to admin-only endpoint.");
+            return new ResponseEntity<>("Access denied: Only authenticated admins allowed", HttpStatus.UNAUTHORIZED);
+        }
+        if (!sessionUser.isAdmin()) {
+            logger.warn("Forbidden access attempt by non-admin user: {}", sessionUser.getUsername());
+            return new ResponseEntity<>("Access denied: Only admins can perform this action", HttpStatus.FORBIDDEN);
+        }
+        return null; // All good
     }
 }
