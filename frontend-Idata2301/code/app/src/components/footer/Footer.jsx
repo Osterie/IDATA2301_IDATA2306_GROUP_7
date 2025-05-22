@@ -3,7 +3,7 @@ import "./footer.css";
 const Footer = () => {
   return (
     <footer className="section4">
-      <div id="footerContent">
+      <div id="footer-content">
         {/* Decorative or structural content can remain div */}
 
         <section id="contact" aria-labelledby="contactTitle">

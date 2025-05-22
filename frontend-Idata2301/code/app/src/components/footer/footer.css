@@ -9,11 +9,15 @@ body {
   width: 100%;
 }
 
-#footerContent {
+#footer-content {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   width: 100%;
   float: left;
   background: var(--bottom-color);
+}
+
+#footer-content a {
+  color: var(--primary-contrast);
 }
 
 #contact {
