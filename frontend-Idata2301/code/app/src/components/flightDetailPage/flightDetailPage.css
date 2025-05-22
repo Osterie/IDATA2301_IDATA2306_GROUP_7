@@ -197,10 +197,15 @@ h1 {
 
 .detail-description > p {
   color: var(--text-color);
-  width: 60vw;
-  margin-left: 18vw;
+  width: 100%;
+  margin: 0 auto;
   font-size: var(--text-desktop-font-size);
+  max-width: 700px;
+  line-height: 1.5;
+  text-align: justify;
+  padding: 0 1rem;
 }
+
 
 @media (max-width: 900px) {
   .flight-detail-page {
