@@ -23,3 +23,16 @@
   padding: 4px 8px;
   font-weight: bold;
 }
+
+@media (max-width: 900px) {
+  .purchasedFlights,
+  .flights-container,
+  .cardWithCount,
+  .purchaseCount {
+    font-size: var(--text-mobile-font-size);
+  }
+
+  .purchaseCount {
+    font-size: var(--button-text-mobile-font-size);
+  }
+}

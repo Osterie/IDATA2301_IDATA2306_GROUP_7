@@ -56,3 +56,18 @@
 .delete-button:hover {
   background-color: red;
 }
+
+@media (max-width: 900px) {
+  .profile-table th,
+  .profile-table td,
+  .definition-list dt,
+  .definition-list dd,
+  .section,
+  .danger-zone {
+    font-size: var(--text-mobile-font-size);
+  }
+
+  .delete-button {
+    font-size: var(--button-text-mobile-font-size);
+  }
+}
