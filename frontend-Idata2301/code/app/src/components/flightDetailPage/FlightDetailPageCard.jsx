@@ -80,6 +80,13 @@ const FlightDetailPageCard = ({
         <p>Available Seats: <strong>{availableSeats}</strong></p>
       </section>
 
+      <section className="detail-description">
+        <p>
+          Explore the journey with {company.name}!
+          Experience seamless travel from {departureCity} to {arrivalCity} on {date}. Whether you're commuting for business or leisure, {company.name} offers reliable and comfortable service tailored to your needs. Book your route today and enjoy a smooth ride to your destination.
+        </p>
+      </section>
+
       {accommodations.length > 0 && (
         <section className="accommodations-section">
           <h3>Flight Features</h3>

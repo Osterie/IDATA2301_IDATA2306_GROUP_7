@@ -195,6 +195,13 @@ h1 {
   margin-bottom: 0.25rem;
 }
 
+.detail-description > p {
+  color: var(--text-color);
+  width: 60vw;
+  margin-left: 18vw;
+  font-size: var(--text-desktop-font-size);
+}
+
 @media (max-width: 900px) {
   .flight-detail-page {
     padding: 1rem;
@@ -236,5 +243,9 @@ h1 {
   .provider-alternative-vertical-scroll {
     max-height: 400px;
     padding-right: 0.5rem;
+  }
+
+  .detail-description > p {
+    font-size: var(--text-mobile-font-size);
   }
 }
