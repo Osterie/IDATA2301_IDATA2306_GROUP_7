@@ -46,6 +46,8 @@ const FlightCard = ({
   const [showPopup, setShowPopup] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
 
+  //Handles the addition of a flight to the shopping cart
+  // Checks if the flight is available and shows a popup message
   const handleAddToCart = () => {
     const inCart = getFlightInCartCount(id);
     
@@ -64,6 +66,7 @@ const FlightCard = ({
     }, 3000);// 3 seconds
   };
 
+  // Toggles the visibility of the flight
   const handleToggleVisibility = async () => {
     const formData = {
       priceId: id,

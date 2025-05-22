@@ -17,6 +17,7 @@ const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
           throw new Error(error);
         };
 
+        // Fetching a random flight with the date tomorrow
         await sendApiRequest("GET", "/flights/tomorrow", (flightsTomorrow) => {
           allProducts.push(...flightsTomorrow.map((flight) => ({
             ...flight,
@@ -30,6 +31,7 @@ const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
           errorResponse
         );
 
+        // Fetching a random flight with the highest discount
         await sendApiRequest("GET", "/flights/highest-discount", (discountFlight) => {
           allProducts.push(...discountFlight.map((flight) => ({
             ...flight,
@@ -43,6 +45,7 @@ const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
           errorResponse
         );
 
+        // Fetching a random flight
         await sendApiRequest("GET", "/flights/random", (randomFlight) => {
           allProducts.push(...randomFlight.map((flight) => ({
             ...flight,
@@ -56,6 +59,7 @@ const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
           errorResponse
         );
 
+        // Fetching a random flight
         await sendApiRequest("GET", "/flights/random", (randomFlight) => {
           allProducts.push(...randomFlight.map((flight) => ({
             ...flight,
@@ -69,6 +73,7 @@ const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
           errorResponse
         );
 
+        // Fetching a random flight
         await sendApiRequest("GET", "/flights/random", (randomFlight) => {
           allProducts.push(...randomFlight.map((flight) => ({
             ...flight,
@@ -82,6 +87,7 @@ const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
           errorResponse
         );
 
+        // Fetching a random flight
         await sendApiRequest("GET", "/flights/random", (randomFlight) => {
           allProducts.push(...randomFlight.map((flight) => ({
             ...flight,

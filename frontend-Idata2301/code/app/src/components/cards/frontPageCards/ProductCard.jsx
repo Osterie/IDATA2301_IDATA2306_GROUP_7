@@ -13,6 +13,8 @@ const ProductCard = ({
 
   const img = flight.scheduledFlight.flight.company.imageUrl;
 
+  // Sets active page to flight details and sets selected flight
+  // to the flight that was clicked
   const handleCardClick = () => {
     setSelectedFlight(flight);
     setActivePage("flight-details");
