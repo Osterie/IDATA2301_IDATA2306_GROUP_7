@@ -5,7 +5,7 @@ Sprint stenographer: Tobias
 
 ## **Sprint Overview**
 
-- **Sprint Number:** Sprint 10
+- **Sprint Number:** Sprint 11
 - **Duration:** 20.05.2025 - 22.05.2025
 - **Sprint Goal:** Prepare for submission
 - **Team Members:**
