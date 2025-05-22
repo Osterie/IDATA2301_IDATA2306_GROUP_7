@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FlightCard from "./FlightCard";
 import "./flightsContainer.css";
 import { isAdmin } from "../../../library/Identity/authentication";

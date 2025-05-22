@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { removeFromShoppingCart, clearShoppingCart, addToShoppingCart, getShoppingCartAsArray, deleteFromShoppingCart } from "../../../utils/shoppingCartUtils";
 import FlightCard from "../../cards/searchedFlights/FlightCard.jsx";
 import { getCookie } from "../../../library/tools";
 import { sendApiRequest } from "../../../library/requests";
 import { getPreferredCurrency } from "../../../utils/cookieUtils";
-import { convertCurrency } from "../../../utils/currencyUtils";
 import { calculateFinalPriceInUserCurrency } from "../../../utils/currencyUtils";
 
 
@@ -90,7 +89,7 @@ const ShoppingCartHero = ({ setActivePage, setSelectedFlight, setFlights, flight
         (response) => {
           setFlights((prevFlights) =>
             prevFlights.map((flight) => {
-              const cartItem = cart.find((item) => item.id === flight.id);
+              const cartItem = cart.find((item) => item.scheduledFlight.id === flight.scheduledFlight.id);
               if (cartItem) {
                 return {
                   ...flight,
@@ -102,7 +101,7 @@ const ShoppingCartHero = ({ setActivePage, setSelectedFlight, setFlights, flight
               }
               return flight;
             })
-          );
+        );
 
 
           clearShoppingCart();

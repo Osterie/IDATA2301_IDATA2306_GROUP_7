@@ -7,10 +7,10 @@ import favActivePicture from "../../resources/images/favactive.png";
 import favInactivePicture from "../../resources/images/favinactive.png";
 
 
-const FlightDetailPageCard = ({ 
-  flight, 
-  isFavorite, 
-  onFavoriteToggle, 
+const FlightDetailPageCard = ({
+  flight,
+  isFavorite,
+  onFavoriteToggle,
   setSelectedFlight,
   setActivePage,
   accommodations = [] }) => {
@@ -97,21 +97,20 @@ const FlightDetailPageCard = ({
 
       {onFavoriteToggle && (
         <div
-        className={`detail-favorite-button ${
-          isFavorite ? "favorited" : ""
-        }`}
+          className={`detail-favorite-button ${isFavorite ? "favorited" : ""
+            }`}
           onClick={() => onFavoriteToggle?.(flight.id, isFavorite)}
         >
-            <div className="favorite-content">
-              <img
-                src={isFavorite ? favActivePicture : favInactivePicture}
-                alt={isFavorite ? "Flight is favorited" : "Flight is not favorited"}
-            className="favorite-icon"
-          />
-              
-            </div>
+          <div className="favorite-content">
+            <img
+              src={isFavorite ? favActivePicture : favInactivePicture}
+              alt={isFavorite ? "Flight is favorited" : "Flight is not favorited"}
+              className="favorite-icon"
+            />
+
           </div>
-        )}
+        </div>
+      )}
 
       <div className="flight-card-price-section">
         {discount > 0 ? (
@@ -144,14 +143,14 @@ const FlightDetailPageCard = ({
 
               setSelectedFlight(flight);
               setActivePage("flight-details");
-            
-          }}
-        >
-          Details
-        </button>
-  )}
+
+            }}
+          >
+            Details
+          </button>
+        )}
         <button className="btn add-to-cart" onClick={handleAddToCart}>Add to cart</button>
-        <div> {showPopup && ( <div className="detail-popup-message"> ✅ Added to cart! </div> )} </div>
+        <div> {showPopup && (<div className="detail-popup-message"> ✅ Added to cart! </div>)} </div>
 
 
       </footer>

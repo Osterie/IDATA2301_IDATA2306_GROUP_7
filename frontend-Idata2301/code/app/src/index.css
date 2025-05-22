@@ -6,11 +6,11 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-*{
+* {
   padding: 0;
   margin: 0;
   text-decoration: none;
@@ -19,23 +19,23 @@ code {
 }
 
 /* CSS variables */
-:root{
+:root {
   /* Main colors */
   --primary-color: #182833;
   --secondary-color: #183040;
-  --background-color: rgb(240,240,250);
+  --background-color: rgb(240, 240, 250);
   --background-color-darker: rgb(220, 220, 240);
   --box-color: white;
   --serious-box-color: #ffe6e6;
   --bottom-color: #101520;
   --serious-button-color: #c82333;
-  --button-color:#27ae60;
-  --button-hover-color: #50C878;
+  --button-color: #27ae60;
+  --button-hover-color: #50c878;
 
   /* Contrast colors */
-  --primary-contrast: #FDA300;
-  --call-to-action-color: #FDA300;
-  --call-to-action-highlight-color: #FFC24D;
+  --primary-contrast: #fda300;
+  --call-to-action-color: #fda300;
+  --call-to-action-highlight-color: #ffc24d;
 
   /* Text color */
   --text-color: #212529;
@@ -69,5 +69,4 @@ code {
 
   /* Navbar */
   --navbar-height: 80px;
-  
 }

@@ -40,7 +40,6 @@ figcaption {
 
 /* Responsive design */
 @media (max-width: 900px) {
-
   .title {
     font-size: var(--h3-mobile-font-size);
   }
@@ -54,7 +53,9 @@ figcaption {
     height: 72px;
   }
 
-  .title, .name, .role {
+  .title,
+  .name,
+  .role {
     font-size: var(--text-mobile-font-size);
   }
 }
