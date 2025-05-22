@@ -45,7 +45,7 @@ const ProductCard = ({
               <p>Discount: {flight.discount}%</p>
             </>
           ) : (
-            <p>
+            <p style={{ fontWeight: "bold", color: "#d32f2f" }}>
               {calculateFinalPriceInUserCurrency(flight.price, flight.discount, flight.currencyCode)} {getPreferredCurrency()}
             </p>
           )}
