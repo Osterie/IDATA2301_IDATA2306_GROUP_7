@@ -52,7 +52,7 @@ Endpoint for getting hidden flight
 | Add company table                  | Tobias   | Completed     | [5]          |              |
 | Made initializer for companies     | Tobias   | Completed     | [5]          |              |
 | Add company logos for company      | Adrian   | Completed     | [5]          |              |
-| Comment                            | Everyone | Not completed | [8]          |              |
+| Comment                            | Tobias   | Not completed | [4]          |              |
 | Further error loggers              | Everyone | Not completed | [6]          |              |
 | Finish reccomended cards           | Daniel   | Completed     | [5]          |              |
 | Add purchasing date to purchases   | Adrian   | Completed     | [3]          | Low priority |

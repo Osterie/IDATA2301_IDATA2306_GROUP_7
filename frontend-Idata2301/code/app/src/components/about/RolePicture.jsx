@@ -1,4 +1,3 @@
-import React from "react";
 import "./rolePicture.css";
 
 const RolePicture = ({ image, title, name, role }) => {

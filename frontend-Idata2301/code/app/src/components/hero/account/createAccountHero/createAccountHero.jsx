@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { sendApiRequest } from '../../../../library/requests';
 import { sendAuthenticationRequest } from '../../../../library/Identity/authentication';
 import './createAccountHero.css'; // Scoped styles
@@ -19,7 +19,6 @@ const CreateAccount = () => {
       'POST',
       '/signup',
       async () => {
-        console.log('Successfully created account');
         await sendAuthenticationRequest(
           username,
           password,
@@ -30,7 +29,6 @@ const CreateAccount = () => {
       signupData,
       (error) => {
         setMessage(`Error: ${error}`);
-        console.log('Error creating account: ', error);
       }
     );
   };

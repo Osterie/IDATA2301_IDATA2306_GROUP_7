@@ -25,10 +25,10 @@ const ContactForm = () => {
         <p className="text-green-600">Thank you! Your message has been sent.</p>
       ) : (
         <form
-            action="https://formsubmit.co/d4d53e49a9133e043ae554f42b38f3a1"
-            method="POST"
-            className="space-y-4"
-            onSubmit={handleSubmit}
+          action="https://formsubmit.co/d4d53e49a9133e043ae554f42b38f3a1"
+          method="POST"
+          className="space-y-4"
+          onSubmit={handleSubmit}
         >
           <input
             type="text"

@@ -10,7 +10,6 @@ export async function getCompanyImage(companyId) {
       "GET",
       `/company/${companyId}/image`,
       function (imageBlob) {
-        console.log("Successfully fetched company image");
         resolve(imageBlob);
       },
       null,
@@ -32,7 +31,6 @@ export async function getCompanyLogo(companyId) {
       "GET",
       `/company/${companyId}/logo`,
       function (logoBlob) {
-        console.log("Successfully fetched company logo");
         resolve(logoBlob);
       },
       null,

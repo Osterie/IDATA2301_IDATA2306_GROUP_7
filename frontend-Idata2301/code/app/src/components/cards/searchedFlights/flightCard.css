@@ -4,9 +4,9 @@
   border-radius: var(--box-border-radius);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 100%;              /* Full width of container */
-  max-width: none;          /* Remove restriction */
-  height: auto;             /* Automatically fit content */
+  width: 100%; /* Full width of container */
+  max-width: none; /* Remove restriction */
+  height: auto; /* Automatically fit content */
   max-height: 300px;
   margin-bottom: 20px;
   text-align: center;
@@ -36,7 +36,8 @@
   color: #7f8c8d;
 }
 
-.flight-card-date, .flight-card-seats {
+.flight-card-date,
+.flight-card-seats {
   font-size: var(--text-desktop-font-size);
   font-weight: bold;
   color: #34495e;
@@ -71,9 +72,8 @@
   color: #4caf50; /* soft green, or choose any accent color */
   margin-top: -6px;
   margin-bottom: 8px;
-  font-weight: bold
+  font-weight: bold;
 }
-
 
 .flight-card-actions {
   display: flex;
@@ -160,7 +160,6 @@
   }
 } */
 
-
 .flight-card-title {
   width: 100%;
   text-align: center;
@@ -169,7 +168,10 @@
   padding-left: 60px;
 }
 
-.flight-detail-button, .flight-cart-button, .flight-card-toggle-visibility-button, .flight-card-actions-button {
+.flight-detail-button,
+.flight-cart-button,
+.flight-card-toggle-visibility-button,
+.flight-card-actions-button {
   margin: 0.5rem;
   border: none;
   color: var(--contrast-text-color);
@@ -213,4 +215,16 @@
 
 .flight-card-toggle-visibility-button:hover {
   background-color: red;
+}
+
+.flight-popup-message {
+  opacity: 0.9;
+  position: absolute;
+  right: 1em;
+  background: var(--primary-color);
+  color: var(--primary-contrast);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: wrap;
 }

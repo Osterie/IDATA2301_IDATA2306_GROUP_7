@@ -8,7 +8,8 @@
     position: relative;
 }
 
-.search-bar-input, .search-form button {
+.search-bar-input,
+.search-form button {
     flex: 1 1 200px;
     max-width: 100%;
     box-sizing: border-box;
@@ -79,4 +80,33 @@
 
 .autocomplete-suggestions li:hover {
     background-color: #f0f0f0;
+}
+
+/* Mobile Font Sizes */
+@media (max-width: 1050px) {
+    .search-form input,
+    .call-to-action,
+    .autocomplete-wrapper {
+        font-size: var(--text-mobile-font-size);
+    }
+
+    .dropdown-button {
+        font-size: var(--text-mobile-font-size);
+    }
+
+    .autocomplete-suggestions li {
+        font-size: var(--text-mobile-font-size);
+    }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

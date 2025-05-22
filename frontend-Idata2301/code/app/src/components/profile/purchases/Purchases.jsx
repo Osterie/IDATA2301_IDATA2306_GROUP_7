@@ -1,68 +1,75 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import styles from "./purchases.module.css";
+import React, { useEffect, useState } from "react";
+import "./purchases.css";
 import { sendApiRequest } from "../../../library/requests.js";
 import FlightCard from "../../cards/searchedFlights/FlightCard.jsx";
 
+const PurchasedFlights = ({ user, setSelectedFlight, setActivePage }) => {
+  const [flights, setFlights] = useState([]);
 
-
-const PurchasedFlights = ({user, setSelectedFlight, setActivePage}) => {
-
-  let [flights, setFlights] = useState([]);
-
-  // Function to fetch purchased flights from the backend
+  // Fetches the users purchased flights
   const fetchPurchasedFlights = async () => {
     await sendApiRequest(
       "GET",
       `/purchases?userId=${user.id}`,
       (response) => {
-        // Handle the response as needed
         if (response && response.length > 0) {
-          console.log(response)
           setFlights(response);
-        } else {
-          console.log("No purchased flights found for this user.");
         }
       },
-      null, // No request body for GET
+      null,
       (error) => {
         console.error("Error fetching purchased flights:", error);
       }
     );
   };
 
-  // Call the function to fetch purchased flights when the component mounts
   useEffect(() => {
-    if (user){
+    if (user) {
       fetchPurchasedFlights();
     }
   }, []);
+
+  // Group by flight.price.id
+  const groupedFlights = flights.reduce((map, flight) => {
+    const priceId = flight.price.id;
+    if (!map[priceId]) {
+      map[priceId] = { flight: flight.price, count: 1, dates: [flight.date] };
+    } else {
+      map[priceId].count += 1;
+      map[priceId].dates.push(flight.date);
+    }
+    return map;
+  }, {});
+
+  const groupedList = Object.values(groupedFlights);
 
   return (
     <div>
       <h2>Purchased Flights</h2>
       <p>Here is a list of flights you have purchased.</p>
-        
-      <div className="flights-container flights-grid">
-      {flights.length > 0 ? (
-        flights
-          .map((flight) => (
-            <FlightCard
-              key={flight.id}
-              flight={flight.price}
-              purchasable={false}
-              purchaseDate ={flight.date}
-              setSelectedFlight={setSelectedFlight} 
-              setActivePage={setActivePage}
-            />
+
+      <div className="flights-container">
+        {groupedList.length > 0 ? (
+          groupedList.map(({ flight, count, dates }) => (
+            <div key={flight.id} className="cardWithCount">
+              <FlightCard
+                key={flight.id}
+                flight={flight}
+                purchasable={false}
+                purchaseDate={dates[0]}
+                setSelectedFlight={setSelectedFlight}
+                setActivePage={setActivePage}
+              />
+              <div className="purchaseCount">
+                × {count}
+              </div>
+            </div>
           ))
-      ) : (
-        <p>No flights found.</p>
-      )}
+        ) : (
+          <p>No flights found.</p>
+        )}
       </div>
     </div>
-
   );
 };
 

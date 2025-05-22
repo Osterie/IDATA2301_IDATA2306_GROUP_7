@@ -1,5 +1,10 @@
+body {
+  overflow-x: hidden;
+}
+
 .flight-hero-image {
-  width: 99vw;
+  width: 100%;
+  max-width: 100vw; /* Optional safeguard */
   height: 50vh;
   overflow: hidden;
 }
@@ -12,13 +17,12 @@
 
 .flight-detail-page {
   position: relative;
-  /* width: 99vw; */
   margin: 10px auto;
+  margin-bottom: 2rem;
   padding: 2rem;
   border: 1px solid var(--contrast-border-color);
   border-radius: var(--box-border-radius);
   background-color: var(--box-color);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
   font-family: sans-serif;
 }
 
@@ -95,6 +99,15 @@ h1 {
   background-color: var(--secondary-color);
 }
 
+.detail-button {
+  background-color: var(--call-to-action-color);
+  color: var(--contrast-text-color);
+}
+
+.detail-button:hover {
+  background-color: var(--call-to-action-highlight-color);
+}
+
 .buy-now {
   background-color: var(--call-to-action-color);
   color: var(--contrast-text-color);
@@ -105,29 +118,139 @@ h1 {
 }
 
 .provider-alternative-parent {
-  position: relative;
-  width: 99vw;
-  margin: 10px auto;
+  margin-top: 2rem;
+  width: 80vw;
+  margin-left: 10vw;
+  background-color: var(--background-color-darker);
   padding: 2rem;
-  border: 1px solid var(--contrast-border-color);
   border-radius: var(--box-border-radius);
-  background-color: var(--box-color);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  font-family: sans-serif;
 }
 
-.provider-alternative-container{
+.provider-alternative-vertical-scroll {
+  max-height: 550px; /* or however tall a single card is */
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  padding-right: 1rem;
+}
+
+.provider-alternative-item {
+  scroll-snap-align: start;
+  margin-bottom: 1rem;
+}
+
+.provider-alternative-container {
   overflow-y: scroll;
 }
 
+.detail-popup-message {
+  opacity: 0.9;
+  bottom: 3.7em;
+  right: 1em;
+  background: var(--primary-color);
+  color: var(--primary-contrast);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: wrap;
+}
+
+.detail-favorite-button {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0.5rem;
+  border: 3px solid var(--serious-button-color);
+  border-radius: var(--button-border-radius);
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+  height: 30px;
+}
+
+.detail-favorite-button:hover {
+  background-color: var(--serious-button-color);
+}
+
+.detail-favorite-button.favorited {
+  background-color: var(--serious-button-color);
+}
+
+.accommodations-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+}
+
+.accommodation-list {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.accommodation-item {
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.detail-description > p {
+  color: var(--text-color);
+  width: 100%;
+  margin: 0 auto;
+  font-size: var(--text-desktop-font-size);
+  max-width: 700px;
+  line-height: 1.5;
+  text-align: justify;
+  padding: 0 1rem;
+}
+
+
 @media (max-width: 900px) {
   .flight-detail-page {
-    width: 100%;
     padding: 1rem;
+    margin: 1rem;
   }
 
-  .flight-route {
+  h1 {
+    font-size: var(--h1-mobile-font-size);
+  }
+
+  .company-logo {
+    position: relative; /* Instead of absolute, so it doesn’t overlap on small screens */
+    height: 40px;
+    margin-bottom: 1rem;
+  }
+
+  .action-buttons {
     flex-direction: column;
-    gap: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: var(--text-mobile-font-size);
+  }
+
+  .detail-favorite-button {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 1rem 0;
+  }
+
+  .provider-alternative-parent {
+    width: 100vw;
+    margin-left: 0;
+  }
+
+  .provider-alternative-vertical-scroll {
+    max-height: 400px;
+    padding-right: 0.5rem;
+  }
+
+  .detail-description > p {
+    font-size: var(--text-mobile-font-size);
   }
 }

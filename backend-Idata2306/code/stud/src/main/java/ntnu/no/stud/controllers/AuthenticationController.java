@@ -46,23 +46,22 @@ public class AuthenticationController {
   @Autowired
   private JwtUtil jwtUtil;
 
-  @Operation(summary = "Authenticate user and get JWT token",
-             description = "Validates user credentials and returns a JWT token if successful.")
+  /**
+   * Authenticates a user and returns a JWT token if successful.
+   *
+   * @param authenticationRequest the authentication request containing username
+   *                              and password
+   * @return ResponseEntity with the JWT token or an error message
+   */
+  @Operation(summary = "Authenticate user and get JWT token", description = "Validates user credentials and returns a JWT token if successful.")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "200", description = "Authentication successful",
-      content = @Content(schema = @Schema(implementation = AuthenticationResponse.class))),
-    @ApiResponse(responseCode = "401", description = "Invalid username or password",
-      content = @Content)
+      @ApiResponse(responseCode = "200", description = "Authentication successful", content = @Content(schema = @Schema(implementation = AuthenticationResponse.class))),
+      @ApiResponse(responseCode = "401", description = "Invalid username or password", content = @Content)
   })
   @PostMapping("/api/authenticate")
   public ResponseEntity<?> authenticate(
-    @io.swagger.v3.oas.annotations.parameters.RequestBody(
-      description = "Authentication request with username and password",
-      required = true,
-      content = @Content(schema = @Schema(implementation = AuthenticationRequest.class))
-    )
-    @RequestBody AuthenticationRequest authenticationRequest) {
-    
+      @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Authentication request with username and password", required = true, content = @Content(schema = @Schema(implementation = AuthenticationRequest.class))) @RequestBody AuthenticationRequest authenticationRequest) {
+
     logger.info("Authentication attempt for user: {}", authenticationRequest.getUsername());
 
     try {
@@ -81,22 +80,21 @@ public class AuthenticationController {
     return ResponseEntity.ok(new AuthenticationResponse(jwt));
   }
 
-  @Operation(summary = "Sign up new user",
-             description = "Creates a new user account with username, password, and email.")
+  /**
+   * Handles user sign-up and creates a new user account.
+   *
+   * @param signupData the sign-up data containing username, password, and email
+   * @return ResponseEntity with the result of the sign-up operation
+   */
+  @Operation(summary = "Sign up new user", description = "Creates a new user account with username, password, and email.")
   @ApiResponses(value = {
-    @ApiResponse(responseCode = "200", description = "User created successfully"),
-    @ApiResponse(responseCode = "400", description = "User creation failed due to invalid data or IO error",
-      content = @Content)
+      @ApiResponse(responseCode = "200", description = "User created successfully"),
+      @ApiResponse(responseCode = "400", description = "User creation failed due to invalid data or IO error", content = @Content)
   })
   @PostMapping("/api/signup")
   public ResponseEntity<String> signupProcess(
-    @io.swagger.v3.oas.annotations.parameters.RequestBody(
-      description = "Sign-up data including username, password and email",
-      required = true,
-      content = @Content(schema = @Schema(implementation = SignupModel.class))
-    )
-    @RequestBody SignupModel signupData) {
-    
+      @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Sign-up data including username, password and email", required = true, content = @Content(schema = @Schema(implementation = SignupModel.class))) @RequestBody SignupModel signupData) {
+
     logger.info("Sign-up attempt for username: {}", signupData.getUsername());
 
     ResponseEntity<String> response;
@@ -105,7 +103,7 @@ public class AuthenticationController {
       logger.info("User successfully created: {}", signupData.getUsername());
       response = new ResponseEntity<>(HttpStatus.OK);
     } catch (IOException e) {
-      logger.error("Error creating user: {}", signupData.getUsername(), e);
+      logger.error("Error creating user: {}", signupData.getUsername());
       response = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
     return response;

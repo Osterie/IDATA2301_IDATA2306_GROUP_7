@@ -59,14 +59,11 @@ public class FlightInitializer {
                 int airlineId = flightCompanyRepository.getRandomCompanyId();
                 String airlinePrefix = flightCompanyRepository.findAbriviationById(airlineId);
 
-                Flight flight = createAndSaveFlight(airlineId, airlinePrefix);
-
-                // Adds accommodations and flight classes
-                for (int j = 0; j < 3; j++) {
-                    flightAccommodationInitializer.addRandomAccommodationToFlight(flight);
-                    flightClassInitializer.generateFlightClassesForFlight(flight);
-                }
+                createAndSaveFlight(airlineId, airlinePrefix);
             }
+
+                flightAccommodationInitializer.addRandomAccommodationforFlights();
+                flightClassInitializer.generateFlightClassesForFlight();
 
             // Generate scheduled flights for all created flights
             scheduledFlightsInitializer.generateScheduledFlights();

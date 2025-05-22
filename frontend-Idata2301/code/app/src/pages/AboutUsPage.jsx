@@ -4,7 +4,7 @@ function DealsPage() {
 
   return (
     <>
-        <AboutUs />
+      <AboutUs />
     </>
   );
 }

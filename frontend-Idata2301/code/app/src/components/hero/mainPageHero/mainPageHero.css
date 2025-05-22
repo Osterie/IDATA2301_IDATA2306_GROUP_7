@@ -1,5 +1,6 @@
 /* Reset full height */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -8,7 +9,9 @@ html, body {
 /* Hero Section */
 .hero {
   position: relative;
-  height: calc(100vh - var(--navbar-height)); /* Adjust this if navbar height changes */
+  height: calc(
+    100vh - var(--navbar-height)
+  ); /* Adjust this if navbar height changes */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,7 +26,7 @@ html, body {
   left: 0;
   height: 100%;
   width: 100%;
-  background-image: url('./images/ross-parmly-rf6ywHVkrlY-unsplash.jpg');
+  background-image: url("./images/ross-parmly-rf6ywHVkrlY-unsplash.jpg");
   background-size: cover;
   background-position: center;
   z-index: 0;
@@ -51,7 +54,10 @@ html, body {
 .hero-header h1,
 .hero-header p {
   margin: 0;
-  color: var(--contrast-text-color, #fff); /* Fallback white if CSS var missing */
+  color: var(
+    --contrast-text-color,
+    #fff
+  ); /* Fallback white if CSS var missing */
 }
 
 .hero-header h1 {

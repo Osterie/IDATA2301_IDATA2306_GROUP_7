@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FlightCard from "./FlightCard";
 import "./flightsContainer.css";
 import { isAdmin } from "../../../library/Identity/authentication";
@@ -47,9 +47,11 @@ const FlightsContainer = ({
     );
   };
 
+  // Function to handle favorite toggle
   const handleFavoriteToggle = (flightId, currentlyFavorite) => {
     if (!user?.id) return;
 
+    // Update the favorite IDs in the state
     const updateFavorites = () => {
       setFavoriteIds((prev) =>
         currentlyFavorite

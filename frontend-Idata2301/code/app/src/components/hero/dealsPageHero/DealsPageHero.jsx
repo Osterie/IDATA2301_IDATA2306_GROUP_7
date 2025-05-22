@@ -1,4 +1,3 @@
-import React from 'react';
 import './dealsPageHero.css';
 import SearchBar from '../../searchBar/SearchBar';
 

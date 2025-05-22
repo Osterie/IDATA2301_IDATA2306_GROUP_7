@@ -1,6 +1,5 @@
 import {sendApiRequest} from "../requests.js";
 import {getCookie, setCookie, deleteCookie} from "../tools.js";
-import {redirectTo} from "../navigation.js";
 
 // Authentication stuff
 
@@ -27,10 +26,6 @@ export function getAuthenticatedUser() {
     }
   }
 
-  if (!user) {
-    console.log("User not authenticated");
-    console.log(commaSeparatedRoles)
-  }
   return user;
 }
 
@@ -42,14 +37,12 @@ export function getAuthenticatedUser() {
 export function isAdmin(user) {
 
   if (!user) {
-    console.log("User is null");
     return false;
   }
 
   
   const roles = user.roles;
   if (!roles) {
-    console.log("User has no roles");
     return false;
   }
   
@@ -77,7 +70,6 @@ export async function sendAuthenticationRequest(username, password, successCallb
     function (jwtResponse) {
       setCookie("jwt", jwtResponse.jwt, getExpirationMilliseconds(jwtResponse.jwt));
       const userData = parseJwtUser(jwtResponse.jwt);
-      console.log(userData)
       if (userData) {
         setCookie("current_user_id", userData.id);
         setCookie("current_username", userData.username);
@@ -143,7 +135,7 @@ export function parseJwtUser(jwtString) {
  * Log-out the user
  */
 export function doLogout() {
-  console.log("Logging out...");
+  console.error("Logging out...");
   deleteAuthorizationCookies();
   window.location.href = '/index.html'; // Adjust the URL as needed
 }
@@ -159,6 +151,11 @@ export function deleteAuthorizationCookies() {
   deleteCookie("current_email");
 }
 
+/**
+ * Check if the JWT is expired
+ * @param jwt JWT string
+ * @returns {boolean} true if expired, false otherwise
+ */
 function isJwtExpired(jwt) {
   const payload = parseJwtUser(jwt);
   if (!payload || !payload.exp) return true;
@@ -166,6 +163,10 @@ function isJwtExpired(jwt) {
   return payload.exp < now;
 }
 
+/**
+ * Check if the JWT is valid on page load
+ * @returns {boolean} true if the JWT is valid, false otherwise
+ */
 export function checkJwtOnLoad() {
   const jwt = getCookie("jwt");
   if (!jwt || isJwtExpired(jwt)) {

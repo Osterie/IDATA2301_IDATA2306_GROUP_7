@@ -37,10 +37,14 @@ public class SearchController {
   @Autowired
   private AirportRepository airportRepository;
 
-  @Operation(
-      summary = "Search for flights",
-      description = "Search flights based on departure, arrival, date range, and passengers details."
-  )
+  /**
+   * Searches for flights based on the provided search criteria.
+   *
+   * @param searchedFlight The search criteria including departure, arrival, date
+   *                       range, and passengers.
+   * @return A list of matching flight prices.
+   */
+  @Operation(summary = "Search for flights", description = "Search flights based on departure, arrival, date range, and passengers details.")
   @ApiResponses({
       @ApiResponse(responseCode = "200", description = "List of matching flights returned")
   })
@@ -67,15 +71,20 @@ public class SearchController {
           String className = price.getFlightClassId().getFlightClass().getName();
           int availableSeats = price.getFlightClassId().getAvailableSeats();
           Integer required = requiredSeatsPerClass.get(className);
+          if (availableSeats == 0) {
+            return false; // No available seats
+          }
           return required != null && availableSeats >= required && required > 0;
         })
         .toList();
   }
 
-  @Operation(
-      summary = "Get list of airports",
-      description = "Retrieve all airports used in flight searches."
-  )
+  /**
+   * Retrieves a list of all airport codes and cities used to search for flights.
+   *
+   * @return An iterable collection of Airport search terms.
+   */
+  @Operation(summary = "Get list of airports", description = "Retrieve all airports used in flight searches.")
   @ApiResponses({
       @ApiResponse(responseCode = "200", description = "List of airports returned")
   })

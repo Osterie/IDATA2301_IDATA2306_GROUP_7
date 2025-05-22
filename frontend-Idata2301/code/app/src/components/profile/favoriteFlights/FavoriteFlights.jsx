@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./favoriteFlights.module.css";
-import { fetchFavoriteFlights } from "../../../library/favoritesAPI.js";
+import { fetchFavoriteFlights, removeFavoriteFlight, addFavoriteFlight } from "../../../library/favoritesAPI.js";
 import FlightCard from "../../cards/searchedFlights/FlightCard.jsx";
 
 const FavoriteFlights = ({ user, setSelectedFlight, setActivePage }) => {
@@ -9,20 +9,34 @@ const FavoriteFlights = ({ user, setSelectedFlight, setActivePage }) => {
 
   const userId = user.id;
 
-  useEffect(() => {
+  // Fetches the favorit flights
+  const fetchFavorites = () => {
     fetchFavoriteFlights(
       userId,
-      (response) => {
-        setFavorites(response);
-      },
-      (errorMessage) => {
-        setError(errorMessage);
-      }
+      (response) => setFavorites(response),
+      (errorMessage) => setError(errorMessage)
     );
+  };
+
+  useEffect(() => {
+    if (userId) {
+      fetchFavorites();
+    }
   }, [userId]);
 
+  // Handles the toggle favorit button
   const handleFavoriteToggle = (flightId, currentlyFavorite) => {
-    // TODO: Implement removing from favorites
+    if (!userId) return;
+
+    const callback = () => {
+      fetchFavorites(); // Refetch favorites after toggle completes
+    };
+
+    if (currentlyFavorite) {
+      removeFavoriteFlight(userId, flightId, callback);
+    } else {
+      addFavoriteFlight(userId, flightId, callback);
+    }
   };
 
   return (

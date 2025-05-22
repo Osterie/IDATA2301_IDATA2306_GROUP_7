@@ -32,7 +32,6 @@ const ManageUserPage = ({ handleGoBack }) => {
   const handleDelete = async (userId) => {
     try {
       await deleteUser(userId);
-      console.log(`User with ID ${userId} deleted`);
       setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
     } catch (error) {
       console.error("Error deleting user:", error);
@@ -46,7 +45,6 @@ const ManageUserPage = ({ handleGoBack }) => {
 
   const handleConfirmRole = async (userId) => {
     try {
-      console.log(`Assigning role "${newRole}" to user ID ${userId}`);
       setNewRole(newRole.trim().toUpperCase()); // Ensure the role is in uppercase
       await assignRoleToUser(userId, newRole); // <- call your API
 
@@ -54,9 +52,9 @@ const ManageUserPage = ({ handleGoBack }) => {
         prevUsers.map((user) =>
           user.id === userId
             ? {
-                ...user,
-                roles: [...user.roles, { role: newRole.trim().toUpperCase() }], // Add new role to the user's roles
-              }
+              ...user,
+              roles: [...user.roles, { role: newRole.trim().toUpperCase() }], // Add new role to the user's roles
+            }
             : user
         )
       );
@@ -68,9 +66,9 @@ const ManageUserPage = ({ handleGoBack }) => {
         // Convert to array, filter out empty strings
         let rolesArray = allUserRoles
           ? allUserRoles
-              .split(",")
-              .map((r) => r.trim().toUpperCase())
-              .filter((r) => r)
+            .split(",")
+            .map((r) => r.trim().toUpperCase())
+            .filter((r) => r)
           : [];
 
         // Add new role if it's not already in the list
@@ -101,9 +99,9 @@ const ManageUserPage = ({ handleGoBack }) => {
         prevUsers.map((user) =>
           user.id === userId
             ? {
-                ...user,
-                roles: user.roles.filter((r) => r.role !== role), // Remove the role from the user
-              }
+              ...user,
+              roles: user.roles.filter((r) => r.role !== role), // Remove the role from the user
+            }
             : user
         )
       );
@@ -115,9 +113,9 @@ const ManageUserPage = ({ handleGoBack }) => {
         // Convert to array, filter out empty strings
         let rolesArray = allUserRoles
           ? allUserRoles
-              .split(",")
-              .map((r) => r.trim().toUpperCase())
-              .filter((r) => r)
+            .split(",")
+            .map((r) => r.trim().toUpperCase())
+            .filter((r) => r)
           : [];
 
         // Remove the role if it exists in the list

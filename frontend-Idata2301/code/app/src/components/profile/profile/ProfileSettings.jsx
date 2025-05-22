@@ -11,10 +11,10 @@ const ProfileSettings = ({ user }) => {
     setProfilePrefs(prefs);
   }, []);
 
+  // Deletes the user that clicked the button
   const handleDeleteSelf = async () => {
     try {
-      await deleteSelf(user.id);
-      console.log(`User with ID ${user.id} deleted`);
+      await deleteSelf();
     } catch (error) {
       console.error("Error deleting user:", error);
     }
@@ -55,8 +55,7 @@ const ProfileSettings = ({ user }) => {
                 </tr>
                 <tr>
                   <th scope="row">Roles</th>
-                  <td>{console.log(user)} 
-                  {user.roles?.join(", ") || "USER"}</td>
+                  <td>{user.roles?.join(", ") || "USER"}</td>
                 </tr>
               </tbody>
             </table>

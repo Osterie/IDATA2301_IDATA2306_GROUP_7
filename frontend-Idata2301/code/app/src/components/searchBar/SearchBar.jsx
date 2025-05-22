@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import './searchBar.css';
 import PassengerAmountField from './PassengerAmountField';
 
-import {sendApiRequest} from "../../library/requests";
+import { sendApiRequest } from "../../library/requests";
 
 
 
 
-const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }) => {  // Receive setFlights as a prop
+const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams }) => {  // Receive setFlights as a prop
     const [showDropdown, setShowDropdown] = useState(false);
     const [searchTerms, setSearchTerms] = useState([]);
     const [searchTermsMap, setSearchTermsMap] = useState(new Map());
@@ -15,21 +15,21 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
     const [toSuggestions, setToSuggestions] = useState([]);
     const [focusedInput, setFocusedInput] = useState(null);
 
-    
+
     const passengers = (searchParams.passengers) || [
-    { classType: { name: "Economy" }, amount: 1 },
-    { classType: { name: "Business" }, amount: 1 },
-    { classType: { name: "First" }, amount: 1 }
+        { classType: { name: "Economy" }, amount: 1 },
+        { classType: { name: "Business" }, amount: 1 },
+        { classType: { name: "First" }, amount: 1 }
     ];
 
 
 
     const setPassengers = (newPassengers) => {
-    setSearchParams({
-      ...searchParams,
-      passengers: newPassengers
-    });
-  };
+        setSearchParams({
+            ...searchParams,
+            passengers: newPassengers
+        });
+    };
 
 
     // Fetch search terms when the component mounts
@@ -44,7 +44,7 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
             value = searchTermsMap.get(value);
         }
         setSearchParams({ ...searchParams, [name]: value });
-        
+
         if (name === "departure") {
             const filtered = searchTerms.filter(term =>
                 term.toLowerCase().includes(value.toLowerCase())
@@ -62,7 +62,7 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
 
     const handleSuggestionClick = (inputName, value) => {
         if (searchTermsMap.has(value)) {
-                value = searchTermsMap.get(value);
+            value = searchTermsMap.get(value);
         }
         setSearchParams({ ...searchParams, [inputName]: value });
         if (inputName === "departure") {
@@ -75,21 +75,21 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         document.body.style.cursor = 'wait'; // Show wait cursor
 
         try {
             await sendApiRequest(
                 "POST", "/searchForFlights",
                 function (fetchedData) {
-                    // const fetchedData = response.json();
                     fetchedData.isNewSearch = true; // Add the isNewSearch property to the fetched data
                     setFlights(fetchedData);  // Store flights in state
                     setActivePage("deals");  // ✅ Navigate to the Deals page
                 },
                 JSON.stringify(searchParams),
                 function (errorResponse) {
-                    console.log("Error: " + errorResponse);
+                    console.error("Error: " + errorResponse);
+                    alert("Unfortunately our server is currently down, please try again later.");
                     throw new Error('Network response was not ok');
                 }
             )
@@ -117,10 +117,10 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
                     for (let i = 0; i < cities.length; i++) {
                         searchTermsMap.set(cities[i], airports[i]);
                     }
-                    
+
                     cities.sort();
                     airports.sort();
-                    
+
                     for (let i = 0; i < cities.length; i++) {
                         searchTerms.push(cities[i]);
                     }
@@ -128,14 +128,14 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
                     for (let i = 0; i < airports.length; i++) {
                         searchTerms.push(airports[i]);
                     }
-                
+
                     setSearchTermsMap(searchTermsMap);
                     setSearchTerms(searchTerms);
                 },
                 null,
                 function (errorResponse) {
-                    console.log("Error: " + errorResponse);
-                    throw new Error('Network response was not ok for fetching search terms');
+                    console.error("Error: " + errorResponse);
+                    alert("Unfortunately our server is currently down, please try again later.");
                 }
             )
 
@@ -148,9 +148,11 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
     return (
         <form className="search-form" onSubmit={handleSubmit}>
             <div className="autocomplete-wrapper">
+                <label htmlFor="departure" className="sr-only">Departure</label>
                 <input
                     className="search-bar-input"
                     type="text"
+                    id="departure"
                     placeholder="From"
                     name="departure"
                     autoComplete="off"         // disables browser autofill
@@ -171,9 +173,11 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
             </div>
 
             <div className="autocomplete-wrapper">
+                <label htmlFor="arrival" className="sr-only">Arrival</label>
                 <input
                     className="search-bar-input"
                     type="text"
+                    id="arrival"
                     placeholder="To"
                     name="arrival"
                     autoComplete="off"         // disables browser autofill
@@ -193,18 +197,20 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
                 )}
             </div>
 
-            <input className="search-bar-input" type="date" name="fromDate" value={searchParams.fromDate} onChange={handleChange} required />
-            <input className="search-bar-input" type="date" name="toDate" value={searchParams.toDate} onChange={handleChange} required />
+            <label htmlFor="fromDate" className="sr-only">From Date</label>
+            <input className="search-bar-input" id="fromDate" type="date" name="fromDate" value={searchParams.fromDate} onChange={handleChange} required />
+            <label htmlFor="toDate" className="sr-only">To Date</label>
+            <input className="search-bar-input" id="toDate" type="date" name="toDate" value={searchParams.toDate} onChange={handleChange} required />
 
             <button type="button" className="dropdown-button" onClick={() => setShowDropdown(!showDropdown)}>
                 Select Passengers
             </button>
 
             {showDropdown && (
-            <PassengerAmountField
-                passengers={passengers}
-                setPassengers={setPassengers}
-            />
+                <PassengerAmountField
+                    passengers={passengers}
+                    setPassengers={setPassengers}
+                />
             )}
 
             <button className="call-to-action" type="submit">Search For Flights</button>

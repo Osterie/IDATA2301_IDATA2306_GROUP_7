@@ -15,6 +15,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
+/**
+ * Controller responsible for managing flight prices.
+ * Provides endpoints to fetch flight price information.
+ */
 @RestController
 @RequestMapping("/api/flights")
 @CrossOrigin(origins = "*")
@@ -26,20 +30,29 @@ public class PriceController {
     @Autowired
     private PriceRepository priceRepository;
 
-    @Operation(summary = "Get the cheapest flight",
-               description = "Returns the single cheapest flight available.")
+    /**
+     * Endpoint to retrieve the cheapest flight.
+     * This endpoint returns the flight with the lowest price.
+     * 
+     * @return The cheapest flight as a Price object
+     */
+    @Operation(summary = "Get the cheapest flight", description = "Returns the single cheapest flight available.")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Cheapest flight retrieved successfully")
+            @ApiResponse(responseCode = "200", description = "Cheapest flight retrieved successfully")
     })
     @GetMapping("/cheapest")
     public Price getCheapestFlight() {
         return priceRepository.findCheapestFlight();
     }
 
-    @Operation(summary = "Get flights departing today",
-               description = "Returns a list of flights departing on the current date.")
+    /**
+     * Endpoint to retrieve flights departing today.
+     * 
+     * @return A list of flights departing today
+     */
+    @Operation(summary = "Get flights departing today", description = "Returns a list of flights departing on the current date.")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Flights departing today retrieved successfully")
+            @ApiResponse(responseCode = "200", description = "Flights departing today retrieved successfully")
     })
     @GetMapping("/today")
     public List<Price> getFlightsToday() {
@@ -47,10 +60,14 @@ public class PriceController {
         return priceRepository.findRandomFlightByDate(today);
     }
 
-    @Operation(summary = "Get flights departing tomorrow",
-               description = "Returns a list of flights departing on the next day.")
+    /**
+     * Endpoint to retrieve flights departing tomorrow.
+     * 
+     * @return A list of flights departing tomorrow
+     */
+    @Operation(summary = "Get flights departing tomorrow", description = "Returns a list of flights departing on the next day.")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Flights departing tomorrow retrieved successfully")
+            @ApiResponse(responseCode = "200", description = "Flights departing tomorrow retrieved successfully")
     })
     @GetMapping("/tomorrow")
     public List<Price> getFlightsTomorrow() {
@@ -58,31 +75,45 @@ public class PriceController {
         return priceRepository.findRandomFlightByDate(tomorrow);
     }
 
-    @Operation(summary = "Get random flights",
-               description = "Returns a list of randomly selected flights.")
+    /**
+     * Endpoint to retrieve random flights.
+     * This endpoint returns a list of randomly selected flights.
+     * 
+     * @return A list of random flights
+     */
+    @Operation(summary = "Get random flights", description = "Returns a list of randomly selected flights.")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Random flights retrieved successfully")
+            @ApiResponse(responseCode = "200", description = "Random flights retrieved successfully")
     })
     @GetMapping("/random")
     public List<Price> getRandomFlights() {
         return priceRepository.findRandomFlight();
     }
 
-    @Operation(summary = "Get flights with the highest discount",
-               description = "Returns a list of flights offering the highest discount.")
+    /**
+     * Endpoint to retrieve flights with the highest discount.
+     * 
+     * @return A list of flights offering the highest discount
+     */
+    @Operation(summary = "Get flights with the highest discount", description = "Returns a list of flights offering the highest discount.")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Flights with highest discount retrieved successfully")
+            @ApiResponse(responseCode = "200", description = "Flights with highest discount retrieved successfully")
     })
     @GetMapping("/highest-discount")
     public List<Price> getHighestDiscountedFlight() {
         return priceRepository.findHighestDiscountFlight();
     }
 
-    @Operation(summary = "Get flights by a list of IDs",
-               description = "Returns a list of flights matching the provided IDs.")
+    /**
+     * Endpoint to retrieve flights by a list of IDs.
+     * 
+     * @param ids A list of flight IDs
+     * @return A list of flights matching the provided IDs
+     */
+    @Operation(summary = "Get flights by a list of IDs", description = "Returns a list of flights matching the provided IDs.")
     @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Flights retrieved successfully"),
-        @ApiResponse(responseCode = "400", description = "Invalid request data")
+            @ApiResponse(responseCode = "200", description = "Flights retrieved successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid request data")
     })
     @PostMapping("/getFlightByIds")
     public List<Price> getFlightByIds(@RequestBody List<Integer> ids) {

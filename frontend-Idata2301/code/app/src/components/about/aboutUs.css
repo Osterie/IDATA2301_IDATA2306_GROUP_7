@@ -1,65 +1,80 @@
-/* AboutUs.css */
 .about-us-section {
-    padding: 2rem;
-    font-family: 'Arial', sans-serif;
-    background-color: var(--contrast-text-color);
-    color: #333;
-    margin: 0 auto;
-    max-width: 900px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .about-us-section h1 {
-    text-align: center;
-    font-size: var(--h1-desktop-font-size);
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
-  }
-  
-  .about-us-section h2 {
-    font-size: var(--h2-desktop-font-size);
-    color: var(--text-color);
-    margin-top: 1.5rem;
-    border-bottom: 2px solid var(--text-color);
-    padding-bottom: 0.5rem;
-  }
-  
-  .about-us-section p {
-    font-size: var(--text-desktop-font-size);
-    line-height: 1.8;
-    margin-bottom: 1rem;
-  }
-  
+  color: var(--text-color);
+  padding: 3rem 1.5rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.about-us-section header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.about-us-section h1 {
+  font-size: var(--h1-desktop-font-size);
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.about-us-section h2 {
+  font-size: var(--h2-desktop-font-size);
+  margin: 1.5rem 0 0.75rem;
+  color: var(--text-color);
+  padding-left: 0.75rem;
+}
+
+.about-us-info-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.about-card {
+  background-color: var(--box-color);
+  border-radius: var(--box-border-radius);
+  padding: 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-4px);
+}
+
+.about-card address,
+.about-card p {
+  font-size: var(--text-desktop-font-size);
+  line-height: 1.7;
+}
+
+.about-us-text-container {
+  background-color: var(--box-color);
+  padding: 2rem;
+  border-radius: var(--box-border-radius);
+}
+
+.about-us-text-container p {
+  margin-bottom: 1.25rem;
+  font-size: var(--text-desktop-font-size);
+  line-height: 1.8;
+}
+
+@media (max-width: 900px) {
   .about-us-info-container {
-    margin-bottom: 2rem;
+    grid-template-columns: 1fr;
+  }
+
+  .about-us-section h1 {
+    font-size: var(--h1-mobile-font-size);
+  }
+
+  .about-us-section h2 {
+    font-size: var(--h2-mobile-font-size);
   }
   
-  .about-us-text-container {
-    line-height: 1.8;
-    color: #555;
-  }
-  
+  .about-card address,
+  .about-card p,
   .about-us-text-container p {
-    margin-bottom: 1rem;
+    font-size: var(--text-mobile-font-size);
   }
-  
-  /* Responsive styling */
-  @media (max-width: 768px) {
-    .about-us-section {
-      padding: 1.5rem;
-      font-size: var(--text-mobile-font-size);
-    }
-  
-    .about-us-section h1 {
-      font-size: var(--h1-mobile-font-size);
-    }
-  
-    .about-us-section h2 {
-      font-size: var(--h2-mobile-font-size);
-    }
-  
-    .about-us-section p {
-      font-size: var(--h3-mobile-font-size);
-    }
-  }
-  
+}

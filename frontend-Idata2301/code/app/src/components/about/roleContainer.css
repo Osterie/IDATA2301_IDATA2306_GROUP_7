@@ -23,7 +23,7 @@
 }
 
 /* Responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .role-list {
     flex-direction: column;
     align-items: center;
@@ -31,5 +31,10 @@
 
   .role-list li {
     max-width: 100%;
+    font-size: var(--text-mobile-font-size);
+  }
+
+  .role-container h2 {
+    font-size: var(--h2-mobile-font-size);
   }
 }

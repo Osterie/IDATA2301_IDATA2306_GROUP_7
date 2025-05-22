@@ -10,6 +10,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * Represents a purchase made by a user.
  * Each purchase is linked to a specific user and a specific price entity.
@@ -32,8 +34,8 @@ public class Purchase {
      */
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
-
     /**
      * The date when the purchase was made.
      */

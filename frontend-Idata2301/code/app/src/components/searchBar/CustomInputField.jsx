@@ -2,14 +2,18 @@ import { useState } from "react";
 import "./customInputField.css";
 
 const CustomInputField = ({ amount, onAmountChange }) => {
+
+  // Adds value
   const addValue = () => {
     onAmountChange(amount + 1);
   };
 
+  // Subracts value
   const subtractValue = () => {
     onAmountChange(Math.max(0, amount - 1));
   };
 
+  // Handles a change to the page
   const handleChange = (e) => {
     const value = e.target.value;
 

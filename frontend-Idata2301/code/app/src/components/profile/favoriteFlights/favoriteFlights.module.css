@@ -41,3 +41,25 @@ p {
   font-size: var(--text-desktop-font-size);
   font-weight: bold;
 }
+
+@media (max-width: 900px) {
+  h2 {
+    font-size: var(--h2-mobile-font-size);
+  }
+
+  p {
+    font-size: var(--text-mobile-font-size);
+  }
+
+  .flight-item h3 {
+    font-size: var(--h3-mobile-font-size);
+  }
+
+  .flight-item p {
+    font-size: var(--text-mobile-font-size);
+  }
+
+  .error {
+    font-size: var(--text-mobile-font-size);
+  }
+}

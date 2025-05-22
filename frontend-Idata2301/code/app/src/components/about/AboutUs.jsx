@@ -1,16 +1,16 @@
-import React from "react";
 import "./aboutUs.css";
 import RoleContainer from "./RoleContainer";
 
 const AboutUs = () => {
   return (
-    <section className="about-us-section">
+    <main className="about-us-section">
       <header>
         <h1>About Us</h1>
+        <p>Your gateway to smarter flight booking</p>
       </header>
 
       <section className="about-us-info-container">
-        <article>
+        <div className="about-card">
           <h2>Address</h2>
           <address>
             Skyscanner Limited<br />
@@ -19,24 +19,24 @@ const AboutUs = () => {
             Edinburgh EH3 9EN<br />
             United Kingdom
           </address>
-        </article>
+        </div>
 
-        <article>
+        <div className="about-card">
           <h2>Offices</h2>
-          <p>United Kingdom, Singapore, Spain, China, USA, Japan, India</p>
-        </article>
+          <p>UK, Singapore, Spain, China, USA, Japan, India</p>
+        </div>
 
-        <article>
-          <h2>Company Registration Number</h2>
+        <div className="about-card">
+          <h2>Company Reg. Number</h2>
           <p>04217916</p>
-        </article>
+        </div>
 
-        <article>
-          <h2>VAT Registration Number</h2>
+        <div className="about-card">
+          <h2>VAT Number</h2>
           <p>GB 208148618</p>
-        </article>
+        </div>
 
-        <article>
+        <div className="about-card">
           <h2>Registered Office</h2>
           <address>
             Skyscanner Limited<br />
@@ -45,7 +45,7 @@ const AboutUs = () => {
             London W1D 4AL<br />
             United Kingdom
           </address>
-        </article>
+        </div>
       </section>
 
       <section>
@@ -53,23 +53,21 @@ const AboutUs = () => {
       </section>
 
       <section className="about-us-text-container">
-        <article>
-          <h2>Welcome to Flight Finder</h2>
-          <p>
-            Welcome to <em>Flight Finder</em>, where your journey into the skies begins with the perfect flight option tailored to your needs. At <em>Flight Finder</em>, we've transformed the flight booking experience by aggregating real-time prices and schedules from a plethora of trusted airline partners. No more <em>endless tab-switching</em> to hunt down the best deal – our platform brings all the information to you in a single, streamlined experience.
-          </p>
-          <p>
-            Our commitment goes beyond simply offering a vast array of flight options; we are dedicated to ensuring <em>transparency</em>, <em>efficiency</em>, and an <em>exhilarating</em> booking experience. Our user-friendly interface allows you to effortlessly compare flights, ensuring you find the perfect match for your travel preferences and budget. Farewell to <em>hidden fees</em> and <em>complex booking procedures</em> – welcome to a smooth flight booking journey.
-          </p>
-          <p>
-            <em>Flight Finder</em> is not just about finding flights; it's about commencing your travel adventure on the right note. Our platform is designed to infuse a sense of <em>excitement</em> into the planning process. From last-minute getaways to well-planned business trips, we ensure you have all the choices at your fingertips. Our services are designed to bring you closer to the world, <em>one flight at a time</em>.
-          </p>
-          <p>
-            Join <em>Flight Finder</em> and elevate your travel planning to new heights. Whether you're chasing the <em>Northern Lights</em>, jetting off to a <em>tropical paradise</em>, or heading to a bustling city for a conference, every flight booked with us is a promise of <em>discovery</em> and <em>reliability</em>. With <em>Flight Finder</em>, embark on every journey with <em>confidence</em> and let your travel aspirations take flight.
-          </p>
-      </article>
+        <h2>Welcome to Flight Finder</h2>
+        <p>
+          At <em>Flight Finder</em>, your journey into the skies begins with the perfect flight option tailored to your needs. We’ve revolutionized the booking experience by aggregating real-time data from trusted airline partners.
+        </p>
+        <p>
+          Say goodbye to <em>endless tab-switching</em>—our platform delivers everything in one clean, intuitive interface.
+        </p>
+        <p>
+          Transparency, efficiency, and ease-of-use are at our core. Whether you're planning a last-minute getaway or a business trip, <em>Flight Finder</em> ensures the experience is seamless and inspiring.
+        </p>
+        <p>
+          Every flight you book is the start of a new adventure—one filled with <em>confidence</em>, <em>clarity</em>, and <em>curiosity</em>. Let’s fly smarter, together.
+        </p>
       </section>
-    </section>
+    </main>
   );
 };
 

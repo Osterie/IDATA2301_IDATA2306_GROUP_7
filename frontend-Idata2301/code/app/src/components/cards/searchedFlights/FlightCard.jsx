@@ -1,11 +1,11 @@
-import React from "react";
+import { useState } from "react";
 import "./flightCard.css";
-import { sendApiRequest } from "../../../library/requests";
-import { addToShoppingCart } from "../../../utils/shoppingCartUtils";
+import { updateFlightVisibility } from "../../../library/flightAPI";
+import { addToShoppingCart, getFlightInCartCount } from "../../../utils/shoppingCartUtils";
 import favActivePicture from "../../../resources/images/favactive.png";
 import favInactivePicture from "../../../resources/images/favinactive.png";
-import { convertCurrency } from "../../../utils/currencyUtils";
 import { getPreferredCurrency } from "../../../utils/cookieUtils";
+import { calculateFinalPriceInUserCurrency } from "../../../utils/currencyUtils";
 
 const FlightCard = ({
   flight,
@@ -43,37 +43,38 @@ const FlightCard = ({
     },
   } = flight;
 
+  const [showPopup, setShowPopup] = useState(false);
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
+
+  //Handles the addition of a flight to the shopping cart
+  // Checks if the flight is available and shows a popup message
   const handleAddToCart = () => {
+    const inCart = getFlightInCartCount(id);
+    
+    if (availableSeats - inCart <= 0) {
+      setShowErrorPopup(true);
+      setTimeout(() => {
+        setShowErrorPopup(false);
+      }, 3000);// 3 seconds
+      return;
+    }
+    setShowPopup(true);
     addToShoppingCart(id);
+
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);// 3 seconds
   };
 
+  // Toggles the visibility of the flight
   const handleToggleVisibility = async () => {
     const formData = {
       priceId: id,
       doHide: !isHidden,
     };
 
-    await sendApiRequest(
-      "POST",
-      "/setFlightProductVisibility",
-      (result) => {
-        const updatedFlight = { ...flight, isHidden: !isHidden };
-        if (typeof onVisibilityChange === "function") {
-          onVisibilityChange(updatedFlight);
-        }
-      },
-      JSON.stringify(formData),
-      (errorResponse) => {
-        console.log("Error: " + errorResponse);
-      }
-    );
+    await updateFlightVisibility(flight, isHidden, onVisibilityChange, formData);
   };
-
-  const calculateDiscountedPrice = (price, discount) => {
-    return discount > 0 ? (price - (price * discount) / 100).toFixed(0) : price;
-  };
-
-  const discountedPrice = calculateDiscountedPrice(price, discount);
 
   return (
     <div className="flight-card">
@@ -128,16 +129,17 @@ const FlightCard = ({
               className="flight-card-original-price"
               style={{ textDecoration: "line-through", color: "#888", margin: 0 }}
             >
-              {convertCurrency(price, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
+
+              {calculateFinalPriceInUserCurrency(price, 0, currencyCode)} {getPreferredCurrency()}
             </p>
             <p className="flight-card-price" style={{ fontWeight: "bold", color: "#d32f2f" }}>
-              {convertCurrency(discountedPrice, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
+              {calculateFinalPriceInUserCurrency(price, discount, currencyCode)} {getPreferredCurrency()}
             </p>
             <p className="flight-card-discount">Discount: {discount}%</p>
           </>
         ) : (
           <p className="flight-card-price">
-            {convertCurrency(discountedPrice, currencyCode, getPreferredCurrency())} {getPreferredCurrency()}
+            {calculateFinalPriceInUserCurrency(price, discount, currencyCode)} {getPreferredCurrency()}
           </p>
         )}
       </div>
@@ -154,31 +156,22 @@ const FlightCard = ({
       >
         Details
       </button>
+      {onFavoriteToggle && (
+        <div
+          className={`flight-card-favorite-button ${isFavorite ? "favorited" : ""
+            }`}
+          onClick={() => onFavoriteToggle?.(flight.id, isFavorite)}
+        >
+          <div className="favorite-content">
+            <img
+              src={isFavorite ? favActivePicture : favInactivePicture}
+              alt={isFavorite ? "Flight is favorited" : "Flight is not favorited"}
+              className="favorite-icon"
+            />
 
-      {purchasable && (
-        <button className="flight-cart-button" onClick={handleAddToCart}>
-          Add to cart
-        </button>
-      )}
-
-      <div
-        className={`flight-card-favorite-button ${
-          isFavorite ? "favorited" : ""
-        }`}
-        onClick={() => onFavoriteToggle?.(flight.id, isFavorite)}
-      >
-        <div className="favorite-content">
-          <img
-            src={isFavorite ? favActivePicture : favInactivePicture}
-            alt={isFavorite ? "Flight is favorited" : "Flight is not favorited"}
-            className="favorite-icon"
-          />
-          {/* <div className="favorite-text">
-            {isFavorite ? "Favorited" : "Not Favorited"}
-          </div> */}
+          </div>
         </div>
-      </div>
-
+      )}
       {actionButton && (
         <button
           className="flight-card-actions-button"
@@ -187,6 +180,32 @@ const FlightCard = ({
           {actionButton.props.children}
         </button>
       )}
+
+      {purchasable && (
+
+
+        <button className="flight-cart-button" onClick={handleAddToCart}>
+          Add to cart
+        </button>
+      )}
+
+      <div>
+            
+        <div>
+          {showPopup && (
+            <div className="flight-popup-message">
+              Added to cart!
+            </div>
+          )}
+
+
+          {showErrorPopup && (
+            <div className="flight-popup-message">
+              No flight avaliable!
+            </div>
+          )}
+        </div>
+      </div>
 
       <p className="flight-card-provider">Provider: {provider}</p>
 

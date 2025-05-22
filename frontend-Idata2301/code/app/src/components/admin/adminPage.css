@@ -10,7 +10,7 @@
 }
 
 .admin-card {
-    background-color: var(--box-color);
+  background-color: var(--box-color);
   padding: 2.5rem;
   border-radius: var(--box-border-radius);
   box-shadow: var(--shadow-color);
@@ -52,17 +52,17 @@
   background-color: var(--call-to-action-highlight-color);
 }
 
-/* Resposive styling */
+/* Responsive styling */
 @media (max-width: 900px) {
   .admin-card {
     padding: 2rem;
   }
 
   .admin-card h1 {
-    font-size: var(--h1-mobile-font-size);;
+    font-size: var(--h1-mobile-font-size);
   }
 
   .admin-actions button {
-    font-size: var(--button-mobile-font-size);;
+    font-size: var(--button-mobile-font-size);
   }
 }
