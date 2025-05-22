@@ -31,10 +31,10 @@ import CookieConsent from "react-cookie-consent";
 function App() {
   // TODO REMOVE THIS. ONLY TESTING!
   const [searchParams, setSearchParams] = useState({
-    departure: "JFK",
-    arrival: "SIN",
-    fromDate: "2020-01-01",
-    toDate: "2030-01-01",
+    departure: "",
+    arrival: "",
+    fromDate: "",
+    toDate: "",
     passengers: [
       { classType: { name: "Economy" }, amount: 1 },
       { classType: { name: "Business" }, amount: 0 },
