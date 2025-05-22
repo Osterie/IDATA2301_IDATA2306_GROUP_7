@@ -220,7 +220,6 @@
 .flight-popup-message {
   opacity: 0.9;
   position: absolute;
-  bottom: 3.7em;
   right: 1em;
   background: var(--primary-color);
   color: var(--primary-contrast);
