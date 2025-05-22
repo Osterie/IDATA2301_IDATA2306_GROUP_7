@@ -45,3 +45,9 @@ export const deleteFromShoppingCart = (flightId) => {
 export const clearShoppingCart = () => {
   localStorage.removeItem(STORAGE_KEY);
 };
+
+// Get the total number of items in the cart
+export const getFlightInCartCount = (flightId) => {
+  const cart = getShoppingCart();
+  return cart[flightId] || 0;
+}

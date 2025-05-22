@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./flightCard.css";
 import { updateFlightVisibility } from "../../../library/flightAPI";
-import { addToShoppingCart } from "../../../utils/shoppingCartUtils";
+import { addToShoppingCart, getFlightInCartCount } from "../../../utils/shoppingCartUtils";
 import favActivePicture from "../../../resources/images/favactive.png";
 import favInactivePicture from "../../../resources/images/favinactive.png";
 import { getPreferredCurrency } from "../../../utils/cookieUtils";
@@ -44,8 +44,18 @@ const FlightCard = ({
   } = flight;
 
   const [showPopup, setShowPopup] = useState(false);
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
 
   const handleAddToCart = () => {
+    const inCart = getFlightInCartCount(id);
+    
+    if (availableSeats - inCart <= 0) {
+      setShowErrorPopup(true);
+      setTimeout(() => {
+        setShowErrorPopup(false);
+      }, 3000);// 3 seconds
+      return;
+    }
     setShowPopup(true);
     addToShoppingCart(id);
 
@@ -174,16 +184,24 @@ const FlightCard = ({
         <button className="flight-cart-button" onClick={handleAddToCart}>
           Add to cart
         </button>
-
       )}
 
       <div>
-        {showPopup && (
-          <div className="flight-popup-message">
-            ✅ Added to cart!
-          </div>
-        )}
+            
+        <div>
+          {showPopup && (
+            <div className="flight-popup-message">
+              Added to cart!
+            </div>
+          )}
 
+
+          {showErrorPopup && (
+            <div className="flight-popup-message">
+              No flight avaliable!
+            </div>
+          )}
+        </div>
       </div>
 
       <p className="flight-card-provider">Provider: {provider}</p>
