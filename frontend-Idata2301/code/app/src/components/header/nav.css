@@ -49,6 +49,10 @@ nav ul li {
   margin: 0 10px;
 }
 
+nav a{
+  text-decoration: none;;
+}
+
 nav ul li a {
   color: var(--contrast-text-color);
   font-size: var(--button-text-desktop-font-size);
