@@ -91,7 +91,7 @@
     }
 
     .dropdown-button {
-        font-size: var(--button-text-mobile-font-size);
+        font-size: var(--text-mobile-font-size);
     }
 
     .autocomplete-suggestions li {

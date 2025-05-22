@@ -71,4 +71,10 @@
   .about-us-section h2 {
     font-size: var(--h2-mobile-font-size);
   }
+  
+  .about-card address,
+  .about-card p,
+  .about-us-text-container p {
+    font-size: var(--text-mobile-font-size);
+  }
 }

@@ -52,7 +52,7 @@
   background-color: var(--call-to-action-highlight-color);
 }
 
-/* Resposive styling */
+/* Responsive styling */
 @media (max-width: 900px) {
   .admin-card {
     padding: 2rem;
