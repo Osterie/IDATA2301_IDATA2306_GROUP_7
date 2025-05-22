@@ -81,3 +81,20 @@
 .autocomplete-suggestions li:hover {
     background-color: #f0f0f0;
 }
+
+/* Mobile Font Sizes */
+@media (max-width: 1050px) {
+    .search-form input,
+    .call-to-action,
+    .autocomplete-wrapper {
+        font-size: var(--text-mobile-font-size);
+    }
+
+    .dropdown-button {
+        font-size: var(--button-text-mobile-font-size);
+    }
+
+    .autocomplete-suggestions li {
+        font-size: var(--text-mobile-font-size);
+    }
+}

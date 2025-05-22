@@ -66,14 +66,13 @@
 @media (max-width: 1050px) {
     .input-number {
         flex-wrap: wrap;
-        /* Wrap elements */
         justify-content: center;
-        /* Center align */
         text-align: center;
     }
 
     .input-number input {
         max-width: 100px;
+        font-size: var(--text-mobile-font-size);
     }
 
     .input-number-actions {
