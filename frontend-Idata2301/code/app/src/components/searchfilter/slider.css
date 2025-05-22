@@ -93,3 +93,15 @@
     height: 0;
     z-index: 2;
 }
+
+/* --------- Mobile fonts --------- */
+@media (max-width: 900px) {
+  .dual-range-slider-form-control {
+    font-size: var(--text-mobile-font-size);
+  }
+
+  .dual-range-slider-number-input {
+    font-size: var(--text-mobile-font-size);
+    width: 70px; /* smaller input on mobile */
+  }
+}

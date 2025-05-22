@@ -130,4 +130,9 @@ input[type="checkbox"] {
     font-size: var(--text-mobile-font-size);
     color: var(--text-color);
   }
+
+  /* Also apply mobile font size to dropdown content for consistency */
+  .dropdown-content {
+    font-size: var(--text-mobile-font-size);
+  }
 }
