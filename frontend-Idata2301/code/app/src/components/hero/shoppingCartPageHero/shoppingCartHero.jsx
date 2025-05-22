@@ -90,7 +90,7 @@ const ShoppingCartHero = ({ setActivePage, setSelectedFlight, setFlights, flight
         (response) => {
           setFlights((prevFlights) =>
             prevFlights.map((flight) => {
-              const cartItem = cart.find((item) => item.id === flight.id);
+              const cartItem = cart.find((item) => item.scheduledFlight.id === flight.scheduledFlight.id);
               if (cartItem) {
                 return {
                   ...flight,
@@ -102,7 +102,7 @@ const ShoppingCartHero = ({ setActivePage, setSelectedFlight, setFlights, flight
               }
               return flight;
             })
-          );
+        );
 
 
           clearShoppingCart();
