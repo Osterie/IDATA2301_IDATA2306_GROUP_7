@@ -7,7 +7,7 @@ Sprint stenographer: Adrian
 
 - **Sprint Number:** Sprint 10
 - **Duration:** 15.05.2025 - 20.05.2025
-- **Sprint Goal:** 
+- **Sprint Goal:** Finish the last functionality on the backend
 - **Team Members:**
   - Tobias Olsen Reiakvam - TobyJavascript
   - Adrian Gjøsund Bjørge - Osterie / Adrian Gjøsund Bjørge
@@ -21,6 +21,7 @@ Sprint stenographer: Adrian
 - Endpoints for purchasing
 - Endpoint for getting hidden flight
 - Endpoint for provider alternatives
+- Endpoint for accommodations
 
 - **Not Completed:**
 - Try using docker

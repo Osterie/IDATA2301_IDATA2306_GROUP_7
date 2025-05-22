@@ -1,10 +1,10 @@
 .purchasedFlights {
-    border-radius: var(--box-border-radius);
-    padding: 20px;
-  }
-  
+  border-radius: var(--box-border-radius);
+  padding: 20px;
+}
 
-.flights-container{
+
+.flights-container {
   display: flex;
   flex-direction: column;
 }
