@@ -1,6 +1,11 @@
 import { sendApiRequest } from "../requests.js";
 import { doLogout } from "./authentication.js";
 
+
+/**
+ * Gets all users from the API
+ * @returns {Promise<*>}
+ */
 export async function getAllUsers() {
   return new Promise((resolve, reject) => {
     sendApiRequest(
@@ -18,6 +23,9 @@ export async function getAllUsers() {
   });
 }
 
+/**
+ * Deletes user with the given ID
+ */
 export async function deleteUser(userId) {
   return new Promise((resolve, reject) => {
     sendApiRequest(
@@ -34,6 +42,10 @@ export async function deleteUser(userId) {
   });
 }
 
+/**
+ * Deletes the current user
+ * @returns {Promise<*>}
+ */
 export async function deleteSelf() {
   return new Promise((resolve, reject) => {
     sendApiRequest(
@@ -52,6 +64,12 @@ export async function deleteSelf() {
   });
 }
 
+/**
+ * Assigns a role to a user
+ * @param userId The ID of the user
+ * @param role The role to assign
+ * @returns {Promise<*>}
+ */
 export async function assignRoleToUser(userId, role) {
   return new Promise((resolve, reject) => {
     const postData = {
@@ -74,6 +92,12 @@ export async function assignRoleToUser(userId, role) {
   });
 }
 
+/**
+ * Removes a role from a user
+ * @param userId The ID of the user
+ * @param role The role to remove
+ * @returns {Promise<*>}
+ */
 export async function removeRoleFromUser(userId, role) {
   return new Promise((resolve, reject) => {
     const postData = {

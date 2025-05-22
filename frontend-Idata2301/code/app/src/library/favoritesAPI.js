@@ -1,5 +1,11 @@
 import { sendApiRequest } from "./requests.js";
 
+/**
+ * Fetches the favorite flights for a given user.
+ * @param {string} userId The ID of the user
+ * @param {function} onSuccess Callback function to handle successful response
+ * @param {function} onError Callback function to handle error response
+ */
 export function fetchFavoriteFlights(userId, onSuccess, onError) {
   sendApiRequest(
     "GET",
@@ -10,6 +16,13 @@ export function fetchFavoriteFlights(userId, onSuccess, onError) {
   );
 }
 
+/**
+ * Adds a flight to the user's favorites.
+ * @param {string} userId The ID of the user
+ * @param {string} priceId The ID of the flight price
+ * @param {function} onSuccess Callback function to handle successful response
+ * @param {function} onError Callback function to handle error response
+ */
 export function addFavoriteFlight(userId, priceId, onSuccess, onError) {
   sendApiRequest(
     "POST",
@@ -20,6 +33,13 @@ export function addFavoriteFlight(userId, priceId, onSuccess, onError) {
   );
 }
 
+/**
+ * Removes a flight from the user's favorites.
+ * @param {string} userId The ID of the user
+ * @param {string} priceId The ID of the flight price
+ * @param {function} onSuccess Callback function to handle successful response
+ * @param {function} onError Callback function to handle error response
+ */
 export function removeFavoriteFlight(userId, priceId, onSuccess, onError) {
   sendApiRequest(
     "DELETE",

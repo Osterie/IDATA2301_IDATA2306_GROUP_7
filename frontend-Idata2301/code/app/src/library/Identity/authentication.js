@@ -1,6 +1,5 @@
 import {sendApiRequest} from "../requests.js";
 import {getCookie, setCookie, deleteCookie} from "../tools.js";
-import {redirectTo} from "../navigation.js";
 
 // Authentication stuff
 
@@ -152,6 +151,11 @@ export function deleteAuthorizationCookies() {
   deleteCookie("current_email");
 }
 
+/**
+ * Check if the JWT is expired
+ * @param jwt JWT string
+ * @returns {boolean} true if expired, false otherwise
+ */
 function isJwtExpired(jwt) {
   const payload = parseJwtUser(jwt);
   if (!payload || !payload.exp) return true;
@@ -159,6 +163,10 @@ function isJwtExpired(jwt) {
   return payload.exp < now;
 }
 
+/**
+ * Check if the JWT is valid on page load
+ * @returns {boolean} true if the JWT is valid, false otherwise
+ */
 export function checkJwtOnLoad() {
   const jwt = getCookie("jwt");
   if (!jwt || isJwtExpired(jwt)) {
