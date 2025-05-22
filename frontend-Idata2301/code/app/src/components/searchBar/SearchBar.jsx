@@ -82,7 +82,6 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
             await sendApiRequest(
                 "POST", "/searchForFlights",
                 function (fetchedData) {
-                    // const fetchedData = response.json();
                     fetchedData.isNewSearch = true; // Add the isNewSearch property to the fetched data
                     setFlights(fetchedData);  // Store flights in state
                     setActivePage("deals");  // ✅ Navigate to the Deals page
@@ -90,6 +89,7 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
                 JSON.stringify(searchParams),
                 function (errorResponse) {
                     console.error("Error: " + errorResponse);
+                    alert("Unfortunately our server is currently down, please try again later.");
                     throw new Error('Network response was not ok');
                 }
             )
@@ -135,7 +135,7 @@ const SearchBar = ({ setFlights, setActivePage, searchParams, setSearchParams  }
                 null,
                 function (errorResponse) {
                     console.error("Error: " + errorResponse);
-                    throw new Error('Network response was not ok for fetching search terms');
+                    alert("Unfortunately our server is currently down, please try again later.");
                 }
             )
 
