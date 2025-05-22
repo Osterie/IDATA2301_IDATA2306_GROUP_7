@@ -70,6 +70,25 @@ const ShoppingCartHero = ({ setActivePage, setSelectedFlight, setFlights, flight
 
   const handlePurchase = async () => {
 
+    let totalPurchasedSeatsForScheduledFlight = new Map();
+
+    cart.forEach(cartItem => {
+      if (totalPurchasedSeatsForScheduledFlight.has(cartItem.scheduledFlight.id)) {
+        totalPurchasedSeatsForScheduledFlight.set(cartItem.scheduledFlight.id, totalPurchasedSeatsForScheduledFlight.get(cartItem.scheduledFlight.id) + cartItem.quantity);
+      }
+      else {
+        totalPurchasedSeatsForScheduledFlight.set(cartItem.scheduledFlight.id, cartItem.quantity);
+      }
+    });
+
+    for (const [flightId, quantity] of totalPurchasedSeatsForScheduledFlight.entries()) {
+      const flight = cart.find(flight => flight.scheduledFlight.id === flightId);
+      if (flight && flight.flightClassId.availableSeats < quantity) {
+        alert("Not enough seats available for flight " + flight.scheduledFlight.flight.name);
+        return;
+      }
+    }
+
     if (!userId) {
       setActivePage("login");
       return;

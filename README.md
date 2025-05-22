@@ -69,6 +69,13 @@ This project is a full-stack web application using Spring Boot for the backend a
 
 ### Backend
 
+#### Database
+1. Install MySQL or on your local machine.
+2. Create a new database named `flight_application`.
+3. Create a user with the necessary privileges to access the database.
+4. Make sure to note down the database host, username, password, and port number.
+5. Make sure you run the database server.
+
 Below are the required environment variables for the backend:
 
 | Variable Name       | Description                                                                                    |
