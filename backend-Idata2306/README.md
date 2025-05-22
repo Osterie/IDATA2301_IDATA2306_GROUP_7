@@ -8,17 +8,17 @@ This project is a full-stack web application using Spring Boot for the backend a
 ---
 
 ## Project members
-| Name    | GitHub-Username  |
-|---------|------------------|
-| Adrian  | Osterie          |
-| Daniel  | Pizzaester       |
-| Tobias  | TobyJavascript   |
+| Name   | GitHub-Username |
+| ------ | --------------- |
+| Adrian | Osterie         |
+| Daniel | Pizzaester      |
+| Tobias | TobyJavascript  |
 
 ---
 
-## Installing dependencies
+## Getting started
 
-#### Installing Maven
+### Installing Maven
 1. Download Maven from the official website: [https://maven.apache.org/download.cgi](https://maven.apache.org/download.cgi)
 2. Extract the downloaded archive and add the `bin` directory to your system's `PATH`.
 3. Verify the installation by running:
@@ -34,30 +34,25 @@ This project is a full-stack web application using Spring Boot for the backend a
    java -version
    ```
 
----
-
-## Enviroment variables
-
-### Backend
+### Enviroment variables
 
 Below are the required environment variables for the backend:
 
-| Variable Name        | Description                     |
-|----------------------|---------------------------------|
-| `DATABASE_HOST`      | Hostname or IP of the database  |
-| `DATABASE_USERNAME`  | Username to connect to database |
-| `DATABASE_PASSWORD`  | Password for the database user  |
-| `DATABASE_PORT`      | Database port number            |
-| `DATABASE_NAME`      | Name of the database            |
-| `JWT_SECRET_KEY`     | Secret key for JWT signing      |
+| Variable Name       | Description                                                                                    |
+| ------------------- | ---------------------------------------------------------------------------------------------- |
+| `DATABASE_HOST`     | Hostname or IP of the database (localhost if you run it locally)                               |
+| `DATABASE_USERNAME` | Username to connect to database (if your are running locally, username to your mysql database) |
+| `DATABASE_PASSWORD` | Password for the database user (if your are running locally, password to your mysql database)  |
+| `DATABASE_PORT`     | Database port number (by default 3306)                                                         |
+| `DATABASE_NAME`     | Name of the database (flight_application)                                                      |
+| `JWT_SECRET_KEY`    | Secret key for JWT signing                                                                     |
 
 ---
 
-## Launching project
-
-#### Launching Spring Boot
+### Launching project
 1. Open a terminal at the **pom.xml** level.
 2. Run the following command:
    ```sh
    mvn spring-boot:run
    ```
+---
