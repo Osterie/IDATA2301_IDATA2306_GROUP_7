@@ -62,4 +62,3 @@ Below are the required environment variables for the backend:
    ```sh
    mvn spring-boot:run
    ```
----

@@ -5,6 +5,8 @@
 ## Project Overview
 This project is a full-stack web application using Spring Boot for the backend and React for the frontend. It provides a REST API for data management and a user-friendly interface for interacting with the application.
 
+We were assigned the theme of building a Flight Price Aggregator, under the brand name Flight Finder. The primary objective was to develop a functional and user-friendly platform that enables users to efficiently compare flight prices from multiple providers.
+
 ## Project Pictures
 
 ### Home page
