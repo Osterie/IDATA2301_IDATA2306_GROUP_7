@@ -11,6 +11,7 @@ const ProfileSettings = ({ user }) => {
     setProfilePrefs(prefs);
   }, []);
 
+  // Deletes the user that clicked the button
   const handleDeleteSelf = async () => {
     try {
       await deleteSelf();

@@ -6,6 +6,7 @@ import FlightCard from "../../cards/searchedFlights/FlightCard.jsx";
 const PurchasedFlights = ({ user, setSelectedFlight, setActivePage }) => {
   const [flights, setFlights] = useState([]);
 
+  // Fetches the users purchased flights
   const fetchPurchasedFlights = async () => {
     await sendApiRequest(
       "GET",
@@ -28,7 +29,7 @@ const PurchasedFlights = ({ user, setSelectedFlight, setActivePage }) => {
     }
   }, []);
 
-  // 🔁 Group by flight.price.id
+  // Group by flight.price.id
   const groupedFlights = flights.reduce((map, flight) => {
     const priceId = flight.price.id;
     if (!map[priceId]) {
@@ -52,10 +53,10 @@ const PurchasedFlights = ({ user, setSelectedFlight, setActivePage }) => {
           groupedList.map(({ flight, count, dates }) => (
             <div key={flight.id} className="cardWithCount">
               <FlightCard
-                  key={flight.id}
+                key={flight.id}
                 flight={flight}
                 purchasable={false}
-                purchaseDate={dates[0]} // optional: show first purchase date
+                purchaseDate={dates[0]}
                 setSelectedFlight={setSelectedFlight}
                 setActivePage={setActivePage}
               />

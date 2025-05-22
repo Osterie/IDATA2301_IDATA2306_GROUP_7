@@ -68,6 +68,7 @@ const FilterSidebar = ({ flights, setFlights }) => {
     flights.isNewSearch = false; // Reset the flag after processing
   }, [flights]);
 
+  // Handles a change to the company class
   const handleCompanyChange = (company) => {
     let updatedCompanies;
 

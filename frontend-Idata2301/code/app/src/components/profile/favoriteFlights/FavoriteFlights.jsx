@@ -9,6 +9,7 @@ const FavoriteFlights = ({ user, setSelectedFlight, setActivePage }) => {
 
   const userId = user.id;
 
+  // Fetches the favorit flights
   const fetchFavorites = () => {
     fetchFavoriteFlights(
       userId,
@@ -23,6 +24,7 @@ const FavoriteFlights = ({ user, setSelectedFlight, setActivePage }) => {
     }
   }, [userId]);
 
+  // Handles the toggle favorit button
   const handleFavoriteToggle = (flightId, currentlyFavorite) => {
     if (!userId) return;
 

@@ -36,11 +36,10 @@ Sprint stenographer: Adrian
 
 | Story/Task                         | Assignee | Status        | Story Points | Comments |
 | ---------------------------------- | -------- | ------------- | ------------ | -------- |
+| Endpoints for accommodations       | Tobias   | Completed     | [5]          |          |
 | Endpoints for purchasing           | Daniel   | Completed     | [5]          |          |
 | Endpoint for getting hidden flight | Adrian   | Completed     | [4]          |          |
 | Endpoint for provider alternatives | Adrian   | Completed     | [5]          |          |
-| Comment                            | Adrian   | Completed     | [8]          |          |
-| Postman tests for all endpoints    | Adrian   | Completed | [8]          |          |
 | Try using docker                   | Everyone | Not Completed | [3]          |          |
 | Https connection                   | Everyone | Not completed | [6]          |          |
 | Further error loggers              | Everyone | Not completed | [6]          |          |
