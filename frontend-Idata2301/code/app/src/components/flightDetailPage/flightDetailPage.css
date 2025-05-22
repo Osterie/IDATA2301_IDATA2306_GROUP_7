@@ -228,6 +228,11 @@ h1 {
     margin: 1rem 0;
   }
 
+  .provider-alternative-parent {
+    width: 100vw;
+    margin-left: 0;
+  }
+
   .provider-alternative-vertical-scroll {
     max-height: 400px;
     padding-right: 0.5rem;
