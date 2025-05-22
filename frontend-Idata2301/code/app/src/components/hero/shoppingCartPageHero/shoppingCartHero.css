@@ -132,10 +132,15 @@
 }
 
 .cart-popup-message {
-  z-index: 10;
+  position: absolute;
+  align-content: center;
+  font-weight: bold;
+  left:0;
+  right:0;
+  margin-left: auto;
+  margin-right: auto;
   height: 40vh;
   width: 60vw;
-  position: absolute;
   background: var(--primary-color);
   color: var(--primary-contrast);
   padding: 6px 12px;
