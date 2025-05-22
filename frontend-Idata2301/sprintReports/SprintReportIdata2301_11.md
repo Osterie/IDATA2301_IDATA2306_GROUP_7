@@ -5,7 +5,7 @@ Sprint stenographer: Tobias
 
 ## **Sprint Overview**
 
-- **Sprint Number:** Sprint 10
+- **Sprint Number:** Sprint 11
 - **Duration:** 20.05.2025 - 22.05.2025
 - **Sprint Goal:** Prepare for submission
 - **Team Members:**
@@ -25,8 +25,14 @@ Sprint stenographer: Tobias
 - Finish testing
 
 - **Completed Work:**
+- README
+- Lighthosue tests
+- Pop ups
+- Deploy frontend
 
 - **Not Completed:**
+- Docker
+- HTTPS
 
 ---
 
@@ -42,6 +48,8 @@ Sprint stenographer: Tobias
 | Semantic elements used (div and span are last resort).                | Everyone | Not completed | [5]          |                                 |
 | Lighthouse tests                                                      | Everyone | Completed     | [3]          |                                 |
 | Format jsx and css files                                              | Everyone | Completed     | [7]          |                                 |
+| Deploy frontend to server                                             | Tobias and Daniel | Completed     | [5]          |                        |
+| Add pop ups                                                           | Adrian and Daniel | Completed     | [6]          |                        |
 
 ---
 
