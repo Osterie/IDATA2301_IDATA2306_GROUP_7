@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "ece8ee8e-3aec-4650-ba54-1fad9f739c7c",
+		"name": "Administration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41299440",
+		"_collection_link": "https://flight-finder.postman.co/workspace/My-Workspace~84f7b8e3-71f0-465b-84fc-c3f7af832edd/collection/43072437-ece8ee8e-3aec-4650-ba54-1fad9f739c7c?action=share&source=collection_link&creator=41299440"
+	},
+	"item": [
+		{
+			"name": "getHiddenProducts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{host}}:8080/api/getHiddenProducts",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"getHiddenProducts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setFlightProductVisibility",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"priceId\": 1,\r\n  \"doHide\": true\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:8080/api/setFlightProductVisibility",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"setFlightProductVisibility"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addRole",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 2,\r\n  \"roleName\": \"TEST\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:8080/api/addRole",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"addRole"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removeRole",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 2,\r\n  \"roleName\": \"TEST\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:8080/api/removeRole",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"removeRole"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editUsersInRole",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"users\": [\r\n    {\r\n      \"id\": 2,\r\n      \"userame\":\"TestApi1\"\r\n    },\r\n    {\r\n      \"id\": 2,\r\n      \"userame\":\"TestApi2\"\r\n    }\r\n  ],\r\n  \"role\": {\r\n    \"id\":1,\r\n    \"role\": \"USER\",\r\n    \"user\": {\r\n        \"id\":1\r\n    }\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:8080/api/editUsersInRole",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"editUsersInRole"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

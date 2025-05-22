@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "0a6f5a3d-fb87-4124-962c-63a5fd6b008a",
+		"name": "Authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41299440",
+		"_collection_link": "https://flight-finder.postman.co/workspace/My-Workspace~84f7b8e3-71f0-465b-84fc-c3f7af832edd/collection/43072437-0a6f5a3d-fb87-4124-962c-63a5fd6b008a?action=share&source=collection_link&creator=41299440"
+	},
+	"item": [
+		{
+			"name": "authenticate",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"chuck\",\r\n  \"password\": \"Nunchucks2024\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:8080/api/authenticate",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signup",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"testUser0\",\r\n  \"password\": \"testPasswordSecret\",\r\n  \"email\":\"test@testing.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:8080/api/signup",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
