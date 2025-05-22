@@ -4,71 +4,70 @@
 }
 
 /* Box to display users */
-.user-card-container{ 
-    display: flex; 
-    flex-wrap: wrap; 
-    gap: 1rem; 
+.user-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.user-card{
-    border: 1px solid #ccc;
-    border-radius: var(--box-border-radius);
-    padding: 1rem;
-    width: 250px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.user-card {
+  border: 1px solid #ccc;
+  border-radius: var(--box-border-radius);
+  padding: 1rem;
+  width: 250px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .delete-user-button {
-    background-color: var(--serious-button-color);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: var(--button-border-radius);
-    cursor: pointer;
-    margin-top: 1rem;
-    margin-right: 1rem;
+  background-color: var(--serious-button-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+  margin-top: 1rem;
+  margin-right: 1rem;
 }
 
-.add-role-button{
-    background-color: #0069D9;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: var(--button-border-radius);
-    cursor: pointer;
-    margin-top: 1rem;
+.add-role-button {
+  background-color: #0069d9;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--button-border-radius);
+  cursor: pointer;
+  margin-top: 1rem;
 }
 
 .roles-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .role-card {
-    background-color: #f0f0f0;
-    padding: 3px 5px;
-    border-radius: var(--box-border-radius);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .remove-role-button {
-    background-color: grey;
-    color: white;
-    border: none;
-    padding: 3px 7px;
-    border-radius: 100%;
-    cursor: pointer;
-    font-size: var(--text-desktop-font-size);
-  }
-  
-  .remove-role-button:hover {
-    background-color: #c82333;
-  }
-  
-  .add-role-button,
-  .delete-user-button {
-    margin-top: 10px;
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.role-card {
+  background-color: #f0f0f0;
+  padding: 3px 5px;
+  border-radius: var(--box-border-radius);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.remove-role-button {
+  background-color: grey;
+  color: white;
+  border: none;
+  padding: 3px 7px;
+  border-radius: 100%;
+  cursor: pointer;
+  font-size: var(--text-desktop-font-size);
+}
+
+.remove-role-button:hover {
+  background-color: #c82333;
+}
+
+.add-role-button,
+.delete-user-button {
+  margin-top: 10px;
+}

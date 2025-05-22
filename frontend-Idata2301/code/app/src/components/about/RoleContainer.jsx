@@ -1,4 +1,3 @@
-import React from "react";
 import RolePicture from "./RolePicture";
 import "./roleContainer.css";
 import image1 from "./images/image1.jpg";

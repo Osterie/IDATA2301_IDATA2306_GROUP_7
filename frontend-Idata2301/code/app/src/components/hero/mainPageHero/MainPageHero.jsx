@@ -11,7 +11,7 @@ const MainPageHero = ({ setFlights, setActivePage, searchParams, setSearchParams
 
       {/* Dark overlay to improve text readability over image */}
       <div className="hero-overlay" aria-hidden="true" />
-      
+
       {/* Foreground content (text and search bar) */}
       <div className="hero-content">
         <header className="hero-header">

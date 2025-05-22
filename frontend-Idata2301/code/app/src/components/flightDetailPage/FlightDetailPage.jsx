@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./flightDetailPage.css";
 import FlightDetailPageCard from "./FlightDetailPageCard";
-import { getCompanyImage } from "../../library/imageRequests";
 import { sendApiRequest } from "../../library/requests";
 import flightHeroImage from "../../resources/images/avel-chuklanov-Ou1eqo29Ums-unsplash.jpg";
 import { getFlightAccommodations } from "../../library/accommodations";
@@ -60,21 +59,21 @@ const FlightDetailPage = ({
     }
   }, [flight, searchParams]);
 
-    // Load favorite flight IDs for this user
-    useEffect(() => {
-      if (user?.id) {
-        fetchFavoriteFlights(
-          user.id,
-          (data) => {
-            const ids = data.map((fav) => fav.price.id); // Ensure this maps correctly
-            setFavoriteIds(ids);
-          },
-          (err) => {
-            console.error("Failed to fetch favorites", err);
-          }
-        );
-      }
-    }, [user]);
+  // Load favorite flight IDs for this user
+  useEffect(() => {
+    if (user?.id) {
+      fetchFavoriteFlights(
+        user.id,
+        (data) => {
+          const ids = data.map((fav) => fav.price.id); // Ensure this maps correctly
+          setFavoriteIds(ids);
+        },
+        (err) => {
+          console.error("Failed to fetch favorites", err);
+        }
+      );
+    }
+  }, [user]);
 
   const doGetFlightAccommodations = async (flight) => {
     if (flight && flight.scheduledFlight.flight.id) {
@@ -118,8 +117,8 @@ const FlightDetailPage = ({
         />
       </header>
 
-      <FlightDetailPageCard flight={flight} accommodations={flightAccommodations} 
-        isFavorite={favoriteIds.includes(flight.id)} onFavoriteToggle={handleFavoriteToggle}/>
+      <FlightDetailPageCard flight={flight} accommodations={flightAccommodations}
+        isFavorite={favoriteIds.includes(flight.id)} onFavoriteToggle={handleFavoriteToggle} />
 
       <article className="provider-alternative-parent">
         <h1>Provider alternatives</h1>
@@ -128,7 +127,7 @@ const FlightDetailPage = ({
 
             <div className="provider-alternative-item" key={flight.id}>
               <FlightDetailPageCard key={flight.id} flight={flight} isFavorite={favoriteIds.includes(flight.id)}
-              onFavoriteToggle={handleFavoriteToggle} setActivePage={setActivePage} setSelectedFlight={setSelectedFlight}/>
+                onFavoriteToggle={handleFavoriteToggle} setActivePage={setActivePage} setSelectedFlight={setSelectedFlight} />
             </div>
 
           ))}

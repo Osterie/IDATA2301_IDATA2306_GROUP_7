@@ -1,10 +1,9 @@
-import React from "react";
+import { useState } from "react";
 import "./flightCard.css";
 import { updateFlightVisibility } from "../../../library/flightAPI";
 import { addToShoppingCart } from "../../../utils/shoppingCartUtils";
 import favActivePicture from "../../../resources/images/favactive.png";
 import favInactivePicture from "../../../resources/images/favinactive.png";
-import { convertCurrency } from "../../../utils/currencyUtils";
 import { getPreferredCurrency } from "../../../utils/cookieUtils";
 import { calculateFinalPriceInUserCurrency } from "../../../utils/currencyUtils";
 
@@ -44,7 +43,7 @@ const FlightCard = ({
     },
   } = flight;
 
-  const [showPopup, setShowPopup] = React.useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleAddToCart = () => {
     setShowPopup(true);
@@ -117,7 +116,7 @@ const FlightCard = ({
               className="flight-card-original-price"
               style={{ textDecoration: "line-through", color: "#888", margin: 0 }}
             >
-              
+
               {calculateFinalPriceInUserCurrency(price, 0, currencyCode)} {getPreferredCurrency()}
             </p>
             <p className="flight-card-price" style={{ fontWeight: "bold", color: "#d32f2f" }}>
@@ -144,23 +143,22 @@ const FlightCard = ({
       >
         Details
       </button>
-        {onFavoriteToggle && (
+      {onFavoriteToggle && (
         <div
-        className={`flight-card-favorite-button ${
-          isFavorite ? "favorited" : ""
-        }`}
+          className={`flight-card-favorite-button ${isFavorite ? "favorited" : ""
+            }`}
           onClick={() => onFavoriteToggle?.(flight.id, isFavorite)}
         >
-            <div className="favorite-content">
-              <img
-                src={isFavorite ? favActivePicture : favInactivePicture}
-                alt={isFavorite ? "Flight is favorited" : "Flight is not favorited"}
-            className="favorite-icon"
-          />
-              
-            </div>
+          <div className="favorite-content">
+            <img
+              src={isFavorite ? favActivePicture : favInactivePicture}
+              alt={isFavorite ? "Flight is favorited" : "Flight is not favorited"}
+              className="favorite-icon"
+            />
+
           </div>
-        )}
+        </div>
+      )}
       {actionButton && (
         <button
           className="flight-card-actions-button"
@@ -170,23 +168,23 @@ const FlightCard = ({
         </button>
       )}
 
-            {purchasable && (
-        
-        
+      {purchasable && (
+
+
         <button className="flight-cart-button" onClick={handleAddToCart}>
-            Add to cart
-          </button>
+          Add to cart
+        </button>
 
-          )}
-            
-        <div>
-          {showPopup && (
-            <div className="flight-popup-message">
-              ✅ Added to cart!
-            </div>
-          )}
+      )}
 
-        </div>
+      <div>
+        {showPopup && (
+          <div className="flight-popup-message">
+            ✅ Added to cart!
+          </div>
+        )}
+
+      </div>
 
       <p className="flight-card-provider">Provider: {provider}</p>
 

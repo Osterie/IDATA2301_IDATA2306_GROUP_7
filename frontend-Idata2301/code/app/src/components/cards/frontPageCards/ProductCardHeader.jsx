@@ -1,4 +1,3 @@
-import React from "react";
 import "./productCardHeader.css";
 
 const ProductCardHeader = () => {

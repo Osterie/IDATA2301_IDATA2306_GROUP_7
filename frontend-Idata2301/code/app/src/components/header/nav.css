@@ -18,12 +18,12 @@ nav {
 /* Adjust the .logo div to use Flexbox */
 nav .logo {
   display: flex;
-  align-items: center;  /* Vertically aligns the logo and text */
+  align-items: center; /* Vertically aligns the logo and text */
 }
 
 nav .logo-container {
   display: flex;
-  align-items: center;  /* Aligns logo image and text horizontally */
+  align-items: center; /* Aligns logo image and text horizontally */
 }
 
 nav .logo img {
@@ -37,7 +37,6 @@ nav .logo h1 {
   color: var(--contrast-text-color); /* Adjusts the text color */
   font-size: var(--h1-desktop-text-color);
 }
-
 
 nav ul {
   display: flex;
@@ -103,7 +102,6 @@ nav ul li a:hover {
   nav ul {
     position: absolute;
     width: 100%;
-    height: 120vh;
     background: var(--secondary-color);
     top: var(--navbar-height);
     left: -100%;
@@ -125,10 +123,10 @@ nav ul li a:hover {
   }
 }
 
-.log-out-button{
+.log-out-button {
   background-color: var(--serious-button-color);
 }
 
-.nav-bar-icon{
+.nav-bar-icon {
   font-size: 1.25rem;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { sendApiRequest } from '../../../../library/requests';
 import { sendAuthenticationRequest } from '../../../../library/Identity/authentication';
 import './createAccountHero.css'; // Scoped styles

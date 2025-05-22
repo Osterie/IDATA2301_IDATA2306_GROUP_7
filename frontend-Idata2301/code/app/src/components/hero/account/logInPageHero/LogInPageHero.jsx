@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './logInPageHero.css';
 import { sendAuthenticationRequest } from '../../../../library/Identity/authentication'; // Adjust the import path as needed
 
@@ -22,8 +22,6 @@ const LoginPageHero = ({ setActivePage }) => {
         setMessage(`Login failed: ${error}`);
       }
     );
-
-    // Login with backend 
   };
 
   return (
@@ -70,7 +68,7 @@ const LoginPageHero = ({ setActivePage }) => {
             <hr /><span>or</span><hr />
           </div>
         </form>
-        
+
         <a id="create-account-link" href="#" onClick={() => setActivePage("create-account")}>If you dont have one, create one!</a>
 
       </div>

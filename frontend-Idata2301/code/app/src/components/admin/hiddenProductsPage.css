@@ -1,10 +1,10 @@
 .hidden-page-title {
-    font-size: var(--h1-desktop-font-size);
-    margin-top: 4rem;
+  font-size: var(--h1-desktop-font-size);
+  margin-top: 4rem;
 }
 
 /* Custom container styling to hidden page */
 .hidden-page-container {
-    margin-left: 1rem;
-    margin-right: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }

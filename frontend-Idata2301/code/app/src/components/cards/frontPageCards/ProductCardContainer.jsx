@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./productCardContainer.css";
 import ProductCard from "./ProductCard";
-import flightHeroImage from "../../../resources/images/avel-chuklanov-Ou1eqo29Ums-unsplash.jpg"; 
 import { sendApiRequest } from "../../../library/requests";
-
-const API_BASE_URL = "http://localhost:8080/api/flights";
 
 const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
   const [products, setProducts] = useState([]);
