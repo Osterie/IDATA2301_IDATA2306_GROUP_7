@@ -79,7 +79,6 @@ const FlightDetailPage = ({
   const doGetFlightAccommodations = async (flight) => {
     if (flight && flight.scheduledFlight.flight.id) {
       await getFlightAccommodations(flight.scheduledFlight.flight.id, function (response) {
-        console.info("Flight accommodations fetched successfully:", response);
         setFlightAccommodations(response); // Save to state
       });
     }
