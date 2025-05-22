@@ -13,6 +13,10 @@ const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
       try {
         const allProducts = [];
 
+        const errorResponse = (error) => {
+          throw new Error(error);
+        };
+
         await sendApiRequest("GET", "/flights/tomorrow", (flightsTomorrow) => {
           allProducts.push(...flightsTomorrow.map((flight) => ({
             ...flight,
@@ -21,7 +25,10 @@ const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
             price: flight.price,
             currencyCode: flight.currencyCode,
           })));
-        });
+        },
+          null,
+          errorResponse
+        );
 
         await sendApiRequest("GET", "/flights/highest-discount", (discountFlight) => {
           allProducts.push(...discountFlight.map((flight) => ({
@@ -31,7 +38,10 @@ const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
             price: flight.price,
             currencyCode: flight.currencyCode,
           })));
-        });
+        },
+          null,
+          errorResponse
+        );
 
         await sendApiRequest("GET", "/flights/random", (randomFlight) => {
           allProducts.push(...randomFlight.map((flight) => ({
@@ -41,7 +51,10 @@ const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
             price: flight.price,
             currencyCode: flight.currencyCode,
           })));
-        });
+        },
+          null,
+          errorResponse
+        );
 
         await sendApiRequest("GET", "/flights/random", (randomFlight) => {
           allProducts.push(...randomFlight.map((flight) => ({
@@ -51,7 +64,10 @@ const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
             price: flight.price,
             currencyCode: flight.currencyCode,
           })));
-        });
+        },
+          null,
+          errorResponse
+        );
 
         await sendApiRequest("GET", "/flights/random", (randomFlight) => {
           allProducts.push(...randomFlight.map((flight) => ({
@@ -61,7 +77,10 @@ const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
             price: flight.price,
             currencyCode: flight.currencyCode,
           })));
-        });
+        },
+          null,
+          errorResponse
+        );
 
         await sendApiRequest("GET", "/flights/random", (randomFlight) => {
           allProducts.push(...randomFlight.map((flight) => ({
@@ -71,13 +90,16 @@ const ProductContainer = ({ setSelectedFlight, setActivePage }) => {
             price: flight.price,
             currencyCode: flight.currencyCode,
           })));
-        });
+        },
+          null,
+          errorResponse
+        );
 
         setProducts(allProducts);
         setLoading(false);
       } catch (err) {
         console.error("Unexpected error fetching products:", err);
-        setError("Failed to load products.");
+        setError("Failed to load products. Server is down, please try again later.");
         setLoading(false);
       }
     };
