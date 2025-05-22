@@ -242,29 +242,29 @@ const ShoppingCartHero = ({ setActivePage, setSelectedFlight, setFlights, flight
                   );
                 })}
               </ul>
-              <div className="total-price">
-                <strong>Total:</strong> {getTotalPrice()} {getPreferredCurrency()}
-              </div>
-
-              {cart.length > 0 && (
-                <button
-                  className="purchase-button"
-                  onClick={handlePurchase}
-                  disabled={isPurchasing}
-                >
-                  {isPurchasing ? "Processing..." : "Purchase Now"}
-                </button>
-
-              )}
             </>
           ) : (
             <p>Your shopping cart is empty.</p>
 
 
-
+            
           )}
 
         </div>
+          <div className="total-price">
+            <strong>Total:</strong> {getTotalPrice()} {getPreferredCurrency()}
+          </div>
+
+          {cart.length > 0 && (
+            <button
+              className="purchase-button"
+              onClick={handlePurchase}
+              disabled={isPurchasing}
+            >
+            {isPurchasing ? "Processing..." : "Purchase Now"}
+            </button>
+
+        )}
       </div>
     </section>
 

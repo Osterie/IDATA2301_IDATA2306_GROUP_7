@@ -47,9 +47,11 @@ const FlightsContainer = ({
     );
   };
 
+  // Function to handle favorite toggle
   const handleFavoriteToggle = (flightId, currentlyFavorite) => {
     if (!user?.id) return;
 
+    // Update the favorite IDs in the state
     const updateFavorites = () => {
       setFavoriteIds((prev) =>
         currentlyFavorite

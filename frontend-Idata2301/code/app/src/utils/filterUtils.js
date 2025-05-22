@@ -1,5 +1,6 @@
 import { calculateFinalPriceInUserCurrency } from "./currencyUtils";
 
+// Find the minimum price from the flights array
 export function findMinPrice(flights) {
   return Math.min(
     ...flights.map((flight) =>
@@ -12,6 +13,7 @@ export function findMinPrice(flights) {
   );
 }
 
+// Find the maximum price from the flights array
 export function findMaxPrice(flights) {
   return Math.max(
     ...flights.map((flight) =>
@@ -32,6 +34,7 @@ export function getUniqueCompanies(flights) {
   return [...new Set(companies)]; // Remove duplicates
 }
 
+// Filter flights based on price range and selected companies
 export function filterFlights(flightsToFilter, min, max, companies) {
   const updatedFlights = flightsToFilter.map((flight) => {
     const flightCompany = flight.scheduledFlight.flight.company.name;
@@ -49,6 +52,7 @@ export function filterFlights(flightsToFilter, min, max, companies) {
   return updatedFlights;
 };
 
+// Sort flights based on the selected option
 export function sortFlights(flightsToSort, option) {
   const sorted = [...flightsToSort];
 
