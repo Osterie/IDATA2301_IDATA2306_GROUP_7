@@ -15,7 +15,7 @@ import Navbar from "./components/header/Navbar";
 import AdminPage from "./components/admin/AdminPage";
 import ManageUserPage from "./components/admin/ManageUserPage";
 import HiddenProductsPage from "./components/admin/HiddenProductsPage";
-import { getAuthenticatedUser} from "./library/Identity/authentication"; // adjust path as needed
+import { getAuthenticatedUser } from "./library/Identity/authentication"; // adjust path as needed
 import FlightDetailPage from "./components/flightDetailPage/FlightDetailPage";
 import { saveConvertionTableToLocalStorage } from "./utils/currencyUtils";
 
@@ -55,17 +55,11 @@ function App() {
     setActivePage(previousPage);
   };
 
-
   useEffect(() => {
     const loggedInUser = getAuthenticatedUser();
     setUser(loggedInUser);
     saveConvertionTableToLocalStorage();
   }, []);
-
-  // // Check JWT on load
-  // useEffect(() => {
-  //   checkJwtOnLoad();
-  // }, []);
 
   const navigateTo = (page) => {
     if (page !== activePage) {
@@ -73,8 +67,6 @@ function App() {
       setActivePage(page);
     }
   };
-
-
 
   // Checks if user has already consented to cookies
   // If no consent: Ask
@@ -85,14 +77,12 @@ function App() {
       if (last) console.log("Restoring search:", last);
     }
   }, []);
-  
+
   useEffect(() => {
     if (flights.length > 0) {
       setLastSearch(flights);
     }
   }, [flights]);
-
-
 
   return (
     <div className="App">
@@ -110,7 +100,7 @@ function App() {
         {/* Searched flights and deals Page */}
         {activePage === "deals" && (
           <>
-            <DealsPage setFlights={setFlights} setActivePage={navigateTo} searchParams={searchParams} setSearchParams={setSearchParams} flights={flights} user={user} setSelectedFlight={setSelectedFlight}/>
+            <DealsPage setFlights={setFlights} setActivePage={navigateTo} searchParams={searchParams} setSearchParams={setSearchParams} flights={flights} user={user} setSelectedFlight={setSelectedFlight} />
           </>
         )}
         {/* Details page */}
@@ -143,7 +133,7 @@ function App() {
         {activePage === "hidden-products" && <HiddenProductsPage handleGoBack={handleGoBack} />}
         {activePage === "create-account" && <CreateAccount />} {/* no navigation prop, so no change */}
         {activePage === "shoppingCart" && (
-          <ShoppingCartHero setActivePage={navigateTo} setSelectedFlight={setSelectedFlight} setFlights={setFlights} flights={flights}/>
+          <ShoppingCartHero setActivePage={navigateTo} setSelectedFlight={setSelectedFlight} setFlights={setFlights} flights={flights} />
         )}
       </main>
 
