@@ -119,7 +119,7 @@ const ShoppingCartHero = ({ setActivePage, setSelectedFlight, setFlights, flight
 
       setTimeout(() => {
         setShowPopup(false);
-      }, 30000000);// 3 seconds
+      }, 3000);// 3 seconds
 
     }
   };
