@@ -7,9 +7,8 @@ select {
     cursor: pointer;
 }
 
-.adult-input, .child-input {
-    
-}
+.adult-input,
+.child-input {}
 
 .dropdown-window {
     position: absolute;
@@ -33,8 +32,8 @@ select {
 @media (max-width: 1050px) {
     .dropdown-window {
         width: 100%;
-        height: 100vh; /* Full height */
+        height: 100vh;
+        /* Full height */
         left: 50%;
     }
-  }
-  
+}
