@@ -2,7 +2,12 @@ import { getPreferredCurrency } from "./cookieUtils";
 
 // This function saves the conversion table to local storage if it doesn't exist or if it's older than 2 days
 export const saveConvertionTableToLocalStorage = () => {
-  fetch("https://openexchangerates.org/api/latest.json?app_id=2339143d97cf4826a4e3fa0d38d291de")
+
+  if (localStorage.getItem("currency_convertion_table") !== null){
+    return; // If the conversion table already exists, do nothing
+  }
+  
+  fetch("https://openexchangerates.org/api/latest.json?app_id=9b524eb607954d77bb14f1fc1afe6940")
     .then((response) => response.json())
     .then((data) => {
       data.saved = new Date();
